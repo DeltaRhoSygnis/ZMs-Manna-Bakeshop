@@ -18,3 +18,13 @@ opencode/config/.server-password
 opencode/config/pair-url.txt
 opencode/config/serve.log
 >>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
+
+docs/
+zm-manna
+app.js
+.dockerignore
+styles/archive/
+rename/
+mockups/
+opencode/
+.devcontainer

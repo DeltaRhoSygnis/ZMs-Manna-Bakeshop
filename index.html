@@ -21,8 +21,9 @@
 
   <header>
     <div class="container header-row">
+
       <!-- Bakery Logo & Title -->
-      <a href="index.html" class="logo">
+      <a href="#home" class="logo">
         <img src="assets/ZmsLogo.webp" alt="Zm's Logo">
         <div class="logo-text">
           <h2>Zm's Manna</h2>
@@ -32,20 +33,17 @@
 
       <!-- Navigation links -->
       <nav>
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
+          <ul>
+          <li><a href="#home" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#products">Products</a></li>
           <li><a href="#packaging">Packaging</a></li>
-          <li><a href="wholesale.html">Wholesale</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+          </ul>
       </nav>
 
       <!-- Request Button -->
-
       <div>
-        <a href="wholesale.html#inquiry-form" class="btn btn-blue">Request Price List</a>
+        <a href="#contact" class="btn btn-blue">Contact Us</a>
       </div>
     </div>
     <div class="scroll-progress"></div>
@@ -55,7 +53,7 @@
        2. WELCOME / MAIN BANNER
        ========================================== -->
 
-  <section class="section">
+  <section class="section" id="home">
     <div class="container">
       <div class="banner">
         <!-- Banner Left text -->
@@ -66,7 +64,7 @@
             Zm's Manna Bakeshop provides quality baked biscuits, toasted bread, and pasalubong favorites produced in P-2 Lumbo, Valencia City, Bukidnon for individual customers and bulk wholesale buyers across Mindanao.
           </p>
           <div class="banner-btns">
-            <a href="wholesale.html#inquiry-form" class="btn btn-blue">Request Price List</a>
+            <a href="#contact" class="btn btn-blue">Contact Us</a>
             <a href="#products" class="btn btn-white">View Products</a>
           </div>
         </div>
@@ -83,52 +81,12 @@
        3. ABOUT THE BAKERY
        ========================================== -->
 
-  <section id="about" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">About Zm's Manna Bakeshop</h2>
-        <p class="section-desc">Our bakery story, facility, and location in Valencia City.</p>
-      </div>
 
-      <div class="row">
-        <!-- Overview -->
-        <div class="col-2">
-          <div class="box">
-            <span class="tag">Bakery Overview</span>
-            <p class="about-desc">
-              Located in P-2 Lumbo, Valencia City, Bukidnon, Zm's Manna Bakeshop is a dedicated local producer of traditional toasted breads, cookies, otap, and pasalubong bakery items.
-            </p>
-            <p class="about-desc">
-              We serve walk-in customers, mini marts, supermarkets, and local resellers across Bukidnon with freshly baked products.
-            </p>
-            <div class="about-photo">
-              <img src="assets\promotion-wide.webp" alt="Bakery Production">
-            </div>
-          </div>
-        </div>
-
-        <!-- Location & Directions -->
-        <div class="col-2">
-          <div class="box">
-            <span class="tag">Facility Address</span>
-            <h3 style="color: #0b2746; margin-bottom: 8px;">P-2 Lumbo, Valencia City, Bukidnon</h3>
-            <p class="about-desc">Convenient direct access for transport vans, distributor pickups, and regional logistics couriers.</p>
-
-            <div class="map-box">
-              <h4>&#128506; Location Directions</h4>
-              <p>Along Lumbo primary bypass arterial road, Valencia City, Bukidnon.</p>
-              <p style="margin-top: 8px; color: #888888;">(Open for walk-ins &amp; scheduled pickups)</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ==========================================
        4. ORDER OPTIONS (PATHWAYS)
        ========================================== -->
-
+<!--
   <section class="section">
     <div class="container">
       <div class="section-header">
@@ -137,7 +95,7 @@
       </div>
 
       <div class="row">
-        <!-- Option 1 -->
+        <!-- Option 1
         <div class="col-3">
           <div class="box">
             <span class="step-badge">STEP 01</span>
@@ -146,8 +104,8 @@
             <a href="#products" class="btn btn-white btn-block">Explore Catalog</a>
           </div>
         </div>
-
-        <!-- Option 2 -->
+    -->
+        <!-- Option 2
         <div class="col-3">
           <div class="box">
             <span class="step-badge">STEP 02</span>
@@ -156,8 +114,8 @@
             <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Reseller Inquiries</a>
           </div>
         </div>
-
-        <!-- Option 3 -->
+    -->
+        <!-- Option 3
         <div class="col-3">
           <div class="box">
             <span class="step-badge">STEP 03</span>
@@ -169,11 +127,8 @@
       </div>
     </div>
   </section>
-
-  <!-- ==========================================
-       5. PRODUCT CATALOG
-       ========================================== -->
-
+-->
+    <!-- PRODUCTS -->
   <section id="products" class="section">
     <div class="container">
       <div class="section-header">
@@ -291,10 +246,83 @@
       </div>
     </div>
   </section>
+  <!-- PHOTO GALLERY -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Product Showcase Gallery</h2>
+        <p class="section-desc">Photos of our packaged products ready for distribution.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Cookie-de-longga.jpeg" alt="Cookie de Longa">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Biscocho.webp" alt="Biscocho">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Mammon.webp" alt="Mammon">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Hopia.webp" alt="Hopia">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ==========================================
-       7. CONTACT INFORMATION
+       7.  INFORMATION
        ========================================== -->
+    <section id="about" class="section">
+        <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">About Zm's Manna Bakeshop</h2>
+            <p class="section-desc">Our bakery story, facility, and location in Valencia City.</p>
+        </div>
+
+        <div class="row">
+            <!-- Overview -->
+            <div class="col-2">
+            <div class="box">
+                <span class="tag">Bakery Overview</span>
+                <p class="about-desc">
+                Located in P-2 Lumbo, Valencia City, Bukidnon, Zm's Manna Bakeshop is a dedicated local producer of traditional toasted breads, cookies, otap, and pasalubong bakery items.
+                </p>
+                <p class="about-desc">
+                We serve walk-in customers, mini marts, supermarkets, and local resellers across Bukidnon with freshly baked products.
+                </p>
+                <div class="about-photo">
+                <img src="assets\promotion-wide.webp" alt="Bakery Production">
+                </div>
+            </div>
+            </div>
+
+            <!-- Location & Directions -->
+            <div class="col-2">
+            <div class="box">
+                <span class="tag">Facility Address</span>
+                <h3 style="color: #0b2746; margin-bottom: 8px;">P-2 Lumbo, Valencia City, Bukidnon</h3>
+                <p class="about-desc">Convenient direct access for transport vans, distributor pickups, and regional logistics couriers.</p>
+
+                <div class="map-box">
+                <h4>&#128506; Location Directions</h4>
+                <p>Along Lumbo primary bypass arterial road, Valencia City, Bukidnon.</p>
+                <p style="margin-top: 8px; color: #888888;">(Open for walk-ins &amp; scheduled pickups)</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
 
   <section id="contact" class="section">
     <div class="container">
@@ -348,46 +376,12 @@
     </div>
   </section>
 
-  <!-- ==========================================
-       8. PHOTO GALLERY
-       ========================================== -->
 
-  <section class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Product Showcase Gallery</h2>
-        <p class="section-desc">Photos of our packaged products ready for distribution.</p>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <div class="gallery-img">
-            <img src="assets/Cookie-de-longga.jpeg" alt="Cookie de Longa">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="gallery-img">
-            <img src="assets/Biscocho.webp" alt="Biscocho">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="gallery-img">
-            <img src="assets/Mammon.webp" alt="Mammon">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="gallery-img">
-            <img src="assets/Hopia.webp" alt="Hopia">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ==========================================
        9. FOOTER
        ========================================== -->
-
+<!-- --
   <footer>
     <div class="container">
       <div class="footer-top">
@@ -417,6 +411,6 @@
       </div>
     </div>
   </footer>
-
+-->
 </body>
 </html>

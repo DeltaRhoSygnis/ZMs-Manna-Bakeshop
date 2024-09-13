@@ -223,17 +223,17 @@ body {
 /* ==========================================
    5. PRODUCT CATALOG CARDS
    ========================================== */
-
+/*
 .product-box {
   padding: 22px;
   text-align: center;
 }
-
+*/
 .product-img {
   width: 100%;
   height: 210px;
   background-color: #F4EFE2;
-  border-radius: 14px;
+  border-radius: 14px 14px 0px 0px;
   overflow: hidden;
   margin-bottom: 18px;
   display: flex;
@@ -460,7 +460,7 @@ body {
 /* ==========================================
    10. RESPONSIVE BREAKPOINTS
    ========================================== */
-   
+
 @media (max-width: 992px) {
   /* (the .banner stacking rule lives in media.css, because home.css
      loads AFTER this file and would override it from here) */
