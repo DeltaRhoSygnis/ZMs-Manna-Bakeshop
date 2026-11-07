@@ -30,14 +30,19 @@
   <header class="header">
     <div class="container header-inner">
       <a class="logo" href="#home">
-        <img src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
+        <img decoding="async" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
         <span>
           <strong>Zm’s Manna</strong>
           <small>Bakeshop · Valencia</small>
         </span>
       </a>
 
-      <nav class="nav" aria-label="Main navigation">
+      <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="Open menu">
+      <label class="nav-toggle-label" for="nav-toggle" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="nav" id="site-nav" aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#products">Products</a>
         <a href="#pathways">Order Options</a>
@@ -76,7 +81,7 @@
       </div>
 
       <figure class="hero-image">
-        <img src="assets/BiscochoNice.webp" alt="Sealed Biscocho packs beside toasted slices on a dark wooden table" width="966" height="680">
+        <img decoding="async" fetchpriority="high" src="assets/BiscochoNice.webp" alt="Sealed Biscocho packs beside toasted slices on a dark wooden table" width="966" height="680">
         <figcaption>Signature favorite: Toasted Biscocho pouch · 100g</figcaption>
       </figure>
     </section>
@@ -130,7 +135,7 @@
 
       <div class="products">
         <article class="product">
-          <img src="assets/CookieDeLonga.webp" alt="Sealed Cookie de Longa pack beside a blue mug" width="720" height="960">
+          <img loading="lazy" decoding="async" src="assets/CookieDeLonga.webp" alt="Sealed Cookie de Longa pack beside a blue mug" width="720" height="960">
           <h3>Cookie de Longa</h3>
           <p>Sesame-topped round cookie sandwiches with a sweet signature filling.</p>
           <p class="product-meta">100g net wt. · Wholesale tier on request</p>
@@ -138,7 +143,7 @@
         </article>
 
         <article class="product">
-          <img src="assets/Biscocho.webp" alt="Two sealed Biscocho packs in a wire basket" width="960" height="720">
+          <img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Two sealed Biscocho packs in a wire basket" width="960" height="720">
           <h3>Biscocho</h3>
           <p>Twice-baked crispy bread slices glazed with butter and sugar.</p>
           <p class="product-meta">100g net wt. · Top seller</p>
@@ -146,7 +151,7 @@
         </article>
 
         <article class="product">
-          <img src="assets/Mammon.webp" alt="Two sealed Toasted Mammon packs" width="720" height="960">
+          <img loading="lazy" decoding="async" src="assets/Mammon.webp" alt="Two sealed Toasted Mammon packs" width="720" height="960">
           <h3>Toasted Mammon</h3>
           <p>Light sponge cake slices slow-toasted for an airy, crispy crunch.</p>
           <p class="product-meta">100g net wt. · Light crunch</p>
@@ -154,7 +159,7 @@
         </article>
 
         <article class="product">
-          <img src="assets/Patatas.webp" alt="Three sealed Patatas biscuit packs" width="960" height="720">
+          <img loading="lazy" decoding="async" src="assets/Patatas.webp" alt="Three sealed Patatas biscuit packs" width="960" height="720">
           <h3>Patatas</h3>
           <p>Finger-style crunchy biscuit batons with a savory-sweet taste.</p>
           <p class="product-meta">100g net wt. · Coffee pairing</p>
@@ -162,7 +167,7 @@
         </article>
 
         <article class="product">
-          <img src="assets/Hopia.webp" alt="Sealed Hopia Choco pack" width="960" height="720">
+          <img loading="lazy" decoding="async" src="assets/Hopia.webp" alt="Sealed Hopia Choco pack" width="960" height="720">
           <h3>Hopia Choco</h3>
           <p>Flaky crust pockets filled with rich chocolate sweet bean paste.</p>
           <p class="product-meta">100g net wt. · Rich filling</p>
@@ -170,7 +175,7 @@
         </article>
 
         <article class="product">
-          <img class="product-logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem" width="473" height="478">
+          <img loading="lazy" decoding="async" class="product-logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem" width="473" height="478">
           <h3>Otap &amp; Loaf Breads</h3>
           <p>Crisp oval puff biscuits and soft sliced loaves for breakfast and merienda.</p>
           <p class="product-meta">Standard packs · Specialty line</p>
@@ -182,7 +187,7 @@
     <!-- 4. Packaging -->
     <section class="packaging" id="packaging">
       <figure class="packaging-image">
-        <img src="assets/Biscocho.webp" alt="Sealed Biscocho pouches with printed labels and barcodes" width="960" height="720">
+        <img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Sealed Biscocho pouches with printed labels and barcodes" width="960" height="720">
         <figcaption>DTI branding, nutrition details, and POS barcode on every 100g unit.</figcaption>
       </figure>
 
@@ -220,7 +225,7 @@
         <p class="phone-label">Direct production phone</p>
         <a class="phone" href="tel:09261774601">0926-177-4601</a>
 
-        <img class="promo" src="assets/banner.webp" alt="Zm’s Manna reseller and pasalubong update banner" width="1376" height="768">
+        <img loading="lazy" decoding="async" class="promo" src="assets/banner.webp" alt="Zm’s Manna reseller and pasalubong update banner" width="1376" height="768">
       </div>
 
       <div class="order-box">
@@ -314,7 +319,7 @@
         </div>
       </div>
 
-      <img class="contact-banner" src="assets/prompotion.webp" alt="Zm’s Manna pasalubong promo with four product packs" width="1024" height="1024">
+      <img loading="lazy" decoding="async" class="contact-banner" src="assets/prompotion.webp" alt="Zm’s Manna pasalubong promo with four product packs" width="1024" height="1024">
 
       <div class="contact-grid">
         <a class="contact-card" href="tel:09261774601">
@@ -359,12 +364,12 @@
       </div>
 
       <div class="gallery">
-        <figure><img src="assets/CookieDeLonga.webp" alt="Cookie de Longa pack outdoors" width="720" height="960"><figcaption>Cookie de Longa</figcaption></figure>
-        <figure><img src="assets/Biscocho.webp" alt="Biscocho packs in a basket" width="960" height="720"><figcaption>Toasted Biscocho</figcaption></figure>
-        <figure><img src="assets/Mammon.webp" alt="Toasted Mammon packs" width="720" height="960"><figcaption>Toasted Mammon</figcaption></figure>
-        <figure><img src="assets/Patatas.webp" alt="Patatas biscuit packs" width="960" height="720"><figcaption>Patatas Biscuits</figcaption></figure>
-        <figure><img src="assets/Hopia.webp" alt="Hopia Choco pack" width="960" height="720"><figcaption>Hopia Choco</figcaption></figure>
-        <figure><img src="assets/BiscochoNice.webp" alt="Biscocho packs and toasted slices on dark wood" width="966" height="680"><figcaption>Biscocho on Dark Wood</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="assets/CookieDeLonga.webp" alt="Cookie de Longa pack outdoors" width="720" height="960"><figcaption>Cookie de Longa</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Biscocho packs in a basket" width="960" height="720"><figcaption>Toasted Biscocho</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="assets/Mammon.webp" alt="Toasted Mammon packs" width="720" height="960"><figcaption>Toasted Mammon</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="assets/Patatas.webp" alt="Patatas biscuit packs" width="960" height="720"><figcaption>Patatas Biscuits</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="assets/Hopia.webp" alt="Hopia Choco pack" width="960" height="720"><figcaption>Hopia Choco</figcaption></figure>
+        <figure><img loading="lazy" decoding="async" src="assets/BiscochoNice.webp" alt="Biscocho packs and toasted slices on dark wood" width="966" height="680"><figcaption>Biscocho on Dark Wood</figcaption></figure>
       </div>
     </section>
 
@@ -375,7 +380,7 @@
       <div class="footer-grid">
         <div>
           <a class="logo" href="#home">
-            <img src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
+            <img loading="lazy" decoding="async" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
             <span><strong>Zm’s Manna Bakeshop</strong><small>P-2 Lumbo, Valencia City, Bukidnon</small></span>
           </a>
           <p>Quality baked biscuits, toasted bread, and pasalubong favorites for individual and wholesale buyers across Mindanao.</p>
@@ -386,5 +391,17 @@
       <p class="footer-bottom">© Zm’s Manna Bakeshop. P-2 Lumbo, Valencia City, Bukidnon. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    // Close the menu panel after a link is chosen.
+    (function () {
+      var toggle = document.getElementById('nav-toggle');
+      var nav = document.getElementById('site-nav');
+      if (!toggle || !nav) return;
+      nav.addEventListener('click', function (event) {
+        if (event.target.closest('a')) toggle.checked = false;
+      });
+    })();
+  </script>
 </body>
 </html>
