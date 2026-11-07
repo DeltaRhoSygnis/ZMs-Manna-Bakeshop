@@ -33,6 +33,10 @@
 
 html {
   scroll-behavior: smooth;
+  /* Mobile browsers inflate text that spans the full width. The layout is
+     designed for phones, so keep the authored sizes exactly. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -968,10 +972,16 @@ section[id] {
   }
 }
 
-/* Phone density: the same card, laid out as a row. The pack sits on the
-   left, text on the right, one action underneath - so two products share
-   a screen instead of one. Nothing about the type scale changes. */
+/* Phone: the utility strip is three lines of 10px text above the fold,
+   and the hero repeats the address two lines later. Drop it there.
+
+   The product card then becomes a row: pack on the left, text on the
+   right, action underneath. Nothing about the type scale changes. */
 @media (max-width: 639px) {
+  .topbar {
+    display: none;
+  }
+
   .section {
     margin-top: 44px;
   }
@@ -1014,12 +1024,6 @@ section[id] {
 
   .product p {
     margin: 0;
-    font-size: 13.5px;
-    line-height: 1.45;
-  }
-
-  .product-meta {
-    font-size: 11.5px;
   }
 
   .product .btn {
@@ -1035,14 +1039,6 @@ section[id] {
   .gallery {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 10px;
-  }
-}
-
-/* Phone: the utility strip is three lines of 10px text above the fold,
-   and the hero repeats the address two lines later. Drop it there. */
-@media (max-width: 639px) {
-  .topbar {
-    display: none;
   }
 }
 
