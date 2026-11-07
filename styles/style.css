@@ -18,6 +18,13 @@
   --biscuit: #9a6532;
   --serif: "Fraunces", Georgia, serif;
   --sans: "DM Sans", Arial, sans-serif;
+
+  /* Fluid scales. One value that grows with the viewport replaces
+     separate phone / tablet / desktop versions of the same rule. */
+  --h1: clamp(2.5rem, 6vw + 0.5rem, 3.5rem);
+  --h2: clamp(1.85rem, 3vw + 0.5rem, 2.15rem);
+  --space: clamp(48px, 7vw, 80px);
+  --gutter: clamp(20px, 4vw, 24px);
 }
 
 * {
@@ -62,7 +69,8 @@ a {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 
 /* Keyboard users can jump straight to the content. */
@@ -82,11 +90,24 @@ a {
   top: 10px;
 }
 
+/* Keyboard focus, drawn outside the control so it reads on any background. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+.wholesale :focus-visible {
+  outline-color: var(--gold);
+}
+
 /* ---------- 2. Buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 48px;
   padding: 14px 26px;
   border: 1px solid transparent;
   border-radius: 999px;
@@ -97,7 +118,6 @@ a {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  white-space: nowrap;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
@@ -129,6 +149,10 @@ a {
 .btn-outline:hover {
   background: var(--navy);
   color: #fff;
+}
+
+.header .btn {
+  white-space: nowrap;
 }
 
 .btn-small {
@@ -181,8 +205,9 @@ a {
 }
 
 .logo img {
-  width: 46px;
-  height: 46px;
+  width: clamp(34px, 9vw, 46px);
+  height: auto;
+  aspect-ratio: 1 / 1;
   border-radius: 8px;
   object-fit: contain;
   mix-blend-mode: multiply;
@@ -191,7 +216,7 @@ a {
 .logo strong {
   display: block;
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: clamp(15px, 4.4vw, 19px);
   color: var(--navy);
   white-space: nowrap;
 }
@@ -228,14 +253,15 @@ a {
 /* ---------- 4. Hero ---------- */
 .hero {
   display: grid;
-  gap: 32px;
-  padding: 40px 0 0;
+  align-items: center;
+  gap: clamp(24px, 4vw, 48px);
+  padding: clamp(24px, 5vw, 60px) 0 0;
 }
 
 .hero h1 {
   margin: 10px 0 4px;
-  font-size: 40px;
-  letter-spacing: -1px;
+  font-size: var(--h1);
+  letter-spacing: -0.02em;
 }
 
 .tag {
@@ -294,7 +320,7 @@ a {
 
 .hero-image img {
   width: 100%;
-  height: 340px;
+  height: clamp(280px, 45vw, 430px);
   border-radius: 18px;
   object-fit: cover;
 }
@@ -311,7 +337,7 @@ a {
 
 /* ---------- 5. Section headings ---------- */
 .section {
-  margin-top: 80px;
+  margin-top: var(--space);
 }
 
 /* Leaves room for the sticky header when a nav link jumps to a section. */
@@ -319,10 +345,14 @@ section[id] {
   scroll-margin-top: 140px;
 }
 
+/* The lead paragraph drops under the title only when there is no room
+   beside it, so the heading block needs no breakpoint of its own. */
 .section-head {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 24px;
   margin-bottom: 28px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
@@ -341,7 +371,7 @@ section[id] {
 .packaging h2,
 .contact h2 {
   margin-top: 4px;
-  font-size: 30px;
+  font-size: var(--h2);
 }
 
 .hero-text,
@@ -351,6 +381,7 @@ section[id] {
 }
 
 .section-lead {
+  flex: 1 1 260px;
   max-width: 380px;
   margin: 0;
   font-size: 14px;
@@ -360,6 +391,7 @@ section[id] {
 /* ---------- 6. Pathway cards ---------- */
 .cards {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
 }
 
@@ -410,6 +442,7 @@ section[id] {
 /* ---------- 7. Product grid ---------- */
 .products {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
 }
 
@@ -424,7 +457,7 @@ section[id] {
 
 .product img {
   width: 100%;
-  height: 210px;
+  height: clamp(200px, 30vw, 220px);
   border-radius: 10px;
   object-fit: cover;
 }
@@ -453,14 +486,20 @@ section[id] {
 
 .product .btn {
   margin-top: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+  letter-spacing: 0.2px;
 }
 
 /* ---------- 8. Packaging ---------- */
 .packaging {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
   gap: 32px;
-  margin-top: 80px;
-  padding: 24px;
+  margin-top: var(--space);
+  padding: clamp(20px, 3vw, 40px);
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -472,7 +511,7 @@ section[id] {
 
 .packaging-image img {
   width: 100%;
-  height: 320px;
+  height: clamp(240px, 34vw, 320px);
   border-radius: 14px;
   object-fit: cover;
 }
@@ -498,9 +537,11 @@ section[id] {
 /* ---------- 9. Wholesale ---------- */
 .wholesale {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
   gap: 32px;
-  margin-top: 80px;
-  padding: 24px;
+  margin-top: var(--space);
+  padding: clamp(20px, 3vw, 40px);
   background: var(--navy);
   border-radius: 20px;
   color: #fff;
@@ -508,7 +549,7 @@ section[id] {
 
 .wholesale h2 {
   color: #fff;
-  font-size: 34px;
+  font-size: var(--h2);
 }
 
 .wholesale h3 {
@@ -628,6 +669,7 @@ section[id] {
 /* ---------- 11. About ---------- */
 .about-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
 }
 
@@ -676,8 +718,8 @@ section[id] {
 
 /* ---------- 12. Contact ---------- */
 .contact {
-  margin-top: 80px;
-  padding: 24px;
+  margin-top: var(--space);
+  padding: clamp(20px, 3vw, 40px);
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -685,7 +727,7 @@ section[id] {
 
 .contact-banner {
   width: 100%;
-  height: 220px;
+  height: clamp(190px, 26vw, 240px);
   margin-bottom: 24px;
   border-radius: 14px;
   object-fit: cover;
@@ -694,6 +736,7 @@ section[id] {
 
 .contact-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
@@ -735,13 +778,18 @@ section[id] {
 
 .cta-bar {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 16px;
   margin-top: 24px;
   padding: 24px;
   background: var(--navy);
   border-radius: 16px;
+}
+
+.cta-bar > div {
+  flex: 1 1 280px;
 }
 
 .cta-bar h3 {
@@ -772,7 +820,7 @@ section[id] {
 
 .gallery img {
   width: 100%;
-  height: 140px;
+  aspect-ratio: 1 / 1;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -787,7 +835,7 @@ section[id] {
 
 /* ---------- 14. Footer ---------- */
 .footer {
-  margin-top: 80px;
+  margin-top: var(--space);
   background: var(--white);
   border-top: 1px solid var(--border);
 }
@@ -798,6 +846,7 @@ section[id] {
 
 .footer-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
   padding-bottom: 24px;
   border-bottom: 1px solid var(--border);
@@ -839,49 +888,41 @@ section[id] {
   color: var(--gray);
 }
 
-/* ---------- 15. Larger screens ---------- */
-@media (min-width: 560px) {
+/* ---------- 15. Responsive: four tiers, one per layout mode ----------
+
+   Size, spacing and image height are fluid (see the clamp() tokens),
+   so no rule below changes a font or a padding. Each tier only decides
+   how many columns a section has, or which header mode is in use. */
+
+/* Tier 1 - two-up: paired cards side by side */
+@media (min-width: 640px) {
   .hero-facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-}
 
-@media (min-width: 640px) {
-  .products {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
+  .products,
   .contact-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .cta-bar {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
+/* Tier 2 - three-up: the buyer cards and stacked split sections */
 @media (min-width: 800px) {
-  .section-head {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-
   .cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .about-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
+  .about-grid,
   .footer-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
+/* Tier 3 - split layouts, and the header drops to one inline row */
 @media (min-width: 900px) {
   .header-inner {
     flex-wrap: nowrap;
@@ -893,13 +934,13 @@ section[id] {
     order: 0;
     flex-wrap: nowrap;
     width: auto;
-    gap: 16px;
     padding-top: 0;
     border-top: 0;
+    gap: clamp(12px, 1.6vw, 22px);
   }
 
   .nav a {
-    font-size: 13px;
+    font-size: 13.5px;
   }
 
   section[id] {
@@ -908,51 +949,30 @@ section[id] {
 
   .hero {
     grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: center;
-    gap: 48px;
-    padding-top: 60px;
   }
 
-  .hero h1 {
-    font-size: 56px;
-  }
-
-  .hero-image img {
-    height: 430px;
+  .packaging,
+  .wholesale {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .products {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .packaging {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: center;
-    padding: 40px;
-  }
-
-  .wholesale {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-    padding: 40px;
-  }
-
-  .contact {
-    padding: 40px;
-  }
-
-  .contact-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+/* Below 360px the logo tagline is what pushes the header into a third
+   row. Drop it there; the brand name and the site h1 carry the identity. */
+@media (max-width: 359px) {
+  .logo small {
+    display: none;
   }
 }
 
+/* Tier 4 - full desktop density: the densest grids only */
 @media (min-width: 1000px) {
-  .nav {
-    gap: 22px;
-  }
-
-  .nav a {
-    font-size: 14px;
+  .contact-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .gallery {
