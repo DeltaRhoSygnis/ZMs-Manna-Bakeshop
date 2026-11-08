@@ -1,394 +1,915 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Zm’s Manna Bakeshop | Valencia City, Bukidnon</title>
-  <meta name="description" content="Biscuits, toasted bread, and pasalubong favorites baked fresh in Valencia City, Bukidnon. Retail packs and wholesale supply.">
+  <title>Zm’s Manna Bakeshop | Biscuits, Bread &amp; Pasalubong from Valencia City</title>
+  <meta name="description" content="Authentic packaged biscuits, toasted bread, and pasalubong specialties baked fresh at P-2 Lumbo, Valencia City, Bukidnon. Retail and wholesale supply across Mindanao.">
   <meta name="theme-color" content="#123b68">
 
   <!-- Tab icon taken from the bakeshop logo -->
   <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zm’s Manna Bakeshop | Valencia City, Bukidnon">
+  <meta property="og:description" content="Biscuits, bread, and pasalubong favorites baked fresh in Valencia City. Retail packs and wholesale cases for stores, pharmacies, and resellers.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap">
+
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Top strip -->
+  <!-- Location & brand strip -->
   <div class="topbar">
-    <p>P-2 Lumbo, Valencia City, Bukidnon &nbsp;•&nbsp; Fresh local biscuits &amp; pasalubong &nbsp;•&nbsp; DTI registered bakehouse</p>
+    <div class="topbar__inner">
+      <p class="topbar__location">
+        <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+        <span>P-2 Lumbo, Valencia City, Bukidnon</span>
+      </p>
+      <span class="topbar__sep" aria-hidden="true">•</span>
+      <span class="topbar__detail">Fresh local biscuits &amp; pasalubong · DTI registered bakehouse</span>
+      <span class="topbar__sep topbar__sep--md" aria-hidden="true">•</span>
+      <span class="topbar__badge">
+        <span class="topbar__dot" aria-hidden="true"></span>
+        Batch baking daily
+      </span>
+    </div>
   </div>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container header-inner">
-      <a class="logo" href="#home">
-        <img decoding="async" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
+  <!-- Sticky header -->
+  <header class="site-header">
+    <div class="container header__inner">
+      <a class="brand" href="#home" aria-label="Zm’s Manna Bakeshop home">
+        <span class="brand__mark">
+          <img class="brand__logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop seal logo" width="473" height="478">
+        </span>
         <span>
-          <strong>Zm’s Manna</strong>
-          <small>Bakeshop · Valencia</small>
+          <span class="brand__name">Zm’s Manna</span>
+          <span class="brand__sub">Bakeshop · Valencia</span>
         </span>
       </a>
 
-      <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="Open menu">
+      <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="Open menu" aria-controls="site-nav">
       <label class="nav-toggle-label" for="nav-toggle" aria-hidden="true">
         <span></span><span></span><span></span>
       </label>
 
-      <nav class="nav" id="site-nav" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#products">Products</a>
-        <a href="#pathways">Order Options</a>
-        <a href="#packaging">Packaging</a>
-        <a href="#wholesale">Wholesale</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a class="nav__link" href="#home" aria-current="page">Home</a>
+        <a class="nav__link" href="#products">Products</a>
+        <a class="nav__link" href="#pathways">Order Options</a>
+        <a class="nav__link" href="#packaging">Packaging Specs</a>
+        <a class="nav__link" href="#wholesale">Wholesale &amp; Reseller</a>
+        <a class="nav__link" href="#distribution">Distribution</a>
+        <a class="nav__link" href="#about">About</a>
+        <a class="nav__link" href="#contact">Contact</a>
       </nav>
 
-      <a class="btn btn-gold btn-small" href="#wholesale">Price List</a>
+      <div class="header__actions">
+        <a class="btn btn--gold btn--sm shimmer-effect" href="#wholesale">Request price list</a>
+        <a class="header__call" href="tel:09261774601" aria-label="Call the bakehouse at 0926 177 4601" title="Call bakehouse directly">
+          <span class="material-symbols-outlined" aria-hidden="true">call</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <main id="main" class="container">
+  <main id="main">
+    <div class="container page">
 
-    <!-- 1. Hero -->
-    <section class="hero" id="home">
-      <div class="hero-text">
-        <p class="tag">Biscuits · Bread · Pasalubong</p>
-        <h1>Zm’s Manna Bakeshop</h1>
-        <p class="slogan">“Love at first bite!”</p>
-        <p>Authentic packaged biscuits, breads, and pasalubong specialties baked fresh at
-          <strong>P-2 Lumbo, Valencia City, Bukidnon</strong>. Handcrafted for family merienda,
-          snack counters, and resellers across Mindanao.</p>
+      <!-- 1. Hero -->
+      <section class="hero" id="home">
+        <div class="hero__glow" aria-hidden="true"></div>
+        <div class="hero__glow hero__glow--blue" aria-hidden="true"></div>
 
-        <div class="hero-buttons">
-          <a class="btn btn-navy" href="#products">View Products</a>
-          <a class="btn btn-gold" href="#wholesale">Request Price List</a>
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <p class="hero__eyebrow">
+              <span class="dot" aria-hidden="true"></span>
+              Biscuits · Bread · Pasalubong favorites
+            </p>
+
+            <div class="hero__title-group">
+              <h1 class="hero__title">Zm’s Manna Bakeshop</h1>
+              <p class="hero__tagline">“Love at first bite!”</p>
+            </div>
+
+            <p class="hero__text">
+              Authentic packaged biscuits, breads, and pasalubong specialties baked fresh at
+              <strong>P-2 Lumbo, Valencia City, Bukidnon</strong>. Handcrafted with traditional
+              warmth for family merienda, snack counters, and regional commercial resellers
+              across Mindanao.
+            </p>
+
+            <div class="hero__actions">
+              <a class="btn btn--navy" href="#products">
+                <span>View products</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_downward</span>
+              </a>
+              <a class="btn btn--gold shimmer-effect" href="#wholesale">
+                <span>Request price list</span>
+                <span class="material-symbols-outlined" aria-hidden="true">receipt_long</span>
+              </a>
+            </div>
+
+            <dl class="hero__facts">
+              <div class="fact">
+                <dt class="fact__label">
+                  <span class="material-symbols-outlined" aria-hidden="true">location_city</span> Origin
+                </dt>
+                <dd class="fact__value">Valencia City, Bukidnon</dd>
+              </div>
+              <div class="fact fact--divided">
+                <dt class="fact__label">
+                  <span class="material-symbols-outlined" aria-hidden="true">inventory_2</span> Packaging
+                </dt>
+                <dd class="fact__value">Retail sealed 100g</dd>
+              </div>
+              <div class="fact fact--offset">
+                <dt class="fact__label">
+                  <span class="material-symbols-outlined" aria-hidden="true">verified</span> Credentials
+                </dt>
+                <dd class="fact__value">DTI &amp; barcode ready</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="hero__media">
+            <figure class="hero__figure">
+              <img class="hero__img" src="assets/BiscochoNice.webp" alt="Sealed Biscocho packs beside toasted slices on a dark wooden table" width="966" height="680" fetchpriority="high" decoding="async">
+              <div class="hero__scrim" aria-hidden="true"></div>
+              <figcaption class="hero__caption">
+                <span class="hero__caption-group">
+                  <span class="hero__caption-icon">
+                    <span class="material-symbols-outlined" aria-hidden="true">bakery_dining</span>
+                  </span>
+                  <span>
+                    <span class="hero__caption-label">Signature favorite</span>
+                    <span class="hero__caption-title">Toasted Biscocho pouch</span>
+                  </span>
+                </span>
+                <span class="hero__caption-weight">100g net wt.</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Buyer pathways -->
+      <section class="pathways" id="pathways">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Targeted purchasing pipelines</p>
+            <h2 class="section-title">Wholesale &amp; retail pathways</h2>
+          </div>
+          <p class="section-lead">Commercial arrangements tailored to match your specific supply scale, shelf turnaround, and dispatch schedules.</p>
         </div>
 
-        <ul class="hero-facts">
-          <li><strong>Origin</strong><span>Valencia City, Bukidnon</span></li>
-          <li><strong>Packaging</strong><span>Retail sealed 100g</span></li>
-          <li><strong>Credentials</strong><span>DTI &amp; barcode ready</span></li>
-        </ul>
-      </div>
+        <div class="pathway-grid">
+          <article class="pathway">
+            <div class="pathway__body">
+              <p class="pathway__num">01</p>
+              <div>
+                <h3 class="pathway__title">Individual &amp; walk-ins</h3>
+                <p class="pathway__kicker">Pasalubong &amp; snacking</p>
+              </div>
+              <p class="pathway__text">Direct retail purchases, travel pasalubong bundles for Bukidnon visitors, and fresh batch pickup right from our primary bakehouse in Lumbo, Valencia City.</p>
+            </div>
+            <div class="pathway__action">
+              <a class="btn btn--outline btn--sm btn--full" href="#products">Explore products</a>
+            </div>
+          </article>
 
-      <figure class="hero-image">
-        <img decoding="async" fetchpriority="high" src="assets/BiscochoNice.webp" alt="Sealed Biscocho packs beside toasted slices on a dark wooden table" width="966" height="680">
-        <figcaption>Signature favorite: Toasted Biscocho pouch · 100g</figcaption>
-      </figure>
-    </section>
+          <article class="pathway pathway--featured">
+            <div class="pathway__body">
+              <p class="pathway__num pathway__num--gold">02</p>
+              <div>
+                <h3 class="pathway__title">Stores &amp; mini marts</h3>
+                <p class="pathway__kicker pathway__kicker--navy">Reseller shelves</p>
+              </div>
+              <p class="pathway__text">Pre-sealed retail bags with barcoded labels formatted for convenience counters, grocery store shelves, and prompt replenishment runs across Bukidnon.</p>
+            </div>
+            <div class="pathway__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">Reseller inquiries</a>
+            </div>
+          </article>
 
-    <!-- 2. Buyer pathways -->
-    <section class="section" id="pathways">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Targeted purchasing pipelines</p>
-          <h2>Wholesale &amp; Retail Pathways</h2>
+          <article class="pathway">
+            <div class="pathway__body">
+              <p class="pathway__num pathway__num--dark">03</p>
+              <div>
+                <h3 class="pathway__title">Malls, pharmacies &amp; bulk</h3>
+                <p class="pathway__kicker">Commercial supply</p>
+              </div>
+              <p class="pathway__text">Bulk institutional supply, consolidated carton packaging, documented delivery freight, and formal distribution relationships across Mindanao.</p>
+            </div>
+            <div class="pathway__action">
+              <a class="btn btn--navy btn--sm btn--full" href="#wholesale">Start bulk inquiry</a>
+            </div>
+          </article>
         </div>
-        <p class="section-lead">Arrangements tailored to your supply scale, shelf turnaround, and dispatch schedule.</p>
-      </div>
+      </section>
 
-      <div class="cards">
-        <article class="card">
-          <span class="card-num">01</span>
-          <h3>Individual &amp; Walk-ins</h3>
-          <p class="card-kicker">Pasalubong &amp; snacking</p>
-          <p>Retail purchases, travel pasalubong bundles, and fresh batch pickup from our bakehouse in Lumbo.</p>
-          <a class="btn btn-outline btn-full" href="#products">Explore Products</a>
-        </article>
+      <!-- 3. Product catalog -->
+      <section class="catalog" id="products">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">
+              <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+              Fresh from Valencia City
+            </p>
+            <h2 class="section-title">Product catalog</h2>
+          </div>
 
-        <article class="card">
-          <span class="card-num">02</span>
-          <h3>Stores &amp; Mini Marts</h3>
-          <p class="card-kicker">Reseller shelves</p>
-          <p>Pre-sealed retail bags with barcoded labels for convenience counters and grocery shelves.</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Reseller Inquiries</a>
-        </article>
-
-        <article class="card">
-          <span class="card-num">03</span>
-          <h3>Malls, Pharmacies &amp; Bulk</h3>
-          <p class="card-kicker">Commercial supply</p>
-          <p>Bulk carton supply with documented delivery freight and formal distribution terms.</p>
-          <a class="btn btn-navy btn-full" href="#wholesale">Start Bulk Inquiry</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- 3. Products -->
-    <section class="section" id="products">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Fresh from Valencia City</p>
-          <h2>Product Catalog</h2>
-        </div>
-        <p class="section-lead">Six packaged lines · Biscuits &amp; cookies · Toasted specialties · Pastry &amp; loaves</p>
-      </div>
-
-      <div class="products">
-        <article class="product">
-          <img loading="lazy" decoding="async" src="assets/CookieDeLonga.webp" alt="Sealed Cookie de Longa pack beside a blue mug" width="720" height="960">
-          <h3>Cookie de Longa</h3>
-          <p>Sesame-topped round cookie sandwiches with a sweet signature filling.</p>
-          <p class="product-meta">100g net wt. · Wholesale tier on request</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Ask About Cookie de Longa</a>
-        </article>
-
-        <article class="product">
-          <img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Two sealed Biscocho packs in a wire basket" width="960" height="720">
-          <h3>Biscocho</h3>
-          <p>Twice-baked crispy bread slices glazed with butter and sugar.</p>
-          <p class="product-meta">100g net wt. · Top seller</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Ask About Biscocho</a>
-        </article>
-
-        <article class="product">
-          <img loading="lazy" decoding="async" src="assets/Mammon.webp" alt="Two sealed Toasted Mammon packs" width="720" height="960">
-          <h3>Toasted Mammon</h3>
-          <p>Light sponge cake slices slow-toasted for an airy, crispy crunch.</p>
-          <p class="product-meta">100g net wt. · Light crunch</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Ask About Toasted Mammon</a>
-        </article>
-
-        <article class="product">
-          <img loading="lazy" decoding="async" src="assets/Patatas.webp" alt="Three sealed Patatas biscuit packs" width="960" height="720">
-          <h3>Patatas</h3>
-          <p>Finger-style crunchy biscuit batons with a savory-sweet taste.</p>
-          <p class="product-meta">100g net wt. · Coffee pairing</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Ask About Patatas</a>
-        </article>
-
-        <article class="product">
-          <img loading="lazy" decoding="async" src="assets/Hopia.webp" alt="Sealed Hopia Choco pack" width="960" height="720">
-          <h3>Hopia Choco</h3>
-          <p>Flaky crust pockets filled with rich chocolate sweet bean paste.</p>
-          <p class="product-meta">100g net wt. · Rich filling</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Ask About Hopia Choco</a>
-        </article>
-
-        <article class="product">
-          <img loading="lazy" decoding="async" class="product-logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem" width="473" height="478">
-          <h3>Otap &amp; Loaf Breads</h3>
-          <p>Crisp oval puff biscuits and soft sliced loaves for breakfast and merienda.</p>
-          <p class="product-meta">Standard packs · Specialty line</p>
-          <a class="btn btn-gold btn-full" href="#wholesale">Ask About the Specialty Line</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- 4. Packaging -->
-    <section class="packaging" id="packaging">
-      <figure class="packaging-image">
-        <img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Sealed Biscocho pouches with printed labels and barcodes" width="960" height="720">
-        <figcaption>DTI branding, nutrition details, and POS barcode on every 100g unit.</figcaption>
-      </figure>
-
-      <div class="packaging-text">
-        <p class="eyebrow">Retail &amp; wholesale ready</p>
-        <h2>Packaging &amp; Merchandising</h2>
-        <p>Designed for ambient shelf-life, easy scanning, and attractive display.</p>
-
-        <ol class="spec-list">
-          <li><strong>Clear heat-sealed pouches</strong> keep biscuits moisture-proof during transport.</li>
-          <li><strong>POS barcode &amp; DTI tags</strong> are ready for supermarket and mini-mart scanners.</li>
-          <li><strong>Standardized 100g portions</strong> keep pricing simple across product lines.</li>
-          <li><strong>High shelf endurance</strong> suits pharmacy counters and souvenir displays.</li>
-        </ol>
-
-        <a class="btn btn-navy" href="#wholesale">Inquire on Carton Quantities</a>
-      </div>
-    </section>
-
-    <!-- 5. Wholesale -->
-    <section class="wholesale" id="wholesale">
-      <div class="wholesale-info">
-        <p class="eyebrow light">Commercial inquiries</p>
-        <h2>Wholesale &amp; Reseller Desk</h2>
-        <p>Mini marts, supermarkets, pharmacies, souvenir kiosks, and distributors can request our volume tier schedule.</p>
-
-        <h3>Order Tiers</h3>
-        <ul class="tier-list">
-          <li><span>Sample assortment</span><strong>20 pouches</strong></li>
-          <li><span>Store starter case</span><strong>50 pouches</strong></li>
-          <li><span>Full master carton</span><strong>100 pouches</strong></li>
-          <li><span>Distributor freight</span><strong>300+ pouches</strong></li>
-        </ul>
-
-        <p class="phone-label">Direct production phone</p>
-        <a class="phone" href="tel:09261774601">0926-177-4601</a>
-
-        <img loading="lazy" decoding="async" class="promo" src="assets/banner.webp" alt="Zm’s Manna reseller and pasalubong update banner" width="1376" height="768">
-      </div>
-
-      <div class="order-box">
-        <h3>Request the Current Price List</h3>
-        <p>Call or text the bakehouse with these details and we will send the sheet for your order tier.</p>
-        <ul class="order-list">
-          <li>Business or buyer name</li>
-          <li>Buyer type (store, pharmacy, bulk buyer)</li>
-          <li>Target order tier and volume</li>
-          <li>Products of interest</li>
-          <li>Contact number or email</li>
-          <li>Delivery city and dispatch date</li>
-        </ul>
-        <a class="btn btn-gold btn-full" href="tel:09261774601">Call 0926-177-4601</a>
-        <a class="btn btn-navy btn-full" href="sms:09261774601">Text Your Inquiry</a>
-      </div>
-    </section>
-
-    <!-- 6. Distribution -->
-    <section class="section" id="distribution">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Supply &amp; order fulfillment</p>
-          <h2>Distribution &amp; Logistics</h2>
-        </div>
-        <p class="section-lead">Guidelines for store deliveries, freight pickups, and provincial dispatch.</p>
-      </div>
-
-      <div class="faq">
-        <details open>
-          <summary>Primary service area &amp; coverage</summary>
-          <p>Based in Valencia City, Bukidnon. Regular dispatches serve Malaybalay, Maramag, Quezon, and Manolo Fortich, with freight corridors to Cagayan de Oro, Davao Region, and Northern Mindanao.</p>
-        </details>
-        <details>
-          <summary>Delivery methods &amp; pickup options</summary>
-          <p>Local route delivery for recurring partners, third-party cargo couriers for provincial stores, and direct warehouse pickup at P-2 Lumbo.</p>
-        </details>
-        <details>
-          <summary>Minimum order quantities</summary>
-          <p>Sample bundles start at 20 pouches, reseller starter cases at 50 packs, and commercial cartons at 100 to 300+ units.</p>
-        </details>
-        <details>
-          <summary>Production &amp; lead time</summary>
-          <p>Wholesale batches need 2 to 4 business days for baking, cooling, sealing, barcode checking, and carton packing.</p>
-        </details>
-        <details>
-          <summary>Payment terms</summary>
-          <p>Bank transfer, GCash business accounts, and COD for established Bukidnon partners. Price sheets include suggested retail margins.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- 7. About -->
-    <section class="section" id="about">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Community bakehouse heritage</p>
-          <h2>About Zm’s Manna</h2>
-        </div>
-        <p class="section-lead">Producing trusted snack favorites in Valencia City, Bukidnon.</p>
-      </div>
-
-      <div class="about-grid">
-        <article class="about-card">
-          <h3>Baking quality biscuits for Mindanao homes &amp; stores</h3>
-          <p>Located in <strong>P-2 Lumbo, Valencia City, Bukidnon</strong>, Zm’s Manna Bakeshop is a local producer of traditional toasted breads, crispy cookies, and signature pasalubong delicacies.</p>
-          <p>We combine time-tested recipes with clear pouch packaging so every order arrives crisp and fresh.</p>
-          <ul class="stats">
-            <li><strong>100g</strong><span>Uniform net weight</span></li>
-            <li><strong>DTI</strong><span>Registered producer</span></li>
-            <li><strong>Lumbo</strong><span>Valencia City</span></li>
+          <ul class="catalog__filters" aria-label="Catalog categories">
+            <li class="chip chip--active">All products (6)</li>
+            <li class="chip">Biscuits &amp; cookies (2)</li>
+            <li class="chip">Toasted specialties (2)</li>
+            <li class="chip">Pastry &amp; loaves (2)</li>
           </ul>
-        </article>
-
-        <article class="about-card">
-          <h3>Visit the bakehouse</h3>
-          <p><strong>P-2 Lumbo, Valencia City, Bukidnon</strong></p>
-          <p>Direct road access for cargo carriers, provincial van pickups, and local customers.</p>
-          <p>Open Monday to Saturday, 7:00 AM to 6:00 PM.</p>
-          <a class="btn btn-outline" href="tel:09261774601">Call Before Visiting</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- 8. Contact -->
-    <section class="contact" id="contact">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Get in touch</p>
-          <h2>Contact &amp; Inquiry Information</h2>
         </div>
-      </div>
 
-      <img loading="lazy" decoding="async" class="contact-banner" src="assets/prompotion.webp" alt="Zm’s Manna pasalubong promo with four product packs" width="1024" height="1024">
+        <div class="product-grid">
+          <!-- Cookie de Longa -->
+          <article class="product">
+            <div class="product__body">
+              <div class="product__media">
+                <img class="product__img" src="assets/CookieDeLonga.webp" alt="Sealed Cookie de Longa pack beside a blue mug on an outdoor table" width="720" height="960" loading="lazy" decoding="async">
+                <p class="product__tag">Cookies</p>
+                <p class="product__note">
+                  <span class="material-symbols-outlined" aria-hidden="true">verified</span> 100g barcoded
+                </p>
+              </div>
+              <div>
+                <h3 class="product__title">Cookie de Longa</h3>
+                <p class="product__text">Traditional sesame-topped round cookie sandwiches baked to crisp golden perfection with sweet signature filling.</p>
+                <dl class="product__specs">
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Pack net weight:</dt>
+                    <dd class="spec-row__value">100g net wt.</dd>
+                  </div>
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Wholesale rate:</dt>
+                    <dd class="spec-row__note">
+                      <span class="spec-row__dot" aria-hidden="true"></span> Tier available on request
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="product__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">
+                <span>Ask about Cookie de Longa</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </article>
 
-      <div class="contact-grid">
-        <a class="contact-card" href="tel:09261774601">
-          <strong>Official Phone</strong>
-          <span>0926-177-4601</span>
-          <small>As printed on packaging</small>
-        </a>
-        <div class="contact-card">
-          <strong>Facebook Page</strong>
-          <span>Zm’s Manna Bakeshop</span>
-          <small>Updates &amp; announcements</small>
+          <!-- Biscocho -->
+          <article class="product">
+            <div class="product__body">
+              <div class="product__media">
+                <img class="product__img" src="assets/Biscocho.webp" alt="Two sealed Biscocho packs in a wire basket with a yellow mug" width="960" height="720" loading="lazy" decoding="async">
+                <p class="product__tag">Toasted bread</p>
+                <p class="product__note">
+                  <span class="material-symbols-outlined" aria-hidden="true">star</span> Top seller
+                </p>
+              </div>
+              <div>
+                <h3 class="product__title">Biscocho</h3>
+                <p class="product__text">Twice-baked crispy bread slices delicately glazed with butter and granulated sugar crust for classic Philippine merienda.</p>
+                <dl class="product__specs">
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Pack net weight:</dt>
+                    <dd class="spec-row__value">100g net wt.</dd>
+                  </div>
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Wholesale rate:</dt>
+                    <dd class="spec-row__note">
+                      <span class="spec-row__dot" aria-hidden="true"></span> Tier available on request
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="product__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">
+                <span>Ask about Biscocho</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Toasted Mammon -->
+          <article class="product">
+            <div class="product__body">
+              <div class="product__media">
+                <img class="product__img" src="assets/Mammon.webp" alt="Two sealed Toasted Mammon packs with a blue mug" width="720" height="960" loading="lazy" decoding="async">
+                <p class="product__tag">Toasted cake</p>
+                <p class="product__note">
+                  <span class="material-symbols-outlined" aria-hidden="true">verified</span> Light crunch
+                </p>
+              </div>
+              <div>
+                <h3 class="product__title">Toasted Mammon</h3>
+                <p class="product__text">Light golden sponge mammon slices slow-toasted to an airy, crispy, satisfying crunch that melts in your coffee.</p>
+                <dl class="product__specs">
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Pack net weight:</dt>
+                    <dd class="spec-row__value">100g net wt.</dd>
+                  </div>
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Wholesale rate:</dt>
+                    <dd class="spec-row__note">
+                      <span class="spec-row__dot" aria-hidden="true"></span> Tier available on request
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="product__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">
+                <span>Ask about Toasted Mammon</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Patatas -->
+          <article class="product">
+            <div class="product__body">
+              <div class="product__media">
+                <img class="product__img" src="assets/Patatas.webp" alt="Three sealed Patatas biscuit packs beside a yellow mug" width="960" height="720" loading="lazy" decoding="async">
+                <p class="product__tag">Biscuits</p>
+                <p class="product__note">
+                  <span class="material-symbols-outlined" aria-hidden="true">coffee</span> Coffee pairing
+                </p>
+              </div>
+              <div>
+                <h3 class="product__title">Patatas</h3>
+                <p class="product__text">Classic finger-style elongated crunchy biscuit batons with savory-sweet crunch, loved by coffee drinkers.</p>
+                <dl class="product__specs">
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Pack net weight:</dt>
+                    <dd class="spec-row__value">100g net wt.</dd>
+                  </div>
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Wholesale rate:</dt>
+                    <dd class="spec-row__note">
+                      <span class="spec-row__dot" aria-hidden="true"></span> Tier available on request
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="product__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">
+                <span>Ask about Patatas</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Hopia Choco -->
+          <article class="product">
+            <div class="product__body">
+              <div class="product__media">
+                <img class="product__img" src="assets/Hopia.webp" alt="Sealed Hopia Choco pack with its label facing forward" width="960" height="720" loading="lazy" decoding="async">
+                <p class="product__tag">Pastry snack</p>
+                <p class="product__note">
+                  <span class="material-symbols-outlined" aria-hidden="true">bakery_dining</span> Rich filling
+                </p>
+              </div>
+              <div>
+                <h3 class="product__title">Hopia Choco</h3>
+                <p class="product__text">Flaky crust pockets stuffed with rich chocolate sweet bean filling; sealed fresh for lingering oven warmth.</p>
+                <dl class="product__specs">
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Pack net weight:</dt>
+                    <dd class="spec-row__value">100g net wt.</dd>
+                  </div>
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Wholesale rate:</dt>
+                    <dd class="spec-row__note">
+                      <span class="spec-row__dot" aria-hidden="true"></span> Tier available on request
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="product__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">
+                <span>Ask about Hopia Choco</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Otap & special loaves -->
+          <article class="product">
+            <div class="product__body">
+              <div class="product__media product__media--emblem">
+                <img class="product__emblem" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem" width="473" height="478" loading="lazy" decoding="async">
+                <p class="product__emblem-name">Otap &amp; bakery loaves</p>
+                <p class="product__emblem-note">Fresh daily batch bake lineup</p>
+                <p class="product__tag product__tag--solid">Specialty line</p>
+              </div>
+              <div>
+                <h3 class="product__title">Otap &amp; special loaf breads</h3>
+                <p class="product__text">Crisp flaky oval puff biscuits and soft sliced bakery loaves for morning breakfast and afternoon merienda tables.</p>
+                <dl class="product__specs">
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Pack net weight:</dt>
+                    <dd class="spec-row__value">Standard packs</dd>
+                  </div>
+                  <div class="spec-row">
+                    <dt class="spec-row__label">Wholesale rate:</dt>
+                    <dd class="spec-row__note">
+                      <span class="spec-row__dot" aria-hidden="true"></span> Tier available on request
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+            <div class="product__action">
+              <a class="btn btn--gold btn--sm btn--full" href="#wholesale">
+                <span>Ask about the specialty line</span>
+                <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+              </a>
+            </div>
+          </article>
         </div>
-        <div class="contact-card">
-          <strong>Bakehouse Site</strong>
-          <span>P-2 Lumbo, Valencia</span>
-          <small>Bukidnon, Northern Mindanao</small>
-        </div>
-        <div class="contact-card">
-          <strong>Operating Hours</strong>
-          <span>Mon – Sat: 7AM – 6PM</span>
-          <small>Dispatches on business days</small>
-        </div>
-      </div>
+      </section>
 
-      <div class="cta-bar">
-        <div>
-          <h3>Need wholesale pricing or samples?</h3>
-          <p>Send your target order volume to receive our updated product schedule.</p>
+      <!-- 4. Packaging & merchandising -->
+      <section class="packaging" id="packaging">
+        <div class="packaging__grid">
+          <div class="packaging__media">
+            <figure class="packaging__figure">
+              <img class="packaging__img" src="assets/Biscocho.webp" alt="Sealed Biscocho pouches with printed labels and barcodes" width="960" height="720" loading="lazy" decoding="async">
+              <figcaption class="packaging__caption">
+                <p class="packaging__caption-head">
+                  <span class="material-symbols-outlined" aria-hidden="true">verified</span>
+                  <span class="packaging__caption-label">Packaging compliance</span>
+                </p>
+                <p class="packaging__caption-text">DTI Negosyo Center branding, nutrition details, POS barcode, and contact slots visible on every 100g unit.</p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="packaging__body">
+            <div>
+              <p class="packaging__pill">Retail &amp; wholesale ready</p>
+              <h2 class="packaging__title">Packaging &amp; merchandising specifications</h2>
+              <p class="packaging__lead">Engineered for long ambient shelf-life, simple inventory scanning, and attractive display placement.</p>
+            </div>
+
+            <div class="spec-grid">
+              <div class="spec">
+                <p class="spec__num">1</p>
+                <div>
+                  <h3 class="spec__title">Clear heat-sealed pouches</h3>
+                  <p class="spec__text">Durable food-grade film keeping biscuits moisture-proof and crunchy during regional transport.</p>
+                </div>
+              </div>
+              <div class="spec">
+                <p class="spec__num">2</p>
+                <div>
+                  <h3 class="spec__title">POS barcode &amp; DTI tags</h3>
+                  <p class="spec__text">Scannable standard retail barcodes ready for supermarket POS registers and mini-mart scanners.</p>
+                </div>
+              </div>
+              <div class="spec">
+                <p class="spec__num">3</p>
+                <div>
+                  <h3 class="spec__title">Standardized 100g portions</h3>
+                  <p class="spec__text">Uniform net weight across Biscocho, Cookie de Longa, Mammon, and Patatas lines for easy pricing.</p>
+                </div>
+              </div>
+              <div class="spec">
+                <p class="spec__num">4</p>
+                <div>
+                  <h3 class="spec__title">High shelf endurance</h3>
+                  <p class="spec__text">Ambient shelf stability suited for pharmacy counters, grocery stands, and tourist souvenir displays.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <a class="btn btn--navy" href="#wholesale">
+                <span>Inquire on master carton quantities</span>
+                <span class="material-symbols-outlined" aria-hidden="true">inventory</span>
+              </a>
+            </div>
+          </div>
         </div>
-        <a class="btn btn-gold" href="#wholesale">Request Price List</a>
-      </div>
-    </section>
+      </section>
 
-    <!-- 9. Gallery -->
-    <section class="section" id="gallery">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Visual showcase</p>
-          <h2>Product &amp; Packaging Gallery</h2>
+      <!-- 5. Wholesale & reseller desk -->
+      <section class="wholesale" id="wholesale">
+        <div class="wholesale__glow" aria-hidden="true"></div>
+
+        <div class="wholesale__grid">
+          <div class="wholesale__intro">
+            <div class="wholesale__stack">
+              <p class="wholesale__pill">Commercial inquiries</p>
+              <h2 class="wholesale__title">Wholesale &amp; reseller desk</h2>
+              <p class="wholesale__text">Mini marts, supermarkets, independent pharmacies, souvenir kiosks, and distribution agents can request our volume tier schedules.</p>
+
+              <div class="tier-box">
+                <p class="tier-box__label">Order tiers</p>
+                <dl class="tier-list">
+                  <div class="tier-row">
+                    <dt>Sample assortment</dt>
+                    <dd>20 pouches</dd>
+                  </div>
+                  <div class="tier-row">
+                    <dt>Store starter case</dt>
+                    <dd>50 pouches</dd>
+                  </div>
+                  <div class="tier-row">
+                    <dt>Full master carton</dt>
+                    <dd>100 pouches</dd>
+                  </div>
+                  <div class="tier-row">
+                    <dt>Distributor freight</dt>
+                    <dd>300+ pouches</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div class="phone-box">
+                <p class="phone-box__label">Direct production phone</p>
+                <a class="phone-box__link" href="tel:09261774601">
+                  <span class="material-symbols-outlined" aria-hidden="true">phone_iphone</span>
+                  0926-177-4601
+                </a>
+                <p class="phone-box__note">Official hotline registered on all product packaging labels.</p>
+              </div>
+
+              <figure class="wholesale__promo">
+                <img src="assets/banner.webp" alt="Zm’s Manna reseller and pasalubong update banner" width="1376" height="768" loading="lazy" decoding="async">
+              </figure>
+            </div>
+
+            <p class="wholesale__note">* Official price lists, sample assortments, and delivery dates are confirmed by bakehouse staff upon receipt.</p>
+          </div>
+
+          <div class="inquiry">
+            <h3 class="inquiry__title">Request the current price list</h3>
+            <p class="inquiry__lead">Call or text the bakehouse with the details below. Staff will reply with the wholesale sheet that matches your order tier.</p>
+
+            <div class="inquiry__grid">
+              <div class="inquiry-item">
+                <p class="inquiry-item__label">Business or buyer name</p>
+                <p class="inquiry-item__text">The name that should appear on the price sheet.</p>
+              </div>
+              <div class="inquiry-item">
+                <p class="inquiry-item__label">Buyer classification</p>
+                <p class="inquiry-item__text">Mini mart, supermarket, pharmacy, corporate, or individual bulk buyer.</p>
+              </div>
+              <div class="inquiry-item">
+                <p class="inquiry-item__label">Order tier</p>
+                <p class="inquiry-item__text">Sample, store starter case, master carton, or distributor freight.</p>
+              </div>
+              <div class="inquiry-item">
+                <p class="inquiry-item__label">Products of interest</p>
+                <p class="inquiry-item__text">Cookie de Longa, Biscocho, Toasted Mammon, Patatas, Hopia Choco, or the Otap line.</p>
+              </div>
+              <div class="inquiry-item">
+                <p class="inquiry-item__label">Contact number or email</p>
+                <p class="inquiry-item__text">Where the official price sheet should be sent.</p>
+              </div>
+              <div class="inquiry-item">
+                <p class="inquiry-item__label">Delivery location &amp; volume</p>
+                <p class="inquiry-item__text">Target carton volume, delivery city, and dispatch timeline.</p>
+              </div>
+            </div>
+
+            <div class="inquiry__actions">
+              <a class="btn btn--gold" href="tel:09261774601">
+                <span class="material-symbols-outlined" aria-hidden="true">call</span>
+                Call 0926-177-4601
+              </a>
+              <a class="btn btn--navy" href="sms:09261774601">
+                <span class="material-symbols-outlined" aria-hidden="true">sms</span>
+                Text your inquiry
+              </a>
+            </div>
+
+            <p class="inquiry__hint">Include your business name, buyer type, target order volume, and delivery city in the message.</p>
+          </div>
         </div>
-        <p class="section-lead">Genuine packaged products photographed on site in Bukidnon.</p>
-      </div>
+      </section>
 
-      <div class="gallery">
-        <figure><img loading="lazy" decoding="async" src="assets/CookieDeLonga.webp" alt="Cookie de Longa pack outdoors" width="720" height="960"><figcaption>Cookie de Longa</figcaption></figure>
-        <figure><img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Biscocho packs in a basket" width="960" height="720"><figcaption>Toasted Biscocho</figcaption></figure>
-        <figure><img loading="lazy" decoding="async" src="assets/Mammon.webp" alt="Toasted Mammon packs" width="720" height="960"><figcaption>Toasted Mammon</figcaption></figure>
-        <figure><img loading="lazy" decoding="async" src="assets/Patatas.webp" alt="Patatas biscuit packs" width="960" height="720"><figcaption>Patatas Biscuits</figcaption></figure>
-        <figure><img loading="lazy" decoding="async" src="assets/Hopia.webp" alt="Hopia Choco pack" width="960" height="720"><figcaption>Hopia Choco</figcaption></figure>
-        <figure><img loading="lazy" decoding="async" src="assets/BiscochoNice.webp" alt="Biscocho packs and toasted slices on dark wood" width="966" height="680"><figcaption>Biscocho on Dark Wood</figcaption></figure>
-      </div>
-    </section>
+      <!-- 6. Distribution & logistics -->
+      <section class="distribution" id="distribution">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Supply &amp; order fulfillment</p>
+            <h2 class="section-title">Distribution &amp; logistics details</h2>
+          </div>
+          <p class="section-lead">Operating guidelines for retail store deliveries, freight pickups, and provincial dispatch across Mindanao.</p>
+        </div>
 
+        <div class="accordion">
+          <details class="accordion__item" open>
+            <summary class="accordion__summary">
+              <span class="accordion__summary-group">
+                <span class="material-symbols-outlined" aria-hidden="true">pin_drop</span>
+                <span>Primary service area &amp; coverage</span>
+              </span>
+              <span class="material-symbols-outlined accordion__chevron" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="accordion__body">Based in <strong>Valencia City, Bukidnon</strong>. Regular scheduled dispatches serve Bukidnon municipalities (Malaybalay, Maramag, Quezon, Manolo Fortich) and onward logistics freight corridors connecting Cagayan de Oro City, Davao Region, and Northern Mindanao.</p>
+          </details>
+
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <span class="accordion__summary-group">
+                <span class="material-symbols-outlined" aria-hidden="true">local_shipping</span>
+                <span>Delivery methods &amp; pickup options</span>
+              </span>
+              <span class="material-symbols-outlined accordion__chevron" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="accordion__body">Three flexible channels: <strong>1)</strong> Direct local route delivery for recurring merchant partners in Valencia; <strong>2)</strong> Third-party regional logistics / cargo couriers for provincial store shipments; and <strong>3)</strong> Direct warehouse pickup at P-2 Lumbo for local travelers and wholesalers.</p>
+          </details>
+
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <span class="accordion__summary-group">
+                <span class="material-symbols-outlined" aria-hidden="true">inventory</span>
+                <span>Minimum order quantities (MOQ)</span>
+              </span>
+              <span class="material-symbols-outlined accordion__chevron" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="accordion__body">Tier-based per box carton bundle: Sample bundles start at 20 pouches; standard reseller starter cases at 50 assorted 100g packs; commercial master cartons at 100 to 300+ units with tiered wholesale margins.</p>
+          </details>
+
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <span class="accordion__summary-group">
+                <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
+                <span>Production &amp; batch baking lead time</span>
+              </span>
+              <span class="material-symbols-outlined accordion__chevron" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="accordion__body">Standard wholesale batch orders require <strong>2 to 4 business days</strong> advance notice to allow fresh dough batching, oven baking, cooling, heat-sealing, barcode quality-checking, and protective master carton packing.</p>
+          </details>
+
+          <details class="accordion__item">
+            <summary class="accordion__summary">
+              <span class="accordion__summary-group">
+                <span class="material-symbols-outlined" aria-hidden="true">payments</span>
+                <span>Payment terms &amp; reseller margins</span>
+              </span>
+              <span class="material-symbols-outlined accordion__chevron" aria-hidden="true">expand_more</span>
+            </summary>
+            <p class="accordion__body">We support direct bank transfer, GCash business accounts, and Cash on Delivery (COD) for established local retail partners within Bukidnon. Wholesale price sheets include generous suggested retail price (SRP) spreads.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- 7. About & location -->
+      <section class="about" id="about">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Community bakehouse heritage</p>
+            <h2 class="section-title">About Zm’s Manna Bakeshop</h2>
+          </div>
+          <p class="section-lead">Proudly producing trusted snack favorites in Valencia City, Bukidnon.</p>
+        </div>
+
+        <div class="about__grid">
+          <div class="story">
+            <div class="story__head">
+              <div class="story__brand">
+                <img class="story__logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem" width="473" height="478" loading="lazy" decoding="async">
+                <div>
+                  <p class="story__kicker">Bukidnon food producer</p>
+                  <p class="story__sub">Registered Negosyo Center artisan</p>
+                </div>
+              </div>
+              <h3 class="story__title">Baking quality biscuits for Mindanao homes &amp; stores</h3>
+              <p class="story__text">Located in <strong>P-2 Lumbo, Valencia City, Bukidnon</strong>, Zm’s Manna Bakeshop has built a dependable reputation as a local producer of traditional toasted breads, crispy cookies, and signature pasalubong delicacies.</p>
+              <p class="story__text">We combine time-tested recipes with modern clear pouch packaging to guarantee crispy crunch and genuine taste. From daily family merienda to tourist travel gift bags, our products proudly embody Valencia’s rich baking heritage.</p>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <p class="stat__value">100g</p>
+                <p class="stat__label">Uniform net wt.</p>
+              </div>
+              <div class="stat stat--divided">
+                <p class="stat__value">DTI</p>
+                <p class="stat__label">Bukidnon supported</p>
+              </div>
+              <div class="stat">
+                <p class="stat__value">Lumbo</p>
+                <p class="stat__label">Valencia City</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="location">
+            <div class="location__head">
+              <p class="location__label">Physical bakehouse address</p>
+              <p class="location__title">P-2 Lumbo, Valencia City, Bukidnon</p>
+              <p class="location__text">Convenient direct road access for logistical cargo carriers, provincial van pickups, and local customers.</p>
+            </div>
+
+            <div class="map">
+              <div class="map__dots" aria-hidden="true"></div>
+              <div class="map__content">
+                <p class="map__pin">
+                  <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+                </p>
+                <p class="map__name">Zm’s Manna Bakeshop</p>
+                <p class="map__addr">P-2 Lumbo, Valencia City, Bukidnon</p>
+                <p class="map__route">Along primary Lumbo arterial route</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Contact -->
+      <section class="contact" id="contact">
+        <div class="contact__inner">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Get in touch</p>
+              <h2 class="section-title">Contact &amp; inquiry information</h2>
+            </div>
+            <p class="contact__region">Valencia City, Bukidnon, PH</p>
+          </div>
+
+          <figure class="contact__promo">
+            <img src="assets/prompotion.webp" alt="Zm’s Manna pasalubong promo with Biscocho, Cookie de Longa, Toasted Mammon, and Hopia Choco packs" width="1024" height="1024" loading="lazy" decoding="async">
+          </figure>
+
+          <div class="contact-grid">
+            <a class="contact-card contact-card--link" href="tel:09261774601">
+              <p class="contact-card__label">
+                <span class="material-symbols-outlined" aria-hidden="true">call</span> Official phone
+              </p>
+              <p class="contact-card__value">0926-177-4601</p>
+              <p class="contact-card__note">As printed on official packaging</p>
+            </a>
+
+            <div class="contact-card">
+              <p class="contact-card__label">
+                <span class="material-symbols-outlined" aria-hidden="true">public</span> Facebook page
+              </p>
+              <p class="contact-card__value">Zm’s Manna Bakeshop</p>
+              <p class="contact-card__note">Official social updates &amp; announcements</p>
+            </div>
+
+            <div class="contact-card">
+              <p class="contact-card__label">
+                <span class="material-symbols-outlined" aria-hidden="true">home_pin</span> Bakehouse site
+              </p>
+              <p class="contact-card__value">P-2 Lumbo, Valencia</p>
+              <p class="contact-card__note">Bukidnon, Northern Mindanao</p>
+            </div>
+
+            <div class="contact-card">
+              <p class="contact-card__label">
+                <span class="material-symbols-outlined" aria-hidden="true">schedule</span> Operating hours
+              </p>
+              <p class="contact-card__value">Mon – Sat: 7AM – 6PM</p>
+              <p class="contact-card__note">Dispatches during standard business hours</p>
+            </div>
+          </div>
+
+          <div class="contact-cta">
+            <div class="contact-cta__glow" aria-hidden="true"></div>
+            <div class="contact-cta__content">
+              <h3 class="contact-cta__title">Need wholesale pricing or product samples?</h3>
+              <p class="contact-cta__text">Submit your target order volume to receive our updated product schedule.</p>
+            </div>
+            <a class="btn btn--gold shimmer-effect" href="#wholesale">Request price list</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. Gallery -->
+      <section class="gallery" id="gallery">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Visual showcase</p>
+            <h2 class="section-title">Product &amp; packaging gallery</h2>
+          </div>
+          <p class="section-lead">Genuine packaged products photographed on site in Bukidnon.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <div class="gallery-item__media">
+              <img class="gallery-item__img" src="assets/CookieDeLonga.webp" alt="Cookie de Longa pack outdoors" width="720" height="960" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="gallery-item__caption">Cookie de Longa</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <div class="gallery-item__media">
+              <img class="gallery-item__img" src="assets/Biscocho.webp" alt="Biscocho packs in a wire basket" width="960" height="720" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="gallery-item__caption">Toasted Biscocho</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <div class="gallery-item__media">
+              <img class="gallery-item__img" src="assets/Mammon.webp" alt="Toasted Mammon packs beside a blue mug" width="720" height="960" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="gallery-item__caption">Toasted Mammon</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <div class="gallery-item__media">
+              <img class="gallery-item__img" src="assets/Patatas.webp" alt="Patatas biscuit packs on display" width="960" height="720" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="gallery-item__caption">Patatas Biscuits</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <div class="gallery-item__media">
+              <img class="gallery-item__img" src="assets/Hopia.webp" alt="Hopia Choco pack with its label facing forward" width="960" height="720" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="gallery-item__caption">Hopia Choco</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <div class="gallery-item__media">
+              <img class="gallery-item__img" src="assets/ad.webp" alt="Zm’s Manna baked delights lineup with coffee on a wooden table" width="1376" height="768" loading="lazy" decoding="async">
+            </div>
+            <figcaption class="gallery-item__caption">Baked Delights Lineup</figcaption>
+          </figure>
+        </div>
+      </section>
+
+    </div>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-grid">
-        <div>
-          <a class="logo" href="#home">
-            <img loading="lazy" decoding="async" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
-            <span><strong>Zm’s Manna Bakeshop</strong><small>P-2 Lumbo, Valencia City, Bukidnon</small></span>
-          </a>
-          <p>Quality baked biscuits, toasted bread, and pasalubong favorites for individual and wholesale buyers across Mindanao.</p>
-          <p class="phone"><a href="tel:09261774601">0926-177-4601</a></p>
+  <!-- Floating call pill -->
+  <aside class="call-pill" aria-label="Quick contact">
+    <a class="call-pill__btn" href="tel:09261774601" title="Call directly" aria-label="Call the bakehouse">
+      <span class="material-symbols-outlined" aria-hidden="true">phone</span>
+    </a>
+    <span class="call-pill__text">
+      <span class="call-pill__label">Fast bakehouse hotline</span>
+      <a class="call-pill__link" href="tel:09261774601">0926-177-4601</a>
+    </span>
+  </aside>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__brand-line">
+            <img class="footer__logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem logo" width="473" height="478" loading="lazy" decoding="async">
+            <div>
+              <p class="footer__name">Zm’s Manna Bakeshop</p>
+              <p class="footer__address">P-2 Lumbo, Valencia City, Bukidnon</p>
+            </div>
+          </div>
+          <p class="footer__tagline">Quality baked biscuits, toasted bread, and pasalubong favorites produced in Valencia City, Bukidnon for individual customers and bulk wholesale buyers across Mindanao.</p>
+          <p class="footer__phone">
+            <span class="material-symbols-outlined" aria-hidden="true">call</span>
+            <a href="tel:09261774601">0926-177-4601</a>
+          </p>
+        </div>
+
+        <div class="footer__nav-wrap">
+          <p class="footer__nav-title">Quick navigation</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#pathways">Order Options</a>
+            <a href="#packaging">Packaging</a>
+            <a href="#wholesale">Wholesale</a>
+            <a href="#distribution">Distribution</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <p class="footer__note">Official price lists, deliveries, and schedule slots are coordinated directly by phone and desk confirmation.</p>
         </div>
       </div>
 
-      <p class="footer-bottom">© Zm’s Manna Bakeshop. P-2 Lumbo, Valencia City, Bukidnon. All rights reserved.</p>
+      <div class="footer__bottom">
+        <p>© Zm’s Manna Bakeshop. P-2 Lumbo, Valencia City, Bukidnon. All rights reserved.</p>
+        <p class="footer__made">
+          <span class="footer__dot" aria-hidden="true"></span>
+          <span>Crafted with pride in Valencia City, Bukidnon</span>
+        </p>
+      </div>
     </div>
   </footer>
 
