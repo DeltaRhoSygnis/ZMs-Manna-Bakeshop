@@ -1,0 +1,1545 @@
+/* =========================================================
+   Zm's Manna Bakeshop
+   Simple HTML + CSS school project
+   ========================================================= */
+
+/* ---------- 1. Colors, fonts, and base styles ---------- */
+:root {
+  --navy: #123b68;
+  --navy-dark: #0b2746;
+  --blue-light: #eaf1f8;
+  --gold: #d2a62a;
+  --gold-dark: #b98f1c;
+  --cream: #f8f3e8;
+  --white: #fffdf8;
+  --text: #172033;
+  --gray: #4d5667;
+  --border: #ded5c6;
+  --biscuit: #9a6532;
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "DM Sans", Arial, sans-serif;
+
+  /* One compact scale. It steps down once on phones, where the narrower
+     text column cannot carry desktop sizes; columns handle the rest. */
+  --h1: 44px;
+  --h2: 30px;
+  --space: 56px;
+  --gutter: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Mobile browsers inflate text that spans the full width. The layout is
+     designed for phones, so keep the authored sizes exactly. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--serif);
+  color: var(--navy);
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 14px;
+}
+
+a {
+  color: var(--navy);
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left));
+  padding-right: max(var(--gutter), env(safe-area-inset-right));
+}
+
+/* Keyboard users can jump straight to the content. */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 20;
+  padding: 10px 18px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 10px;
+}
+
+/* Keyboard focus, drawn outside the control so it reads on any background. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+.wholesale :focus-visible {
+  outline-color: var(--gold);
+}
+
+/* ---------- 2. Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 26px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.btn-gold:hover {
+  background: var(--gold-dark);
+}
+
+.btn-navy {
+  background: var(--navy);
+  color: #fff;
+}
+
+.btn-navy:hover {
+  background: var(--navy-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--navy);
+}
+
+.btn-outline:hover {
+  background: var(--navy);
+  color: #fff;
+}
+
+.header .btn {
+  white-space: nowrap;
+}
+
+.btn-small {
+  padding: 10px 18px;
+  font-size: 12px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ---------- 3. Top strip and header ---------- */
+.topbar {
+  padding: 9px 16px;
+  background: var(--navy-dark);
+  color: #f2df9e;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.topbar p {
+  margin: 0;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  min-height: 76px;
+  padding-block: 10px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.logo strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.logo small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* The links share the brand's row at every width. Below 900px they do
+   not fit beside the logo, so the strip scrolls sideways instead of
+   wrapping into a second bar. */
+.nav {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  order: 0;
+  min-width: 0;
+  width: auto;
+  gap: 6px 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+/* Menu toggle, used only below 680px where the links stop fitting. */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+}
+
+.nav a {
+  font-size: 14px;
+  color: var(--gray);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav a:hover {
+  color: var(--navy);
+}
+
+/* ---------- 4. Hero ---------- */
+.hero {
+  display: grid;
+  align-items: center;
+  gap: 40px;
+  padding: 40px 0 0;
+}
+
+.hero h1 {
+  margin: 10px 0 4px;
+  font-size: var(--h1);
+  letter-spacing: -0.02em;
+}
+
+.tag {
+  display: inline-block;
+  margin: 0;
+  padding: 6px 14px;
+  background: #f2df9e;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.slogan {
+  margin: 0 0 16px;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--biscuit);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.hero-facts {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.hero-facts strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.hero-facts span {
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.hero-image {
+  margin: 0;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 340px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.hero-image figcaption {
+  margin-top: 10px;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--gray);
+}
+
+/* ---------- 5. Section headings ---------- */
+.section {
+  margin-top: var(--space);
+}
+
+/* Leaves room for the sticky header when a nav link jumps to a section. */
+section[id] {
+  scroll-margin-top: 140px;
+}
+
+/* The lead paragraph drops under the title only when there is no room
+   beside it, so the heading block needs no breakpoint of its own. */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--biscuit);
+}
+
+.section h2,
+.packaging h2,
+.contact h2 {
+  margin-top: 4px;
+  font-size: var(--h2);
+}
+
+.hero-text,
+.packaging-text,
+.wholesale-info {
+  min-width: 0;
+}
+
+.section-lead {
+  flex: 1 1 260px;
+  max-width: 380px;
+  margin: 0;
+  font-size: 15px;
+  color: var(--gray);
+}
+
+/* ---------- 6. Pathway cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--blue-light);
+  border: 1px solid #c8daf0;
+  border-radius: 16px;
+}
+
+.card-num {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+  background: var(--navy);
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--serif);
+  line-height: 42px;
+  text-align: center;
+}
+
+.card h3 {
+  margin: 14px 0 2px;
+  font-size: 21px;
+}
+
+.card-kicker {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--biscuit);
+}
+
+.card p {
+  font-size: 15px;
+  color: var(--gray);
+}
+
+.card .btn {
+  margin-top: auto;
+}
+
+/* ---------- 7. Product grid ---------- */
+.products {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.product img {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.product .product-logo {
+  padding: 24px;
+  background: var(--cream);
+  object-fit: contain;
+}
+
+.product h3 {
+  margin: 14px 0 6px;
+  font-size: 21px;
+}
+
+.product p {
+  font-size: 15px;
+  color: var(--gray);
+}
+
+.product-meta {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--biscuit);
+}
+
+.product .btn {
+  margin-top: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- 8. Packaging ---------- */
+.packaging {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+  margin-top: var(--space);
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.packaging-image {
+  margin: 0;
+}
+
+.packaging-image img {
+  width: 100%;
+  height: 280px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.packaging-image figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.spec-list {
+  margin: 18px 0;
+  padding-left: 20px;
+  color: var(--gray);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.spec-list strong {
+  color: var(--navy);
+}
+
+/* ---------- 9. Wholesale ---------- */
+.wholesale {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+  margin-top: var(--space);
+  padding: 32px;
+  background: var(--navy);
+  border-radius: 20px;
+  color: #fff;
+}
+
+.wholesale h2 {
+  color: #fff;
+  font-size: var(--h2);
+}
+
+.wholesale h3 {
+  color: #fff;
+  font-size: 20px;
+}
+
+.wholesale p {
+  color: #dbe4ef;
+  font-size: 15px;
+}
+
+.eyebrow.light {
+  color: #f2df9e;
+}
+
+.tier-list {
+  margin: 16px 0 20px;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  list-style: none;
+}
+
+.tier-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 15px;
+}
+
+.phone-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #f2df9e;
+}
+
+.phone {
+  display: block;
+  margin: 4px 0 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.phone:hover {
+  color: var(--gold);
+}
+
+.promo {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.order-box {
+  padding: 24px;
+  background: var(--white);
+  border-radius: 16px;
+  color: var(--text);
+}
+
+.order-box h3 {
+  color: var(--navy);
+}
+
+.order-box p {
+  color: var(--gray);
+}
+
+.order-list {
+  margin: 16px 0 20px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--gray);
+}
+
+.order-box .btn {
+  margin-top: 10px;
+}
+
+/* ---------- 10. FAQ / distribution ---------- */
+.faq {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq details:last-child {
+  border-bottom: none;
+}
+
+.faq summary {
+  padding: 18px 20px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.faq p {
+  margin: 0;
+  padding: 0 20px 18px;
+  font-size: 15px;
+  color: var(--gray);
+}
+
+/* ---------- 11. About ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+
+.about-card {
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.about-card h3 {
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+.about-card p {
+  font-size: 15px;
+  color: var(--gray);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 20px 0 0;
+  padding: 16px;
+  background: var(--blue-light);
+  border-radius: 12px;
+  list-style: none;
+  text-align: center;
+}
+
+.stats strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--navy);
+}
+
+.stats span {
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* ---------- 12. Contact ---------- */
+.contact {
+  margin-top: var(--space);
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.contact-banner {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  object-fit: cover;
+  object-position: 50% 62%;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.contact-card {
+  display: block;
+  padding: 18px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.contact-card:hover {
+  background: var(--blue-light);
+}
+
+.contact-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.contact-card span {
+  display: block;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.contact-card small {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.cta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--navy);
+  border-radius: 16px;
+}
+
+.cta-bar > div {
+  flex: 1 1 280px;
+}
+
+.cta-bar h3 {
+  color: #fff;
+  font-size: 22px;
+}
+
+.cta-bar p {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: #dbe4ef;
+}
+
+/* ---------- 13. Gallery ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gallery figure {
+  margin: 0;
+  padding: 8px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.gallery figcaption {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: center;
+}
+
+/* ---------- 14. Footer ---------- */
+.footer {
+  margin-top: var(--space);
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  padding: 40px 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer p {
+  max-width: 420px;
+  margin: 12px 0 0;
+  font-size: 15px;
+  color: var(--gray);
+}
+
+.footer .phone {
+  margin: 12px 0 0;
+  font-size: 16px;
+  color: var(--navy);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 8px 20px;
+  font-size: 15px;
+}
+
+.footer-links a {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--navy);
+}
+
+.footer-bottom {
+  margin: 24px 0 0;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+/* ---------- 15. Responsive layout ----------
+
+   Two axes are controlled independently: how many columns a grid has,
+   and how dense the phone layout is. The type scale steps down exactly
+   once, on phones, because a 44px h1 and 32px panel padding leave too
+   little room for the text column at 320-430px. */
+
+/* Tier 1 - two-up: paired cards side by side */
+@media (min-width: 640px) {
+  .hero-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .products,
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tier 2 - three-up: the buyer cards and stacked split sections */
+@media (min-width: 800px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .about-grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* From 680px up every link fits on one line beside the brand, so the
+   strip stops scrolling and behaves as a normal flex row. The price-list
+   button stays out of the row until 900px so the links have the room. */
+@media (min-width: 680px) {
+  .header-inner {
+    flex-wrap: nowrap;
+    min-height: 84px;
+    padding-block: 0;
+    gap: 10px 16px;
+  }
+
+  .nav {
+    flex: 0 1 auto;
+    min-width: auto;
+    gap: 8px;
+    overflow: visible;
+  }
+
+  .nav a {
+    font-size: 12px;
+  }
+
+  section[id] {
+    scroll-margin-top: 92px;
+  }
+}
+
+@media (max-width: 899.98px) {
+  .header .btn-small {
+    display: none;
+  }
+
+  /* The tagline is the widest part of the brand block; dropping it below
+     900px buys the links roughly 100px of row. */
+  .logo small {
+    display: none;
+  }
+}
+
+/* Tier 3 - split layouts, and the header drops to one inline row */
+@media (min-width: 900px) {
+  .header-inner {
+    flex-wrap: nowrap;
+    min-height: 84px;
+    padding-block: 0;
+  }
+
+  .nav {
+    order: 0;
+    flex: 0 1 auto;
+    flex-wrap: nowrap;
+    min-width: auto;
+    width: auto;
+    padding-top: 0;
+    border-top: 0;
+    gap: 16px;
+    overflow: visible;
+  }
+
+  .nav a {
+    font-size: 13.5px;
+  }
+
+  section[id] {
+    scroll-margin-top: 100px;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .packaging,
+  .wholesale {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .products {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tier 4 - full desktop density: the densest grids only */
+@media (min-width: 1000px) {
+  .contact-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .gallery {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Compact header: one band, scrollable links ----------
+
+   Below 900px the seven links cannot sit inline beside the brand at a
+   readable size, so they share the row and scroll sideways instead of
+   wrapping into a second bar underneath it. */
+@media (max-width: 679.98px) {
+  .header-inner {
+    min-height: 0;
+    padding-block: 8px;
+    gap: 8px 12px;
+  }
+
+  .logo {
+    flex: 0 0 auto;
+  }
+
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+  }
+
+  .nav-toggle-label {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .nav-toggle-label span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--navy);
+  }
+
+  .nav-toggle:focus-visible + .nav-toggle-label {
+    outline: 3px solid var(--navy);
+    outline-offset: 3px;
+  }
+
+  /* The links open as a panel under the header instead of sitting in a
+     strip that gets cut off at the edge. */
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 4px 20px 12px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 24px rgba(18, 59, 104, 0.12);
+    overflow: visible;
+    z-index: 30;
+  }
+
+  .nav-toggle:checked ~ .nav {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 13px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav a:last-child {
+    border-bottom: 0;
+  }
+
+  section[id] {
+    scroll-margin-top: 68px;
+  }
+}
+
+/* ---------- Phone: 320px and up ---------- */
+@media (max-width: 639.98px) {
+  :root {
+    --h1: 40px;
+    --h2: 27px;
+    --space: 40px;
+    --gutter: 20px;
+  }
+
+  /* The utility strip is three lines of 10px text above the fold, and the
+     hero repeats the address a few lines later. */
+  .topbar {
+    display: none;
+  }
+
+  .header {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo strong {
+    font-size: 17px;
+  }
+
+  .logo small {
+    font-size: 9.5px;
+    letter-spacing: 0.6px;
+  }
+
+  /* The price-list button duplicates the hero CTA; on phones the row
+     belongs to the links. */
+  .header .btn-small {
+    display: none;
+  }
+
+  section[id] {
+    scroll-margin-top: calc(64px + env(safe-area-inset-top));
+  }
+
+  /* Hero */
+  .hero {
+    gap: 26px;
+    padding-top: 28px;
+  }
+
+  .hero h1 {
+    margin: 8px 0 2px;
+  }
+
+  .tag {
+    padding: 5px 12px;
+    font-size: 10.5px;
+    letter-spacing: 0.8px;
+  }
+
+  .slogan {
+    margin-bottom: 12px;
+    font-size: 18px;
+  }
+
+  .hero-buttons {
+    margin: 18px 0;
+    gap: 10px;
+  }
+
+  .hero-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+
+  .hero-facts strong {
+    font-size: 9.5px;
+  }
+
+  .hero-facts span {
+    font-size: 12.5px;
+    line-height: 1.35;
+  }
+
+  /* A ratio beats a fixed height here: 340px on a 280px-wide column
+     crops the product shot into a strip. */
+  .hero-image img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-image figcaption {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  /* Section headings */
+  .section-head {
+    margin-bottom: 18px;
+    gap: 6px 16px;
+  }
+
+  .section-lead {
+    font-size: 14.5px;
+  }
+
+  /* Order options: three across, like desktop */
+  .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .card {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .card-num {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    border-radius: 8px;
+  }
+
+  .card h3 {
+    margin: 8px 0 2px;
+    font-size: 14px;
+    overflow-wrap: break-word;
+  }
+
+  .card-kicker {
+    margin: 0 0 6px;
+    font-size: 9px;
+  }
+
+  .card p {
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .card .btn {
+    min-height: 40px;
+    padding: 8px 6px;
+    font-size: 9px;
+    letter-spacing: 0.2px;
+  }
+
+  /* Product catalog: two across instead of one long column. The card
+     stretches, so buttons line up even when descriptions differ. */
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .product {
+    padding: 10px;
+    border-radius: 14px;
+  }
+
+  .product img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+  }
+
+  .product .product-logo {
+    height: auto;
+    aspect-ratio: 4 / 3;
+    padding: 18px;
+  }
+
+  .product h3 {
+    margin: 10px 0 4px;
+    font-size: 16px;
+  }
+
+  .product p {
+    margin: 0 0 6px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .product .product-meta {
+    margin: 0 0 10px;
+    font-size: 10.5px;
+    line-height: 1.4;
+  }
+
+  .product .btn {
+    min-height: 44px;
+    margin-top: auto;
+    padding: 9px 8px;
+    font-size: 10.5px;
+    line-height: 1.3;
+    letter-spacing: 0.3px;
+  }
+
+  /* Split panels: same two-column composition as desktop, with the
+     internal type stepped down to fit the narrow columns. */
+  .packaging,
+  .wholesale,
+  .contact {
+    gap: 16px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .packaging,
+  .wholesale {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .packaging h2,
+  .wholesale h2 {
+    font-size: 20px;
+    overflow-wrap: break-word;
+  }
+
+  .packaging-text > p,
+  .wholesale-info > p:not(.phone-label) {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .spec-list {
+    padding-left: 14px;
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  .wholesale h3 {
+    font-size: 16px;
+  }
+
+  .tier-list li {
+    gap: 8px;
+    font-size: 12.5px;
+  }
+
+  .order-box {
+    padding: 14px;
+  }
+
+  .order-box h3 {
+    font-size: 16px;
+  }
+
+  .order-box p,
+  .order-list {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  .order-box .btn {
+    padding: 10px 8px;
+    font-size: 10.5px;
+  }
+
+  .packaging-image img {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .faq summary {
+    padding: 16px 18px;
+  }
+
+  .faq p {
+    padding: 0 18px 16px;
+    font-size: 14.5px;
+  }
+
+  .about-grid {
+    gap: 16px;
+  }
+
+  .about-card {
+    padding: 20px;
+  }
+
+  .about-card h3 {
+    font-size: 20px;
+  }
+
+  .stats {
+    gap: 6px;
+    padding: 14px 6px;
+  }
+
+  .stats strong {
+    font-size: 20px;
+  }
+
+  .stats span {
+    font-size: 9.5px;
+    letter-spacing: 0.2px;
+  }
+
+  .contact-banner {
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 20px;
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .contact-card {
+    padding: 14px;
+  }
+
+  .contact-card strong {
+    font-size: 10px;
+  }
+
+  .contact-card span {
+    font-size: 15px;
+  }
+
+  .contact-card small {
+    font-size: 11px;
+  }
+
+  .cta-bar {
+    margin-top: 20px;
+    padding: 20px;
+  }
+
+  .cta-bar h3 {
+    font-size: 20px;
+  }
+
+  .cta-bar .btn {
+    width: 100%;
+  }
+
+  /* Gallery: two readable columns beat three thumbnails on a phone. */
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .gallery figure {
+    padding: 6px;
+  }
+
+  .gallery figcaption {
+    font-size: 11.5px;
+  }
+
+  .footer-inner {
+    padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right));
+  }
+
+  .footer-grid {
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  .footer-bottom {
+    font-size: 11.5px;
+  }
+}
+
+/* Small phones: stacked full-width hero actions read better than two
+   uneven pills fighting for the same row. */
+@media (max-width: 479.98px) {
+  .hero-buttons .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* Below 360px the logo tagline is what pushes the brand row into a
+   second line, and the header CTA duplicates the hero button. */
+@media (max-width: 359.98px) {
+  :root {
+    --h1: 34px;
+    --h2: 24px;
+  }
+
+  .packaging h2,
+  .wholesale h2 {
+    font-size: 17px;
+  }
+
+  .logo small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn {
+    transition: none;
+  }
+}

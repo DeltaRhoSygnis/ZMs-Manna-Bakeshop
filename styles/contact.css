@@ -1,0 +1,95 @@
+/* =========================================================
+   CONTACT.CSS - Contact Cards, Inquiries & Promo Banner
+   ZM's Manna Bakeshop
+   ========================================================= */
+
+.contact {
+  margin-top: var(--space);
+  padding: 32px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.contact h2 {
+  margin-top: 4px;
+  font-size: var(--h2);
+}
+
+.contact-banner {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 24px;
+  border-radius: 14px;
+  object-fit: cover;
+  object-position: 50% 62%;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+.contact-card {
+  display: block;
+  padding: 18px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+}
+
+.contact-card:hover {
+  background: var(--blue-light);
+}
+
+.contact-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.contact-card span {
+  display: block;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--navy);
+}
+
+.contact-card small {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--gray);
+}
+
+.cta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--navy);
+  border-radius: 16px;
+}
+
+.cta-bar > div {
+  flex: 1 1 280px;
+}
+
+.cta-bar h3 {
+  color: #fff;
+  font-size: 22px;
+}
+
+.cta-bar p {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: #dbe4ef;
+}

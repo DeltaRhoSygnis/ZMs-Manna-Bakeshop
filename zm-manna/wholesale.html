@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zm's Manna Bakeshop - Wholesale &amp; Logistics</title>
+  <link rel="icon" href="assets/favicon.ico">
+
+  <!-- Simple CSS files -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/header-footer.css">
+  <link rel="stylesheet" href="css/wholesale.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       1. HEADER / NAVIGATION
+       ========================================== -->
+  <header>
+    <div class="container header-row">
+      <!-- Bakery Logo & Title -->
+      <a href="index.html" class="logo">
+        <img src="assets/ZmsLogo.webp" alt="Zm's Logo">
+        <div class="logo-text">
+          <h2>Zm's Manna</h2>
+          <small>Bakeshop · Valencia</small>
+        </div>
+      </a>
+
+      <!-- Navigation links -->
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#products">Products</a></li>
+          <li><a href="index.html#packaging">Packaging</a></li>
+          <li><a href="wholesale.html" class="active">Wholesale</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <a href="index.html" class="btn btn-white">&larr; Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==========================================
+       2. WHOLESALE DESK & INQUIRY FORM
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Wholesale &amp; Reseller Inquiries</h2>
+        <p class="section-desc">Submit your store details to receive wholesale pricing and delivery schedules.</p>
+      </div>
+
+      <div class="box wholesale-row">
+        <!-- Left Column: Business Supply Desk -->
+        <div class="wholesale-info">
+          <h3>Business Supply Desk</h3>
+          <p>
+            We supply mini marts, groceries, pharmacies, and canteens across Bukidnon and nearby provinces. Deliveries are scheduled on regular weekly batches.
+          </p>
+
+          <div class="hotline-box">
+            <strong>Direct Contact Hotline:</strong>
+            <p>Phone: 0926-177-4681</p>
+            <p>Office Hours: Mon - Sat (7:00 AM - 6:00 PM)</p>
+          </div>
+
+          <p style="font-size: 12px; color: #777777;">
+            * Official receipts, delivery manifests, and store documentation are provided upon drop-off.
+          </p>
+        </div>
+
+        <!-- Right Column: Inquiry Form -->
+        <div class="wholesale-form" id="inquiry-form">
+          <form onsubmit="event.preventDefault(); alert('Inquiry submitted successfully!');">
+            <div class="form-group">
+              <label for="storeName">Business Name / Contact Person *</label>
+              <input type="text" id="storeName" placeholder="e.g. Valencia Mini Mart" required>
+            </div>
+
+            <div class="form-group">
+              <label for="storeType">Store Classification *</label>
+              <select id="storeType" required>
+                <option value="">-- Select Store Type --</option>
+                <option value="minimart">Mini Mart / Sari-Sari Store</option>
+                <option value="supermarket">Grocery / Supermarket</option>
+                <option value="pharmacy">Pharmacy / Drugstore</option>
+                <option value="canteen">School / Hospital Canteen</option>
+                <option value="reseller">Independent Distributor</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Products of Interest (Select all that apply)</label>
+              <div class="checkbox-list">
+                <label class="checkbox-item"><input type="checkbox"> Cookie de Longa</label>
+                <label class="checkbox-item"><input type="checkbox"> Toasted Biscocho</label>
+                <label class="checkbox-item"><input type="checkbox"> Toasted Mammon</label>
+                <label class="checkbox-item"><input type="checkbox"> Hopia Choco</label>
+                <label class="checkbox-item"><input type="checkbox"> Patatas Biscuits</label>
+                <label class="checkbox-item"><input type="checkbox"> Special Biscocho</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactNumber">Phone Number or Email *</label>
+              <input type="text" id="contactNumber" placeholder="e.g. 0917-123-4567" required>
+            </div>
+
+            <div class="form-group">
+              <label for="notes">Estimated Quantity / Notes</label>
+              <textarea id="notes" rows="4" placeholder="How many boxes/pouches do you need? What is your delivery location?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-blue btn-block">Submit Wholesale Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       3. DISTRIBUTION & LOGISTICS DETAILS (TABLE)
+       ========================================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Distribution &amp; Logistics Details</h2>
+        <p class="section-desc">Operating guidelines for store partners and distribution across Bukidnon.</p>
+      </div>
+
+      <div class="box table-responsive">
+        <table>
+          <tbody>
+            <tr>
+              <th>Service Area</th>
+              <td>Valencia City, Malaybalay, Maramag, Quezon, and nearby areas across Bukidnon.</td>
+            </tr>
+            <tr>
+              <th>Delivery Methods</th>
+              <td>Bakery Delivery Van, Local Courier / Freight, or Direct Store Pickup at Lumbo.</td>
+            </tr>
+            <tr>
+              <th>Minimum Order (MOQ)</th>
+              <td>Starts at 1 master carton box (contains 24–48 retail pouches).</td>
+            </tr>
+            <tr>
+              <th>Delivery Fee</th>
+              <td>Free delivery within Valencia City proper for minimum orders. Standard rates apply outside city limits.</td>
+            </tr>
+            <tr>
+              <th>Production Lead Time</th>
+              <td>2 to 4 business days notice for bulk orders to guarantee oven-fresh batches.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       4. FOOTER
+       ========================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h3>Zm's Manna Bakeshop</h3>
+          <p>
+            Quality baked biscuits, toasted bread, and pasalubong favorites produced in P-2 Lumbo, Valencia City, Bukidnon.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Navigation Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="index.html#packaging">Packaging</a></li>
+            <li><a href="wholesale.html">Wholesale</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Zm's Manna Bakeshop. All rights reserved.</p>
+        <p>Web Development Laboratory Project</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

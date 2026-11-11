@@ -12,23 +12,32 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@600;700&display=swap">
+
+  <!-- Main Stylesheet Hub (Loads all modular CSS) -->
   <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
+  <!-- Accessibility skip link -->
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- Top strip -->
+  <!-- ==========================================
+       1. TOP NOTIFICATION BAR
+       ========================================== -->
   <div class="topbar">
     <p>P-2 Lumbo, Valencia City, Bukidnon &nbsp;•&nbsp; Fresh local biscuits &amp; pasalubong &nbsp;•&nbsp; DTI registered bakehouse</p>
   </div>
 
-  <!-- Header -->
+  <!-- ==========================================
+       2. HEADER & NAVIGATION
+       ========================================== -->
   <header class="header">
     <div class="container header-inner">
+      <!-- Bakery Logo & Branding -->
       <a class="logo" href="#home">
         <img decoding="async" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="473" height="478">
         <span>
@@ -37,11 +46,13 @@
         </span>
       </a>
 
+      <!-- Mobile navigation hamburger toggle -->
       <input class="nav-toggle" type="checkbox" id="nav-toggle" aria-label="Open menu">
       <label class="nav-toggle-label" for="nav-toggle" aria-hidden="true">
         <span></span><span></span><span></span>
       </label>
 
+      <!-- Navigation links -->
       <nav class="nav" id="site-nav" aria-label="Main navigation">
         <a href="#home">Home</a>
         <a href="#products">Products</a>
@@ -52,15 +63,19 @@
         <a href="#contact">Contact</a>
       </nav>
 
+      <!-- Header Action -->
       <a class="btn btn-gold btn-small" href="#wholesale">Price List</a>
     </div>
   </header>
 
   <main id="main" class="container">
 
-    <!-- 1. Hero -->
-    <section class="hero" id="home">
-      <div class="hero-text">
+    <!-- ==========================================
+         3. WELCOME & BANNER SHOWCASE
+         ========================================== -->
+    <section class="banner" id="home">
+      <!-- Banner Text -->
+      <div class="banner-text">
         <p class="tag">Biscuits · Bread · Pasalubong</p>
         <h1>Zm’s Manna Bakeshop</h1>
         <p class="slogan">“Love at first bite!”</p>
@@ -68,25 +83,28 @@
           <strong>P-2 Lumbo, Valencia City, Bukidnon</strong>. Handcrafted for family merienda,
           snack counters, and resellers across Mindanao.</p>
 
-        <div class="hero-buttons">
+        <div class="banner-btns">
           <a class="btn btn-navy" href="#products">View Products</a>
           <a class="btn btn-gold" href="#wholesale">Request Price List</a>
         </div>
 
-        <ul class="hero-facts">
+        <ul class="banner-facts">
           <li><strong>Origin</strong><span>Valencia City, Bukidnon</span></li>
           <li><strong>Packaging</strong><span>Retail sealed 100g</span></li>
           <li><strong>Credentials</strong><span>DTI &amp; barcode ready</span></li>
         </ul>
       </div>
 
-      <figure class="hero-image">
+      <!-- Banner Feature Image -->
+      <figure class="banner-image">
         <img decoding="async" fetchpriority="high" src="assets/BiscochoNice.webp" alt="Sealed Biscocho packs beside toasted slices on a dark wooden table" width="966" height="680">
         <figcaption>Signature favorite: Toasted Biscocho pouch · 100g</figcaption>
       </figure>
     </section>
 
-    <!-- 2. Buyer pathways -->
+    <!-- ==========================================
+         4. WHOLESALE & RETAIL ORDER OPTIONS
+         ========================================== -->
     <section class="section" id="pathways">
       <div class="section-head">
         <div>
@@ -96,34 +114,39 @@
         <p class="section-lead">Arrangements tailored to your supply scale, shelf turnaround, and dispatch schedule.</p>
       </div>
 
-      <div class="cards">
-        <article class="card">
-          <span class="card-num">01</span>
-          <h3>Individual &amp; Walk-ins</h3>
-          <p class="card-kicker">Pasalubong &amp; snacking</p>
-          <p>Retail purchases, travel pasalubong bundles, and fresh batch pickup from our bakehouse in Lumbo.</p>
+      <div class="order-options">
+        <!-- Pathway 01 -->
+        <article class="pathway-card">
+          <span class="step-badge">01</span>
+          <h3 class="pathway-title">Individual &amp; Walk-ins</h3>
+          <p class="pathway-kicker">Pasalubong &amp; snacking</p>
+          <p class="pathway-desc">Retail purchases, travel pasalubong bundles, and fresh batch pickup from our bakehouse in Lumbo.</p>
           <a class="btn btn-outline btn-full" href="#products">Explore Products</a>
         </article>
 
-        <article class="card">
-          <span class="card-num">02</span>
-          <h3>Stores &amp; Mini Marts</h3>
-          <p class="card-kicker">Reseller shelves</p>
-          <p>Pre-sealed retail bags with barcoded labels for convenience counters and grocery shelves.</p>
+        <!-- Pathway 02 -->
+        <article class="pathway-card">
+          <span class="step-badge">02</span>
+          <h3 class="pathway-title">Stores &amp; Mini Marts</h3>
+          <p class="pathway-kicker">Reseller shelves</p>
+          <p class="pathway-desc">Pre-sealed retail bags with barcoded labels for convenience counters and grocery shelves.</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Reseller Inquiries</a>
         </article>
 
-        <article class="card">
-          <span class="card-num">03</span>
-          <h3>Malls, Pharmacies &amp; Bulk</h3>
-          <p class="card-kicker">Commercial supply</p>
-          <p>Bulk carton supply with documented delivery freight and formal distribution terms.</p>
+        <!-- Pathway 03 -->
+        <article class="pathway-card">
+          <span class="step-badge">03</span>
+          <h3 class="pathway-title">Malls, Pharmacies &amp; Bulk</h3>
+          <p class="pathway-kicker">Commercial supply</p>
+          <p class="pathway-desc">Bulk carton supply with documented delivery freight and formal distribution terms.</p>
           <a class="btn btn-navy btn-full" href="#wholesale">Start Bulk Inquiry</a>
         </article>
       </div>
     </section>
 
-    <!-- 3. Products -->
+    <!-- ==========================================
+         5. PRODUCT CATALOG
+         ========================================== -->
     <section class="section" id="products">
       <div class="section-head">
         <div>
@@ -133,58 +156,66 @@
         <p class="section-lead">Six packaged lines · Biscuits &amp; cookies · Toasted specialties · Pastry &amp; loaves</p>
       </div>
 
-      <div class="products">
-        <article class="product">
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <article class="product-box">
           <img loading="lazy" decoding="async" src="assets/CookieDeLonga.webp" alt="Sealed Cookie de Longa pack beside a blue mug" width="720" height="960">
-          <h3>Cookie de Longa</h3>
-          <p>Sesame-topped round cookie sandwiches with a sweet signature filling.</p>
+          <h3 class="product-name">Cookie de Longa</h3>
+          <p class="product-desc">Sesame-topped round cookie sandwiches with a sweet signature filling.</p>
           <p class="product-meta">100g net wt. · Wholesale tier on request</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Ask About Cookie de Longa</a>
         </article>
 
-        <article class="product">
+        <!-- Product 2 -->
+        <article class="product-box">
           <img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Two sealed Biscocho packs in a wire basket" width="960" height="720">
-          <h3>Biscocho</h3>
-          <p>Twice-baked crispy bread slices glazed with butter and sugar.</p>
+          <h3 class="product-name">Biscocho</h3>
+          <p class="product-desc">Twice-baked crispy bread slices glazed with butter and sugar.</p>
           <p class="product-meta">100g net wt. · Top seller</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Ask About Biscocho</a>
         </article>
 
-        <article class="product">
+        <!-- Product 3 -->
+        <article class="product-box">
           <img loading="lazy" decoding="async" src="assets/Mammon.webp" alt="Two sealed Toasted Mammon packs" width="720" height="960">
-          <h3>Toasted Mammon</h3>
-          <p>Light sponge cake slices slow-toasted for an airy, crispy crunch.</p>
+          <h3 class="product-name">Toasted Mammon</h3>
+          <p class="product-desc">Light sponge cake slices slow-toasted for an airy, crispy crunch.</p>
           <p class="product-meta">100g net wt. · Light crunch</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Ask About Toasted Mammon</a>
         </article>
 
-        <article class="product">
+        <!-- Product 4 -->
+        <article class="product-box">
           <img loading="lazy" decoding="async" src="assets/Patatas.webp" alt="Three sealed Patatas biscuit packs" width="960" height="720">
-          <h3>Patatas</h3>
-          <p>Finger-style crunchy biscuit batons with a savory-sweet taste.</p>
+          <h3 class="product-name">Patatas</h3>
+          <p class="product-desc">Finger-style crunchy biscuit batons with a savory-sweet taste.</p>
           <p class="product-meta">100g net wt. · Coffee pairing</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Ask About Patatas</a>
         </article>
 
-        <article class="product">
+        <!-- Product 5 -->
+        <article class="product-box">
           <img loading="lazy" decoding="async" src="assets/Hopia.webp" alt="Sealed Hopia Choco pack" width="960" height="720">
-          <h3>Hopia Choco</h3>
-          <p>Flaky crust pockets filled with rich chocolate sweet bean paste.</p>
+          <h3 class="product-name">Hopia Choco</h3>
+          <p class="product-desc">Flaky crust pockets filled with rich chocolate sweet bean paste.</p>
           <p class="product-meta">100g net wt. · Rich filling</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Ask About Hopia Choco</a>
         </article>
 
-        <article class="product">
+        <!-- Product 6 -->
+        <article class="product-box">
           <img loading="lazy" decoding="async" class="product-logo" src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop emblem" width="473" height="478">
-          <h3>Otap &amp; Loaf Breads</h3>
-          <p>Crisp oval puff biscuits and soft sliced loaves for breakfast and merienda.</p>
+          <h3 class="product-name">Otap &amp; Loaf Breads</h3>
+          <p class="product-desc">Crisp oval puff biscuits and soft sliced loaves for breakfast and merienda.</p>
           <p class="product-meta">Standard packs · Specialty line</p>
           <a class="btn btn-gold btn-full" href="#wholesale">Ask About the Specialty Line</a>
         </article>
       </div>
     </section>
 
-    <!-- 4. Packaging -->
+    <!-- ==========================================
+         6. PACKAGING & MERCHANDISING
+         ========================================== -->
     <section class="packaging" id="packaging">
       <figure class="packaging-image">
         <img loading="lazy" decoding="async" src="assets/Biscocho.webp" alt="Sealed Biscocho pouches with printed labels and barcodes" width="960" height="720">
@@ -207,7 +238,9 @@
       </div>
     </section>
 
-    <!-- 5. Wholesale -->
+    <!-- ==========================================
+         7. WHOLESALE & RESELLER DESK
+         ========================================== -->
     <section class="wholesale" id="wholesale">
       <div class="wholesale-info">
         <p class="eyebrow light">Commercial inquiries</p>
@@ -244,7 +277,9 @@
       </div>
     </section>
 
-    <!-- 6. Distribution -->
+    <!-- ==========================================
+         8. DISTRIBUTION & LOGISTICS (FAQ)
+         ========================================== -->
     <section class="section" id="distribution">
       <div class="section-head">
         <div>
@@ -278,7 +313,9 @@
       </div>
     </section>
 
-    <!-- 7. About -->
+    <!-- ==========================================
+         9. ABOUT THE BAKEHOUSE
+         ========================================== -->
     <section class="section" id="about">
       <div class="section-head">
         <div>
@@ -310,7 +347,9 @@
       </div>
     </section>
 
-    <!-- 8. Contact -->
+    <!-- ==========================================
+         10. CONTACT & INQUIRIES
+         ========================================== -->
     <section class="contact" id="contact">
       <div class="section-head">
         <div>
@@ -353,7 +392,9 @@
       </div>
     </section>
 
-    <!-- 9. Gallery -->
+    <!-- ==========================================
+         11. PRODUCT & PACKAGING GALLERY
+         ========================================== -->
     <section class="section" id="gallery">
       <div class="section-head">
         <div>
@@ -375,6 +416,9 @@
 
   </main>
 
+  <!-- ==========================================
+       12. FOOTER
+       ========================================== -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-grid">
@@ -392,8 +436,8 @@
     </div>
   </footer>
 
+  <!-- Navigation script for mobile drawer -->
   <script>
-    // Close the menu panel after a link is chosen.
     (function () {
       var toggle = document.getElementById('nav-toggle');
       var nav = document.getElementById('site-nav');

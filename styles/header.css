@@ -1,0 +1,114 @@
+/* =========================================================
+   HEADER.CSS - Bakery Topbar & Main Navigation
+   ZM's Manna Bakeshop
+   ========================================================= */
+
+/* Top notification strip */
+.topbar {
+  padding: 9px 16px;
+  background: var(--navy-dark);
+  color: #f2df9e;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.topbar p {
+  margin: 0;
+}
+
+/* Sticky bakery header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  min-height: 76px;
+  padding-block: 10px;
+}
+
+/* Bakery brand logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.logo strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+.logo small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* Header navigation links */
+.nav {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: nowrap;
+  order: 0;
+  min-width: 0;
+  width: auto;
+  gap: 6px 16px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
+}
+
+.nav a {
+  font-size: 14px;
+  color: var(--gray);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav a:hover {
+  color: var(--navy);
+}
+
+/* Header call to action button */
+.header .btn {
+  white-space: nowrap;
+}
+
+/* Mobile navigation toggle (hidden on desktop) */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+}
