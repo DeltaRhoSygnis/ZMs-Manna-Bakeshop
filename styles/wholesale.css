@@ -1,0 +1,140 @@
+/* =========================================================
+   WHOLESALE.CSS - Wholesale Supply, Pricing & Distribution
+   ZM's Manna Bakeshop
+   ========================================================= */
+
+.wholesale {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+  margin-top: var(--space);
+  padding: 32px;
+  background: var(--navy);
+  border-radius: 20px;
+  color: #fff;
+}
+
+.wholesale-info {
+  min-width: 0;
+}
+
+.wholesale h2 {
+  margin-top: 4px;
+  color: #fff;
+  font-size: var(--h2);
+}
+
+.wholesale h3 {
+  color: #fff;
+  font-size: 20px;
+}
+
+.wholesale p {
+  color: #dbe4ef;
+  font-size: 15px;
+}
+
+.wholesale :focus-visible {
+  outline-color: var(--gold);
+}
+
+.tier-list {
+  margin: 16px 0 20px;
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  list-style: none;
+}
+
+.tier-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 15px;
+}
+
+.phone-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #f2df9e;
+}
+
+.phone {
+  display: block;
+  margin: 4px 0 20px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+.phone:hover {
+  color: var(--gold);
+}
+
+.promo {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.order-box {
+  padding: 24px;
+  background: var(--white);
+  border-radius: 16px;
+  color: var(--text);
+}
+
+.order-box h3 {
+  color: var(--navy);
+}
+
+.order-box p {
+  color: var(--gray);
+}
+
+.order-list {
+  margin: 16px 0 20px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--gray);
+}
+
+.order-box .btn {
+  margin-top: 10px;
+}
+
+/* FAQ / Distribution Details */
+.faq {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.faq details {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq details:last-child {
+  border-bottom: none;
+}
+
+.faq summary {
+  padding: 18px 20px;
+  font-weight: 700;
+  color: var(--navy);
+  cursor: pointer;
+}
+
+.faq p {
+  margin: 0;
+  padding: 0 20px 18px;
+  font-size: 15px;
+  color: var(--gray);
+}

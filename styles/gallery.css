@@ -1,0 +1,33 @@
+/* =========================================================
+   GALLERY.CSS - Product Photo Showcase Grid
+   ZM's Manna Bakeshop
+   ========================================================= */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gallery figure {
+  margin: 0;
+  padding: 8px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.gallery figcaption {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: center;
+}
