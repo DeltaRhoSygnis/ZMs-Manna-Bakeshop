@@ -4,23 +4,24 @@
 
 This is the answer to "how do the JS functions relate to the CSS?".
 
-Related: [`JS-GUIDE.md`](./JS-GUIDE.md) · [`CSS-GUIDE.md`](./CSS-GUIDE.md)
+Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
+[`JS-GUIDE.md`](./JS-GUIDE.md) · [`CSS-GUIDE.md`](./CSS-GUIDE.md)
 
 ---
 
 ## 1. The contract in one paragraph
 
 JavaScript in this project **never styles anything directly**. It does not
-set a `color`, a `width`, a `padding`, or an `opacity`. What it does is
+set a `color`, a `width`, a `padding` or an `opacity`. What it does is
 write *state* — a class name, a data attribute, or a CSS custom property —
 and the stylesheet reacts to that state. So there are exactly four channels:
 
 | Channel | JS writes | CSS reads |
 | --- | --- | --- |
-| **State class** | `el.classList.add("open")` | `.modal.open { … }` |
-| **Custom property** | `el.style.setProperty("--g1", "#D9A05B")` | `background:linear-gradient(…, var(--g1), var(--g2))` |
-| **Inline style (exceptional)** | `el.style.width = "42%"`, `el.style.transform = "…"` | inline style wins the cascade |
-| **Text content** | `el.textContent = "3 / 6"` | `content` is not CSS, but the element's typography is |
+| **State class** | `el.classList.add("is-open")` | `.modal.is-open { … }` |
+| **Custom property** | `el.style.setProperty("--gradient-from", "#D9A05B")` | `background:linear-gradient(…, var(--gradient-from), var(--gradient-to))` |
+| **Inline style (exceptional)** | `el.style.width = "42%"` | inline style wins the cascade |
+| **Text content** | `el.textContent = "3 / 6"` | the element's typography, not its text |
 
 Everything else — colour, spacing, radius, shadow, easing, breakpoints —
 lives in `styles/`.
@@ -28,39 +29,39 @@ lives in `styles/`.
 ### The three laws
 
 1. **JS owns state, CSS owns appearance.** If you are about to write
-   `el.style.background = "gold"` in JS, stop: add a class and write the rule
-   in CSS instead.
-2. **Every state class needs a CSS rule**, and every state class should be
-   listed in this document. If you add one, add it to the table below.
+   `el.style.background = "gold"` in JS, stop: add a class and write the
+   rule in CSS instead.
+2. **Every state class needs a CSS rule**, and every state class is listed
+   in this document. If you add one, add it to the table below.
 3. **CSS never invents behaviour.** CSS can animate and transition, but it
    cannot decide *when* — that is always JS's job.
 
 ---
 
-## 2. State classes
+## 2. The state classes
 
-The complete list of classes that JavaScript adds or removes at runtime, and
-the CSS that gives them meaning.
+Every class JavaScript adds or removes at runtime, and the CSS that gives it
+meaning. All of them start with `is-`, or are a body state.
 
 | Class | Added / removed by | CSS rule | File | What you see |
 | --- | --- | --- | --- | --- |
-| `.in` | Scroll reveal observer (`app.js` 100) | `.js [data-reveal].in` | 01 | Element rises 28px and fades in |
-| `.lock` | `setMenu` (157), `openModal` (202), `closeModal` (210), `openLightbox` (235), `closeLb` (243) | `body.lock` | 01 | Page scroll freezes behind the overlay |
-| `.active` | `setMenu` (152) | `#burger.active .burger-lines span` | 03 | The three burger bars fold into an X |
-| `.open` | `setMenu` (154), `openModal` (199), `closeModal` (207), `openLightbox` (232), `closeLb` (241) | `#mobileMenu.open`, `.modal.open`, `.lightbox.open` | 03, 08, 12 | Overlay fades in; its `.modal-box` / `.lb-stage` scales up |
-| `.no-img` | `bindFallback` (78) | `.no-img img`, `.no-img .mono` | 05 | Broken photo is replaced by the serif monogram |
-| `.is-logo` | `openModal` (182), grid template (86) | `.modal-media.is-logo`, `.grid-gallery .g-item.is-logo` | 08, 12 | Flat cream card instead of a gradient; navy caption with a hairline |
-| `.show` | `onScroll` (131) | `#toTop.show` | 13 | The back-to-top button fades and slides in |
-| `.hide` | `onScroll` (129) | `#navbar.hide` | 03 | The nav pill slides off the top while scrolling down |
-| `.scrolled` | `onScroll` (128) | — | — | **No CSS rule.** Leftover hook. |
+| `.is-visible` | The scroll reveal observer | `.js [data-reveal].is-visible` | base | The element rises 28px and fades in |
+| `.is-open` | `setMenuOpen`, `openProductPopup`, `closeProductPopup`, `openPhotoViewer`, `closePhotoViewer` | `#mobile-menu.is-open`, `.modal.is-open`, `.photo-viewer.is-open` | components | The overlay fades in; its box scales up |
+| `.is-active` | `setMenuOpen` | `#menu-button.is-active .menu-icon span` | components | The three bars fold into an X |
+| `.is-hidden` | `onScroll` | `#navbar.is-hidden` | components | The header slides off the top while scrolling down |
+| `.is-shown` | `onScroll` | `#back-to-top.is-shown` | components | The back-to-top button fades and slides in |
+| `.is-logo` | `buildProductTiles`, `openProductPopup` | `.modal-media.is-logo`, `.product-grid .product-card.is-logo` | components, sections | A flat cream card instead of a gradient; navy caption with a hairline |
+| `.is-contained` | `buildProductTiles`, `openProductPopup` | `.modal-media img.is-contained`, `.product-grid .product-card img.is-contained` | components, sections | The photo is shown whole instead of cropped |
+| `.image-missing` | `handleBrokenImage` | `.image-missing img`, `.image-missing .fallback-text` | components | The broken photo is replaced by its letters |
+| `.scroll-locked` | `setMenuOpen`, `openProductPopup`, `closeProductPopup`, `openPhotoViewer`, `closePhotoViewer` | `body.scroll-locked` | base | The page scroll freezes behind the overlay |
 
-Two more classes exist in CSS but are **not** written by JS — they come from
-the HTML and simply *enable* a state:
+Two classes exist in CSS but are **not** written by JS — they come from the
+markup and simply *enable* a state:
 
 | Class | Where it comes from | CSS rule | File |
 | --- | --- | --- | --- |
-| `.js` | inline `<script>` in `index.html` `<head>` (line 21) | `.js [data-reveal]` | 01 |
-| `.is-product` | `<div class="grid-gallery is-product" id="productGrid">` | `.grid-gallery.is-product .g-cap` | 12 |
+| `.js` | The inline `<script>` in `index.html` `<head>` | `.js [data-reveal]` | base |
+| `.is-product` | *gone* — there is only one grid now | — | — |
 
 ---
 
@@ -68,14 +69,11 @@ the HTML and simply *enable* a state:
 
 | Property | Written by | Value | Read by | Effect |
 | --- | --- | --- | --- | --- |
-| `--g1` | grid template (87), `openModal` (181) | hex colour | `.g-item` background, `.modal-media` background | Gradient start |
-| `--g2` | grid template (87), `openModal` (181) | hex colour | same | Gradient end |
-| `--mx` | hero parallax loop (295) | float `−0.5…0.5` | `.layer` transform | Horizontal parallax (currently dead — no `#heroVisual`) |
-| `--my` | hero parallax loop (296) | float `−0.5…0.5` | `.layer` transform | Vertical parallax (currently dead) |
-| `--depth` | CSS only | fixed number | `.layer` transform | How far each layer moves relative to the others |
+| `--gradient-from` | `buildProductTiles`, `openProductPopup` | a hex colour | `.product-card` background, `.modal-media` background | The gradient's start |
+| `--gradient-to` | `buildProductTiles`, `openProductPopup` | a hex colour | the same | The gradient's end |
 
-Note that `--g1` / `--g2` are the *only* custom properties that carry data
-into CSS. Everything else is a design token.
+Those two are the **only** custom properties that carry data into CSS.
+Everything else in `theme.css` is a design token.
 
 ---
 
@@ -87,254 +85,223 @@ decision.
 
 | Written by | Property | Why inline |
 | --- | --- | --- |
-| `onScroll` (127) | `#progressBar` `width` | A live percentage that changes every frame |
-| Scroll reveal (102) | `transitionDelay` | Read from `data-delay`; per-element timing |
-| `openModal` (181) / `closeModal` (208) | `.modal` `visibility` | Puts the overlay in/out of the focus order *instantly*, while CSS fades it over .35s |
-| `openLightbox` (233) / `closeLb` (244) | `.lightbox` `visibility` | Same trick |
-| `setMenu` (155) | `#mobileMenu` `visibility` | Same trick |
-| `updateLb` (227) | `.lb-stage` `background` | The gradient is built per-photo from `g1`/`g2` and written as a whole `linear-gradient` |
-| Tilt (273–274) | `transition`, `transform` | Per-frame 3D transform during pointer movement |
-| Magnetic button (281) | `transform` | Per-frame position tracking |
+| `setupScrollChrome` | `#progress-bar`'s `width` | A live percentage that changes every frame |
+| `setupScrollReveal` | `transitionDelay` | Read from `data-delay`; a per-element time |
+| `openProductPopup` / `closeProductPopup` | the popup's `visibility` | Puts the overlay in and out of the focus order *instantly*, while CSS fades it over .35s |
+| `openPhotoViewer` / `closePhotoViewer` | the viewer's `visibility` | The same trick |
+| `setMenuOpen` | the menu's `visibility` | The same trick |
+| `showCurrentPhoto` | `.photo-frame`'s `background` | The gradient is built per-photo and written as a whole `linear-gradient` |
+| `setupMouseEffects` | `transform` | A per-frame position, on pointer move |
 
-The `visibility` trick deserves a note, because it looks redundant. CSS
-already has `.modal.open { visibility:visible }`. But CSS transitions
-`visibility` with a 0.35s delay, so without the inline override the modal's
-buttons would stay in the tab order for a third of a second *after* the
-overlay closed, and the first `.focus()` call would land on an element the
-browser still considered hidden. JS sets it inline to make focus land on the
-first paint.
+### The `visibility` trick, in detail
+
+It looks redundant, because CSS already has `.modal.is-open { visibility:visible }`.
+But CSS transitions `visibility` with a 0.35s delay, so without the inline
+override the popup's buttons would stay in the tab order for a third of a
+second *after* the overlay closed, and the first `.focus()` call would land
+on an element the browser still considered hidden. JS sets it inline so
+focus lands on the first paint.
 
 ---
 
-## 5. Effect table — the direct answer
+## 5. The effect table
 
 Every JS function, and the CSS it drives.
 
-| JS function | Line | DOM it touches | Class / property written | CSS that reacts | File |
-| --- | --- | --- | --- | --- | --- |
-| `bindFallback` | 77 | any `img` | `.no-img` on the parent | `.no-img img`, `.no-img .mono` | 05 |
-| *(grid render)* | 85 | `#productGrid` | inline `--g1`, `--g2` | `.g-item` background gradient | 12 |
-| *(grid render)* | 86 | each tile | `data-reveal`, `data-delay` | `.js [data-reveal]` | 01 |
-| *(grid render)* | 89 | each tile img | `class="contain"` | `.g-item img.contain` | 12 |
-| *(grid render)* | 86 | Otap tile | `.is-logo` | `.g-item.is-logo` | 12 |
-| *(grid render)* | 96 | `[data-fb]` | `href` | — (link target, not style) | — |
-| *(scroll reveal)* | 100 | `[data-reveal]` | `.in` | `.js [data-reveal].in` | 01 |
-| *(scroll reveal)* | 102 | `[data-reveal]` | `transitionDelay` | transition timing | 01 |
-| *(counters)* | 114 | `[data-count]` | `textContent` | `.stat .num` typography | 06 |
-| `onScroll` | 127 | `#progressBar` | inline `width` | `.progress span` | 01 |
-| `onScroll` | 128 | `#navbar` | `.scrolled` | *(none)* | — |
-| `onScroll` | 129 | `#navbar` | `.hide` | `#navbar.hide` | 03 |
-| `onScroll` | 131 | `#toTop` | `.show` | `#toTop.show` | 13 |
-| *(scroll spy)* | 142 | `.nav-link` | `.active` | *(none — no nav links exist)* | — |
-| `setMenu` | 152 | `#burger` | `.active` | `#burger.active .burger-lines span` | 03 |
-| `setMenu` | 153 | `#burger` | `aria-expanded` | — (accessibility) | — |
-| `setMenu` | 154 | `#mobileMenu` | `.open` | `#mobileMenu.open`, `#mobileMenu.open .mm-links a` | 03 |
-| `setMenu` | 155 | `#mobileMenu` | inline `visibility` | transition coordination | 03 |
-| `setMenu` | 157 | `body` | `.lock` | `body.lock` | 01 |
-| `openModal` | 181 | `.modal-media` | `--g1`, `--g2` | `.modal-media` background | 08 |
-| `openModal` | 182 | `.modal-media` | `.is-logo` | `.modal-media.is-logo` | 08 |
-| `openModal` | 186 | `.modal-info` | innerHTML | `.chip`, `.modal-desc`, `.spec`, `.modal-note` | 08, 02 |
-| `openModal` | 198 | "View full image" btn | `data-gl` | `.btn.ghost` | 02 |
-| `openModal` | 199 | `#productModal` | `.open` | `.modal.open`, `.modal.open .modal-box` | 08 |
-| `openModal` | 200 | `#productModal` | inline `visibility` | transition coordination | 08 |
-| `openModal` | 202 | `body` | `.lock` | `body.lock` | 01 |
-| `closeModal` | 207 | `#productModal` | `.open` removed | `.modal` base state | 08 |
-| `updateLb` | 224–227 | `.lb-img`, `.lb-cap`, `.lb-count`, `.lb-stage` | `src`, `alt`, `textContent`, inline `background` | `.lb-img`, `.lb-cap`, `.lb-count` | 12 |
-| `openLightbox` | 232 | `#lightbox` | `.open` | `.lightbox.open`, `.lightbox.open .lb-stage` | 12 |
-| `openLightbox` | 233 | `#lightbox` | inline `visibility` | transition coordination | 12 |
-| `openLightbox` | 235 | `body` | `.lock` | `body.lock` | 01 |
-| `closeLb` | 241 | `#lightbox` | `.open` removed | `.lightbox` base state | 12 |
-| *(tilt)* | 273–274 | `.tilt` | inline `transform` | *(dead — no `.tilt` elements)* | — |
-| *(magnetic)* | 281 | `.btn` | inline `transform` | `.btn` transition list includes `transform` | 02 |
-| *(parallax)* | 295–296 | `#heroVisual` | `--mx`, `--my` | `.layer` transform | 05 |
+| JS function | DOM it touches | Class / property written | CSS that reacts | File |
+| --- | --- | --- | --- | --- |
+| `handleBrokenImage` | any `img` | `.image-missing` on the parent | `.image-missing img`, `.image-missing .fallback-text` | components |
+| `buildProductTiles` | `#product-grid` | inline `--gradient-from`, `--gradient-to` | `.product-card` background | sections |
+| `buildProductTiles` | each card | `data-reveal`, `data-delay` | `.js [data-reveal]` | base |
+| `buildProductTiles` | the Otap card | `.is-logo`, `img.is-contained` | `.product-grid .product-card.is-logo`, `… img.is-contained` | sections |
+| `buildProductTiles` | each card | `data-id` | — (read by the click handler) | — |
+| `applySiteSettings` | `[data-fb]` | `href` | — (a link target, not a style) | — |
+| the reveal observer | `[data-reveal]` | `.is-visible` | `.js [data-reveal].is-visible` | base |
+| the reveal observer | `[data-reveal]` | `transitionDelay` | the transition timing | base |
+| the counter observer | `[data-count]` | `textContent` | `.stat .stat-number` typography | sections |
+| `setupScrollChrome` | `#progress-bar` | inline `width` | `.scroll-progress span` | base |
+| `setupScrollChrome` | `#navbar` | `.is-hidden` | `#navbar.is-hidden` | components |
+| `setupScrollChrome` | `#back-to-top` | `.is-shown` | `#back-to-top.is-shown` | components |
+| `setMenuOpen` | `#menu-button` | `.is-active` | `#menu-button.is-active .menu-icon span` | components |
+| `setMenuOpen` | `#mobile-menu` | `.is-open` | `#mobile-menu.is-open`, `… .menu-links a` | components |
+| `setMenuOpen` | `body` | `.scroll-locked` | `body.scroll-locked` | base |
+| `openProductPopup` | `.modal-media` | `--gradient-from`, `--gradient-to` | `.modal-media` background | components |
+| `openProductPopup` | `.modal-media` | `.is-logo` | `.modal-media.is-logo` | components |
+| `openProductPopup` | `.modal-info` | `innerHTML` | `.tag`, `.modal-description`, `.spec`, `.modal-note` | components |
+| `openProductPopup` | the "View full image" button | `data-gl` | `.btn.btn-secondary` | components |
+| `openProductPopup` | `#product-modal` | `.is-open` | `.modal.is-open`, `.modal.is-open .modal-box` | components |
+| `openProductPopup` | `body` | `.scroll-locked` | `body.scroll-locked` | base |
+| `closeProductPopup` | `#product-modal` | `.is-open` removed | `.modal` base state | components |
+| `showCurrentPhoto` | `.photo-image`, `.photo-caption`, `.photo-counter`, `.photo-frame` | `src`, `alt`, `textContent`, inline `background` | `.photo-image`, `.photo-caption`, `.photo-counter` | components |
+| `openPhotoViewer` | `#photo-viewer` | `.is-open` | `.photo-viewer.is-open`, `.photo-viewer.is-open .photo-frame` | components |
+| `openPhotoViewer` | `body` | `.scroll-locked` | `body.scroll-locked` | base |
+| `closePhotoViewer` | `#photo-viewer` | `.is-open` removed | `.photo-viewer` base state | components |
+| `setupMouseEffects` | `.btn` | inline `transform` | `.btn`'s transition list includes `transform` | components |
 
 ---
 
-## 6. Reverse index — CSS selector → what controls it
+## 6. The reverse index
 
-If you want to change how something behaves (not how it looks), start here.
+If you want to change how something *behaves* rather than how it looks,
+start here.
 
 | CSS selector | Controlled by | File |
 | --- | --- | --- |
-| `.js [data-reveal].in` | Scroll reveal observer | 01 |
-| `body.lock` | `setMenu` / `openModal` / `openLightbox` | 01 |
-| `#navbar.hide` | `onScroll` | 03 |
-| `#burger.active …` | `setMenu` | 03 |
-| `#mobileMenu.open …` | `setMenu` | 03 |
-| `.no-img img`, `.no-img .mono` | `bindFallback` | 05 |
-| `.modal.open`, `.modal.open .modal-box` | `openModal` / `closeModal` | 08 |
-| `.modal-media.is-logo` | `openModal` | 08 |
-| `.grid-gallery .g-item.is-logo` | grid render | 12 |
-| `.lightbox.open`, `.lightbox.open .lb-stage` | `openLightbox` / `closeLb` | 12 |
-| `#toTop.show` | `onScroll` | 13 |
-| `.progress span` (width) | `onScroll` | 01 |
-| `.stat .num` (text) | counter observer | 06 |
-| `.lb-cap`, `.lb-count` (text) | `updateLb` | 12 |
+| `.js [data-reveal].is-visible` | The scroll reveal observer | base |
+| `body.scroll-locked` | `setMenuOpen` / `openProductPopup` / `openPhotoViewer` | base |
+| `#navbar.is-hidden` | `setupScrollChrome` | components |
+| `#menu-button.is-active …` | `setMenuOpen` | components |
+| `#mobile-menu.is-open …` | `setMenuOpen` | components |
+| `.image-missing img`, `.image-missing .fallback-text` | `handleBrokenImage` | components |
+| `.modal.is-open`, `.modal.is-open .modal-box` | `openProductPopup` / `closeProductPopup` | components |
+| `.modal-media.is-logo` | `openProductPopup` | components |
+| `.product-grid .product-card.is-logo` | `buildProductTiles` | sections |
+| `.photo-viewer.is-open`, `.photo-viewer.is-open .photo-frame` | `openPhotoViewer` / `closePhotoViewer` | components |
+| `#back-to-top.is-shown` | `setupScrollChrome` | components |
+| `.scroll-progress span` (width) | `setupScrollChrome` | base |
+| `.stat .stat-number` (text) | The counter observer | sections |
+| `.photo-caption`, `.photo-counter` (text) | `showCurrentPhoto` | components |
 
 ---
 
-## 7. Worked example — clicking a product tile
+## 7. Worked example — clicking a product card
 
 Everything that happens, in order, and where each step lives.
 
 ```
-1. User clicks the tile
+1. The visitor clicks a card
         │
-2. Delegated listener on #productGrid            app.js:212
-   e.target.closest(".g-item") → the tile
+2. The card's own listener fires                     app.js — buildProductTiles
+   openProductPopup(card.dataset.id)
         │
-3. openModal(tile.dataset.id)                    app.js:176
+3. Find the product in PRODUCTS                       app.js — openProductPopup
         │
-4. Look up the record in PRODUCTS                app.js:177
+4. Save document.activeElement                       app.js
+   └→ so the focus can be restored on close
         │
-5. Save document.activeElement into lastFocus     app.js:179
-   └→ so focus can be restored on close
+5. Write the gradient onto .modal-media              app.js
+   media.style.setProperty("--gradient-from", …)
+   media.classList.toggle("is-logo", …)
         │
-6. media.style.setProperty("--g1", p.g1)          app.js:181
-   media.style.setProperty("--g2", p.g2)
+6. Rewrite .modal-media and .modal-info              app.js
+   └→ CSS: .modal-media img, .modal-description, .spec, .tag
         │
-7. media.classList.toggle("is-logo", !!p.fit)     app.js:182
+7. productModal.classList.add("is-open")             app.js
+   │  └→ CSS: .modal { visibility:hidden; opacity:0 }        components.css
+   │  └→ CSS: .modal.is-open { visibility:visible; opacity:1 }
+   │  └→ CSS: .modal.is-open .modal-box { transform:none }
         │
-8. media.innerHTML = mono + <img>                app.js:183
-        │  └→ CSS: .modal-media img { object-fit:cover }   08-modal.css
-        │  └→ CSS: .modal-media img.contain { … }          08-modal.css
+8. Set inline visibility, aria-hidden="false",       app.js
+   lock the body, focus the close button
+   │  └→ CSS: body.scroll-locked { overflow:hidden }        base.css
         │
-9. bindFallback($("img", media))                  app.js:184
-   └→ if it fails: parent gets .no-img            05-marquee.css
-        │
-10. GALLERY.findIndex(g => g.src === p.img)       app.js:185
-        │
-11. modal-info.innerHTML = chip + title + desc
-        + <dl class="spec"> + note + optional
-        <button class="btn ghost" data-gl="…">    app.js:186-198
-        │  └→ CSS: .chip                          02-components.css
-        │  └→ CSS: .modal-desc, .spec, .modal-note 08-modal.css
-        │  └→ CSS: .btn.ghost                     02-components.css
-        │
-12. modal.classList.add("open")                  app.js:199
-        │  └→ CSS: .modal { visibility:hidden; opacity:0 }   08
-        │  └→ CSS: .modal.open { visibility:visible; opacity:1 } 08
-        │  └→ CSS: .modal.open .modal-box { transform:none }  08
-        │
-13. modal.style.visibility = "visible"           app.js:200
-        └→ so focus can land immediately
-        │
-14. modal.setAttribute("aria-hidden","false")    app.js:201
-        │
-15. document.body.classList.add("lock")          app.js:202
-        └→ CSS: body.lock { overflow:hidden }     01-base.css
-        │
-16. $(".modal-close", modal).focus()             app.js:203
-        │
-17. From here, the global keydown handler owns
-    Escape (close) and Tab (trapped)              app.js:252-265
+9. From here the global keydown handler owns         app.js — setupKeyboardControls
+   Escape (close) and Tab (trapped)
 ```
 
-**Closing** runs `closeModal` (`app.js:205`): restore focus to `lastFocus`,
-remove `.open`, clear the inline `visibility`, set `aria-hidden="true"`,
-remove `.lock` from the body. The CSS then plays the reverse transition
-(opacity back to 0 over .35s, then `visibility` hides it because of the
-`visibility 0s linear .35s` delay in the transition list).
+**Closing** runs `closeProductPopup`: restore the focus to
+`productPopupPreviouslyFocused`, remove `.is-open`, clear the inline
+`visibility`, set `aria-hidden="true"`, remove `.scroll-locked` from the
+body. The CSS then plays the reverse transition — the opacity goes back to 0
+over .35s, and `visibility` hides the overlay afterwards because of the
+`visibility 0s linear .35s` delay in the transition list.
 
 ---
 
 ## 8. Worked example — scrolling
 
-`onScroll` (`app.js:125`) is the only scroll handler, and it does four
+`setupScrollChrome` is the only scroll handler, and it does three
 independent things in one pass:
 
 ```
-scroll event (passive)                            app.js:134
-        │  rAF-throttled by the `ticking` flag
+scroll event (passive)                                app.js
+        │  rAF-throttled by the waitingForFrame flag
         ▼
-onScroll()                                         app.js:125
+setupScrollChrome()
    │
-   ├─ #progressBar.style.width = "%"              app.js:127
-   │     └→ CSS: .progress span { width:0; background:linear-gradient(gold→accent) }  01
+   ├─ #progress-bar.style.width = "%"                app.js
+   │     └→ CSS: .scroll-progress span { width:0; background:linear-gradient(gold→accent) }  base.css
    │
-   ├─ #navbar.classList.toggle("scrolled", y>24)  app.js:128
-   │     └→ no CSS rule — hook for future use
+   ├─ #navbar.classList.toggle("is-hidden", y>220 && y>lastY)   app.js
+   │     └→ CSS: #navbar.is-hidden { transform:translateY(-140%) }  components.css
    │
-   ├─ #navbar.classList.toggle("hide", y>220 && y>lastY)   app.js:129
-   │     └→ CSS: #navbar.hide { transform:translateY(-140%) }  03
-   │
-   └─ #toTop.classList.toggle("show", y>600)      app.js:131
-         └→ CSS: #toTop { opacity:0; translate:0 14px; pointer-events:none }  13
-         └→ CSS: #toTop.show { opacity:1; translate:0 0; pointer-events:auto } 13
+   └─ #back-to-top.classList.toggle("is-shown", y>600)  app.js
+         └→ CSS: #back-to-top { opacity:0; translate:0 14px; pointer-events:none }
+         └→ CSS: #back-to-top.is-shown { opacity:1; translate:0 0; pointer-events:auto }
 ```
 
-`y > lastY` means "the user is scrolling **down**" — so the nav hides on the
-way down and reappears the moment you scroll up.
+`y > lastY` means "the visitor is scrolling **down**" — so the header hides
+on the way down and comes back the moment they scroll up.
 
 ---
 
 ## 9. Gotchas
 
-Things that will trip you up if you don't know the pattern.
+Things that will trip you up if you do not know the pattern.
 
-### The `.mono` fallback lives in the wrong file
+### The fallback letters live in an unexpected place
 
-`.mono` and `.no-img` are declared in **`05-marquee.css`**, but they are used
-by the hero (`04-hero.css`), the product tiles (`12-gallery.css`) and the
-modal (`08-modal.css`). If you ever delete "the unused marquee rules", you
-will delete the image-fallback system with them.
+`.fallback-text` and `.image-missing` are declared in `components.css`, but
+they are used by the banner (`sections.css`), the product cards
+(`sections.css`) and the popup (`components.css`). They are shared
+components, so they belong with the shared parts.
 
-### `visibility` is set in two places
-
-Both CSS (`.modal.open { visibility:visible }`) and JS
-(`modal.style.visibility = "visible"`). The inline value wins. The CSS rule
-still matters for the **hide** direction, where the delayed
-`visibility 0s linear .35s` keeps the overlay in the layout until the fade
-finishes.
-
-### `bindFallback` targets the **parent**, not the image
+### `handleBrokenImage` targets the **parent**, not the image
 
 ```js
-img.parentElement.classList.add("no-img")
+image.parentElement.classList.add("image-missing");
 ```
 
-So the CSS must be written as `.no-img img` and `.no-img .mono`, never
-`.img.no-img`. This matters because the parent differs per context:
-`.g-item` for a tile, `.modal-media` for the modal, `.hero-photo` for the
-hero.
+So the CSS is written as `.image-missing img` and
+`.image-missing .fallback-text` — never `.img.image-missing`. The parent
+differs per context: `.product-card` for a card, `.modal-media` for the
+popup, `.banner-image` for the banner.
 
-### `body.lock` is added by three different features
+### `body.scroll-locked` is added by three different features
 
-Menu, modal, and lightbox all lock the body — and each removes it when it
-closes. They cannot open simultaneously (the modal's "View full image"
-button closes the modal first), so there is no counter to maintain. If you
-ever let two overlays overlap, you need a counter, not a boolean.
+The menu, the popup and the viewer all lock the body, and each removes it
+when it closes. They cannot open at the same time — the popup's "View full
+image" button closes the popup first — so there is no counter to maintain.
+If you ever let two overlays overlap, you need a counter, not a boolean.
 
 ### The product grid has no markup
 
-`#productGrid` is empty in `index.html`; JavaScript fills it. The `<noscript>`
-note next to it is the only fallback. Any CSS you write for `.g-item` will
-never appear without JavaScript.
+`#product-grid` is empty in `index.html`; JavaScript fills it. The
+`<noscript>` note next to it is the only fallback. Any CSS you write for
+`.product-card` will never appear without JavaScript.
 
 ### Custom properties inherit
 
-`--g1` / `--g2` are set on the tile (`.g-item`) and on `.modal-media`. They
-inherit into descendants, so `.g-item img` sees them too. If you set them on
-a container, every child inherits the same gradient unless it overrides them.
+`--gradient-from` and `--gradient-to` are set on the card and on
+`.modal-media`. They inherit into descendants, so if you set them on a
+container, every child inherits the same gradient unless it overrides them.
 
 ### `data-delay` is a *time*, not a class
 
-`data-delay="90"` becomes `style.transitionDelay = "90ms"`. It is not a
-CSS selector; you cannot target it from the stylesheet.
+`data-delay="90"` becomes `style.transitionDelay = "90ms"`. It is not a CSS
+selector; you cannot target it from the stylesheet.
 
 ### The `.js` class exists so nothing hides without JavaScript
 
 `.js [data-reveal] { opacity:0 }` means that if `app.js` never loads, the
 inline `<script>` in `<head>` still added `.js` — so content *would* stay
-hidden. The guard is the opposite direction: the inline script adds `.js`
-only when JS runs, so a no-JS browser never applies the hidden state. Do not
-remove that inline script.
+hidden. The guard works the other way round: the inline script adds `.js`
+only when JavaScript runs, so a browser without it never applies the hidden
+state. Do not remove that inline script.
 
 ### Reduced motion is enforced twice
 
-Once in CSS (`14-responsive.css` — kills all durations), once in JS
-(`reduced` flag — skips the counter animation, the smooth scroll, and the
-whole pointer-effects block). A new animation must respect both.
+Once in CSS (`responsive.css` — it kills all durations), once in JS (the
+`userPrefersLessMotion` flag — it skips the counter animation, the smooth
+scroll and the whole mouse-effects block). A new animation has to respect
+both.
+
+### The focus restore uses two separate variables
+
+`productPopupPreviouslyFocused` and `photoViewerPreviouslyFocused` restore
+focus to different things: the popup returns to the product card, the viewer
+returns to the card as well (because the popup was closed before the viewer
+opened). They must not share a name.
 
 ---
 
@@ -342,9 +309,10 @@ whole pointer-effects block). A new animation must respect both.
 
 1. Decide the state name: a class like `.is-open`, `.is-active`, `.is-done`.
 2. Add the CSS rule in the stylesheet that owns the element
-   (`styles/NN-section.css`), using tokens only.
-3. Add the class from JS with `classList.add` / `classList.toggle`.
+   (`styles/components.css` or `styles/sections.css`), using tokens only.
+3. Add the class from JavaScript with `classList.add` / `classList.toggle`.
 4. If the state needs a value (a colour, a number, a position), use a custom
-   property: `el.style.setProperty("--x", value)` and read it with `var(--x)`.
+   property: `el.style.setProperty("--x", value)` and read it with
+   `var(--x)`.
 5. Document it in §2 (state classes) and §5 (effect table) of this file, and
    in the selector index of [`CSS-GUIDE.md`](./CSS-GUIDE.md).

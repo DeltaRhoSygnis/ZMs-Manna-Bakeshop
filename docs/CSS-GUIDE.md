@@ -1,571 +1,430 @@
 # CSS Guide — Zm's Manna Bakeshop
 
 Complete reference for `styles/`. Covers the layering model, every token,
-every selector, every breakpoint, the motion inventory, and an audit of which
-rules are live.
+every selector, every breakpoint, the motion inventory, the stacking order,
+and what the refactor removed.
 
-Related: [`JS-CSS-BRIDGE.md`](./JS-CSS-BRIDGE.md) ·
-[`JS-GUIDE.md`](./JS-GUIDE.md) · [`../DESIGN.md`](../DESIGN.md)
+Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
+[`JS-CSS-BRIDGE.md`](./JS-CSS-BRIDGE.md) · [`JS-GUIDE.md`](./JS-GUIDE.md) ·
+[`../DESIGN.md`](../DESIGN.md)
 
 ---
 
 ## 1. How the CSS is organised
 
-### 1.1 Load order
+### 1.1 The five files
 
-`index.html` `<head>` links the stylesheets in this order. The order is
-**meaningful** — later files win at equal specificity, so this is the cascade
-made explicit.
-
-| # | File | Lines | Owns |
+| File | Lines | Rules | Owns |
 | --- | --- | --- | --- |
-| 00 | `00-tokens.css` | 15 | `:root` variables only |
-| 01 | `01-base.css` | 37 | Reset, typography, layout primitives, reveal system |
-| 02 | `02-components.css` | 14 | `.btn`, `.chip` |
-| 03 | `03-header.css` | 67 | Nav pill, burger, full-screen menu |
-| 04 | `04-hero.css` | 139 | The split intro card |
-| 05 | `05-marquee.css` | 54 | Marquee strip (+ legacy hero rules, see audit) |
-| 06 | `06-story.css` | 13 | Story copy + stat cards |
-| 07 | `07-products.css` | 32 | Legacy product cards (all orphaned — see audit) |
-| 08 | `08-modal.css` | 30 | Product detail dialog |
-| 09 | `09-craft.css` | 14 | Four-step bake timeline |
-| 10 | `10-freshness.css` | 13 | Freshness tiles |
-| 11 | `11-visit.css` | 14 | Visit cards + map |
-| 12 | `12-gallery.css` | 45 | `.g-item` tiles + lightbox |
-| 13 | `13-footer.css` | 18 | Footer + back-to-top |
-| 14 | `14-responsive.css` | 33 | Breakpoints + reduced motion |
-| 15 | `15-catalog.css` | 71 | Unused (see audit) |
+| `theme.css` | 22 | 1 | Every custom property. Nothing else. |
+| `base.css` | 62 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
+| `components.css` | 190 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
+| `sections.css` | 245 | 87 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
+| `responsive.css` | 49 | 26 | Every breakpoint, plus reduced motion. |
 
-`15-catalog.css` is **not linked** from `index.html`. The file exists only.
+### 1.2 Load order
 
-### 1.2 The five layers
+`index.html` links them in this order, and the order is the cascade order:
+the most general rules first, the most specific last.
 
 ```
-Layer 0  tokens        00        :root { --var: value }
-Layer 1  base          01        reset, element defaults, primitives
-Layer 2  components    02        reusable pieces (.btn, .chip)
-Layer 3  sections      03–13     one file per page section
-Layer 4  overrides     14        breakpoints + reduced motion
+theme.css → base.css → components.css → sections.css → responsive.css
 ```
 
-Rules of the layering model:
+The same order is used inside `index.html` for the `<link>` tags. There is a
+`CONTENTS` index at the top of each file listing what it holds.
 
-- **Tokens never appear in later files as literals.** Always `var(--gold)`.
-- **Base holds primitives, not sections.** `.container`, `.section`, `.eyebrow`,
-  `.sec-head`, `.sr-only`, `.skip`, `.grain`, `.progress`, and the reveal system
-  are the only things allowed in `01-base.css`.
-- **A section file may only style its own section** plus shared components
-  scoped to that section (e.g. `.intro-panel .btn` in `04-hero.css`).
-- **`14-responsive.css` owns all breakpoint overrides**, so a breakpoint rule
-  is never scattered through the section files. Exception: `04-hero.css` and
-  `15-catalog.css` carry their own local `@media` blocks because their layout
-  changes are specific to that one component.
+### 1.3 The layering rules
+
+- **Tokens never appear as literals in later files.** Always `var(--color-gold)`.
+- **Base holds primitives, not sections.** `.container`, `.section`,
+  `.screen-reader-only`, `.skip-link`, `.noise-overlay`, `.scroll-progress`
+  and the reveal system are the only things allowed in `base.css`.
+- **A section file may only style its own section**, plus shared components
+  scoped to that section (`.banner-text .btn` in `sections.css`).
+- **`responsive.css` owns every breakpoint override**, so a breakpoint rule is
+  never scattered through the section files.
+  - **Exception:** `sections.css` carries local `@media` blocks for the
+    banner only, because its layout changes are specific to that one block.
+
+### 1.4 Specificity, and where the rules rely on it
+
+Two pairs depend on specificity rather than source order:
+
+| Pair | Specificity | Why it works |
+| --- | --- | --- |
+| `.btn.btn-secondary` vs `.banner-text .btn.btn-secondary` | (0,2,0) vs (0,3,0) | The banner's outlined button is transparent and cream, because the banner rule is more specific. |
+| `.product-card:hover .product-caption` vs `.product-grid .product-caption` | (0,3,0) vs (0,2,0) | In the product grid the caption is always visible; the hover rule only changes it when you hover. |
 
 ---
 
 ## 2. Design tokens
 
-All in `00-tokens.css`, under `:root`. This is the single place to change the
+All in `theme.css`, under `:root`. This is the one place to change the
 palette or the type system.
 
 ### 2.1 Colour
 
-| Token | Value | Where it is used | Notes |
-| --- | --- | --- | --- |
-| `--bg` | `#F8F3E8` | `body` background, `.brand` blur base, `#mobileMenu` | Warm cream page. Carries a 22px radial dot grid. |
-| `--surface` | `#FFFDF8` | Cards, footer, `.btn.ghost`, `.stat`, `.tile`, `.v-card`, `.g-item.is-logo` | Card fill. |
-| `--surface2` | `#F2EDE3` | `#products`, `#freshness`, `#gallery` bands | Alternating band behind sections. |
-| `--surface-blue` | `#EAF1F8` | **nothing** | Orphaned token — safe to delete. |
-| `--ink` | `#172033` | `body` colour, `--gold` surfaces | Body copy. Also the mandatory text colour on gold. |
-| `--heading` | `#123B68` | `h1,h2,h3`, `.v-value`, `.brand-name` | Navy display type. |
-| `--muted` | `#4D5667` | Secondary copy: `.sec-sub`, `.card-body p`, `.f-col a`, `.story-copy p` | 6.7:1 on cream. |
-| `--line` | `#DED5C6` | Every hairline border | The separation system — see *Rules*. |
-| `--gold` | `#D2A62A` | `.btn.solid`, `#burger`, `.eyebrow::before`, `#toTop`, `.m-star`, focus accents | **Never carries white text.** Always `--ink`. |
-| `--gold-dark` | `#C39722` | `.btn.solid` gradient end, `#burger` border | Gradient/edge partner of `--gold`. |
-| `--gold-soft` | `#F2DF9E` | Accents **on navy**: `.intro-panel .eyebrow.light`, `.intro-tag`, `.intro-meta span` | Light gold for dark backgrounds. |
-| `--accent-text` | `#945F2F` | `.eyebrow`, `.chip`, `.spec dt`, `.v-label`, `.more`, focus ring | Warm brown, 4.8:1 at smallest size. |
-| `--accent-soft` | `rgba(210,166,42,.14)` | `.chip` background, `.tile-icon` background | Tinted fill behind accent text. |
+| Token | Value | Where it is used |
+| --- | --- | --- |
+| `--color-background` | `#F8F3E8` | The page cream, with a 22px dot grid |
+| `--color-surface` | `#FFFDF8` | Cards, footer, the outlined button |
+| `--color-surface-alt` | `#F2EDE3` | The alternating band behind products and freshness |
+| `--color-ink` | `#172033` | Body copy. Also the mandatory text colour on gold. |
+| `--color-heading` | `#123B68` | Display type, headings, values |
+| `--color-muted` | `#4D5667` | Secondary copy |
+| `--color-border` | `#DED5C6` | Every hairline border |
+| `--color-gold` | `#D2A62A` | Buttons, marks, accents — always paired with `--color-ink` |
+| `--color-gold-dark` | `#C39722` | The gold gradient's end, and the menu button's border |
+| `--color-gold-soft` | `#F2DF9E` | Accents **on navy** |
+| `--color-accent` | `#945F2F` | Section labels, the tag, the spec labels, the focus ring |
+| `--color-accent-soft` | `rgba(210,166,42,.14)` | The tag's and the icon's tinted fill |
 
-Navy `#123B68` appears in three places: `--heading`, and hard-coded as the
-hero panel background (`04-hero.css`) and overlay scrims. If you change the
-navy, you must change `04-hero.css` too — it is not a token.
+Navy `#123B68` also appears hard-coded in three places, because it is a
+*field* and not a text colour: `.banner-text` background, the popup scrim
+`rgba(11,39,70,.55)`, and the photo-viewer scrim `rgba(7,22,40,.9)`.
 
 ### 2.2 Type
 
 | Token | Value | Role |
 | --- | --- | --- |
-| `--serif` | `"Fraunces", Georgia, serif` | Display: headings, `.brand-name`, `.intro-title`, `.stat .num`, `.v-value`, `.lb-cap`, `.step-num` |
-| `--sans` | `"DM Sans", Arial, sans-serif` | Everything else: body, labels, buttons, meta rows |
+| `--font-heading` | `"Fraunces", Georgia, serif` | Headings, the brand name, the banner title, the stat numbers, the photo caption |
+| `--font-body` | `"DM Sans", Arial, sans-serif` | Everything else: body, labels, buttons, meta rows |
 
-Both are loaded from Google Fonts in `index.html` `<head>` with
-`preconnect`. Fraunces is requested at `opsz` 9–144, weights 600/700, italic.
+Both are loaded from Google Fonts in `index.html` `<head>` with `preconnect`.
+Fraunces is requested at `opsz` 9–144, weights 600/700, italic.
 
-### 2.3 Space, shape, depth
+### 2.3 Shape, depth and spacing
 
 | Token | Value | Where it is used |
 | --- | --- | --- |
-| `--r` | `22px` | Card radius: `.stat`, `.tile`, `.v-card`, `.g-item` |
-| `--nav-h` | `64px` | `scroll-padding-top` in `01-base.css`, `#mobileMenu` padding, hero top margin |
-| `--shadow` | `0 18px 44px -18px rgba(18,59,104,.25)` | Hero card, `.modal-box`, `#burger:hover`, `#toTop` |
-| `--shadow-sm` | `0 8px 24px -12px rgba(18,59,104,.18)` | Cards, `.brand`, `.map-wrap`, lightbox stage variant |
+| `--card-radius` | `1.375rem` | Card radius: `.stat`, `.feature-card`, `.visit-card`, `.product-card` |
+| `--header-height` | `4rem` | `scroll-padding-top`, the mobile menu's padding, the banner's top margin |
+| `--shadow` | `0 1.125rem 2.75rem -1.125rem` | The banner card, `.modal-box`, `#menu-button:hover`, `#back-to-top` |
+| `--shadow-small` | `0 0.5rem 1.5rem -0.75rem` | Resting cards, `.brand`, `.map-wrapper` |
 
-Radii that are **not** tokens (they are one-off by design): `24px` intro card,
-`26px` modal, `22px` lightbox stage, `18px` catalog card, `999px` pills.
-
----
-
-## 3. Selector index
-
-Every selector defined in `styles/`, grouped by file. `◉` = live (matches
-markup), `○` = orphaned.
-
-### 00-tokens.css
-
-- `:root` — all 19 variables. ◉
-
-### 01-base.css
-
-**Reset**
-
-- `*, *::before, *::after` — `box-sizing:border-box`, zero margins/padding ◉
-- `img` — `max-width:100%; display:block` ◉
-- `a` — inherits colour, no underline ◉
-- `button` — inherits font/colour, no border, `cursor:pointer` ◉
-
-**Document**
-
-- `html` — `scroll-behavior:smooth`, `scroll-padding-top:calc(var(--nav-h) + 16px)`, `-webkit-text-size-adjust:100%` ◉
-- `body` — sans font, cream + dot-grid background, ink colour, 16px/1.65, antialiased, `overflow-x:hidden`, `transition:color .4s` ◉
-- `body.lock` — `overflow:hidden`. **Written by JS** when a modal, lightbox or mobile menu is open ◉
-- `::selection` — gold background, ink text ◉
-- `:focus-visible` — 2px `--accent-text` outline, 3px offset ◉
-
-**Type**
-
-- `h1, h2, h3` — serif, 600, `line-height:1.12`, tight tracking, `--heading` ◉
-
-**Layout primitives**
-
-- `.container` — `width:min(1180px, 92%)`, auto margins ◉
-- `.section` — `padding:clamp(3.5rem,7vw,6rem) 0`, `position:relative` ◉
-
-**Shared text parts**
-
-- `.eyebrow` — inline-flex, uppercase, `.22em` tracking, `--accent-text`, with a 26×2px gold rule via `::before` ◉
-- `.eyebrow.light` — scoped gold-soft variant, declared in `04-hero.css` ◉
-- `.sec-head` — `max-width:640px` section header block ◉
-- `.sec-head h2` — fluid size, vertical rhythm ◉
-- `.sec-sub` — muted intro paragraph ◉
-- `.sr-only` — visually hidden, still readable by screen readers ◉
-- `.skip` — fixed skip link, parked off-screen at `top:-60px`, slides in on `:focus` ◉
-
-**Chrome**
-
-- `.grain` — fixed full-screen SVG noise overlay, `opacity:.045`, `pointer-events:none`, `z-index:140` ◉
-- `.progress` — fixed 3px bar at the top of the viewport, `z-index:150` ◉
-- `.progress span` — the gold→brown gradient fill, width driven by JS ◉
-
-**Reveal system**
-
-- `.js [data-reveal]` — `opacity:0; translateY(28px)` + transition. Gated behind `.js` so content is never hidden without JavaScript ◉
-- `.js [data-reveal].in` — the revealed state. **`.in` is added by JS** ◉
-
-### 02-components.css
-
-- `.btn` — pill button, `inline-flex`, gold-safe transition set, `will-change:transform` ◉
-- `.btn .arr` — the `→` glyph; slides right on hover ◉
-- `.btn:hover .arr` — `translateX(4px)` ◉
-- `.btn.solid` — gold gradient, ink text, gold shadow ◉
-- `.btn.solid:hover` — deeper shadow ◉
-- `.btn.ghost` — surface fill, `--line` border, navy text ◉
-- `.btn.ghost:hover` — gold border, accent text ◉
-- `.chip` — small uppercase pill for the modal's category label. **Injected by JS** ◉
-
-### 03-header.css
-
-- `#navbar` — fixed top bar, `pointer-events:none` so it never blocks the page; children re-enable it ◉
-- `#navbar.hide` — `translateY(-140%)`. **Toggled by JS** on scroll-down ◉
-- `#navbar > *` — `pointer-events:auto` ◉
-- `.brand` — floating frosted-glass pill (`backdrop-filter:blur(14px)`) ◉
-- `.brand-mark` / `.brand-mark img` — 34px square logo, `object-fit:contain` ◉
-- `.brand-name` / `.brand small` — stacked name + uppercase subtitle ◉
-- `#burger` — gold pill menu button ◉
-- `.menu-word` — the word "Menu" beside the bars ◉
-- `.burger-lines` / `.burger-lines span` — three 18×2px bars ◉
-- `#burger.active .burger-lines span:nth-child(1|2|3)` — X transform. **`.active` is added by JS** ◉
-- `#mobileMenu` — fixed full-screen overlay, `visibility:hidden; opacity:0` ◉
-- `#mobileMenu.open` — `visibility:visible; opacity:1`. **`.open` is added by JS** ◉
-- `.mm-links` / `.mm-links a` / `.mm-links a i` / `.mm-links a:hover` — the numbered nav list ◉
-- `#mobileMenu.open .mm-links a` — staggered entry ◉
-- `#mobileMenu.open .mm-links a:nth-child(1…7)` — 60ms-per-item stagger via `transition-delay` ◉
-- `.mm-bottom` / `.mm-foot` — footer strip inside the menu ◉
-
-### 04-hero.css
-
-- `.intro` — the hero card: `min(1180px, 92%)` wide, `1.15fr .85fr` two-column grid, 24px radius, `--shadow` ◉
-- `.intro-photo.hero-photo` — left cell; overrides the legacy `.hero-photo` rules in `05-marquee.css` ◉
-- `.intro-photo img` — absolutely positioned, `object-fit:cover` ◉
-- `.intro-photo .mono` — fallback monogram size ◉
-- `.intro-caption` — blurred pill caption over the photo ◉
-- `.intro-panel` — right cell; navy `#123B68` field, cream text ◉
-- `.intro-logo img` — 52px logo ◉
-- `.intro-copy` — vertical stack ◉
-- `.intro-panel .eyebrow.light` / `::before` — gold-soft eyebrow on navy ◉
-- `.intro-title` — the "Zm's / Manna" wordmark, `clamp(2.0rem,3.6vw,3.0rem)` ◉
-- `.intro-tag` — italic gold-soft tagline ◉
-- `.intro-desc` — 46ch measure, 78% cream ◉
-- `.intro-desc b` — full-opacity cream for `<b>` spans ◉
-- `.intro-cta` — flex row of buttons ◉
-- `.intro-panel .btn` — tighter padding inside the panel ◉
-- `.intro-panel .btn.ghost.light` / `:hover` — transparent ghost variant on navy ◉
-- `.intro-meta` — bottom meta block, `margin-top:auto` pins it to the bottom ◉
-- `.intro-meta > div` — `96px 1fr` label/value grid ◉
-- `.intro-meta > div:last-child` — drops the final border ◉
-- `.intro-meta span` / `.intro-meta p` — gold-soft labels, cream values ◉
-- `.intro .scroll-cue` — `display:none` (hero has no scroll cue) ○
-- Local `@media (max-width:1024px | 768px | 560px)` — single column, then type/padding tuning ◉
-
-### 05-marquee.css
-
-**Live**
-
-- `.marquee` — full-bleed band, top/bottom hairline, surface fill ◉
-- `.marquee-track` — flex strip, `width:max-content`, `animation:marquee 30s linear infinite` ◉
-- `.marquee:hover .marquee-track` — pauses on hover ◉
-- `.m-item` — the product name; serif, muted, `white-space:nowrap` ◉
-- `.m-star` — the `✦` separator, gold ◉
-- `@keyframes marquee` — `to { transform:translateX(-50%) }` (the track holds two identical spans, so -50% loops seamlessly) ◉
-
-**Also live but oddly placed here**
-
-- `.mono` — the fallback monogram: absolutely centred, `opacity:0`. **Used by the hero, the product tiles, and the modal**, all of which live in other files ◉
-- `.no-img img` — hides a broken image. **`.no-img` is added by JS** to the image's parent ◉
-- `.no-img .mono` — reveals the monogram when the image fails ◉
-
-**Orphaned legacy block** (previous design; nothing in `index.html` matches)
-
-- `.hero`, `.hero-bg`, `.blob`, `.blob.b1`, `.blob.b2` ○
-- `.hero-inner`, `.hero-title`, `.hero-title em`, `.hero-tag`, `.hero-desc`, `.hero-cta`, `.hero-meta`, `.meta-chip` ○
-- `.hero-visual`, `.layer`, `.hero-frame`, `.hero-ring` ○
-- `.float-chip`, `.float-chip small`, `.float-chip.fc1`, `.float-chip.fc2` ○
-- `.scroll-cue`, `.scroll-cue .mouse`, `.scroll-cue .mouse::after` ○
-- `@keyframes floaty`, `spin`, `cue` — only used by the orphaned rules above ○
-
-### 06-story.css
-
-- `.story-grid` — `1.1fr .9fr` two-column: copy left, stats right ◉
-- `.story-copy h2` — heading rhythm ◉
-- `.story-copy p` — muted, `max-width:56ch` ◉
-- `.story-copy p b` — navy emphasis ◉
-- `.stats` — 2×2 grid of stat cards ◉
-- `.stat` — surface card, `--r` radius, lifts on hover ◉
-- `.stat .num` — the big serif number. **Value is written by JS** (`data-count`) ◉
-- `.stat .lbl` — muted caption ◉
-
-### 07-products.css — entirely orphaned
-
-Kept from the previous design. The current product grid uses `.g-item` from
-`12-gallery.css`.
-
-- `.filters`, `.filter`, `.filter:hover`, `.filter.active` ○
-- `.grid-products` ○
-- `.card`, `.card:hover`, `.card.hide`, `.card.pop` ○
-- `.ph`, `.ph img`, `.ph img.contain`, `.card:hover .ph img`, `.card:hover .ph img.contain` ○
-- `.card-body`, `.card-body h3`, `.card-body p`, `.card-foot` ○
-- `.tag`, `.more`, `.more .arr`, `.card:hover .more .arr` ○
-- `@keyframes cardIn` ○ (only used by `.card.pop`)
-
-### 08-modal.css
-
-- `.modal` — fixed scrim, navy 55% + `blur(8px)`, `visibility:hidden; opacity:0` ◉
-- `.modal.open` — visible. **`.open` is added by JS** ◉
-- `.modal-box` — `min(960px,100%)`, 90vh max, two columns, 26px radius, `--shadow` ◉
-- `.modal.open .modal-box` — `transform:none` (enters from `translateY(26px) scale(.97)`) ◉
-- `.modal-close` — circular close button, rotates 90° on hover ◉
-- `.modal-media` — left media cell, `min-height:460px`, background uses `--g1`/`--g2` ◉
-- `.modal-media::after` — soft radial highlight over the gradient ◉
-- `.modal-media img` / `.modal-media img.contain` — cover / contain variants ◉
-- `.modal-media.is-logo` — flat surface instead of gradient. **`.is-logo` is added by JS** ◉
-- `.modal-media .mono` — fallback monogram ◉
-- `.modal-info` — right text cell ◉
-- `.modal-info h3` — product name ◉
-- `.modal-desc` — description. **Injected by JS** ◉
-- `.spec`, `.spec div`, `.spec dt`, `.spec dd` — the five-row spec list. **Injected by JS** ◉
-- `.modal-note` — the "baked in small batches" footnote. **Injected by JS** ◉
-
-### 09-craft.css
-
-- `.steps` — 4-column grid, `position:relative` for the rail ◉
-- `.steps::before` — the dashed rail: a `repeating-linear-gradient` 2px line at `top:27px`, inset 6% each side ◉
-- `.step` — one step ◉
-- `.step-num` — 54px gold-ringed circle, `z-index:1` so it sits above the rail ◉
-- `.step:hover .step-num` — fills gold, scales 1.08 ◉
-- `.step h3`, `.step p` — copy ◉
-- `#freshness` — stray duplicate of the rule in `10-freshness.css` (harmless, identical) ○
-
-### 10-freshness.css
-
-- `#freshness` — alternating band fill + hairlines ◉
-- `.tiles` — 4-column grid ◉
-- `.tile` — surface card, lifts on hover ◉
-- `.tile-icon` — 48px rounded square with `--accent-soft` fill ◉
-- `.tile-icon svg` — `stroke:var(--accent-text)`, `fill:none`, 1.8 stroke width, round caps ◉
-- `.tile h3`, `.tile p` — copy ◉
-
-### 11-visit.css
-
-- `.visit-grid` — two columns: cards left, map right ◉
-- `.v-cards` — 2×2 grid of visit cards ◉
-- `.v-card` — surface card; `display:flex; flex-direction:column` so the three spans stack tightly ◉
-- `a.v-card:hover` — lifts and goes gold (only anchors get the hover treatment) ◉
-- `.v-label` — uppercase accent label ◉
-- `.v-value` — serif value ◉
-- `.v-sub` — muted sub-line ◉
-- `.map-wrap` — rounded bordered frame, `min-height:380px` ◉
-- `.map-wrap iframe` — fills the frame, `filter:saturate(.85)` to match the palette ◉
-- `.visit-note` / `.visit-note b` — the closing note with a gold `✦` ◉
-
-### 12-gallery.css
-
-- `#gallery` — band fill (no such section in the current markup) ○
-- `.grid-gallery` — 3-column grid. **Live** via `.grid-gallery.is-product` on `#productGrid` ◉
-- `.g-item` — the product tile button: 4:3 aspect, `--r` radius, gradient background from `--g1`/`--g2`, lifts on hover ◉
-- `.g-item:hover` — `translateY(-6px)` + `--shadow` ◉
-- `.g-item img` / `.g-item:hover img` — cover, scales 1.07 on hover ◉
-- `.g-cap` — caption gradient bar, hidden by default, slides up ◉
-- `.g-item:hover .g-cap`, `.g-item:focus-visible .g-cap` — reveal on hover **and keyboard focus** ◉
-- `.grid-gallery.is-product .g-cap` — captions always visible in the product grid ◉
-- `.grid-gallery .g-item img.contain` — `object-fit:contain` with padding, for the logo-only product ◉
-- `.grid-gallery .g-item.is-logo` — flat surface instead of gradient. **`.is-logo` is added by JS** ◉
-- `.grid-gallery .g-item.is-logo .g-cap` — navy caption on surface with a top hairline ◉
-- `.lightbox` — fixed near-black scrim, `blur(10px)`, `visibility:hidden; opacity:0` ◉
-- `.lightbox.open` — visible. **`.open` is added by JS** ◉
-- `.lb-stage` — the photo stage, `min(880px, 92vw)`, 4:3, scales in ◉
-- `.lightbox.open .lb-stage` — `transform:none` ◉
-- `.lb-img` — `object-fit:contain` with padding ◉
-- `.lb-bar` — caption + counter strip ◉
-- `.lb-cap` — serif italic caption. **Text written by JS** ◉
-- `.lb-count` — "3 / 6". **Text written by JS** ◉
-- `.lb-close` — circular close, rotates on hover ◉
-- `.lb-prev`, `.lb-next` — circular arrows at the sides ◉
-- `.lb-prev:hover`, `.lb-next:hover`, `.lb-close:hover` — gold fill ◉
-
-### 13-footer.css
-
-- `.footer` — surface band, top hairline, `padding:4rem 0 0` ◉
-- `.f-grid` — `1.4fr 1fr 1fr` columns ◉
-- `.f-brand p` — brand paragraph ◉
-- `.f-col h3` — uppercase column heading ◉
-- `.f-col a`, `.f-col span` — link/line rows ◉
-- `.f-col a:hover` — accent colour ◉
-- `.f-bottom` — copyright strip, hairline top ◉
-- `.f-mark` — the gold `✦` ◉
-- `#toTop` — fixed gold circle, hidden (`opacity:0`, `pointer-events:none`) ◉
-- `#toTop.show` — visible. **`.show` is added by JS** ◉
-- `#toTop:hover` — stays gold, lifts shadow ◉
-
-### 14-responsive.css
-
-- `@media (max-width:1024px)` — hero stacks, galleries drop to 2 columns, steps/tiles to 2, story & visit to 1, footer to 2 ◉
-- `@media (max-width:768px)` — burger visible, modal stacks, modal media shorter ◉
-- `@media (max-width:560px)` — everything to 1 column, tighter section padding, spec rows stack ◉
-- `@media (prefers-reduced-motion:reduce)` — kills all animation and transition durations, forces revealed content visible, stops the marquee ◉
-
-### 15-catalog.css — entirely orphaned, and not linked
-
-`.catalog`, `.catalog-title`, `.catalog-grid`, `.cat-card`, `.cat-card img`,
-`.cat-card figcaption`, `.catalog-strip`, `.catalog-info`, `.catalog-callout`,
-plus its two local media queries. Kept in case a catalog band comes back.
+Radii that are **not** tokens, because they are one-off by design: `1.5rem`
+banner, `1.625rem` popup, `1.375rem` photo frame, `999px` pill.
 
 ---
 
-## 4. Breakpoints
+## 3. The unit policy
 
-Three breakpoints, all `max-width`. Each one is a global override file.
+One rule, applied everywhere:
+
+> **`rem` for anything that measures a size. `px` only for hairlines and for
+> the pill shape. `%` for anything relative to its parent.**
+
+`1rem` is `16px` at the browser default, so this is numerically identical for
+a visitor who has not changed their font size, and it scales with the font
+size for one who has.
+
+**`px` survives in exactly four kinds of place:**
+
+| Kind | Where |
+| --- | --- |
+| Border widths | `border:1px`, `border:1.5px`, `border:2px` |
+| Outline | `outline:2px`, `outline-offset:3px` |
+| The pill radius | `border-radius:999px` on `.btn`, `.tag`, `.brand`, `#menu-button` |
+| Breakpoints | `@media (max-width:1024px)` |
+
+The full glossary of units is in
+[`BEGINNER-GUIDE.md` §3](./BEGINNER-GUIDE.md#3-css-units--what-each-one-means).
+
+---
+
+## 4. Selector index
+
+Every selector in `styles/`, grouped by file.
+
+### theme.css
+
+- `:root` — all 19 custom properties.
+
+### base.css
+
+**Reset** — `*`, `*::before`, `*::after`, `img`, `a`, `button`
+
+**The page** — `html`, `body`, `body.scroll-locked`
+
+**Headings and selection** — `h1`, `h2`, `h3`, `::selection`, `:focus-visible`
+
+**Layout primitives** — `.container`, `.section`
+
+**Reading aids** — `.screen-reader-only`, `.skip-link`, `.skip-link:focus`
+
+**Page overlays** — `.noise-overlay`, `.scroll-progress`, `.scroll-progress span`
+
+**Reveal on scroll** — `.js [data-reveal]`, `.js [data-reveal].is-visible`
+
+### components.css
+
+**Section labels** — `.section-label`, `.section-label::before`,
+`.section-header`, `.section-header h2`, `.section-subtitle`
+
+**Buttons** — `.btn`, `.btn .btn-arrow`, `.btn:hover .btn-arrow`,
+`.btn.btn-primary`, `.btn.btn-primary:hover`, `.btn.btn-secondary`,
+`.btn.btn-secondary:hover`
+
+**The tag** — `.tag`
+
+**Fallback text** — `.fallback-text`, `.image-missing img`,
+`.image-missing .fallback-text`
+
+**The header** — `#navbar`, `#navbar.is-hidden`, `#navbar > *`, `.brand`,
+`.brand-logo`, `.brand-logo img`, `.brand-name`, `.brand small`,
+`#menu-button`, `#menu-button:hover`, `.menu-button-text`, `.menu-icon`,
+`.menu-icon span`, `#menu-button.is-active .menu-icon span:nth-child(1|2|3)`
+
+**The full-screen menu** — `#mobile-menu`, `#mobile-menu.is-open`,
+`.menu-links`, `.menu-links a`, `.menu-links a:hover`, `.menu-links a i`,
+`#mobile-menu.is-open .menu-links a`,
+`#mobile-menu.is-open .menu-links a:nth-child(1…7)`, `.menu-footer`,
+`.menu-footer-text`
+
+**The product popup** — `.modal`, `.modal.is-open`, `.modal-box`,
+`.modal.is-open .modal-box`, `.modal-close`, `.modal-close:hover`,
+`.modal-media`, `.modal-media::after`, `.modal-media img`,
+`.modal-media img.is-contained`, `.modal-media.is-logo`,
+`.modal-media .fallback-text`, `.modal-info`, `.modal-info h3`,
+`.modal-description`, `.spec`, `.spec div`, `.spec dt`, `.spec dd`,
+`.modal-note`
+
+**The photo viewer** — `.photo-viewer`, `.photo-viewer.is-open`,
+`.photo-frame`, `.photo-viewer.is-open .photo-frame`, `.photo-image`,
+`.photo-bar`, `.photo-caption`, `.photo-counter`, `.photo-close`,
+`.photo-close:hover`, `.photo-prev`, `.photo-next`, `.photo-prev:hover`,
+`.photo-next:hover`
+
+**The footer** — `.footer`, `.footer-grid`, `.footer-brand p`,
+`.footer-column h3`, `.footer-column a`, `.footer-column span`,
+`.footer-column a:hover`, `.footer-bottom`, `.footer-star`, `#back-to-top`,
+`#back-to-top.is-shown`, `#back-to-top:hover`
+
+### sections.css
+
+**The banner** — `.banner`, `.banner-image`, `.banner-image img`,
+`.banner-image .fallback-text`, `.banner-caption`, `.banner-text`,
+`.banner-logo img`, `.banner-copy`, `.banner-text .section-label`,
+`.banner-text .section-label::before`, `.banner-title`, `.banner-tagline`,
+`.banner-description`, `.banner-description b`, `.banner-buttons`,
+`.banner-text .btn`, `.banner-text .btn.btn-secondary`,
+`.banner-text .btn.btn-secondary:hover`, `.banner-details`,
+`.banner-details > div`, `.banner-details > div:last-child`,
+`.banner-details span`, `.banner-details p`
+
+**The ticker** — `.ticker`, `.ticker-track`, `.ticker:hover .ticker-track`,
+`.ticker-item`, `.ticker-star`, `@keyframes ticker-scroll`
+
+**The story** — `.story-grid`, `.story-copy h2`, `.story-copy p`,
+`.story-copy p b`, `.stats`, `.stat`, `.stat:hover`, `.stat .stat-number`,
+`.stat .stat-label`
+
+**The products** — `#products`, `.product-grid`, `.product-card`,
+`.product-card:hover`, `.product-card img`, `.product-card:hover img`,
+`.product-caption`, `.product-card:hover .product-caption`,
+`.product-card:focus-visible .product-caption`, `.product-grid .product-caption`,
+`.product-grid .product-card`, `.product-grid .product-card img.is-contained`,
+`.product-grid .product-card.is-logo`,
+`.product-grid .product-card.is-logo .product-caption`
+
+**The craft** — `.steps`, `.steps::before`, `.step`, `.step-number`,
+`.step:hover .step-number`, `.step h3`, `.step p`
+
+**The freshness** — `#freshness`, `.feature-list`, `.feature-card`,
+`.feature-card:hover`, `.feature-icon`, `.feature-icon svg`,
+`.feature-card h3`, `.feature-card p`
+
+**The visit** — `.visit-grid`, `.visit-cards`, `.visit-card`,
+`a.visit-card:hover`, `.visit-label`, `.visit-value`, `.visit-detail`,
+`.map-wrapper`, `.map-wrapper iframe`, `.visit-note`, `.visit-note b`
+
+### responsive.css
+
+- `@media (max-width:1024px)` — `.product-grid`, `.steps`, `.feature-list`,
+  `.steps::before`, `.story-grid`, `.visit-grid`, `.footer-grid`
+- `@media (max-width:768px)` — `#menu-button`, `.modal-box`, `.modal-media`
+- `@media (max-width:560px)` — `.section`, `.product-grid`, `.visit-cards`,
+  `.steps`, `.feature-list`, `.stats`, `.footer-grid`, `.spec div`,
+  `.photo-prev`, `.photo-next`
+- `@media (prefers-reduced-motion:reduce)` — `html`, `*`, `*::before`,
+  `*::after`, `.js [data-reveal]`, `.ticker-track`
+
+---
+
+## 5. Breakpoints
+
+Three breakpoints, all `max-width`. Above 1024px the layout is fluid, so no
+rule is needed.
 
 | Width | What changes |
 | --- | --- |
-| **1024px** | `.hero-inner`, `.hero-visual` (orphaned) → single column. `.grid-products`, `.grid-gallery` → 2 columns. `.steps`, `.tiles` → 2 columns, dashed rail hidden. `.story-grid`, `.visit-grid` → 1 column. `.f-grid` → 2 columns. |
-| **768px** | `.nav-links` hidden (orphaned). `#burger` forced visible. `.modal-box` → 1 column, `max-height:90vh`. `.modal-media` → `min-height:280px`. `.scroll-cue` hidden (orphaned). |
-| **560px** | `.section` padding tightens to `clamp(2.5rem,6vw,3.5rem)`. `.grid-products`, `.grid-gallery`, `.v-cards`, `.steps`, `.tiles`, `.stats` → 1 column. `.f-grid` → 1 column. `.spec div` → stacked label above value. `.lb-prev`/`.lb-next` pulled to 8px from the edges. |
+| **1024px** | `.product-grid` → 2 columns. `.steps`, `.feature-list` → 2 columns and the dashed rail is hidden. `.story-grid`, `.visit-grid` → 1 column. `.footer-grid` → 2 columns. |
+| **768px** | `#menu-button` stays visible. `.modal-box` → 1 column, 90vh max. `.modal-media` → 280px min-height. |
+| **560px** | `.section` padding tightens. `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to 8px from the edges. |
 
-`04-hero.css` also carries local breakpoint blocks for the hero's own type
-scale and grid (1024 / 768 / 560).
+The banner has its own local breakpoints in `sections.css`: at 1024px it
+stacks into one column with a 16:9 photo; at 768px and 560px its type scale
+and padding shrink.
 
-**No breakpoint above 1024px.** Above that the layout is fluid — `clamp()`,
-`min()`, `%` and `fr` do the work. There is no max-width container that needs
-a breakpoint because `.container` is `min(1180px, 92%)`.
+**No breakpoint above 1024px.** Above that, `clamp()`, `min()` and `fr` do the
+work.
 
 ### Reduced motion
 
-`14-responsive.css` `@media (prefers-reduced-motion:reduce)`:
+`responsive.css` `@media (prefers-reduced-motion:reduce)`:
 
 1. `html { scroll-behavior:auto }` — no smooth scroll.
 2. `*, *::before, *::after` — animation and transition durations forced to
    `.01ms`, iteration count to 1.
-3. `.js [data-reveal]` — forced visible (no rise).
-4. `.marquee-track` — `animation:none` (the strip stops).
+3. `.js [data-reveal]` — forced visible.
+4. `.ticker-track` — `animation:none`; the strip stops.
 
-`app.js` mirrors this in JS: `reduced` disables the counter animation, the
-smooth scroll on back-to-top, and the whole tilt/magnetic/parallax block.
+`app.js` mirrors this: the `userPrefersLessMotion` flag disables the counter
+animation, the smooth scroll on back-to-top, and the whole mouse-effects
+block.
 
 ---
 
-## 5. Motion inventory
+## 6. Motion inventory
 
 ### Keyframes
 
-| Name | File | Used by | Live? |
-| --- | --- | --- | --- |
-| `marquee` | 05 | `.marquee-track` | ◉ |
-| `floaty` | 05 | `.float-chip` | ○ |
-| `spin` | 05 | `.hero-ring` | ○ |
-| `cue` | 05 | `.scroll-cue .mouse::after` | ○ |
-| `cardIn` | 07 | `.card.pop` | ○ |
+| Name | File | Used by |
+| --- | --- | --- |
+| `ticker-scroll` | sections.css | `.ticker-track` |
 
-### Transition families
+### Transitions
 
 | Effect | Where |
 | --- | --- |
-| `opacity` + `visibility` | `.modal`, `.lightbox`, `#mobileMenu` — `visibility 0s linear .35s` delays the hide until the fade finishes |
-| `transform` + `box-shadow` | Cards (`.stat`, `.tile`, `.v-card`, `.g-item`) |
-| `transform` | `.btn`, `#burger`, `#toTop`, `.g-item` image zoom |
-| `opacity` + `translate` | `.g-cap`, `#toTop` |
-| `opacity` + `transform` | `.js [data-reveal]` (rise + fade) |
-| `background` / `color` / `border-color` | Buttons, chips, hover states |
-| `rotate` | `.modal-close`, `.lb-close` |
-| `top` | `.skip` |
-| `color` | `body`, `.f-col a` |
-| `transform` on `.btn .arr` | arrow nudge on hover |
+| `opacity` + `visibility` | `.modal`, `.photo-viewer`, `#mobile-menu` — `visibility 0s linear .35s` delays the hide until the fade finishes |
+| `transform` + `box-shadow` | `.stat`, `.feature-card`, `.visit-card`, `.product-card`, `.step-number` |
+| `transform` on the image | `.product-card img` — a slow zoom on hover |
+| `opacity` + `translate` | `.product-caption`, `#back-to-top` |
+| `opacity` + `transform` | `.js [data-reveal]` — the rise and fade |
+| `background` / `color` / `border-color` | Buttons, the tag, hover states |
+| `rotate` | `.modal-close`, `.photo-close` |
+| `top` | `.skip-link` |
+| `color` | `body`, `.footer-column a` |
+| `transform` on `.btn-arrow` | The arrow nudges right on hover |
+| `transform` on `.menu-icon span` | The three bars fold into an X |
 
 ---
 
-## 6. Stacking order
+## 7. Stacking order
 
-Every `z-index` in the project, so overlays always land in the right order.
+Every `z-index` in the project.
 
 | z-index | Element | File |
 | --- | --- | --- |
-| 300 | `.skip` (skip link) | 01 |
-| 150 | `.progress` (scroll bar) | 01 |
-| 140 | `.grain` (noise overlay) | 01 |
-| 130 | `.lightbox` | 12 |
-| 120 | `.modal` | 08 |
-| 90 | `#navbar` | 03 |
-| 85 | `#mobileMenu` | 03 |
-| 80 | `#toTop` | 13 |
+| 300 | `.skip-link` | base |
+| 150 | `.scroll-progress` | base |
+| 140 | `.noise-overlay` | base |
+| 130 | `.photo-viewer` | components |
+| 120 | `.modal` | components |
+| 90 | `#navbar` | components |
+| 85 | `#mobile-menu` | components |
+| 80 | `#back-to-top` | components |
 
 Rule of thumb: **scrims above chrome, chrome above content.** The grain and
-progress bar sit above the nav so they never get covered.
+the progress bar sit above the nav so they never get covered.
 
 ---
 
-## 7. Layout primitives
+## 8. Layout primitives
 
 | Primitive | Where | Notes |
 | --- | --- | --- |
-| `.container` | `01` | `min(1180px, 92%)`, centred. The outer width of every section. |
-| `.section` | `01` | Vertical rhythm: `clamp(3.5rem,7vw,6rem)`. Narrower on mobile. |
-| `#intro` (`.intro`) | `04` | Deliberately *not* inside `.container` — it is its own `min(1180px, 92%)` card with a radius and a shadow, so it reads as a physical card rather than a page band. |
-| `.grid-gallery` | `12` | 3 → 2 → 1 columns. |
-| `.steps` / `.tiles` | 09 / 10 | 4 → 2 → 1 columns. |
-| `.story-grid` | `06` | `1.1fr .9fr` → 1 column. |
-| `.visit-grid` | `11` | 1fr 1fr → 1 column. |
-| `.f-grid` | `13` | `1.4fr 1fr 1fr` → 2 → 1 columns. |
-| `.stats` | `06` | 2×2 → 1 column. |
+| `.container` | base | `min(73.75rem, 92%)`, centred. The outer width of every section. |
+| `.section` | base | Vertical rhythm: `clamp(3.5rem,7vw,6rem)`. |
+| `.banner` | sections | Deliberately *not* inside `.container` — it is its own card with a radius and a shadow, so it reads as a physical card rather than a page band. |
+| `.product-grid` | sections | 3 → 2 → 1 columns. |
+| `.steps` / `.feature-list` | sections | 4 → 2 → 1 columns. |
+| `.story-grid` | sections | `1.1fr .9fr` → 1 column. |
+| `.visit-grid` | sections | 1fr 1fr → 1 column. |
+| `.footer-grid` | sections | `1.4fr 1fr 1fr` → 2 → 1 columns. |
+| `.stats` | sections | 2×2 → 1 column. |
 
 ---
 
-## 8. The rules that keep it coherent
+## 9. The rules that keep it coherent
 
 These are not suggestions; breaking them is how the design drifts.
 
 1. **One gold, one ink.** Any gold surface uses `#172033` for its text.
-   Enforced in `.btn.solid`, `#burger`, `#toTop`, `.step:hover .step-num`,
-   `.modal-close:hover`, `.lb-close:hover`.
-2. **The hero is the only dark block.** Navy `#123B68` appears as a *field* only
-   on `.intro-panel`. Elsewhere navy is text (`--heading`) or a translucent
+   Enforced in `.btn.btn-primary`, `#menu-button`, `#back-to-top`,
+   `.step:hover .step-number`, `.modal-close:hover`, `.photo-close:hover`.
+2. **The banner is the only dark block.** Navy appears as a *field* only on
+   `.banner-text`. Elsewhere navy is text (`--color-heading`) or a translucent
    scrim over media.
-3. **Borders do the work.** Cards are separated by `--line` hairlines, not
-   shadows. `--shadow` is reserved for the hero card, the modal, and floating
-   controls (`#toTop`, `#burger`). `--shadow-sm` is used for resting cards,
-   which is a low-opacity lift, not a separator.
+3. **Borders do the work.** Cards are separated by `--color-border` hairlines,
+   not by shadow. `--shadow` is reserved for the banner card, the popup and
+   floating controls. `--shadow-small` is a resting lift, not a separator.
 4. **The logo card is a label, not a photo.** The Otap & Loaf line has no
-   photograph, so its tile renders as a cream card with the mark centred, a
+   photograph, so its card renders as a cream card with the mark centred, a
    hairline, and navy caption text.
 5. **Copy is the shop's own.** Keep new copy at that register.
-6. **Never use `box-shadow` as a border.** If you need a card to stand out,
-   use `border:1px solid var(--line)`.
+6. **Never use `box-shadow` as a border.** If a card needs to stand out, use
+   `border:1px solid var(--color-border)`.
 
 ---
 
-## 9. Recipes
+## 10. Recipes
 
 ### Change the whole palette
 
-Edit `00-tokens.css` only. Then check three things that are **not** tokens:
+Edit `theme.css` only. Then check the values that are **not** tokens:
 
-- `.intro-panel { background:#123B68 }` in `04-hero.css`
-- `.intro-panel { color:#F8F3E8 }` and `.intro-title { color:#F8F3E8 }`
-- The cream literals `#F8F3E8` in `.intro-caption`, `.lb-bar`, `.lb-cap`,
-  `.lb-close`, `.lb-prev`, `.lb-next`, and the navy scrim `rgba(11,39,70,…)`
-  in `.intro-caption`, `.modal`, `.lb-prev/.lb-next`.
+- `.banner-text { background:#123B68 }` and its `color:#F8F3E8`
+- `.banner-title`, `.banner-description b`, `.banner-caption` — cream
+- The scrims `rgba(11,39,70,…)` and `rgba(7,22,40,…)`
 
 ### Change a font
 
-1. Change `--serif` / `--sans` in `00-tokens.css`.
+1. Change `--font-heading` / `--font-body` in `theme.css`.
 2. Change the Google Fonts `<link>` in `index.html` `<head>`.
 
-### Change section rhythm
+### Change the rhythm between sections
 
-`.section` padding in `01-base.css`. Narrower override at 560px in
-`14-responsive.css`.
+`.section` padding in `base.css`, and the narrower override at 560px in
+`responsive.css`.
 
-### Change card radius
+### Change the card radius
 
-`--r` in `00-tokens.css` — it drives `.stat`, `.tile`, `.v-card`, `.g-item`.
+`--card-radius` in `theme.css` — it drives `.stat`, `.feature-card`,
+`.visit-card` and `.product-card`.
 
 ### Add a button variant
 
-`02-components.css`. Follow the `.btn.solid` pattern and remember rule 1:
+`components.css`, next to `.btn.btn-primary`. Follow the `.btn.btn-…`
+compound so the variant cannot be used without the base, and remember rule 1:
 if the fill is gold, the text must be `#172033`.
 
-### Add a new section
+### Add a section
 
-1. Add `styles/NN-newsection.css`, following the header-comment format of the
-   existing files.
-2. Link it in `index.html` `<head>` **after `13-footer.css` and before
-   `14-responsive.css`**.
+1. Add `styles/NN-new-section.css`, following the header-comment format of
+   the existing files.
+2. Link it in `index.html` `<head>` **after `sections.css` and before
+   `responsive.css`**.
 3. Add the markup inside `<main>` in `index.html`. Wrap content in
    `.container` and give the section `class="section"` plus an `id`.
-4. Add any mobile overrides to `14-responsive.css`, not to the new file.
-5. Do not grow `01-base.css` — it stays tokens/reset/primitives only.
+4. Add any mobile overrides to `responsive.css`, not to the new file.
+5. Do not grow `base.css` — it stays tokens/reset/primitives only.
 
 ---
 
-## 10. Audit — orphaned rules
+## 11. What the refactor removed, and why
 
-Selectors that currently match nothing. Harmless, but they will send the next
-reader hunting for markup that does not exist. Two options per entry: delete
-it, or wire it up.
+Three things were deleted. If you are following an older copy of the code,
+this is why they are not here.
 
-| File | Orphaned selectors | Note |
-| --- | --- | --- |
-| `00-tokens.css` | `--surface-blue` | Unused variable |
-| `05-marquee.css` | `.hero`, `.hero-bg`, `.blob*`, `.hero-inner`, `.hero-title*`, `.hero-tag`, `.hero-desc`, `.hero-cta`, `.hero-meta`, `.meta-chip`, `.hero-visual`, `.layer`, `.hero-frame`, `.hero-ring`, `.float-chip*`, `.scroll-cue*`, `@keyframes floaty/spin/cue` | Previous design's full-bleed hero. `.hero-photo`, `.mono`, `.no-img` in this file are still live. |
-| `07-products.css` | Everything | Previous design's card grid, replaced by `.g-item` in `12-gallery.css` |
-| `09-craft.css` | `#freshness` | Duplicate of the rule in `10-freshness.css` |
-| `12-gallery.css` | `#gallery` | No gallery section in the current markup |
-| `14-responsive.css` | `.hero-inner`, `.hero-visual`, `.nav-links`, `.scroll-cue`, `.grid-products`, `.float-chip.fc1/.fc2` | Dead selectors inside otherwise-live media blocks |
-| `15-catalog.css` | Everything, and the file is not linked | Kept for a future catalog band |
+| Removed | Why |
+| --- | --- |
+| The previous design's card grid (`.card`, `.ph`, `.filters`, …) | The product cards are `.product-card` now. The old rules matched nothing and would have taught the wrong pattern. |
+| The previous design's full-bleed hero (`.hero`, `.blob`, `.float-chip`, `.scroll-cue`, `.hero-ring`, …) | Replaced by the split banner card. Its `.hero-photo` rule in particular had to go, or the banner image would have become a rounded arch. |
+| An unused catalog band (`.catalog`, `.cat-card`, …) | Never linked from `index.html` and never rendered. |
 
-### Dead code in `app.js` for the same reason
-
-| Code | Line | Why |
-| --- | --- | --- |
-| `$$(".tilt")` tilt handler | 269–277 | No element has `class="tilt"` |
-| `#heroVisual` parallax loop | 285–300 | No `#heroVisual` element exists in `index.html` |
-| Scroll spy | 139–145 | No `.nav-link` elements exist; the observer runs but has nothing to highlight |
-
-The scroll spy is worth keeping in mind if you later add a desktop nav — the
-hook is already there.
+Also removed from `app.js`: the tilt handler (nothing had `class="tilt"`),
+the hero parallax (no `#heroVisual` element existed), and the scroll spy (no
+`.nav-link` elements existed).

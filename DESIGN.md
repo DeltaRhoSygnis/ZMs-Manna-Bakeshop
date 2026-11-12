@@ -1,207 +1,141 @@
----
-name: Warm Artisanal Commerce
-colors:
-  surface: '#FFFDF8'
-  surface-dim: '#dedacf'
-  surface-bright: '#fef9ee'
-  surface-container-lowest: '#ffffff'
-  surface-container-low: '#f8f3e8'
-  surface-container: '#f2ede3'
-  surface-container-high: '#ede8dd'
-  surface-container-highest: '#e7e2d7'
-  on-surface: '#1d1c15'
-  on-surface-variant: '#43474f'
-  inverse-surface: '#323029'
-  inverse-on-surface: '#f5f0e5'
-  outline: '#737780'
-  outline-variant: '#c3c6d0'
-  surface-tint: '#3d608f'
-  primary: '#00254a'
-  on-primary: '#ffffff'
-  primary-container: '#123b68'
-  on-primary-container: '#84a6d9'
-  inverse-primary: '#a6c8fe'
-  secondary: '#765a00'
-  on-secondary: '#ffffff'
-  secondary-container: '#fece50'
-  on-secondary-container: '#735800'
-  tertiary: '#3a1e00'
-  on-tertiary: '#ffffff'
-  tertiary-container: '#583100'
-  on-tertiary-container: '#d79756'
-  error: '#B42318'
-  on-error: '#ffffff'
-  error-container: '#ffdad6'
-  on-error-container: '#93000a'
-  primary-fixed: '#d4e3ff'
-  primary-fixed-dim: '#a6c8fe'
-  on-primary-fixed: '#001c3a'
-  on-primary-fixed-variant: '#224875'
-  secondary-fixed: '#ffdf96'
-  secondary-fixed-dim: '#efc044'
-  on-secondary-fixed: '#251a00'
-  on-secondary-fixed-variant: '#5a4400'
-  tertiary-fixed: '#ffdcbe'
-  tertiary-fixed-dim: '#fdb874'
-  on-tertiary-fixed: '#2d1600'
-  on-tertiary-fixed-variant: '#6a3c00'
-  background: '#fef9ee'
-  on-background: '#1d1c15'
-  surface-variant: '#e7e2d7'
-  canvas: '#F8F3E8'
-  surface-blue: '#EAF1F8'
-  ink: '#172033'
-  ink-soft: '#4D5667'
-  brand-navy-dark: '#0B2746'
-  brand-blue: '#2C76A8'
-  brand-gold-soft: '#F2DF9E'
-  line: '#DED5C6'
-  success: '#1D7042'
-  on-navy: '#FFFFFF'
-  on-gold: '#172033'
-typography:
-  display:
-    fontFamily: Noto Serif
-    fontSize: 4rem
-    fontWeight: '700'
-    lineHeight: '1'
-  display-mobile:
-    fontFamily: Noto Serif
-    fontSize: 2.5rem
-    fontWeight: '700'
-    lineHeight: '1.1'
-  headline-lg:
-    fontFamily: Noto Serif
-    fontSize: 3rem
-    fontWeight: '700'
-    lineHeight: '1.05'
-  headline-lg-mobile:
-    fontFamily: Noto Serif
-    fontSize: 2rem
-    fontWeight: '700'
-    lineHeight: '1.15'
-  headline-md:
-    fontFamily: Noto Serif
-    fontSize: 2rem
-    fontWeight: '700'
-    lineHeight: '1.15'
-  headline-sm:
-    fontFamily: DM Sans
-    fontSize: 1.25rem
-    fontWeight: '700'
-    lineHeight: '1.3'
-  body-lg:
-    fontFamily: DM Sans
-    fontSize: 1.125rem
-    fontWeight: '400'
-    lineHeight: '1.6'
-  body-md:
-    fontFamily: DM Sans
-    fontSize: 1rem
-    fontWeight: '400'
-    lineHeight: '1.6'
-  body-sm:
-    fontFamily: DM Sans
-    fontSize: 0.875rem
-    fontWeight: '400'
-    lineHeight: '1.5'
-  label-md:
-    fontFamily: DM Sans
-    fontSize: 0.875rem
-    fontWeight: '700'
-    lineHeight: '1.2'
-  label-sm:
-    fontFamily: DM Sans
-    fontSize: 0.75rem
-    fontWeight: '700'
-    lineHeight: '1.2'
-rounded:
-  sm: 0.25rem
-  DEFAULT: 0.5rem
-  md: 0.75rem
-  lg: 1rem
-  xl: 1.5rem
-  full: 9999px
-spacing:
-  gutter: 1.5rem
-  gutter-sm: 1rem
-  margin: 3.5rem
-  margin-sm: 1.25rem
-  space-xs: 0.25rem
-  space-sm: 0.5rem
-  space-md: 1rem
-  space-lg: 1.5rem
-  space-xl: 2rem
----
+# Zm’s Manna Bakeshop — design system
 
-## Brand & Style
+Static site. No build step, no dependencies. Open `index.html` or serve the
+folder.
 
-This design system expresses a warm, dependable, and product-focused presence for an established regional bakeshop. Operating at the intersection of local community trust and business-to-business distribution, the identity balances artisan bakery hospitality with crisp wholesale structure.
+The look: a neighbourhood bakehouse in Valencia City, Bukidnon, presented like
+a shop counter — warm cream paper, a navy signboard, and gold that only ever
+carries dark ink. The single loud element is the split banner card;
+everything below it stays quiet and evenly paced so the products do the
+talking.
 
-The design movement combines **warm editorial minimalism** with **tactile product packaging aesthetics**. The UI acts as a calm, well-lit digital display shelf. Deep foundational navy conveys regional supply reliability, while warm canvas surfaces, soft gold accents, and toasted biscuit tones evoke oven-fresh heritage. Spatial compositions prioritize clarity, generous negative space, unhurried typography, and authentic product presentation over gimmicky marketing embellishments.
+## Files
 
-## Colors
+| Path | Role |
+| --- | --- |
+| `index.html` | The page. Sections in order: header, banner, ticker, story, products, craft, freshness, visit, footer, product popup, photo viewer. |
+| `app.js` | Product data, the gallery render, the popup, the photo viewer, the menu, scroll reveal, counters, scroll progress. |
+| `styles/theme.css` | The design tokens — every colour, font, radius and shadow. |
+| `styles/base.css` | The reset, typography, layout primitives, the reveal system. |
+| `styles/components.css` | The reusable parts: labels, buttons, the tag, fallback letters, header, menu, popup, photo viewer, footer. |
+| `styles/sections.css` | The seven page sections: banner, ticker, story, products, craft, freshness, visit. |
+| `styles/responsive.css` | Breakpoints at 1024 / 768 / 560, and reduced motion. |
+| `assets/` | Product photos, logo, favicons. |
+| `reference/hero.html` | The banner as a standalone fragment, for reuse. |
+| `docs/` | [Beginner's guide](docs/BEGINNER-GUIDE.md), [CSS guide](docs/CSS-GUIDE.md), [JS guide](docs/JS-GUIDE.md), [JS↔CSS bridge](docs/JS-CSS-BRIDGE.md). |
+| `archive/legacy-2026-11-12/` | The previous design. Not referenced. |
 
-The color palette centers on functional hierarchy and high contrast:
+## Colour
 
-- **Canvas & Surface**: Warm parchment tone (`#F8F3E8`) grounds the overall page canvas, paired with pure cream (`#FFFDF8`) on card surfaces to maintain natural separation without artificial harshness.
-- **Brand Navy (`#123B68`)**: The dominant structural color used for primary navigation, core CTAs, display typography anchors, and full-bleed inquiry containers. Provides institutional stability.
-- **Brand Gold (`#D2A62A`)**: Used selectively for primary commerce intents, category pills, price tags, and secondary action triggers. Must strictly take dark ink (`#172033`) typography for WCAG AA compliance. Never use gold as body text.
-- **Biscuit (`#C98B4B`)**: Serves as a tertiary culinary accent for packaging borders, bakery badges, and subtle dividers.
-- **Ink Tiers**: `#172033` provides deep contrast for copy, while `#4D5667` delivers secondary metadata hierarchy without falling below accessible contrast ratios.
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--color-background` | `#F8F3E8` | Page cream, with a 22px dot grid |
+| `--color-surface` | `#FFFDF8` | Cards, footer, the outlined button |
+| `--color-surface-alt` | `#F2EDE3` | The alternating band behind products and freshness |
+| `--color-heading` | `#123B68` | Display type, the banner panel, buttons' ink |
+| `--color-ink` | `#172033` | Body copy |
+| `--color-muted` | `#4D5667` | Secondary copy |
+| `--color-gold` | `#D2A62A` | Buttons, marks, accents — always paired with `--color-ink` |
+| `--color-gold-soft` | `#F2DF9E` | Accents on navy |
+| `--color-accent` | `#945F2F` | Section labels, the tag, the spec labels, links, focus ring |
+| `--color-border` | `#DED5C6` | Every hairline border |
 
-## Typography
+Gold never carries white text. Body copy on cream is 14.7:1; muted is 6.7:1;
+`--color-accent` is 4.8:1 at its smallest use (the section labels).
 
-The typographic system pairs an authoritative, literary serif for major story landmarks with an engineered, low-contrast geometric sans-serif for product metadata, cards, and data clarity:
+## Type
 
-- **Display & Headings**: Rendered in **Noto Serif** (substituting editorial classic serifs like Fraunces or Georgia) to ground the product line in tangible craftsmanship and time-tested presence. Display headlines use tighter line-height and restrained letter tracking.
-- **Interface & Catalog**: Built entirely on **DM Sans** across regular, medium, and bold weights. This ensures high legibility on package labels, specification matrices, pricing badges, and contact forms.
-- **Labels & Micro-copy**: Set in uppercase **DM Sans** with tracking at `+0.08em` for categorization markers like `BISCUITS`, `PASALUBONG`, and `WHOLESALE`.
+- **Fraunces** (`--font-heading`) — display. Headings, the brand name, the
+  banner wordmark, product names, stat numbers, the photo caption. Weights
+  600/700, optical sizing on.
+- **DM Sans** (`--font-body`) — everything else. Body, labels, buttons, meta
+  rows.
 
-## Layout & Spacing
+Scale follows a fluid clamp; body sits at 16px/1.65, headings from
+`clamp(1.6rem,3.6vw,2.6rem)`. Measure stays under 80 characters (`56ch` on
+story copy, `46ch` inside the banner panel).
 
-The layout is built upon a balanced 12-column responsive fluid grid bounded at a maximum container width of `1240px`:
+## Layout
 
-- **Desktop (>= 1024px)**: Outer margins are `3.5rem` (56px) to `4.5rem` (72px) with `1.5rem` (24px) gutters. Section dividers feature breathing space between `5rem` and `7.5rem` (80px–120px) to establish catalog focus.
-- **Tablet (768px – 1023px)**: 8-column layout with `2rem` (32px) margins and `1.25rem` (20px) gutters.
-- **Mobile (< 768px)**: 4-column layout with `1.25rem` (20px) margins and `1rem` (16px) gutters. Tap targets extend across full row widths where appropriate.
+```
+┌──────────────────────────────────────────────┐
+│ (brand pill)                      (Menu)     │  floating, no bar
+├──────────────────────────────────────────────┤
+│ ┌───────────────┬──────────────────────────┐ │
+│ │               │ logo                     │ │
+│ │   product     │ BISCUITS · BREAD · …     │ │  the banner card
+│ │   photo       │ Zm’s                     │ │  1.15fr / .85fr
+│ │               │ Manna                    │ │  24px radius
+│ │               │ “Love at first bite.”    │ │
+│ │  [caption]    │ copy · two CTAs          │ │
+│ │               │ ─ products / bakehouse … │ │
+│ └───────────────┴──────────────────────────┘ │
+├──────────────────────────────────────────────┤
+│  ✦ ticker of product names, 30s loop         │
+├──────────────────────────────────────────────┤
+│  story copy            │ 2×2 stat cards      │
+│  6 products, 3 columns │ popup on click      │
+│  4 craft steps on a dashed rail              │
+│  4 freshness tiles                           │
+│  visit cards 2×2       │ embedded map        │
+│  footer: brand · Explore · Visit             │
+└──────────────────────────────────────────────┘
+```
 
-Layouts avoid cluttered multi-tier dashboards in favor of horizontal product pacing and calm narrative blocks.
+Content is left-aligned throughout; the banner panel is the only place with a
+fixed two-column split and a dark field. Section rhythm is
+`clamp(3.5rem, 7vw, 6rem)`, tightening to `clamp(2.5rem, 6vw, 3.5rem)` under
+560px.
 
-## Elevation & Depth
+## Units
 
-Visual hierarchy relies on structural surfaces and subtle ambient shadows rather than stark layered drop shadows:
+`rem` for anything that measures a size, `px` only for hairlines and for the
+pill shape, `%` for anything relative to its parent. `1rem` is `16px` at the
+browser default, so the whole design scales with the visitor's font size.
 
-- **Surface Tiers**: Base backdrop sits on warm canvas (`#F8F3E8`). Content containers rise to clean cream (`#FFFDF8`). Segmented commercial blocks (such as B2B buyer pathways) use muted blue tint (`#EAF1F8`), and high-emphasis inquiry sections occupy deep `#123B68`.
-- **Borders & Dividers**: Flat separation relies primarily on crisp structural line borders (`#DED5C6` at 1px thickness) instead of heavy shadows.
-- **Ambient Shadows**: For elevated floating cards and hover feedback, depth is conveyed using an ultra-soft brand-tinted shadow: `0 12px 32px rgba(18, 59, 104, 0.08)`. This creates a tactile elevation without creating harsh digital artifacts.
+## Interaction
 
-## Shapes
+- Reveal on scroll: 28px rise + fade, gated behind `.js` so nothing hides
+  without JavaScript. Disabled under `prefers-reduced-motion`.
+- Counters run once at 60% visibility, 1.4s cubic ease-out; reduced motion
+  jumps straight to the final number.
+- The ticker pauses on hover and stops entirely under reduced motion.
+- The header slides away while you scroll down and returns when you scroll
+  up. The progress bar at the top fills as you go.
+- Product card → popup (`aria-modal`, focus moves to the close button, Tab is
+  trapped, Escape closes, focus returns to the card).
+- Popup → photo viewer for products that have a photo entry; arrows step,
+  Escape closes.
+- Full-screen menu: focus moves to the first link, Tab is trapped, Escape
+  returns focus to the menu button.
+- Overlays set `visibility` inline on open so focus lands immediately; CSS
+  still fades opacity and delays the hide by 0.35s.
 
-The shape system employs roundedness level **2** (`0.5rem` / 8px base radius, `1rem` / 16px medium radius, and `1.5rem` / 24px large radius) complemented by full pill shapes for interactive elements:
+## Rules that keep it coherent
 
-- **Cards & Image Containers**: Set to `1rem` (16px) corner radius to give packaging containers an organic, shelf-like quality.
-- **Inquiry & Hero Panels**: Set to `1.5rem` (24px) corner radius for visual containment.
-- **Interactive Controls**: Buttons, badges, and status pills strictly utilize complete pill shaping (`999px`) to invite immediate touch interaction and distinguish clickable elements from rectangular content containers.
-- **Form Inputs**: Employ `0.5rem` (8px) corner radius to balance clean alignment with soft readability.
+1. **One gold, one ink.** Any gold surface uses `#172033` for its text.
+2. **The banner is the only dark block.** Navy appears again only as a 1px-ish
+   accent (the logo card caption uses navy text, not a navy field).
+3. **Borders do the work.** Cards are separated by `--color-border`, not by
+   shadow. Shadow is reserved for the banner card, the popup and floating
+   controls.
+4. **The logo card is a label, not a photo.** The Otap & Loaf line has no
+   photograph, so its card renders as a cream card with the mark centred, a
+   hairline, and navy caption text.
+5. **Copy is the shop’s own.** Location, hours, phone, DTI note and product
+   notes come from the label; keep new copy at that register.
+6. **Names are plain words.** A class name says what the element is, in the
+   words a person would use out loud. No `hero`, `marquee`, `tile`, `chip`,
+   `ghost` or `monogram`.
 
-## Components
+## Editing notes
 
-### Buttons
-- **Primary Action**: Deep navy (`#123B68`) background, white text (`#FFFFFF`), full pill radius (`999px`), height `48px`, horizontal padding `1.5rem`. Used for top actions like `View Products` and `Submit Inquiry`.
-- **Secondary Action**: Warm gold (`#D2A62A`) background, ink text (`#172033`), full pill radius, height `48px`, horizontal padding `1.5rem`. Used for `Request Price List`.
-- **Outline Action**: Transparent background with 1.5px solid navy border (`#123B68`), navy text, pill radius.
-
-### Cards
-- **Product Card**: Background `#FFFDF8`, 1px border `#DED5C6`, border radius `1rem`, internal padding `1rem`. Houses a centered packaging photo with `#F2DF9E` accent backdrop, followed by title in bold sans-serif, description in `#4D5667`, pack size badge, and a gold ghost action button.
-- **Buyer Pathway Card**: Background `#EAF1F8`, radius `1rem`, padding `1.5rem`. Crisp heading, single descriptive paragraph, and an arrow link in navy.
-
-### Chips & Badges
-- **Category Badge**: Full pill container, subtle biscuit or gold-soft fill (`#F2DF9E`), ink text (`#172033`), uppercase font size `0.75rem`, letter spacing `0.08em`.
-
-### Form Controls
-- **Input Fields**: Background `#FFFFFF`, border 1.5px `#DED5C6`, radius `0.5rem`, height `48px`, padding `0 1rem`. Focus state features a solid 2px outline in `#123B68`. Labels are always visible above inputs in bold sans-serif `#172033`.
-- **Checkboxes & Radios**: Brand navy accent with 2px stroke, maintaining clear visual indicators for multi-item wholesale inquiries.
-
-### Inquiry Panel
-- Full-bleed or inset card with `#123B68` background, `#FFFFFF` typography, `1.5rem` radius, and structured spacing of `3rem` internal padding. Contrast is strictly preserved with cream form fields inset within.
+- Product data lives in `PRODUCTS` at the top of `app.js`; the `PHOTOS`
+  array below it drives the photo viewer. Both use `assets/` paths.
+- `SITE_CONFIG.facebook` is a placeholder search URL — replace it with the
+  exact page URL.
+- New sections: add a stylesheet in `styles/` and a matching `<link>` in
+  `index.html`, linked before `responsive.css`; do not grow `base.css` past
+  tokens, reset and shared primitives.
+- The naming rules, the units glossary and the old→new name map are in
+  [`docs/BEGINNER-GUIDE.md`](docs/BEGINNER-GUIDE.md).

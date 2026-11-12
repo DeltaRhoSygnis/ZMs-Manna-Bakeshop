@@ -1,5 +1,7 @@
 archive/
 *.md
+!README.md
+!CLAUDE.md
 !docs/
 !docs/**/*.md
 reference/
