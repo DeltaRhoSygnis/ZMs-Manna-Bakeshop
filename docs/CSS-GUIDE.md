@@ -56,7 +56,7 @@ files, check that too. The pairs that *do* rely on specificity are listed in
 
 ### 1.4 Specificity, and where the rules rely on it
 
-Two pairs depend on specificity rather than source order:
+Three pairs depend on specificity rather than source order:
 
 | Pair | Specificity | Why it works |
 | --- | --- | --- |
