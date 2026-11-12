@@ -10,7 +10,7 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 
 ## 1. Shape of the file
 
-Plain JavaScript. No framework, no library, no build step. One file, ~500
+Plain JavaScript. No framework, no library, no build step. One file, 612
 lines, read from the top.
 
 ```
@@ -38,6 +38,15 @@ Two environment flags are read once, at the top:
 
 Both gate the expensive effects. Nothing here runs on a phone that has told
 the OS it wants less motion.
+
+### A warning about the names
+
+This file used to be wrapped in an *immediately invoked function*, which kept
+every name inside it. That wrapper is gone — it was one more thing to learn —
+so **every function in this file is now a global name**. That is fine for a
+page with one script, but pick distinctive names if you ever add a second
+one, and do not use names a browser might also use (`open`, `close`, `find`,
+`name`, `status`).
 
 ### The helpers
 
@@ -79,9 +88,9 @@ Six records. Field reference:
 | --- | --- | --- | --- |
 | `id` | string | `data-id`; looked up by `openProductPopup` | `"biscocho"` |
 | `name` | string | Card caption, popup title, `alt` | `"Biscocho"` |
-| `cat` | string | Category key | `"toasted"` |
+| `cat` | string | Category key — **not used by the page yet** | `"toasted"` |
 | `catLabel` | string | The `.tag` in the popup | `"Toasted Specialties"` |
-| `tag` | string | Short badge | `"Top seller"` |
+| `tag` | string | Short badge — **not used by the page yet** | `"Top seller"` |
 | `img` | string | Path under `assets/` | `"assets/Biscocho.webp"` |
 | `fit` | string? | `"contained"` for the logo-style product | `"contained"` (Otap only) |
 | `gradientFrom` / `gradientTo` | hex | The card's gradient → `--gradient-from` / `--gradient-to` | `"#D9A05B"` |
@@ -96,7 +105,7 @@ Six records. Field reference:
 ### `PHOTOS`
 
 Six photos for the viewer. Fields: `src`, `cap`, `gradientFrom`, `gradientTo`,
-`letters`.
+and `letters` (the fallback letters — **not used by the viewer yet**).
 
 **The link between the two:** `openProductPopup` finds the photo index with
 `PHOTOS.findIndex(photo => photo.src === product.img)`. If a product's image
@@ -167,14 +176,14 @@ Under `userPrefersLessMotion` it writes the final value immediately.
 
 ### `setupScrollChrome()`
 
-One scroll handler, four effects, throttled to one frame per scroll event
+One scroll handler, three effects, throttled to one frame per scroll event
 with the `waitingForFrame` flag:
 
 | Effect | What changes |
 | --- | --- |
 | The progress bar | `#progress-bar`'s width becomes the percentage scrolled |
-| The header | `.is-hidden` when scrolling down past 220px, back when scrolling up |
-| The back-to-top button | `.is-shown` past 600px |
+| The header | `.is-hidden` when scrolling down past 220 pixels, back when scrolling up |
+| The back-to-top button | `.is-shown` past 600 pixels |
 
 ### `setupMobileMenu()` and `setMenuOpen(open)`
 
@@ -216,10 +225,19 @@ closes the popup.
 ### `openPhotoViewer(index)`, `closePhotoViewer()`, `showNextPhoto(direction)`
 
 The viewer saves its own focus target — `photoViewerPreviouslyFocused` — so
-it must not share a variable with the popup: they restore focus to different
-things.
+it must not share a name with the popup's: with the IIFE gone, two variables
+with the same name would be a `SyntaxError` and the whole script would die.
 
-`showNextPhoto` wraps around at the ends:
+In practice both restore focus to the **product card**, because the popup
+closes — and puts the focus back on the card — before the viewer opens. The
+"View full image" button lives inside the closed popup, so it could not take
+focus anyway.
+
+`showCurrentPhoto()` writes the current photo into the viewer: the image, its
+alt text, the caption, the "3 / 6" counter, and the stage's gradient.
+
+`showNextPhoto(direction)` moves to the next or previous photo, wrapping
+around at the ends:
 
 ```js
 currentPhotoIndex = (currentPhotoIndex + direction + PHOTOS.length) % PHOTOS.length;
@@ -254,10 +272,10 @@ Skipped entirely when there is no mouse, or when less motion was asked for.
 | Dialog semantics | `role="dialog" aria-modal="true" aria-labelledby="modal-title"` on the popup; `aria-label` on the viewer |
 | Hidden state | `aria-hidden` toggled on the popup, the viewer and the menu |
 | Focus entry | `.modal-close`, `.photo-close`, or the first menu link |
-| Focus exit | Restored to the element that opened the overlay |
+| Focus exit | Restored to the product card that was clicked |
 | Focus containment | `keepFocusInside` on Tab and Shift+Tab |
 | Escape | Closes the top-most overlay; on the menu, returns focus to the menu button |
-| Button labelling | Cards carry `aria-label="View details: <name>"`; the monogram is `aria-hidden` |
+| Button labelling | Cards carry `aria-label="View details: <name>"`; the fallback letters are `aria-hidden` |
 | Motion | `prefers-reduced-motion` disables the counters, the smooth scroll, the ticker and the mouse effects |
 | Progressive enhancement | The page is readable with JavaScript off; only the product grid needs it |
 
@@ -282,7 +300,8 @@ popup and the spec list are all generated from it.
 
 ### Add a seventh product
 
-1. Append a record to `PRODUCTS` with all 15 fields.
+1. Append a record to `PRODUCTS`, with every field the table above lists
+   except `cat` and `tag`, which nothing reads yet.
 2. Add its photo to `assets/`.
 3. If you want a "View full image" button in its popup, add a matching
    `PHOTOS` entry with the **same `src` string** — the link is made by
@@ -311,9 +330,9 @@ The pattern to follow:
 5. **Document the new class** in [`CSS-GUIDE.md`](./CSS-GUIDE.md) and in
    [`JS-CSS-BRIDGE.md`](./JS-CSS-BRIDGE.md).
 
-If the new behaviour needs its own CSS, add a file in `styles/` following the
-numbering convention, and link it in `index.html` **before
-`responsive.css`** so the breakpoint overrides still win.
+If the new behaviour needs its own CSS, add a file in `styles/` named for
+what it contains, and link it in `index.html` **before `responsive.css`** so
+the breakpoint overrides still win.
 
 ---
 
@@ -324,7 +343,7 @@ so you know they were not mistakes.
 
 | Gap | Notes |
 | --- | --- |
-| The `.tilt` handler | No element had `class="tilt"`. The magnetic-button effect in `setupMouseEffects` covers the same ground. |
+| The `.tilt` handler | No element had `class="tilt"`. It was a different effect — a 3D perspective tilt — and the magnetic-button effect in `setupMouseEffects` is not a replacement for it. |
 | The `#heroVisual` parallax | No `#heroVisual` element exists. The banner is a static card now. |
 | The scroll spy | No `.nav-link` elements exist — the full-screen menu is the only navigation. If you ever add a desktop nav, the hook is a small addition. |
 | The `.scrolled` class | It was toggled on the header but no CSS rule read it. |

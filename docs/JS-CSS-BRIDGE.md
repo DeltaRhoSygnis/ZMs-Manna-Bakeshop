@@ -11,10 +11,13 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 
 ## 1. The contract in one paragraph
 
-JavaScript in this project **never styles anything directly**. It does not
-set a `color`, a `width`, a `padding` or an `opacity`. What it does is
-write *state* — a class name, a data attribute, or a CSS custom property —
-and the stylesheet reacts to that state. So there are exactly four channels:
+JavaScript in this project **never makes a design decision**. It never picks
+a colour, a size, a shadow or a font. What it does is write *state* — a class
+name, a data attribute, or a CSS custom property — and the stylesheet reacts
+to that state.
+
+There are four channels. The first two are the ones that matter; the last two
+are the documented exceptions, listed in §4.
 
 | Channel | JS writes | CSS reads |
 | --- | --- | --- |
@@ -45,7 +48,7 @@ meaning. All of them start with `is-`, or are a body state.
 
 | Class | Added / removed by | CSS rule | File | What you see |
 | --- | --- | --- | --- | --- |
-| `.is-visible` | The scroll reveal observer | `.js [data-reveal].is-visible` | base | The element rises 28px and fades in |
+| `.is-visible` | The scroll reveal observer | `.js [data-reveal].is-visible` | base | The element rises 1.75rem and fades in |
 | `.is-open` | `setMenuOpen`, `openProductPopup`, `closeProductPopup`, `openPhotoViewer`, `closePhotoViewer` | `#mobile-menu.is-open`, `.modal.is-open`, `.photo-viewer.is-open` | components | The overlay fades in; its box scales up |
 | `.is-active` | `setMenuOpen` | `#menu-button.is-active .menu-icon span` | components | The three bars fold into an X |
 | `.is-hidden` | `onScroll` | `#navbar.is-hidden` | components | The header slides off the top while scrolling down |
@@ -55,13 +58,12 @@ meaning. All of them start with `is-`, or are a body state.
 | `.image-missing` | `handleBrokenImage` | `.image-missing img`, `.image-missing .fallback-text` | components | The broken photo is replaced by its letters |
 | `.scroll-locked` | `setMenuOpen`, `openProductPopup`, `closeProductPopup`, `openPhotoViewer`, `closePhotoViewer` | `body.scroll-locked` | base | The page scroll freezes behind the overlay |
 
-Two classes exist in CSS but are **not** written by JS — they come from the
-markup and simply *enable* a state:
+One class exists in CSS but is **not** written by JS — it comes from the
+markup and simply *enables* a state:
 
 | Class | Where it comes from | CSS rule | File |
 | --- | --- | --- | --- |
 | `.js` | The inline `<script>` in `index.html` `<head>` | `.js [data-reveal]` | base |
-| `.is-product` | *gone* — there is only one grid now | — | — |
 
 ---
 
@@ -226,7 +228,7 @@ setupScrollChrome()
    │     └→ CSS: #navbar.is-hidden { transform:translateY(-140%) }  components.css
    │
    └─ #back-to-top.classList.toggle("is-shown", y>600)  app.js
-         └→ CSS: #back-to-top { opacity:0; translate:0 14px; pointer-events:none }
+         └→ CSS: #back-to-top { opacity:0; translate:0 0.875rem; pointer-events:none }
          └→ CSS: #back-to-top.is-shown { opacity:1; translate:0 0; pointer-events:auto }
 ```
 

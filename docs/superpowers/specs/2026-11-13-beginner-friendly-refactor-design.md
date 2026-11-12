@@ -573,9 +573,10 @@ popup) and `lbFocus` (the photo viewer) were both going to be renamed to
 single name is a `SyntaxError` and would kill the whole script. They are now
 `productPopupPreviouslyFocused` and `photoViewerPreviouslyFocused`.
 
-They must stay separate because they restore focus to different things: the
-popup returns focus to the product tile, the photo viewer returns focus to the
-"View full image" button inside the popup.
+They must stay separate because with the IIFE gone, two variables sharing a
+name would be a `SyntaxError` that kills the whole script. In practice both
+restore focus to the product card, because the popup closes — and puts the
+focus back on the card — before the viewer opens.
 
 ### 2.4 Techniques kept, with plain-language comments
 
@@ -709,7 +710,12 @@ A throwaway script (in `/tmp`, not in the repo) parses every stylesheet into
 
 Expected: **the sets are identical**. Any difference is a rule that was
 gained, lost, or changed — exactly the class of bug that breaks a site
-silently. File order is compared too, so the cascade order is preserved.
+silently.
+
+The check compares rule *sets*, not rule *order*, so it cannot catch a
+cascade-order mistake. Order was checked by hand instead: every rule that
+moved between files was checked for a competitor that can match the same
+element at the same specificity. None of them has one.
 
 ### V3 — The markup is provably equivalent
 

@@ -21,15 +21,15 @@ talking.
 | `styles/sections.css` | The seven page sections: banner, ticker, story, products, craft, freshness, visit. |
 | `styles/responsive.css` | Breakpoints at 1024 / 768 / 560, and reduced motion. |
 | `assets/` | Product photos, logo, favicons. |
-| `reference/hero.html` | The banner as a standalone fragment, for reuse. |
+| `reference/hero.html` | The banner as a standalone fragment, for reuse. *Local only.* |
 | `docs/` | [Beginner's guide](docs/BEGINNER-GUIDE.md), [CSS guide](docs/CSS-GUIDE.md), [JS guide](docs/JS-GUIDE.md), [JS↔CSS bridge](docs/JS-CSS-BRIDGE.md). |
-| `archive/legacy-2026-11-12/` | The previous design. Not referenced. |
+| `archive/legacy-2026-11-12/` | The previous design. Not referenced. *Local only.* |
 
 ## Colour
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `--color-background` | `#F8F3E8` | Page cream, with a 22px dot grid |
+| `--color-background` | `#F8F3E8` | Page cream, with a 1.375rem dot grid |
 | `--color-surface` | `#FFFDF8` | Cards, footer, the outlined button |
 | `--color-surface-alt` | `#F2EDE3` | The alternating band behind products and freshness |
 | `--color-heading` | `#123B68` | Display type, the banner panel, buttons' ink |
@@ -51,7 +51,7 @@ Gold never carries white text. Body copy on cream is 14.7:1; muted is 6.7:1;
 - **DM Sans** (`--font-body`) — everything else. Body, labels, buttons, meta
   rows.
 
-Scale follows a fluid clamp; body sits at 16px/1.65, headings from
+Scale follows a fluid clamp; body sits at 1rem/1.65, headings from
 `clamp(1.6rem,3.6vw,2.6rem)`. Measure stays under 80 characters (`56ch` on
 story copy, `46ch` inside the banner panel).
 
@@ -65,7 +65,7 @@ story copy, `46ch` inside the banner panel).
 │ │               │ logo                     │ │
 │ │   product     │ BISCUITS · BREAD · …     │ │  the banner card
 │ │   photo       │ Zm’s                     │ │  1.15fr / .85fr
-│ │               │ Manna                    │ │  24px radius
+│ │               │ Manna                    │ │  1.5rem radius
 │ │               │ “Love at first bite.”    │ │
 │ │  [caption]    │ copy · two CTAs          │ │
 │ │               │ ─ products / bakehouse … │ │
@@ -76,7 +76,7 @@ story copy, `46ch` inside the banner panel).
 │  story copy            │ 2×2 stat cards      │
 │  6 products, 3 columns │ popup on click      │
 │  4 craft steps on a dashed rail              │
-│  4 freshness tiles                           │
+│  4 freshness cards                           │
 │  visit cards 2×2       │ embedded map        │
 │  footer: brand · Explore · Visit             │
 └──────────────────────────────────────────────┘
@@ -95,7 +95,7 @@ browser default, so the whole design scales with the visitor's font size.
 
 ## Interaction
 
-- Reveal on scroll: 28px rise + fade, gated behind `.js` so nothing hides
+- Reveal on scroll: a 1.75rem rise + fade, gated behind `.js` so nothing hides
   without JavaScript. Disabled under `prefers-reduced-motion`.
 - Counters run once at 60% visibility, 1.4s cubic ease-out; reduced motion
   jumps straight to the final number.
@@ -114,8 +114,9 @@ browser default, so the whole design scales with the visitor's font size.
 ## Rules that keep it coherent
 
 1. **One gold, one ink.** Any gold surface uses `#172033` for its text.
-2. **The banner is the only dark block.** Navy appears again only as a 1px-ish
-   accent (the logo card caption uses navy text, not a navy field).
+2. **The banner is the only dark block.** Navy appears again only as text
+   (`--color-heading`) or as a translucent scrim over media — never as a
+   second dark field. The logo card caption uses navy text, not a navy field.
 3. **Borders do the work.** Cards are separated by `--color-border`, not by
    shadow. Shadow is reserved for the banner card, the popup and floating
    controls.
