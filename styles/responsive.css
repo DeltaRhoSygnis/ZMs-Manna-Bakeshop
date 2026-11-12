@@ -6,6 +6,12 @@
 
    Everything in this file is an override of a rule that
    lives in base.css, components.css or sections.css.
+
+   ------------------------------------------------------------
+   1024px   two-column galleries, stacked story and visit
+   768px    the popup stacks, the menu button stays
+   560px    everything in one column
+   Motion   the whole page calms down when the OS asks it to
    ========================================================= */
 
 /* --- a tablet or a small laptop --- */

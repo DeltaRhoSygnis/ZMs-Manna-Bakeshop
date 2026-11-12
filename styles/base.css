@@ -3,6 +3,15 @@
 
    Everything in here applies to the whole page. The parts of
    the page that are only used once live in sections.css.
+
+   ------------------------------------------------------------
+   Reset      *  img  a  button
+   Page       html  body  body.scroll-locked
+   Headings   h1,h2,h3  ::selection  :focus-visible
+   Layout     .container  .section
+   Aids       .screen-reader-only  .skip-link
+   Overlays   .noise-overlay  .scroll-progress  .scroll-progress span
+   Reveal     .js [data-reveal]  .js [data-reveal].is-visible
    ========================================================= */
 
 /* --- reset --- */

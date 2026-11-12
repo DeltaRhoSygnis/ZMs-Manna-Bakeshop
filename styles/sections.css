@@ -4,6 +4,15 @@
    One block per section of the page, in the order they
    appear: banner, ticker, story, products, craft,
    freshness, visit.
+
+   ------------------------------------------------------------
+   Banner     .banner  .banner-image  .banner-text  .banner-title
+   Ticker     .ticker  .ticker-track  .ticker-item  .ticker-star
+   Story      .story-grid  .stats  .stat  .stat-number  .stat-label
+   Products   #products  .product-grid  .product-card  .product-caption
+   Craft      .steps  .step  .step-number
+   Freshness  #freshness  .feature-list  .feature-card  .feature-icon
+   Visit      .visit-grid  .visit-card  .map-wrapper  .visit-note
    ========================================================= */
 
 /* ============ THE BANNER — the big block at the top ============ */

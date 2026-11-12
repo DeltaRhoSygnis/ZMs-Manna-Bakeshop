@@ -3,6 +3,16 @@
 
    A component is something that appears in more than one place:
    a button, a label, the header, the popup, the footer.
+
+   ------------------------------------------------------------
+   Labels      .section-label  .section-header  .section-subtitle
+   Buttons     .btn  .btn-primary  .btn-secondary  .btn-arrow
+   Tag         .tag
+   Fallback    .fallback-text  .image-missing
+   Header      #navbar  .brand  #menu-button  #mobile-menu
+   Popup       .modal  .modal-box  .modal-media  .modal-info
+   Photo view  .photo-viewer  .photo-frame  .photo-close
+   Footer      .footer  .footer-grid  #back-to-top
    ========================================================= */
 
 /* --- section labels --- */

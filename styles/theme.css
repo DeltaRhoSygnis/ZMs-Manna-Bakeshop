@@ -5,6 +5,15 @@
    once, and use it anywhere on the page with var(--name).
 
    Change the whole look of the site by editing this file only.
+
+   ------------------------------------------------------------
+   Colours   --color-background  --color-surface  --color-surface-alt
+              --color-ink  --color-heading  --color-muted  --color-border
+              --color-gold  --color-gold-dark  --color-gold-soft
+              --color-accent  --color-accent-soft
+   Depth     --shadow  --shadow-small
+   Shape     --card-radius  --header-height
+   Type      --font-heading  --font-body
    ========================================================= */
 :root{
   /* colours */
