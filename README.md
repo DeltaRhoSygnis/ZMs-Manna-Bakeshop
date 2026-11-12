@@ -24,9 +24,11 @@ map, and a footer.
 
 **The one idea that makes this project click:** CSS owns the look, JavaScript
 owns the state, and they talk through **class names and CSS custom
-properties**. JavaScript never writes a colour or a size — it toggles
-`.is-open` / `.is-visible` / `.is-shown` or sets `--gradient-from`, and the
-stylesheet reacts. See
+properties**. JavaScript never makes a design decision — it never picks a
+colour, a size or a shadow. It toggles `.is-open` / `.is-visible` /
+`.is-shown` or sets `--gradient-from`, and the stylesheet reacts. (There are
+seven documented exceptions where JavaScript writes a measured value inline,
+such as the progress bar's width.) See
 [`docs/JS-CSS-BRIDGE.md`](docs/JS-CSS-BRIDGE.md).
 
 ## File map
@@ -38,8 +40,8 @@ stylesheet reacts. See
 | `styles/` | Five stylesheets, loaded in order. See the table below. |
 | `assets/` | Product photos, logo, favicons. |
 | `docs/` | Project documentation. |
-| `reference/hero.html` | The banner as a standalone fragment, for reuse in other pages. |
-| `archive/legacy-2026-11-12/` | The previous design. Not referenced by anything. |
+| `reference/hero.html` | The banner as a standalone fragment, for reuse in other pages. *Local only — not in version control.* |
+| `archive/legacy-2026-11-12/` | The previous design. Not referenced by anything. *Local only — not in version control.* |
 
 ### Stylesheets (load in this order)
 
@@ -69,9 +71,10 @@ Three rules hold it together:
 2. **One stylesheet per job.** `theme` for values, `base` for structure,
    `components` for the reusable parts, `sections` for this page,
    `responsive` for the breakpoints.
-3. **Tokens are the only place raw values live.** `var(--color-gold)` in CSS,
-   never a hex literal outside `theme.css` and the two deliberate exceptions
-   noted in the CSS guide.
+3. **Tokens carry the palette.** `var(--color-gold)` in CSS. Six values stay
+   literal on purpose — the ink on gold, the cream on navy, the navy banner
+   panel, the two scrims and the gradient fallbacks — and they are all listed
+   in [`docs/CSS-GUIDE.md` §2.4](docs/CSS-GUIDE.md#24-the-raw-values-that-stay-raw).
 
 **Units.** `rem` for anything that measures a size, `px` only for hairlines
 and for the pill shape, `%` for anything relative to its parent. `1rem` is

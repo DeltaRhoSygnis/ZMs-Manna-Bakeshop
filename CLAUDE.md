@@ -31,14 +31,16 @@ archive/        the previous design — frozen, not referenced
 - **A class name says what the element IS**, not what it looks like.
 - **Ids are only for elements JavaScript needs to find.**
 - **JavaScript owns state, CSS owns appearance.** JS toggles a class or sets
-  a custom property; it never sets a colour or a size.
+  a custom property; it never picks a colour, a size or a shadow.
 - **Units:** `rem` for anything that measures a size, `px` only for
   hairlines and the pill radius, `%` for anything relative to its parent.
-- **Tokens only:** `var(--color-gold)` in CSS, never a raw hex outside
-  `theme.css` (and the two deliberate navy/cream exceptions in
-  `sections.css` and `components.css`).
-- Every stylesheet opens with a `CONTENTS` index. Every function carries a
-  comment saying what it looks for and what it changes on screen.
+- **Tokens carry the palette:** `var(--color-gold)` in CSS. Six values stay
+  literal on purpose — the ink on gold, the cream on navy, the navy banner
+  panel, the two scrims and the gradient fallbacks. They are listed in
+  `docs/CSS-GUIDE.md` §2.4.
+- Every stylesheet opens with a header comment listing the groups it holds.
+  Every function carries a comment saying what it looks for and what it
+  changes on screen.
 
 ## The one thing to understand
 
@@ -76,8 +78,9 @@ Then check, at 360 / 768 / 1024 / 1440 px:
 
 ## Before you finish
 
-- Run the grep for stale names: no `hero`, `marquee`, `chip`, `mono`,
-  `g-item`, `lb-`, `mm-`, `v-card`, `f-grid` anywhere outside `archive/`.
+- Run the grep for stale names in the code:
+  `grep -rnE 'hero|marquee|chip|mono|g-item|lb-|mm-|v-card|f-grid' index.html app.js styles/`
+  Expected: nothing. The docs deliberately mention the old names.
 - If you added a state class, add it to the table in
   [`docs/JS-CSS-BRIDGE.md`](docs/JS-CSS-BRIDGE.md) §2 and to the selector
   index in [`docs/CSS-GUIDE.md`](docs/CSS-GUIDE.md) §4.

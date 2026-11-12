@@ -16,10 +16,10 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 
 | File | Lines | Rules | Owns |
 | --- | --- | --- | --- |
-| `theme.css` | 22 | 1 | Every custom property. Nothing else. |
-| `base.css` | 62 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
-| `components.css` | 190 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
-| `sections.css` | 245 | 87 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
+| `theme.css` | 32 | 1 | Every custom property. Nothing else. |
+| `base.css` | 66 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
+| `components.css` | 195 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
+| `sections.css` | 244 | 87 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
 | `responsive.css` | 49 | 26 | Every breakpoint, plus reduced motion. |
 
 ### 1.2 Load order
@@ -31,8 +31,15 @@ the most general rules first, the most specific last.
 theme.css → base.css → components.css → sections.css → responsive.css
 ```
 
-The same order is used inside `index.html` for the `<link>` tags. There is a
-`CONTENTS` index at the top of each file listing what it holds.
+The same order is used inside `index.html` for the `<link>` tags. Each file
+opens with a header comment listing the groups it holds.
+
+**A note on order.** The consolidation moved several rules between files, and
+rule order decides which of two equally specific rules wins. Every rule that
+moved was checked for a competitor that could match the same element at the
+same specificity. None of them has one — but if you move a rule between
+files, check that too. The pairs that *do* rely on specificity are listed in
+§1.4.
 
 ### 1.3 The layering rules
 
@@ -54,7 +61,7 @@ Two pairs depend on specificity rather than source order:
 | Pair | Specificity | Why it works |
 | --- | --- | --- |
 | `.btn.btn-secondary` vs `.banner-text .btn.btn-secondary` | (0,2,0) vs (0,3,0) | The banner's outlined button is transparent and cream, because the banner rule is more specific. |
-| `.product-card:hover .product-caption` vs `.product-grid .product-caption` | (0,3,0) vs (0,2,0) | In the product grid the caption is always visible; the hover rule only changes it when you hover. |
+| `.product-card:hover .product-caption` vs `.product-grid .product-caption` | (0,3,0) vs (0,2,0) | In the product grid the caption is always visible. The hover rule is stronger, but it sets the same values, so it changes nothing there — it only matters for captions outside the grid. |
 
 ---
 
@@ -67,7 +74,7 @@ palette or the type system.
 
 | Token | Value | Where it is used |
 | --- | --- | --- |
-| `--color-background` | `#F8F3E8` | The page cream, with a 22px dot grid |
+| `--color-background` | `#F8F3E8` | The page cream, with a 1.375rem dot grid |
 | `--color-surface` | `#FFFDF8` | Cards, footer, the outlined button |
 | `--color-surface-alt` | `#F2EDE3` | The alternating band behind products and freshness |
 | `--color-ink` | `#172033` | Body copy. Also the mandatory text colour on gold. |
@@ -80,9 +87,20 @@ palette or the type system.
 | `--color-accent` | `#945F2F` | Section labels, the tag, the spec labels, the focus ring |
 | `--color-accent-soft` | `rgba(210,166,42,.14)` | The tag's and the icon's tinted fill |
 
-Navy `#123B68` also appears hard-coded in three places, because it is a
-*field* and not a text colour: `.banner-text` background, the popup scrim
-`rgba(11,39,70,.55)`, and the photo-viewer scrim `rgba(7,22,40,.9)`.
+### 2.4 The raw values that stay raw
+
+Six values are written literally outside `theme.css`, because they are not
+tokens — they are either a second colour on the same surface, or a scrim:
+
+| Value | Where | Why |
+| --- | --- | --- |
+| `#172033` | `base.css` ×2, `components.css` ×7, `sections.css` ×1 | The ink on a gold surface. It is `--color-ink`, spelled out because the rule is "a gold surface carries ink", not "a gold surface carries this token". |
+| `#F8F3E8` | `components.css` ×3, `sections.css` ×5 | The cream on the navy banner panel and on the dark overlays. |
+| `#123B68` | `sections.css` ×1 | The navy banner panel itself — a *field*, not text. |
+| `rgba(11,39,70,…)` | `components.css` ×2, `sections.css` ×2 | The scrim over the page and the photo-viewer arrows. |
+| `#D9A05B` / `#8C4A1F` | `components.css` ×1 each | The fallback gradient behind a card whose `--gradient-from` has not been set yet. |
+
+Changing the palette means changing these too. They are listed in §10.
 
 ### 2.2 Type
 
@@ -98,13 +116,15 @@ Fraunces is requested at `opsz` 9–144, weights 600/700, italic.
 
 | Token | Value | Where it is used |
 | --- | --- | --- |
-| `--card-radius` | `1.375rem` | Card radius: `.stat`, `.feature-card`, `.visit-card`, `.product-card` |
+| `--card-radius` | `1.375rem` | Card radius: `.stat`, `.feature-card`, `.visit-card`, `.product-card`, `.map-wrapper` |
 | `--header-height` | `4rem` | `scroll-padding-top`, the mobile menu's padding, the banner's top margin |
 | `--shadow` | `0 1.125rem 2.75rem -1.125rem` | The banner card, `.modal-box`, `#menu-button:hover`, `#back-to-top` |
 | `--shadow-small` | `0 0.5rem 1.5rem -0.75rem` | Resting cards, `.brand`, `.map-wrapper` |
 
 Radii that are **not** tokens, because they are one-off by design: `1.5rem`
 banner, `1.625rem` popup, `1.375rem` photo frame, `999px` pill.
+
+`--card-radius` also drives `.map-wrapper`.
 
 ---
 
@@ -139,7 +159,7 @@ Every selector in `styles/`, grouped by file.
 
 ### theme.css
 
-- `:root` — all 19 custom properties.
+- `:root` — all 18 custom properties.
 
 ### base.css
 
@@ -239,6 +259,12 @@ Every selector in `styles/`, grouped by file.
 `a.visit-card:hover`, `.visit-label`, `.visit-value`, `.visit-detail`,
 `.map-wrapper`, `.map-wrapper iframe`, `.visit-note`, `.visit-note b`
 
+**The banner on smaller screens** (its own `@media` blocks in this file) —
+`@media (max-width:1024px)`: `.banner`, `.banner-image`, `.banner-text`,
+`.banner-title` · `@media (max-width:768px)`: `.banner-title` ·
+`@media (max-width:560px)`: `.banner`, `.banner-text`, `.banner-title`,
+`.banner-details > div`
+
 ### responsive.css
 
 - `@media (max-width:1024px)` — `.product-grid`, `.steps`, `.feature-list`,
@@ -260,8 +286,8 @@ rule is needed.
 | Width | What changes |
 | --- | --- |
 | **1024px** | `.product-grid` → 2 columns. `.steps`, `.feature-list` → 2 columns and the dashed rail is hidden. `.story-grid`, `.visit-grid` → 1 column. `.footer-grid` → 2 columns. |
-| **768px** | `#menu-button` stays visible. `.modal-box` → 1 column, 90vh max. `.modal-media` → 280px min-height. |
-| **560px** | `.section` padding tightens. `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to 8px from the edges. |
+| **768px** | `#menu-button` stays visible. `.modal-box` → 1 column, 90vh max. `.modal-media` → `17.5rem` min-height. |
+| **560px** | `.section` padding tightens. `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to `0.5rem` from the edges. |
 
 The banner has its own local breakpoints in `sections.css`: at 1024px it
 stacks into one column with a 16:9 photo; at 768px and 560px its type scale
@@ -299,7 +325,9 @@ block.
 | Effect | Where |
 | --- | --- |
 | `opacity` + `visibility` | `.modal`, `.photo-viewer`, `#mobile-menu` — `visibility 0s linear .35s` delays the hide until the fade finishes |
-| `transform` + `box-shadow` | `.stat`, `.feature-card`, `.visit-card`, `.product-card`, `.step-number` |
+| `transform` + `border-color` | `.stat`, `.feature-card`, `.visit-card` |
+| `transform` + `box-shadow` | `.product-card` |
+| `all` | `.step-number` |
 | `transform` on the image | `.product-card img` — a slow zoom on hover |
 | `opacity` + `translate` | `.product-caption`, `#back-to-top` |
 | `opacity` + `transform` | `.js [data-reveal]` — the rise and fade |
@@ -326,6 +354,14 @@ Every `z-index` in the project.
 | 90 | `#navbar` | components |
 | 85 | `#mobile-menu` | components |
 | 80 | `#back-to-top` | components |
+
+Five more `z-index` values are local to one component — they keep a button
+above its own card rather than ordering the page:
+
+| z-index | Element | File |
+| --- | --- | --- |
+| 2 | `.modal-close`, `.photo-prev` / `.photo-next`, `.banner-caption` | components, sections |
+| 1 | `.step-number` (so the circle sits above the dashed rail), the image inside `.modal-media` | components, sections |
 
 Rule of thumb: **scrims above chrome, chrome above content.** The grain and
 the progress bar sit above the nav so they never get covered.
@@ -403,7 +439,7 @@ if the fill is gold, the text must be `#172033`.
 
 ### Add a section
 
-1. Add `styles/NN-new-section.css`, following the header-comment format of
+1. Add `styles/what-it-contains.css`, following the header-comment format of
    the existing files.
 2. Link it in `index.html` `<head>` **after `sections.css` and before
    `responsive.css`**.

@@ -14,8 +14,8 @@ to install. Three things do all the work.
 | File | What it does | How big |
 | --- | --- | --- |
 | `index.html` | The whole page. Every section, the popup and the photo viewer. | one long file |
-| `styles/` | Five stylesheets that decide how it looks. | ~330 lines total |
-| `app.js` | The behaviour: the product cards, the popup, the menu, the scroll effects. | ~500 lines |
+| `styles/` | Five stylesheets that decide how it looks. | 586 lines total |
+| `app.js` | The behaviour: the product cards, the popup, the menu, the scroll effects. | 612 lines |
 
 ### Opening it
 
@@ -33,8 +33,13 @@ Then visit <http://localhost:8899>.
 **CSS owns the look, JavaScript owns the state, and they talk through class
 names and CSS custom properties.**
 
-JavaScript never writes a colour or a size. It changes *state* — it adds a
-class name to an element, or sets a CSS variable — and the stylesheet reacts.
+JavaScript never makes a design decision — it never picks a colour, a size or
+a shadow. It changes *state* — it adds a class name to an element, or sets a
+CSS variable — and the stylesheet reacts. (There are seven documented
+exceptions where JavaScript writes a measured value inline, such as the
+scrolling progress bar's width; they are listed in
+[`JS-CSS-BRIDGE.md` §4](JS-CSS-BRIDGE.md#4-inline-styles-written-from-js).)
+
 For example, to open the product popup, JavaScript adds one class:
 
 ```js
@@ -69,7 +74,11 @@ grep -n "product-card" styles/*.css
 ```
 
 ```
-styles/sections.css:173:.product-card{position:relative;aspect-ratio:4/3; ...
+styles/sections.css:12:   Products   #products  .product-grid  .product-card  .product-caption
+styles/sections.css:183:.product-card{position:relative;aspect-ratio:4/3;border-radius:var(--card-radius);...
+styles/sections.css:186:.product-card:hover{transform:translateY(-0.375rem);box-shadow:var(--shadow)}
+styles/sections.css:187:.product-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+...
 ```
 
 **Step 3 — the file it appears in tells you the section.**
@@ -102,8 +111,8 @@ The project uses one rule, and you can state it in one sentence:
 | `em` | The font size of the element itself | Letter spacing, and anything that should scale with the text | `letter-spacing:.22em` |
 | `%` | The size of the parent element | Widths and heights that should fill their box | `width:92%` |
 | `vw` | 1% of the viewport width | Fluid type and spacing | `font-size:clamp(1.6rem,3.6vw,2.6rem)` |
-| `vh` | 1% of the viewport height | Full-height sections | — |
-| `svh` | The *smallest* viewport height (the safe area on a phone) | Full-height sections on phones | — |
+| `vh` | 1% of the viewport height | Full-height boxes | `max-height:90vh` on the popup |
+| `svh` | The *smallest* viewport height (the safe area on a phone) | Full-height sections on phones | not used here |
 | `ch` | The width of the "0" character | Capping the length of a line of text | `max-width:56ch` |
 | `fr` | A share of the leftover space in a grid | Grid column widths | `grid-template-columns:1.15fr .85fr` |
 | `deg` | A full turn is 360° | Rotation | `rotate(45deg)` |
@@ -141,15 +150,15 @@ Breakpoints are device widths, not font sizes. They stay in `px`.
 | Property | What it does | Where it appears here |
 | --- | --- | --- |
 | `clamp(min, preferred, max)` | Picks a value between two ends — smaller on small screens, larger on big ones | `font-size:clamp(1.6rem,3.6vw,2.6rem)` |
-| `min()` | The smaller of two values | `width:min(1180px,92%)` |
-| `max()` | The larger of two values | `max-width:max-content` |
+| `min()` | The smaller of two values | `width:min(73.75rem,92%)` |
+| `max()` | The larger of two values | not used here |
 | `var(--name)` | Reads a custom property | `color:var(--color-ink)` |
 | `color-mix()` | Mixes two colours | The frosted brand pill |
 | `backdrop-filter: blur()` | Blurs what is behind an element | The brand pill, the popup scrim |
 | `aspect-ratio` | Forces a shape without padding tricks | `aspect-ratio:4/3` on the cards |
 | `inset` | Sets top, right, bottom and left at once | `inset:0` to stretch an image over its box |
 | `gap` | Space between grid or flex children | `gap:1.4rem` |
-| `translate` / `rotate` | Moving and turning, separate from `transform` | `translate:0 14px`, `rotate:90deg` |
+| `translate` / `rotate` | Moving and turning, separate from `transform` | `translate:0 0.875rem`, `rotate:90deg` |
 | `grid-template-columns` | How the columns of a grid are sized | `repeat(3,1fr)` |
 | `:focus-visible` | Styles the focus ring only when the keyboard is being used | The accessibility focus ring |
 | `prefers-reduced-motion` | Asks whether the visitor wants less animation | The reduced-motion block |
@@ -210,8 +219,13 @@ name up.
 JavaScript adds and removes.
 
 ```css
-.is-visible   is-open   is-active   is-hidden   is-shown
+.is-visible   .is-open   .is-active   .is-hidden   .is-shown
+.is-logo      .is-contained
 ```
+
+`.is-logo` and `.is-contained` are not "states" in the on/off sense — they
+say what the element *is* — but they follow the same rule, so there is only
+one thing to remember.
 
 **4. A class name says what the element IS, not what it looks like.**
 `.product-card`, never `.shadow-box`.
@@ -245,110 +259,110 @@ an older copy of the code, this is the map.
 
 | What | Old | New |
 | --- | --- | --- |
-| .class | `eyebrow` | `section-label` |
-| .class | `sec-head` | `section-header` |
-| .class | `sec-sub` | `section-subtitle` |
-| .class | `sr-only` | `screen-reader-only` |
-| .class | `skip` | `skip-link` |
-| .class | `grain` | `noise-overlay` |
-| .class | `progress` | `scroll-progress` |
-| .class | `arr` | `btn-arrow` |
-| .class | `solid` | `btn-primary` |
-| .class | `ghost` | `btn-secondary` |
-| .class | `chip` | `tag` |
-| .class | `mono` | `fallback-text` |
-| .class | `no-img` | `image-missing` |
-| .class | `brand-mark` | `brand-logo` |
-| .class | `menu-word` | `menu-button-text` |
-| .class | `burger-lines` | `menu-icon` |
-| .class | `mm-links` | `menu-links` |
-| .class | `mm-bottom` | `menu-footer` |
-| .class | `mm-foot` | `menu-footer-text` |
-| .class | `intro` | `banner` |
-| .class | `intro-photo` | `banner-image` |
-| .class | `hero-photo` | `banner-image` |
-| .class | `intro-panel` | `banner-text` |
-| .class | `intro-logo` | `banner-logo` |
-| .class | `intro-copy` | `banner-copy` |
-| .class | `intro-title` | `banner-title` |
-| .class | `intro-tag` | `banner-tagline` |
-| .class | `intro-desc` | `banner-description` |
-| .class | `intro-cta` | `banner-buttons` |
-| .class | `intro-meta` | `banner-details` |
-| .class | `intro-caption` | `banner-caption` |
-| .class | `marquee` | `ticker` |
-| .class | `marquee-track` | `ticker-track` |
-| .class | `m-item` | `ticker-item` |
-| .class | `m-star` | `ticker-star` |
-| .class | `num` | `stat-number` |
-| .class | `lbl` | `stat-label` |
-| .class | `modal-desc` | `modal-description` |
-| .class | `grid-gallery` | `product-grid` |
-| .class | `g-item` | `product-card` |
-| .class | `g-cap` | `product-caption` |
-| .class | `step-num` | `step-number` |
-| .class | `tiles` | `feature-list` |
-| .class | `tile` | `feature-card` |
-| .class | `tile-icon` | `feature-icon` |
-| .class | `v-cards` | `visit-cards` |
-| .class | `v-card` | `visit-card` |
-| .class | `v-label` | `visit-label` |
-| .class | `v-value` | `visit-value` |
-| .class | `v-sub` | `visit-detail` |
-| .class | `map-wrap` | `map-wrapper` |
-| .class | `lightbox` | `photo-viewer` |
-| .class | `lb-stage` | `photo-frame` |
-| .class | `lb-img` | `photo-image` |
-| .class | `lb-bar` | `photo-bar` |
-| .class | `lb-cap` | `photo-caption` |
-| .class | `lb-count` | `photo-counter` |
-| .class | `lb-close` | `photo-close` |
-| .class | `lb-prev` | `photo-prev` |
-| .class | `lb-next` | `photo-next` |
-| .class | `f-grid` | `footer-grid` |
-| .class | `f-brand` | `footer-brand` |
-| .class | `f-col` | `footer-column` |
-| .class | `f-bottom` | `footer-bottom` |
-| .class | `f-mark` | `footer-star` |
-| .class | `in` | `is-visible` |
-| .class | `open` | `is-open` |
-| .class | `active` | `is-active` |
-| .class | `hide` | `is-hidden` |
-| .class | `show` | `is-shown` |
-| .class | `lock` | `scroll-locked` |
-| .class | `contain` | `is-contained` |
-| #id | `burger` | `menu-button` |
-| #id | `toTop` | `back-to-top` |
-| #id | `mobileMenu` | `mobile-menu` |
-| #id | `productModal` | `product-modal` |
-| #id | `productGrid` | `product-grid` |
-| #id | `lightbox` | `photo-viewer` |
-| #id | `progressBar` | `progress-bar` |
-| #id | `modalTitle` | `modal-title` |
+| `.class` | `eyebrow` | `section-label` |
+| `.class` | `sec-head` | `section-header` |
+| `.class` | `sec-sub` | `section-subtitle` |
+| `.class` | `sr-only` | `screen-reader-only` |
+| `.class` | `skip` | `skip-link` |
+| `.class` | `grain` | `noise-overlay` |
+| `.class` | `progress` | `scroll-progress` |
+| `.class` | `arr` | `btn-arrow` |
+| `.class` | `solid` | `btn-primary` |
+| `.class` | `ghost` | `btn-secondary` |
+| `.class` | `chip` | `tag` |
+| `.class` | `mono` | `fallback-text` |
+| `.class` | `no-img` | `image-missing` |
+| `.class` | `brand-mark` | `brand-logo` |
+| `.class` | `menu-word` | `menu-button-text` |
+| `.class` | `burger-lines` | `menu-icon` |
+| `.class` | `mm-links` | `menu-links` |
+| `.class` | `mm-bottom` | `menu-footer` |
+| `.class` | `mm-foot` | `menu-footer-text` |
+| `.class` | `intro` | `banner` |
+| `.class` | `intro-photo` | `banner-image` |
+| `.class` | `hero-photo` | `banner-image` |
+| `.class` | `intro-panel` | `banner-text` |
+| `.class` | `intro-logo` | `banner-logo` |
+| `.class` | `intro-copy` | `banner-copy` |
+| `.class` | `intro-title` | `banner-title` |
+| `.class` | `intro-tag` | `banner-tagline` |
+| `.class` | `intro-desc` | `banner-description` |
+| `.class` | `intro-cta` | `banner-buttons` |
+| `.class` | `intro-meta` | `banner-details` |
+| `.class` | `intro-caption` | `banner-caption` |
+| `.class` | `marquee` | `ticker` |
+| `.class` | `marquee-track` | `ticker-track` |
+| `.class` | `m-item` | `ticker-item` |
+| `.class` | `m-star` | `ticker-star` |
+| `.class` | `num` | `stat-number` |
+| `.class` | `lbl` | `stat-label` |
+| `.class` | `modal-desc` | `modal-description` |
+| `.class` | `grid-gallery` | `product-grid` |
+| `.class` | `g-item` | `product-card` |
+| `.class` | `g-cap` | `product-caption` |
+| `.class` | `step-num` | `step-number` |
+| `.class` | `tiles` | `feature-list` |
+| `.class` | `tile` | `feature-card` |
+| `.class` | `tile-icon` | `feature-icon` |
+| `.class` | `v-cards` | `visit-cards` |
+| `.class` | `v-card` | `visit-card` |
+| `.class` | `v-label` | `visit-label` |
+| `.class` | `v-value` | `visit-value` |
+| `.class` | `v-sub` | `visit-detail` |
+| `.class` | `map-wrap` | `map-wrapper` |
+| `.class` | `lightbox` | `photo-viewer` |
+| `.class` | `lb-stage` | `photo-frame` |
+| `.class` | `lb-img` | `photo-image` |
+| `.class` | `lb-bar` | `photo-bar` |
+| `.class` | `lb-cap` | `photo-caption` |
+| `.class` | `lb-count` | `photo-counter` |
+| `.class` | `lb-close` | `photo-close` |
+| `.class` | `lb-prev` | `photo-prev` |
+| `.class` | `lb-next` | `photo-next` |
+| `.class` | `f-grid` | `footer-grid` |
+| `.class` | `f-brand` | `footer-brand` |
+| `.class` | `f-col` | `footer-column` |
+| `.class` | `f-bottom` | `footer-bottom` |
+| `.class` | `f-mark` | `footer-star` |
+| `.class` | `in` | `is-visible` |
+| `.class` | `open` | `is-open` |
+| `.class` | `active` | `is-active` |
+| `.class` | `hide` | `is-hidden` |
+| `.class` | `show` | `is-shown` |
+| `.class` | `lock` | `scroll-locked` |
+| `.class` | `contain` | `is-contained` |
+| `.class` | `light` | *(removed)* |
+| `.class` | `is-product` | *(removed)* |
+| `#id` | `burger` | `menu-button` |
+| `#id` | `toTop` | `back-to-top` |
+| `#id` | `mobileMenu` | `mobile-menu` |
+| `#id` | `productModal` | `product-modal` |
+| `#id` | `productGrid` | `product-grid` |
+| `#id` | `lightbox` | `photo-viewer` |
+| `#id` | `progressBar` | `progress-bar` |
+| `#id` | `modalTitle` | `modal-title` |
+| `token` | `--bg` | `--color-background` |
+| `token` | `--surface` | `--color-surface` |
+| `token` | `--surface2` | `--color-surface-alt` |
+| `token` | `--ink` | `--color-ink` |
+| `token` | `--heading` | `--color-heading` |
+| `token` | `--muted` | `--color-muted` |
+| `token` | `--line` | `--color-border` |
+| `token` | `--gold` | `--color-gold` |
+| `token` | `--gold-dark` | `--color-gold-dark` |
+| `token` | `--gold-soft` | `--color-gold-soft` |
+| `token` | `--accent-text` | `--color-accent` |
+| `token` | `--accent-soft` | `--color-accent-soft` |
+| `token` | `--shadow-sm` | `--shadow-small` |
+| `token` | `--r` | `--card-radius` |
+| `token` | `--nav-h` | `--header-height` |
+| `token` | `--serif` | `--font-heading` |
+| `token` | `--sans` | `--font-body` |
+| `token` | `--g1` | `--gradient-from` |
+| `token` | `--g2` | `--gradient-to` |
 
-One data field changed too, in `app.js`: the product record's `mono` is now
-`letters`, because "monogram" is not a word most people use.
-| token | `--bg` | `--color-background` |
-| token | `--surface` | `--color-surface` |
-| token | `--surface2` | `--color-surface-alt` |
-| token | `--ink` | `--color-ink` |
-| token | `--heading` | `--color-heading` |
-| token | `--muted` | `--color-muted` |
-| token | `--line` | `--color-border` |
-| token | `--gold` | `--color-gold` |
-| token | `--gold-dark` | `--color-gold-dark` |
-| token | `--gold-soft` | `--color-gold-soft` |
-| token | `--accent-text` | `--color-accent` |
-| token | `--accent-soft` | `--color-accent-soft` |
-| token | `--shadow-sm` | `--shadow-small` |
-| token | `--r` | `--card-radius` |
-| token | `--nav-h` | `--header-height` |
-| token | `--serif` | `--font-heading` |
-| token | `--sans` | `--font-body` |
-| token | `--g1` | `--gradient-from` |
-| token | `--g2` | `--gradient-to` |
-| .class | `light` | `(removed)` |
-| .class | `is-product` | `(removed)` |
+One data field changed too, in `app.js`: the product record’s `mono` is now
+`letters`, because “monogram” is not a word most people use.
 
 ---
 
@@ -417,7 +431,9 @@ productModal.classList.add("is-open");
 .modal.is-open .modal-box{transform:none}
 ```
 
-The `.modal-box` rule slides the box up into place as it fades in.**7. Closing it.** `closeProductPopup()` removes the class and puts the
+The `.modal-box` rule slides the box up into place as it fades in.
+
+**7. Closing it.** `closeProductPopup()` removes the class and puts the
 keyboard focus back where it came from:
 
 ```js
@@ -450,13 +466,14 @@ three breakpoints and none of them above 1024px. No phone-specific patches.
 **Sizes use `rem`, so the design scales with the visitor's font size.**
 One rule, stated in a sentence, applied everywhere.
 
-**Everything is accessible.** A skip link, a focus trap in the popup, focus
-returned to where it came from, `aria-*` attributes on the dialogs, a visible
-focus ring, and a full `prefers-reduced-motion` path.
+**The accessibility basics are in place.** A skip link, a focus trap in the
+popup, focus returned to where it came from, `aria-*` attributes on the
+dialogs, a visible focus ring, and a full `prefers-reduced-motion` path.
+(A formal audit has not been carried out.)
 
-**It is progressively enhanced.** The page is readable and complete with
-JavaScript switched off. Only the product grid needs JavaScript, and it says
-so in a `<noscript>` note.
+**It is progressively enhanced.** Every section is readable with JavaScript
+switched off. Only the product grid needs JavaScript, and it says so in a
+`<noscript>` note.
 
 **It is fast.** The scroll handler is passive and throttled to one frame,
 reveals and counters use `IntersectionObserver` instead of scroll events,
