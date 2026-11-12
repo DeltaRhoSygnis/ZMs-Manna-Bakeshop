@@ -325,6 +325,9 @@ an older copy of the code, this is the map.
 | #id | `lightbox` | `photo-viewer` |
 | #id | `progressBar` | `progress-bar` |
 | #id | `modalTitle` | `modal-title` |
+
+One data field changed too, in `app.js`: the product record's `mono` is now
+`letters`, because "monogram" is not a word most people use.
 | token | `--bg` | `--color-background` |
 | token | `--surface` | `--color-surface` |
 | token | `--surface2` | `--color-surface-alt` |
@@ -367,7 +370,7 @@ data — and the data can change without touching the markup.
 
 ```js
 { id:"biscocho", name:"Biscocho", img:"assets/Biscocho.webp",
-  gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", mono:"B", … }
+  gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", letters:"B", … }
 ```
 
 **3. Building the cards.** `buildProductTiles()` turns each record into a

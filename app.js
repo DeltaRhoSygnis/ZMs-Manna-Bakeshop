@@ -63,32 +63,32 @@ const SITE_CONFIG = {
 /* The six products. Each one becomes a card on the page. */
 const PRODUCTS = [
   { id:"cookie-de-longa", name:"Cookie de Longa", cat:"cookies", catLabel:"Cookies & Biscuits", tag:"Sesame cookie sandwich",
-    img:"assets/CookieDeLonga.webp", gradientFrom:"#E8C07D", gradientTo:"#B4691E", mono:"CdL",
+    img:"assets/CookieDeLonga.webp", gradientFrom:"#E8C07D", gradientTo:"#B4691E", letters:"CdL",
     desc:"Sesame-topped round cookie sandwiches with a sweet signature filling.",
     texture:"Crumbly outside, soft sweet center", notes:"Toasted sesame, butter, caramel sugar",
     pair:"Barako coffee or warm milk", pack:"100 g heat-sealed pouch", keep:"Cool, dry place — reseal after opening" },
   { id:"biscocho", name:"Biscocho", cat:"toasted", catLabel:"Toasted Specialties", tag:"Top seller",
-    img:"assets/Biscocho.webp", gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", mono:"B",
+    img:"assets/Biscocho.webp", gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", letters:"B",
     desc:"Twice-baked crispy bread slices glazed with butter and sugar.",
     texture:"Deep crunch, glassy sugar crust", notes:"Butter, toasted sugar, golden bread",
     pair:"Morning coffee or hot tsokolate", pack:"100 g heat-sealed pouch", keep:"Keep sealed to protect the crunch" },
   { id:"toasted-mammon", name:"Toasted Mammon", cat:"toasted", catLabel:"Toasted Specialties", tag:"Light & airy",
-    img:"assets/Mammon.webp", gradientFrom:"#F0D9A8", gradientTo:"#C98F3D", mono:"M",
+    img:"assets/Mammon.webp", gradientFrom:"#F0D9A8", gradientTo:"#C98F3D", letters:"M",
     desc:"Light sponge cake slices slow-toasted for an airy, crispy crunch.",
     texture:"Airy, melt-away crisp", notes:"Vanilla sponge, light caramel",
     pair:"Afternoon tea or kape", pack:"100 g heat-sealed pouch", keep:"Away from humidity, reseal tightly" },
   { id:"patatas", name:"Patatas", cat:"cookies", catLabel:"Cookies & Biscuits", tag:"Coffee pairing",
-    img:"assets/Patatas.webp", gradientFrom:"#E3B778", gradientTo:"#A05C22", mono:"P",
+    img:"assets/Patatas.webp", gradientFrom:"#E3B778", gradientTo:"#A05C22", letters:"P",
     desc:"Finger-style crunchy biscuit batons with a savory-sweet taste.",
     texture:"Firm snap, fine crumb", notes:"Buttery, lightly sweet, hint of salt",
     pair:"Black coffee — merienda classic", pack:"100 g heat-sealed pouch", keep:"Cool, dry shelf; reseal after opening" },
   { id:"hopia-choco", name:"Hopia Choco", cat:"pastry", catLabel:"Pastry & Bread", tag:"Rich filling",
-    img:"assets/Hopia.webp", gradientFrom:"#9A6A45", gradientTo:"#4A2C17", mono:"H",
+    img:"assets/Hopia.webp", gradientFrom:"#9A6A45", gradientTo:"#4A2C17", letters:"H",
     desc:"Flaky crust pockets filled with rich chocolate sweet bean paste.",
     texture:"Layered flaky shell, dense fudgy core", notes:"Cocoa, sweet bean paste, pastry",
     pair:"Warm milk or afternoon kape", pack:"100 g heat-sealed pouch", keep:"Cool, dry place away from sunlight" },
   { id:"otap-loaf", name:"Otap & Loaf Breads", cat:"pastry", catLabel:"Pastry & Bread", tag:"Specialty line",
-    img:"assets/ZmsLogo.webp", fit:"contained", gradientFrom:"#EAD3A2", gradientTo:"#B98A44", mono:"O",
+    img:"assets/ZmsLogo.webp", fit:"contained", gradientFrom:"#EAD3A2", gradientTo:"#B98A44", letters:"O",
     desc:"Crisp oval puff biscuits and soft sliced loaves for breakfast and merienda.",
     texture:"Shatter-crisp otap, pillowy loaf", notes:"Puff pastry sugar / soft milk bread",
     pair:"Breakfast spreads, butter, or jam", pack:"Standard specialty packs", keep:"Loaves best fresh; otap keeps sealed" }
@@ -96,12 +96,12 @@ const PRODUCTS = [
 
 /* The six photos the big photo viewer can show. */
 const PHOTOS = [
-  { src:"assets/CookieDeLonga.webp", cap:"Cookie de Longa", gradientFrom:"#E8C07D", gradientTo:"#B4691E", mono:"CdL" },
-  { src:"assets/Biscocho.webp", cap:"Toasted Biscocho", gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", mono:"B" },
-  { src:"assets/Mammon.webp", cap:"Toasted Mammon", gradientFrom:"#F0D9A8", gradientTo:"#C98F3D", mono:"M" },
-  { src:"assets/Patatas.webp", cap:"Patatas Biscuits", gradientFrom:"#E3B778", gradientTo:"#A05C22", mono:"P" },
-  { src:"assets/Hopia.webp", cap:"Hopia Choco", gradientFrom:"#9A6A45", gradientTo:"#4A2C17", mono:"H" },
-  { src:"assets/BiscochoNice.webp", cap:"Biscocho on Dark Wood", gradientFrom:"#6B4226", gradientTo:"#2B1708", mono:"B" }
+  { src:"assets/CookieDeLonga.webp", cap:"Cookie de Longa", gradientFrom:"#E8C07D", gradientTo:"#B4691E", letters:"CdL" },
+  { src:"assets/Biscocho.webp", cap:"Toasted Biscocho", gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", letters:"B" },
+  { src:"assets/Mammon.webp", cap:"Toasted Mammon", gradientFrom:"#F0D9A8", gradientTo:"#C98F3D", letters:"M" },
+  { src:"assets/Patatas.webp", cap:"Patatas Biscuits", gradientFrom:"#E3B778", gradientTo:"#A05C22", letters:"P" },
+  { src:"assets/Hopia.webp", cap:"Hopia Choco", gradientFrom:"#9A6A45", gradientTo:"#4A2C17", letters:"H" },
+  { src:"assets/BiscochoNice.webp", cap:"Biscocho on Dark Wood", gradientFrom:"#6B4226", gradientTo:"#2B1708", letters:"B" }
 ];
 
 /* =========================================================
@@ -124,7 +124,7 @@ function buildProductTiles() {
     return `
     <button class="product-card${product.fit ? " is-logo" : ""}" data-id="${product.id}" data-reveal data-delay="${(index % 3) * 90}"
       style="${gradient}" aria-haspopup="dialog" aria-label="View details: ${product.name}">
-      <span class="fallback-text" aria-hidden="true">${product.mono}</span>
+      <span class="fallback-text" aria-hidden="true">${product.letters}</span>
       <img src="${product.img}" class="${product.fit ? "is-contained" : ""}" alt="${product.name}" loading="lazy" decoding="async">
       <span class="product-caption">${product.name}</span>
     </button>`;
@@ -392,7 +392,7 @@ function openProductPopup(productId) {
   media.style.setProperty("--gradient-to", product.gradientTo);
   media.classList.toggle("is-logo", Boolean(product.fit));
   media.innerHTML = `
-    <span class="fallback-text">${product.mono}</span>
+    <span class="fallback-text">${product.letters}</span>
     <img src="${product.img}" class="${product.fit ? "is-contained" : ""}" alt="${product.name}" decoding="async">`;
   handleBrokenImage(findElement("img", media));
 
