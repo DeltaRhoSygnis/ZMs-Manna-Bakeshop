@@ -9,11 +9,11 @@
 /* ============ THE BANNER — the big block at the top ============ */
 /* Contained card, not full-bleed, so the photo is not over-zoomed. */
 .banner{
-  width:min(1180px,92%);
+  width:min(73.75rem,92%);
   margin:calc(var(--header-height) + clamp(1rem,2.5vw,2rem)) auto clamp(2.5rem,5vw,4rem);
   display:grid;
   grid-template-columns:1.15fr .85fr;
-  border-radius:24px;
+  border-radius:1.5rem;
   overflow:hidden;
   border:1px solid var(--color-border);
   box-shadow:var(--shadow);
@@ -46,8 +46,8 @@
   position:absolute;left:clamp(1rem,2.4vw,1.6rem);bottom:clamp(1rem,2.4vw,1.6rem);
   z-index:2;display:inline-flex;align-items:center;gap:.5rem;
   font-size:.6rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:#F8F3E8;background:rgba(11,39,70,.62);backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);padding:.45rem .8rem;border-radius:999px;
+  color:#F8F3E8;background:rgba(11,39,70,.62);backdrop-filter:blur(0.5rem);
+  -webkit-backdrop-filter:blur(0.5rem);padding:.45rem .8rem;border-radius:999px;
   border:1px solid rgba(248,243,232,.18);
 }
 
@@ -61,7 +61,7 @@
   color:#F8F3E8;
   padding:clamp(1.5rem,2.4vw,2.2rem) clamp(1.3rem,2.4vw,2.2rem);
 }
-.banner-logo img{width:52px;height:52px;object-fit:contain}
+.banner-logo img{width:3.25rem;height:3.25rem;object-fit:contain}
 .banner-copy{display:flex;flex-direction:column}
 .banner-text .section-label{color:var(--color-gold-soft);font-size:.66rem}
 .banner-text .section-label::before{background:var(--color-gold)}
@@ -106,7 +106,7 @@
 }
 .banner-details > div{
   display:grid;
-  grid-template-columns:96px 1fr;
+  grid-template-columns:6rem 1fr;
   gap:.8rem;
   align-items:baseline;
   padding-bottom:.4rem;
@@ -137,7 +137,7 @@
   .banner-title{font-size:clamp(1.7rem,6vw,2.0rem)}
 }
 @media (max-width:560px){
-  .banner{border-radius:18px}
+  .banner{border-radius:1.125rem}
   .banner-text{padding:1.2rem 1.1rem}
   .banner-title{font-size:clamp(1.7rem,7vw,2.2rem)}
   .banner-details > div{grid-template-columns:1fr;gap:.15rem}
@@ -162,7 +162,7 @@
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .stat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--card-radius);padding:1.6rem 1.4rem;
   box-shadow:var(--shadow-small);transition:transform .3s,border-color .3s}
-.stat:hover{transform:translateY(-5px);border-color:var(--color-gold)}
+.stat:hover{transform:translateY(-0.3125rem);border-color:var(--color-gold)}
 .stat .stat-number{display:block;font-family:var(--font-heading);font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:700;
   color:var(--color-accent);line-height:1}
 .stat .stat-label{display:block;font-size:.82rem;color:var(--color-muted);margin-top:.45rem;font-weight:500}
@@ -174,13 +174,13 @@
 .product-card{position:relative;aspect-ratio:4/3;border-radius:var(--card-radius);overflow:hidden;border:1px solid var(--color-border);
   background:linear-gradient(140deg,var(--gradient-from,#D9A05B),var(--gradient-to,#8C4A1F));box-shadow:var(--shadow-small);
   transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;text-align:left}
-.product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.product-card:hover{transform:translateY(-0.375rem);box-shadow:var(--shadow)}
 .product-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .product-card:hover img{transform:scale(1.07)}
 /* the name across the bottom of the card */
 .product-caption{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1.1rem .9rem;font-size:.85rem;font-weight:700;
-  color:#fff;background:linear-gradient(transparent,rgba(11,39,70,.8));opacity:0;translate:0 8px;
+  color:#fff;background:linear-gradient(transparent,rgba(11,39,70,.8));opacity:0;translate:0 0.5rem;
   transition:opacity .35s,translate .35s}
 .product-card:hover .product-caption,.product-card:focus-visible .product-caption{opacity:1;translate:0 0}
 /* in the product grid the names stay visible, not just on hover */
@@ -197,10 +197,10 @@
 /* ============ THE CRAFT — the four steps of the bake ============ */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;position:relative}
 /* the dashed line the steps sit on */
-.steps::before{content:"";position:absolute;top:27px;left:6%;right:6%;height:2px;
-  background:repeating-linear-gradient(90deg,var(--color-border) 0 8px,transparent 8px 16px)}
+.steps::before{content:"";position:absolute;top:1.6875rem;left:6%;right:6%;height:0.125rem;
+  background:repeating-linear-gradient(90deg,var(--color-border) 0 0.5rem,transparent 0.5rem 1rem)}
 .step{position:relative;padding-top:.4rem}
-.step-number{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;position:relative;z-index:1;
+.step-number{width:3.375rem;height:3.375rem;border-radius:50%;display:grid;place-items:center;position:relative;z-index:1;
   background:var(--color-surface);border:2px solid var(--color-gold);color:var(--color-heading);
   font-family:var(--font-heading);font-weight:700;font-size:1.05rem;margin-bottom:1.1rem;transition:all .3s}
 .step:hover .step-number{background:var(--color-gold);color:#172033;transform:scale(1.08)}
@@ -212,10 +212,10 @@
 .feature-list{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}
 .feature-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--card-radius);padding:1.7rem 1.5rem;
   box-shadow:var(--shadow-small);transition:transform .3s,border-color .3s}
-.feature-card:hover{transform:translateY(-6px);border-color:var(--color-gold)}
-.feature-icon{width:48px;height:48px;border-radius:14px;background:var(--color-accent-soft);display:grid;
+.feature-card:hover{transform:translateY(-0.375rem);border-color:var(--color-gold)}
+.feature-icon{width:3rem;height:3rem;border-radius:0.875rem;background:var(--color-accent-soft);display:grid;
   place-items:center;margin-bottom:1.1rem}
-.feature-icon svg{width:22px;height:22px;stroke:var(--color-accent);fill:none;stroke-width:1.8;
+.feature-icon svg{width:1.375rem;height:1.375rem;stroke:var(--color-accent);fill:none;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
 .feature-card h3{font-size:1.08rem;margin-bottom:.5rem}
 .feature-card p{font-size:.87rem;color:var(--color-muted)}
@@ -225,11 +225,11 @@
 .visit-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
 .visit-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--card-radius);padding:1.5rem 1.4rem;
   box-shadow:var(--shadow-small);display:flex;flex-direction:column;gap:.3rem;transition:transform .3s,border-color .3s}
-a.visit-card:hover{transform:translateY(-5px);border-color:var(--color-gold)}
+a.visit-card:hover{transform:translateY(-0.3125rem);border-color:var(--color-gold)}
 .visit-label{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--color-accent)}
 .visit-value{font-family:var(--font-heading);font-size:1.12rem;font-weight:600;line-height:1.3;color:var(--color-heading)}
 .visit-detail{font-size:.8rem;color:var(--color-muted)}
-.map-wrapper{border-radius:var(--card-radius);overflow:hidden;border:1px solid var(--color-border);box-shadow:var(--shadow-small);min-height:380px}
-.map-wrapper iframe{width:100%;height:100%;min-height:380px;border:0;filter:saturate(.85)}
+.map-wrapper{border-radius:var(--card-radius);overflow:hidden;border:1px solid var(--color-border);box-shadow:var(--shadow-small);min-height:23.75rem}
+.map-wrapper iframe{width:100%;height:100%;min-height:23.75rem;border:0;filter:saturate(.85)}
 .visit-note{margin-top:1.4rem;color:var(--color-muted);font-size:.9rem;display:flex;gap:.5rem;align-items:center}
 .visit-note b{color:var(--color-gold)}

@@ -21,7 +21,7 @@
 @media (max-width:768px){
   #menu-button{display:flex}
   .modal-box{grid-template-columns:1fr;max-height:90vh}
-  .modal-media{min-height:280px}
+  .modal-media{min-height:17.5rem}
 }
 
 /* --- a phone --- */
@@ -30,8 +30,8 @@
   .product-grid,.visit-cards,.steps,.feature-list,.stats{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   .spec div{grid-template-columns:1fr;gap:.15rem}
-  .photo-prev{left:8px}
-  .photo-next{right:8px}
+  .photo-prev{left:0.5rem}
+  .photo-next{right:0.5rem}
 }
 
 /* --- when the operating system asks for less motion --- */
