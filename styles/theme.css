@@ -1,0 +1,23 @@
+/* =========================================================
+   THEME — the design tokens
+
+   A custom property is a CSS variable. You set a value here,
+   once, and use it anywhere on the page with var(--name).
+
+   Change the whole look of the site by editing this file only.
+   ========================================================= */
+:root{
+  /* colours */
+  --color-background:#F8F3E8; --color-surface:#FFFDF8; --color-surface-alt:#F2EDE3;
+  --color-ink:#172033; --color-heading:#123B68; --color-muted:#4D5667;
+  --color-border:#DED5C6;
+  --color-gold:#D2A62A; --color-gold-dark:#C39722; --color-gold-soft:#F2DF9E;
+  --color-accent:#945F2F; --color-accent-soft:rgba(210,166,42,.14);
+  /* depth */
+  --shadow:0 18px 44px -18px rgba(18,59,104,.25);
+  --shadow-small:0 8px 24px -12px rgba(18,59,104,.18);
+  /* shape */
+  --card-radius:22px; --header-height:64px;
+  /* type */
+  --font-heading:"Fraunces",Georgia,serif; --font-body:"DM Sans",Arial,sans-serif;
+}
