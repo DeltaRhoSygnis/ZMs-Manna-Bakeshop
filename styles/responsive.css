@@ -1,0 +1,43 @@
+/* =========================================================
+   RESPONSIVE — how the page changes on smaller screens
+
+   There are three breakpoints: 1024px, 768px and 560px.
+   Above 1024px the layout is fluid, so no rule is needed.
+
+   Everything in this file is an override of a rule that
+   lives in base.css, components.css or sections.css.
+   ========================================================= */
+
+/* --- a tablet or a small laptop --- */
+@media (max-width:1024px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .steps,.feature-list{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .steps::before{display:none}
+  .story-grid,.visit-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+
+/* --- a phone in landscape, or a small tablet --- */
+@media (max-width:768px){
+  #menu-button{display:flex}
+  .modal-box{grid-template-columns:1fr;max-height:90vh}
+  .modal-media{min-height:280px}
+}
+
+/* --- a phone --- */
+@media (max-width:560px){
+  .section{padding:clamp(2.5rem,6vw,3.5rem) 0}
+  .product-grid,.visit-cards,.steps,.feature-list,.stats{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .spec div{grid-template-columns:1fr;gap:.15rem}
+  .photo-prev{left:8px}
+  .photo-next{right:8px}
+}
+
+/* --- when the operating system asks for less motion --- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .js [data-reveal]{opacity:1;transform:none}
+  .ticker-track{animation:none}
+}
