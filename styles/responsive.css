@@ -1,7 +1,8 @@
 /* =========================================================
    RESPONSIVE — how the page changes on smaller screens
 
-   There are three breakpoints: 1024px, 768px and 560px.
+   Three width breakpoints: 1024px, 768px and 560px, plus one
+   height breakpoint at 600px for the popup on short windows.
    Above 1024px the layout is fluid, so no rule is needed.
 
    Everything in this file is an override of a rule that
@@ -11,6 +12,7 @@
    1024px   two-column galleries, stacked story and visit
    768px    the popup stacks, the menu button stays
    560px    everything in one column
+   600px    the popup photo shrinks on a short window
    Motion   the whole page calms down when the OS asks it to
    ========================================================= */
 
@@ -38,6 +40,14 @@
   .spec div{grid-template-columns:1fr;gap:.15rem}
   .photo-prev{left:0.5rem}
   .photo-next{right:0.5rem}
+}
+
+/* --- a short window ---
+   The popup is 90vh tall. On a window that is not very tall,
+   the photo would take up most of it and the details would be
+   pushed below the fold, so the photo shrinks to make room. */
+@media (max-height:600px){
+  .modal-media{min-height:9rem}
 }
 
 /* --- when the operating system asks for less motion --- */

@@ -14,7 +14,7 @@ to install. Three things do all the work.
 | File | What it does | How big |
 | --- | --- | --- |
 | `index.html` | The whole page. Every section, the popup and the photo viewer. | one long file |
-| `styles/` | Five stylesheets that decide how it looks. | 586 lines total |
+| `styles/` | Five stylesheets that decide how it looks. | 596 lines total |
 | `app.js` | The behaviour: the product cards, the popup, the menu, the scroll effects. | 612 lines |
 
 ### Opening it
@@ -461,7 +461,8 @@ custom property in `styles/theme.css`. Re-theming the site means editing that
 file and nothing else.
 
 **The layout is fluid.** `clamp()` and `min()` do the work, so there are only
-three breakpoints and none of them above 1024px. No phone-specific patches.
+three width breakpoints and none of them above 1024px, plus one height
+breakpoint for the popup on short windows. No phone-specific patches.
 
 **Sizes use `rem`, so the design scales with the visitor's font size.**
 One rule, stated in a sentence, applied everywhere.
