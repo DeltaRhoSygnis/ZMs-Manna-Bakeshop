@@ -20,7 +20,7 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 | `base.css` | 66 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
 | `components.css` | 195 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
 | `sections.css` | 244 | 87 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
-| `responsive.css` | 59 | 27 | Every breakpoint, plus reduced motion. |
+| `responsive.css` | 61 | 29 | Every breakpoint, plus reduced motion. |
 
 ### 1.2 Load order
 
@@ -272,7 +272,7 @@ Every selector in `styles/`, grouped by file.
 - `@media (max-width:768px)` — `#menu-button`, `.modal-box`, `.modal-media`
 - `@media (max-width:560px)` — `.section`, `.product-grid`, `.visit-cards`,
   `.steps`, `.feature-list`, `.stats`, `.footer-grid`, `.spec div`,
-  `.photo-prev`, `.photo-next`
+  `.photo-prev`, `.photo-next`, `.modal-info`, `.modal-close`
 - `@media (max-height:600px)` — `.modal-media`
 - `@media (prefers-reduced-motion:reduce)` — `html`, `*`, `*::before`,
   `*::after`, `.js [data-reveal]`, `.ticker-track`
@@ -289,7 +289,7 @@ the popup. Above 1024px the layout is fluid, so no rule is needed.
 | **1024px** | `.product-grid` → 2 columns. `.steps`, `.feature-list` → 2 columns and the dashed rail is hidden. `.story-grid`, `.visit-grid` → 1 column. `.footer-grid` → 2 columns. |
 | **768px** | `#menu-button` stays visible. `.modal-box` → 1 column, 90vh max. `.modal-media` → `17.5rem` min-height. |
 | **600px tall** | `.modal-media` → `9rem` min-height, so the popup's photo does not push the details below the fold on a short window. |
-| **560px** | `.section` padding tightens. `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to `0.5rem` from the edges. |
+| **560px** | `.section` padding tightens. `.modal-info` padding drops to `1.5rem 1.4rem 1.6rem`, so the popup's text is not squeezed. `.modal-close` moves to `0.625rem` from the corner. | `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to `0.5rem` from the edges. |
 
 The banner has its own local breakpoints in `sections.css`: at 1024px it
 stacks into one column with a 16:9 photo; at 768px and 560px its type scale
