@@ -57,7 +57,7 @@ const SITE_CONFIG = {
   // TODO: replace this with the real Facebook page URL
   facebook: "https://www.facebook.com/search/top?q=Zm%27s%20Manna%20Bakeshop",
   // the photo shown in the banner at the top of the page
-  bannerImg: "assets/Patatas.webp"
+  bannerImg: "assets/ad.webp"
 };
 
 /* The six products. Each one becomes a card on the page. */

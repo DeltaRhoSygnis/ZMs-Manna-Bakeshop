@@ -78,7 +78,7 @@ elements straight away — there is no `DOMContentLoaded` wrapper.
 | Key | Value | Notes |
 | --- | --- | --- |
 | `facebook` | a Facebook **search** URL | **Placeholder.** Replace with the real page URL. Every `[data-fb]` link gets this href. |
-| `bannerImg` | `assets/Patatas.webp` | The photo in the banner |
+| `bannerImg` | `assets/ad.webp` | The photo in the banner — the whole range on a wooden table |
 
 ### `PRODUCTS`
 
