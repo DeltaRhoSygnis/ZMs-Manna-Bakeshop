@@ -14,7 +14,7 @@ to install. Three things do all the work.
 | File | What it does | How big |
 | --- | --- | --- |
 | `index.html` | The whole page. Every section, the popup and the photo viewer. | one long file |
-| `styles/` | Five stylesheets that decide how it looks. | 602 lines total |
+| `styles/` | Five stylesheets that decide how it looks. | 625 lines total |
 | `app.js` | The behaviour: the product cards, the popup, the menu, the scroll effects. | 612 lines |
 
 ### Opening it

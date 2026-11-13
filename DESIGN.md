@@ -13,12 +13,12 @@ talking.
 
 | Path | Role |
 | --- | --- |
-| `index.html` | The page. Sections in order: header, banner, ticker, story, products, craft, freshness, visit, footer, product popup, photo viewer. |
+| `index.html` | The page. Sections in order: header, banner, ticker, story, products, craft (with packaging), order, visit, footer, product popup, photo viewer. |
 | `app.js` | Product data, the gallery render, the popup, the photo viewer, the menu, scroll reveal, counters, scroll progress. |
 | `styles/theme.css` | The design tokens — every colour, font, radius and shadow. |
 | `styles/base.css` | The reset, typography, layout primitives, the reveal system. |
 | `styles/components.css` | The reusable parts: labels, buttons, the tag, fallback letters, header, menu, popup, photo viewer, footer. |
-| `styles/sections.css` | The seven page sections: banner, ticker, story, products, craft, freshness, visit. |
+| `styles/sections.css` | The seven page sections: banner, ticker, story, products, craft (with packaging), order, visit. |
 | `styles/responsive.css` | Breakpoints at 1024 / 768 / 560, and reduced motion. |
 | `assets/` | Product photos, the banner crops, the marketing graphics, the logo, favicons. |
 | `reference/hero.html` | The banner as a standalone fragment, for reuse. *Local only.* |
@@ -75,8 +75,9 @@ story copy, `46ch` inside the banner panel).
 ├──────────────────────────────────────────────┤
 │  story copy            │ 2×2 stat cards      │
 │  6 products, 3 columns │ popup on click      │
-│  4 craft steps on a dashed rail              │
-│  4 freshness cards                           │
+│  the bake poster + 4 craft steps on a rail    │
+│  4 packaging cards                            │
+│  order: the wholesale graphic + a call button│
 │  visit cards 2×2       │ embedded map        │
 │  footer: brand · Explore · Visit             │
 └──────────────────────────────────────────────┘

@@ -220,6 +220,29 @@
 .step h3{font-size:1.15rem;margin-bottom:.5rem}
 .step p{font-size:.88rem;color:var(--color-muted)}
 
+/* ============ THE CRAFT — the bake, and how it is packed ============ */
+/* The bakehouse poster, above the four steps. It brings its own frame,
+   so it needs a radius and a shadow but no border of its own. */
+.bake-poster{margin:0 0 clamp(2rem,4vw,3rem);border-radius:var(--card-radius);overflow:hidden;
+  box-shadow:var(--shadow);aspect-ratio:16/9}
+.bake-poster img{width:100%;height:100%;object-fit:cover;display:block}
+/* The packaging half of the same section. */
+.craft-packing{margin-top:clamp(3rem,6vw,5rem)}
+
+/* ============ THE ORDER — wholesale and retail ============ */
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem);align-items:center}
+.order-photo{position:relative;border-radius:var(--card-radius);overflow:hidden;
+  border:1px solid var(--color-border);box-shadow:var(--shadow);aspect-ratio:16/9}
+.order-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.order-copy{display:flex;flex-direction:column;gap:.2rem}
+.order-copy h2{font-size:clamp(1.6rem,3.6vw,2.6rem);margin:.7rem 0 1rem}
+.order-copy p{color:var(--color-muted);margin-bottom:1.4rem;max-width:46ch}
+.order-list{list-style:none;margin:0 0 1.8rem;display:flex;flex-direction:column;gap:.7rem}
+.order-list li{display:flex;gap:.65rem;align-items:flex-start;font-size:.95rem;line-height:1.5;color:var(--color-ink)}
+.order-list li::before{content:"✦";color:var(--color-gold);flex:none;font-size:.8rem;line-height:1.9}
+.order-list b{color:var(--color-heading)}
+.order-cta{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center}
+
 /* ============ THE FRESHNESS — how the bakes are packed ============ */
 #freshness{background:var(--color-surface-alt);border-block:1px solid var(--color-border)}
 .feature-list{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem}

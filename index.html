@@ -8,7 +8,7 @@
 <meta property="og:title" content="Zm’s Manna Bakeshop">
 <meta property="og:description" content="Small-batch biscuits, breads & pasalubong from Valencia City, Bukidnon. Love at first bite.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://zms-manna.vercel.app/assets/banner.webp">
+<meta property="og:image" content="https://zms-manna.vercel.app/assets/wholesale.webp">
 <meta name="theme-color" content="#F8F3E8">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
@@ -52,7 +52,8 @@
     <a href="#story">Our Story <i>03</i></a>
     <a href="#craft">Our Craft <i>04</i></a>
     <a href="#freshness">Freshness <i>05</i></a>
-    <a href="#visit">Visit Us <i>06</i></a>
+    <a href="#order">Order <i>06</i></a>
+    <a href="#visit">Visit Us <i>07</i></a>
   </nav>
   <div class="menu-footer">
     <p class="menu-footer-text">P-2 Lumbo, Valencia City, Bukidnon · Mon–Sat, 7AM–6PM</p>
@@ -68,7 +69,7 @@
     <picture>
       <!-- The wide lifestyle shot is 16:9, which is exactly the shape of
            the banner photo when it sits above the panel. -->
-      <source media="(max-width:1024px)" srcset="assets/ad.webp">
+      <source media="(max-width:1024px)" srcset="assets/banner-counter.webp">
       <!-- Side by side, the photo cell is nearly square, so it uses a square
            crop of the shop counter instead. -->
       <img src="assets/banner-shop.webp" alt="Biscocho, cookies, toasted mammon and patatas arranged on a wooden counter" width="686" height="686" fetchpriority="high" decoding="async">
@@ -152,7 +153,7 @@
   </div>
 </section>
 
-<!-- ============ THE CRAFT — the four steps of the bake
+<!-- ============ THE CRAFT — how we bake, and how it is packed
      Styled by styles/sections.css ============ -->
 <section class="section" id="craft">
   <div class="container">
@@ -161,40 +162,74 @@
       <h2 data-reveal data-delay="80">From dough to sealed pouch</h2>
       <p class="section-subtitle" data-reveal data-delay="160">Four steps, no shortcuts — the same routine every baking day.</p>
     </div>
+
+    <div class="bake-poster" data-reveal>
+      <img src="assets/how-we-bake.webp" alt="Zm's Manna Bakeshop — fresh from our bakehouse, special reseller and pasalubong updates" width="1376" height="768" loading="lazy" decoding="async">
+    </div>
+
     <div class="steps">
       <div class="step" data-reveal><span class="step-number">01</span><h3>Mix &amp; shape</h3><p>Time-tested recipes mixed and shaped by hand in small batches — never mass-produced.</p></div>
       <div class="step" data-reveal data-delay="100"><span class="step-number">02</span><h3>Bake low &amp; slow</h3><p>Even, golden bakes that build flavor and set the crumb before toasting.</p></div>
       <div class="step" data-reveal data-delay="200"><span class="step-number">03</span><h3>Toast for crunch</h3><p>Biscocho and mammon go back in the oven — twice-baked for that signature crisp.</p></div>
       <div class="step" data-reveal data-delay="300"><span class="step-number">04</span><h3>Cool &amp; seal</h3><p>Fully cooled, then heat-sealed in labeled 100g pouches the same day.</p></div>
     </div>
+
+    <!-- the packaging half of the same section -->
+    <div class="craft-packing" id="freshness">
+      <div class="section-header">
+        <span class="section-label" data-reveal>Freshness &amp; packaging</span>
+        <h2 data-reveal data-delay="80">Made to stay crisp</h2>
+        <p class="section-subtitle" data-reveal data-delay="160">How every pouch protects the bake — from our oven to your pantry.</p>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature-card" data-reveal>
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>Heat-sealed pouches</h3><p>Clear, moisture-proof packs keep biscuits crisp through transport and shelf time.</p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="90">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5M8 17h8"/></svg></span>
+          <h3>Honest labels</h3><p>DTI registration, nutrition details, and a scannable barcode printed on every unit.</p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="180">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M6 20h12M8 20V9a4 4 0 0 1 8 0v11"/><path d="M8 13h8"/></svg></span>
+          <h3>Uniform 100g packs</h3><p>The same convenient size across the biscuit lines — easy to grab, easy to share.</p>
+        </div>
+        <div class="feature-card" data-reveal data-delay="270">
+          <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
+          <h3>Shelf-stable crunch</h3><p>Store cool and dry, reseal after opening, and the crunch holds for weeks.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ============ THE FRESHNESS — how the bakes are packed
+<!-- ============ THE ORDER — wholesale and retail
      Styled by styles/sections.css ============ -->
-<section class="section" id="freshness">
+<section class="section" id="order">
   <div class="container">
-    <div class="section-header">
-      <span class="section-label" data-reveal>Freshness &amp; packaging</span>
-      <h2 data-reveal data-delay="80">Made to stay crisp</h2>
-      <p class="section-subtitle" data-reveal data-delay="160">How every pouch protects the bake — from our oven to your pantry.</p>
-    </div>
-    <div class="feature-list">
-      <div class="feature-card" data-reveal>
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <h3>Heat-sealed pouches</h3><p>Clear, moisture-proof packs keep biscuits crisp through transport and shelf time.</p>
+    <div class="order-grid">
+      <div class="order-photo" data-reveal>
+        <img src="assets/wholesale.webp" alt="Zm's Manna bakeshop — authentic Bukidnon baked delights, direct from Valencia City" width="1376" height="768" loading="lazy" decoding="async">
       </div>
-      <div class="feature-card" data-reveal data-delay="90">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5M8 17h8"/></svg></span>
-        <h3>Honest labels</h3><p>DTI registration, nutrition details, and a scannable barcode printed on every unit.</p>
-      </div>
-      <div class="feature-card" data-reveal data-delay="180">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M6 20h12M8 20V9a4 4 0 0 1 8 0v11"/><path d="M8 13h8"/></svg></span>
-        <h3>Uniform 100g packs</h3><p>The same convenient size across the biscuit lines — easy to grab, easy to share.</p>
-      </div>
-      <div class="feature-card" data-reveal data-delay="270">
-        <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
-        <h3>Shelf-stable crunch</h3><p>Store cool and dry, reseal after opening, and the crunch holds for weeks.</p>
+      <div class="order-copy">
+        <span class="section-label" data-reveal>Order from us</span>
+        <h2 data-reveal data-delay="80">Wholesale & retail, baked fresh each day</h2>
+        <p data-reveal data-delay="160">
+          We supply sealed 100&nbsp;g pouches of biscocho, cookies, toasted mammon and
+          hopia to partner counters, shops and merienda tables across Valencia City
+          and the rest of Bukidnon. Every pouch is labelled, barcoded and ready to
+          resell.
+        </p>
+        <ul class="order-list" data-reveal data-delay="240">
+          <li><span><b>Pasalubong and reseller supply</b> — by the carton or by the dozen.</span></li>
+          <li><span><b>Retail and merienda orders</b> — single pouches, ready to pick up.</span></li>
+          <li><span><b>Baked the same day</b> — DTI-registered labels on every unit.</span></li>
+        </ul>
+        <div class="order-cta" data-reveal data-delay="320">
+          <a class="btn btn-primary" href="tel:+639261774601">Call 0926-177-4601 <span class="btn-arrow">→</span></a>
+          <a class="btn btn-secondary" href="#visit">Find the bakehouse</a>
+        </div>
       </div>
     </div>
   </div>
@@ -260,6 +295,7 @@
         <a href="#story">Our Story</a>
         <a href="#craft">Our Craft</a>
         <a href="#freshness">Freshness</a>
+        <a href="#order">Order</a>
       </div>
       <div class="footer-column">
         <h3>Visit</h3>

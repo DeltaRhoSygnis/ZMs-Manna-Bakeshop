@@ -19,8 +19,8 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 | `theme.css` | 32 | 1 | Every custom property. Nothing else. |
 | `base.css` | 66 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
 | `components.css` | 195 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
-| `sections.css` | 248 | 88 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
-| `responsive.css` | 61 | 29 | Every breakpoint, plus reduced motion. |
+| `sections.css` | 271 | 102 | This particular page: banner, ticker, story, products, craft (with packaging), order, visit. |
+| `responsive.css` | 61 | 30 | Every breakpoint, plus reduced motion. |
 
 ### 1.2 Load order
 
@@ -248,12 +248,17 @@ Every selector in `styles/`, grouped by file.
 `.product-grid .product-card.is-logo`,
 `.product-grid .product-card.is-logo .product-caption`
 
-**The craft** — `.steps`, `.steps::before`, `.step`, `.step-number`,
-`.step:hover .step-number`, `.step h3`, `.step p`
+**The craft** — `.bake-poster`, `.bake-poster img`, `.steps`, `.steps::before`,
+`.step`, `.step-number`, `.step:hover .step-number`, `.step h3`, `.step p`,
+`.craft-packing`
 
-**The freshness** — `#freshness`, `.feature-list`, `.feature-card`,
-`.feature-card:hover`, `.feature-icon`, `.feature-icon svg`,
+**The freshness** (inside the craft section) — `#freshness`, `.feature-list`,
+`.feature-card`, `.feature-card:hover`, `.feature-icon`, `.feature-icon svg`,
 `.feature-card h3`, `.feature-card p`
+
+**The order** — `.order-grid`, `.order-photo`, `.order-photo img`, `.order-copy`,
+`.order-copy h2`, `.order-copy p`, `.order-list`, `.order-list li`,
+`.order-list li::before`, `.order-list b`, `.order-cta`
 
 **The visit** — `.visit-grid`, `.visit-cards`, `.visit-card`,
 `a.visit-card:hover`, `.visit-label`, `.visit-value`, `.visit-detail`,
@@ -286,7 +291,7 @@ the popup. Above 1024px the layout is fluid, so no rule is needed.
 
 | Width | What changes |
 | --- | --- |
-| **1024px** | `.product-grid` → 2 columns. `.steps`, `.feature-list` → 2 columns and the dashed rail is hidden. `.story-grid`, `.visit-grid` → 1 column. `.footer-grid` → 2 columns. |
+| **1024px** | `.product-grid` → 2 columns. `.steps`, `.feature-list` → 2 columns and the dashed rail is hidden. `.story-grid`, `.visit-grid`, `.order-grid` → 1 column. `.footer-grid` → 2 columns. |
 | **768px** | `#menu-button` stays visible. `.modal-box` → 1 column, 90vh max. `.modal-media` → `17.5rem` min-height. |
 | **600px tall** | `.modal-media` → `9rem` min-height, so the popup's photo does not push the details below the fold on a short window. |
 | **560px** | `.section` padding tightens. `.modal-info` padding drops to `1.5rem 1.4rem 1.6rem`, so the popup's text is not squeezed. `.modal-close` moves to `0.625rem` from the corner. | `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to `0.5rem` from the edges. |
