@@ -14,7 +14,7 @@ to install. Three things do all the work.
 | File | What it does | How big |
 | --- | --- | --- |
 | `index.html` | The whole page. Every section, the popup and the photo viewer. | one long file |
-| `styles/` | Five stylesheets that decide how it looks. | 598 lines total |
+| `styles/` | Five stylesheets that decide how it looks. | 602 lines total |
 | `app.js` | The behaviour: the product cards, the popup, the menu, the scroll effects. | 612 lines |
 
 ### Opening it
@@ -497,6 +497,7 @@ what it changes on screen.
 | Edit a product | `app.js` — the `PRODUCTS` array |
 | Edit the photo viewer photos | `app.js` — the `PHOTOS` array |
 | Change the Facebook link | `app.js` — `SITE_CONFIG.facebook` |
+| Change the banner photo | `index.html` — the `<picture>` inside `.banner-image` |
 | Change the hours or address | `index.html` — the visit section **and** the footer; keep them in sync |
 | Add a section | New file in `styles/`, a `<link>` in `index.html`, and the markup in `index.html` |
 | Change where the page breaks | `styles/responsive.css` |

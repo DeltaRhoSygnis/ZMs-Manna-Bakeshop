@@ -41,6 +41,10 @@
   background:linear-gradient(150deg,#D9A05B,#8C4A1F);
   overflow:hidden;
 }
+/* The <picture> element holds the banner photo. display:contents makes it
+   invisible to the layout, so the image inside is still measured against
+   .banner-image and nothing shifts. */
+.banner-image picture{display:contents}
 .banner-image img{
   position:absolute;
   inset:0;

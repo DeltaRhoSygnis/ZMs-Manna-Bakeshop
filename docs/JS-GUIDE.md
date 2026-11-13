@@ -10,7 +10,7 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 
 ## 1. Shape of the file
 
-Plain JavaScript. No framework, no library, no build step. One file, 612
+Plain JavaScript. No framework, no library, no build step. One file, 609
 lines, read from the top.
 
 ```
@@ -78,7 +78,6 @@ elements straight away — there is no `DOMContentLoaded` wrapper.
 | Key | Value | Notes |
 | --- | --- | --- |
 | `facebook` | a Facebook **search** URL | **Placeholder.** Replace with the real page URL. Every `[data-fb]` link gets this href. |
-| `bannerImg` | `assets/ad.webp` | The photo in the banner — the whole range on a wooden table |
 
 ### `PRODUCTS`
 
@@ -155,8 +154,12 @@ failed before the listener was attached, so the function also checks
 
 ### `applySiteSettings()`
 
-Sets the banner photo from `SITE_CONFIG.bannerImg`, writes the Facebook URL
-into every `[data-fb]` link, and stamps the year into `#year`.
+Writes the Facebook URL into every `[data-fb]` link and stamps the year into
+`#year`.
+
+The banner photo is *not* set here. It lives in a `<picture>` element in
+`index.html`, which picks the right image for the screen size — and a
+JavaScript assignment to `img.src` would not override that anyway.
 
 ### `setupScrollReveal()`
 

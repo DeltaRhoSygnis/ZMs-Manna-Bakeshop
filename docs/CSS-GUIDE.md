@@ -19,7 +19,7 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 | `theme.css` | 32 | 1 | Every custom property. Nothing else. |
 | `base.css` | 66 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
 | `components.css` | 195 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
-| `sections.css` | 244 | 87 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
+| `sections.css` | 248 | 88 | This particular page: banner, ticker, story, products, craft, freshness, visit. |
 | `responsive.css` | 61 | 29 | Every breakpoint, plus reduced motion. |
 
 ### 1.2 Load order
@@ -223,7 +223,7 @@ Every selector in `styles/`, grouped by file.
 
 ### sections.css
 
-**The banner** — `.banner`, `.banner-image`, `.banner-image img`,
+**The banner** — `.banner`, `.banner-image`, `.banner-image picture`, `.banner-image img`,
 `.banner-image .fallback-text`, `.banner-caption`, `.banner-text`,
 `.banner-logo img`, `.banner-copy`, `.banner-text .section-label`,
 `.banner-text .section-label::before`, `.banner-title`, `.banner-tagline`,
