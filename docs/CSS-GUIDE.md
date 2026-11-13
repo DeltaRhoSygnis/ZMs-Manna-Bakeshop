@@ -19,7 +19,7 @@ Related: [`BEGINNER-GUIDE.md`](./BEGINNER-GUIDE.md) ·
 | `theme.css` | 32 | 1 | Every custom property. Nothing else. |
 | `base.css` | 66 | 24 | The reset, typography, layout primitives, page overlays, the reveal system. |
 | `components.css` | 195 | 96 | The parts used more than once: labels, buttons, the tag, fallback text, the header, the menu, the popup, the photo viewer, the footer. |
-| `sections.css` | 271 | 102 | This particular page: banner, ticker, story, products, craft (with packaging), order, visit. |
+| `sections.css` | 278 | 103 | This particular page: banner, ticker, story, products, craft (with packaging), order, visit. |
 | `responsive.css` | 61 | 30 | Every breakpoint, plus reduced motion. |
 
 ### 1.2 Load order
@@ -191,8 +191,12 @@ Every selector in `styles/`, grouped by file.
 **Fallback text** — `.fallback-text`, `.image-missing img`,
 `.image-missing .fallback-text`
 
-**The header** — `#navbar`, `#navbar.is-hidden`, `#navbar > *`, `.brand`,
-`.brand-logo`, `.brand-logo img`, `.brand-name`, `.brand small`,
+**The header** — `#navbar`, `#navbar.is-hidden`, `#navbar > *`, `#menu-button`,
+`#menu-button:hover`, `.menu-button-text`, `.menu-icon`, `.menu-icon span`,
+`#menu-button.is-active .menu-icon span:nth-child(1|2|3)`.
+
+The brand mark is not in the header — it is part of the banner photo, and
+the photo is the link home. `.brand` and its parts are used by the footer.
 `#menu-button`, `#menu-button:hover`, `.menu-button-text`, `.menu-icon`,
 `.menu-icon span`, `#menu-button.is-active .menu-icon span:nth-child(1|2|3)`
 
@@ -223,7 +227,8 @@ Every selector in `styles/`, grouped by file.
 
 ### sections.css
 
-**The banner** — `.banner`, `.banner-image`, `.banner-image picture`, `.banner-image img`,
+**The banner** — `.banner`, `.banner-image`, `.banner-image picture`,
+`.banner-image img`,
 `.banner-image .fallback-text`, `.banner-caption`, `.banner-text`,
 `.banner-logo img`, `.banner-copy`, `.banner-text .section-label`,
 `.banner-text .section-label::before`, `.banner-title`, `.banner-tagline`,
@@ -296,9 +301,11 @@ the popup. Above 1024px the layout is fluid, so no rule is needed.
 | **600px tall** | `.modal-media` → `9rem` min-height, so the popup's photo does not push the details below the fold on a short window. |
 | **560px** | `.section` padding tightens. `.modal-info` padding drops to `1.5rem 1.4rem 1.6rem`, so the popup's text is not squeezed. `.modal-close` moves to `0.625rem` from the corner. | `.product-grid`, `.visit-cards`, `.steps`, `.feature-list`, `.stats` → 1 column. `.footer-grid` → 1 column. `.spec div` stacks the label above the value. `.photo-prev` / `.photo-next` move to `0.5rem` from the edges. |
 
-The banner has its own local breakpoints in `sections.css`: at 1024px it
-stacks into one column with a 16:9 photo; at 768px and 560px its type scale
-and padding shrink.
+The banner has its own local breakpoints in `sections.css`: at 1025px and up the
+card breaks out of the container and starts at the very top of the page, so
+there is no empty strip above it and the floating brand pill lands on the
+photo; at 1024px it stacks into one column with a 16:9 photo; at 768px and
+560px its type scale and padding shrink.
 
 **No breakpoint above 1024px.** Above that, `clamp()`, `min()` and `fr` do the
 work.

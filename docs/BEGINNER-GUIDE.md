@@ -14,7 +14,7 @@ to install. Three things do all the work.
 | File | What it does | How big |
 | --- | --- | --- |
 | `index.html` | The whole page. Every section, the popup and the photo viewer. | one long file |
-| `styles/` | Five stylesheets that decide how it looks. | 625 lines total |
+| `styles/` | Five stylesheets that decide how it looks. | 632 lines total |
 | `app.js` | The behaviour: the product cards, the popup, the menu, the scroll effects. | 612 lines |
 
 ### Opening it
@@ -153,8 +153,8 @@ Breakpoints are device widths, not font sizes. They stay in `px`.
 | `min()` | The smaller of two values | `width:min(73.75rem,92%)` |
 | `max()` | The larger of two values | `max-width:100%` on the photo frame |
 | `var(--name)` | Reads a custom property | `color:var(--color-ink)` |
-| `color-mix()` | Mixes two colours | The frosted brand pill |
-| `backdrop-filter: blur()` | Blurs what is behind an element | The brand pill, the popup scrim |
+| `color-mix()` | Mixes two colours | The frosted footer brand pill |
+| `backdrop-filter: blur()` | Blurs what is behind an element | The footer brand pill, the popup scrim |
 | `aspect-ratio` | Forces a shape without padding tricks | `aspect-ratio:4/3` on the cards |
 | `inset` | Sets top, right, bottom and left at once | `inset:0` to stretch an image over its box |
 | `gap` | Space between grid or flex children | `gap:1.4rem` |
