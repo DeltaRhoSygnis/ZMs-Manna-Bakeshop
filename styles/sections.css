@@ -136,6 +136,13 @@
 }
 .banner-details p{font-size:.8rem;color:rgba(248,243,232,.86);line-height:1.45}
 
+/* On a wide screen the banner breaks out of the container and fills the top
+   of the page: no empty strip above it, and the floating brand pill in the
+   header lands on the photo instead of straddling the card edge. */
+@media (min-width:1025px){
+  .banner{width:min(110rem,calc(100% - 2.5rem));margin-top:0}
+}
+
 /* --- the banner on smaller screens --- */
 @media (max-width:1024px){
   .banner{

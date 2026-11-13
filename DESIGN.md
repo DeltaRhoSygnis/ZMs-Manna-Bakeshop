@@ -59,7 +59,7 @@ story copy, `46ch` inside the banner panel).
 
 ```
 ┌──────────────────────────────────────────────┐
-│ (brand pill)                      (Menu)     │  floating, no bar
+│ (brand pill)                      (Menu)     │  floating over the banner
 ├──────────────────────────────────────────────┤
 │ ┌───────────────┬──────────────────────────┐ │
 │ │               │ logo                     │ │
@@ -101,7 +101,8 @@ browser default, so the whole design scales with the visitor's font size.
 - Counters run once at 60% visibility, 1.4s cubic ease-out; reduced motion
   jumps straight to the final number.
 - The ticker pauses on hover and stops entirely under reduced motion.
-- The header slides away while you scroll down and returns when you scroll
+- The header holds the brand pill and the menu button, and floats over the
+  banner; it slides away while you scroll down and returns when you scroll
   up. The progress bar at the top fills as you go.
 - Product card → popup (`aria-modal`, focus moves to the close button, Tab is
   trapped, Escape closes, focus returns to the card).
