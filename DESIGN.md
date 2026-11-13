@@ -20,7 +20,7 @@ talking.
 | `styles/components.css` | The reusable parts: labels, buttons, the tag, fallback letters, header, menu, popup, photo viewer, footer. |
 | `styles/sections.css` | The seven page sections: banner, ticker, story, products, craft, freshness, visit. |
 | `styles/responsive.css` | Breakpoints at 1024 / 768 / 560, and reduced motion. |
-| `assets/` | Product photos, logo, favicons. |
+| `assets/` | Product photos, the banner crops, the marketing graphics, the logo, favicons. |
 | `reference/hero.html` | The banner as a standalone fragment, for reuse. *Local only.* |
 | `docs/` | [Beginner's guide](docs/BEGINNER-GUIDE.md), [CSS guide](docs/CSS-GUIDE.md), [JS guide](docs/JS-GUIDE.md), [JS↔CSS bridge](docs/JS-CSS-BRIDGE.md). |
 | `archive/legacy-2026-11-12/` | The previous design. Not referenced. *Local only.* |

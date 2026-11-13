@@ -55,9 +55,7 @@ const userHasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").mat
 /* The few site-wide settings. */
 const SITE_CONFIG = {
   // TODO: replace this with the real Facebook page URL
-  facebook: "https://www.facebook.com/search/top?q=Zm%27s%20Manna%20Bakeshop",
-  // the photo shown in the banner at the top of the page
-  bannerImg: "assets/ad.webp"
+  facebook: "https://www.facebook.com/search/top?q=Zm%27s%20Manna%20Bakeshop"
 };
 
 /* The six products. Each one becomes a card on the page. */
@@ -164,11 +162,10 @@ function handleBrokenImage(image) {
    A few small things that come from SITE_CONFIG.
    ========================================================= */
 
-/* Sets the banner photo, the Facebook links and the year. */
+/* Sets the Facebook links and the year.
+   The banner photo is not set here: it lives in a <picture> element in
+   index.html, which picks the right image for the screen size. */
 function applySiteSettings() {
-  const bannerImage = findElement(".banner-image img");
-  if (bannerImage) bannerImage.src = SITE_CONFIG.bannerImg;
-
   for (const link of findElements("[data-fb]")) {
     link.href = SITE_CONFIG.facebook;
   }

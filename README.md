@@ -38,7 +38,7 @@ such as the progress bar's width.) See
 | `index.html` | The whole page. Sections in order: header, banner, ticker, story, products, craft, freshness, visit, footer, product popup, photo viewer. |
 | `app.js` | All behaviour, as plain functions: product data, rendering, popup, photo viewer, menu, scroll reveal, counters, progress bar, back-to-top. |
 | `styles/` | Five stylesheets, loaded in order. See the table below. |
-| `assets/` | Product photos, logo, favicons. |
+| `assets/` | Product photos, the banner crops, the marketing graphics, the logo, favicons. |
 | `docs/` | Project documentation. |
 | `reference/hero.html` | The banner as a standalone fragment, for reuse in other pages. *Local only — not in version control.* |
 | `archive/legacy-2026-11-12/` | The previous design. Not referenced by anything. *Local only — not in version control.* |

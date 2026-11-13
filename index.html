@@ -65,7 +65,14 @@
 <section class="banner" id="home">
   <div class="banner-image">
     <span class="fallback-text">Zm</span>
-    <img src="assets/ad.webp" alt="Biscocho, cookies, toasted mammon and patatas on a wooden table with a cup of coffee" width="1376" height="768" fetchpriority="high" decoding="async">
+    <picture>
+      <!-- The wide lifestyle shot is 16:9, which is exactly the shape of
+           the banner photo when it sits above the panel. -->
+      <source media="(max-width:1024px)" srcset="assets/ad.webp">
+      <!-- Side by side, the photo cell is nearly square, so it uses a square
+           crop of the shop counter instead. -->
+      <img src="assets/banner-shop.webp" alt="Biscocho, cookies, toasted mammon and patatas arranged on a wooden counter" width="686" height="686" fetchpriority="high" decoding="async">
+    </picture>
     <span class="banner-caption">Fresh from the bakehouse · Valencia City</span>
   </div>
   <div class="banner-text">
