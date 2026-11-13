@@ -35,7 +35,7 @@ such as the progress bar's width.) See
 
 | File | What it does |
 | --- | --- |
-| `index.html` | The whole page. Sections in order: header, banner, ticker, story, products, craft, freshness, visit, footer, product popup, photo viewer. |
+| `index.html` | The whole page. Sections in order: header, banner, ticker, story, products, craft (with packaging), order, visit, footer, product popup, photo viewer. |
 | `app.js` | All behaviour, as plain functions: product data, rendering, popup, photo viewer, menu, scroll reveal, counters, progress bar, back-to-top. |
 | `styles/` | Five stylesheets, loaded in order. See the table below. |
 | `assets/` | Product photos, the banner crops, the marketing graphics, the logo, favicons. |
@@ -50,7 +50,7 @@ such as the progress bar's width.) See
 | `theme.css` | The design tokens — every colour, font, radius and shadow. Change the palette here. |
 | `base.css` | The reset, typography, `.container`, `.section`, the skip link, the noise overlay, the progress bar, the reveal system. |
 | `components.css` | The parts used more than once: labels, buttons, the tag, the fallback letters, the header, the menu, the product popup, the photo viewer, the footer. |
-| `sections.css` | This particular page: banner, ticker, story, products, craft, freshness, visit. |
+| `sections.css` | This particular page: banner, ticker, story, products, craft (with packaging), order, visit. |
 | `responsive.css` | The breakpoints (1024 / 768 / 560) and `prefers-reduced-motion`. |
 
 See [`docs/CSS-GUIDE.md`](docs/CSS-GUIDE.md) for the full selector index.
