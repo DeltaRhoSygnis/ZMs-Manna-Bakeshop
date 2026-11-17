@@ -174,20 +174,30 @@
     :root{--nav-h:4rem}
     .nav-phone{display:none}
     .brand b{font-size:1.0625rem}
-    .hero{align-items:flex-end}
+
+    /* the hero keeps its full composition on a phone: the photo still owns
+       the top two thirds, and nothing is dropped — only re-stacked */
+    .hero{min-height:calc(100svh - var(--nav-h));align-items:flex-end;background-position:center 34%}
     .hero::before{
-      background:linear-gradient(6deg,
-        rgba(8,31,55,.97) 0%,
-        rgba(8,31,55,.93) 38%,
-        rgba(8,31,55,.55) 66%,
-        rgba(8,31,55,.06) 100%);
+      background:linear-gradient(180deg,
+        rgba(8,31,55,0) 0%,
+        rgba(8,31,55,.04) 26%,
+        rgba(8,31,55,.55) 54%,
+        rgba(8,31,55,.93) 74%,
+        rgba(8,31,55,.97) 100%);
     }
-    .hero-inner{padding:1.5rem var(--pad) 2rem;max-width:100%}
-    .hero h1{font-size:clamp(2.125rem, 9.5vw, 2.875rem)}
-    .hero-rule{margin:.875rem 0}
-    .hero-lede{display:none}
+    .hero-inner{padding:1.25rem var(--pad) 2rem;max-width:100%}
+    .hero h1{font-size:clamp(2.375rem, 11vw, 3rem);white-space:nowrap}
+    .hero-rule{margin:.75rem 0 .875rem}
+    .hero-tagline{font-size:clamp(1.1875rem, 5.4vw, 1.5rem)}
+    .hero-lede{
+      display:block;margin-top:.875rem;
+      font-size:.84375rem;line-height:1.62;
+      color:rgba(251,247,238,.85);max-width:32rem;
+    }
     .hero-actions{margin-top:1.25rem;gap:.5rem}
     .btn{padding:.8125rem 1.25rem;font-size:.84375rem}
+
     .band{height:clamp(11rem, 58vw, 16rem)}
     .counter h2{font-size:clamp(1.875rem, 10vw, 2.75rem)}
     .step{width:2.625rem;height:2.625rem;font-size:1rem}
