@@ -6,3 +6,4 @@ archive/
 !docs/**/*.md
 reference/
 .zed
+.superpowers/

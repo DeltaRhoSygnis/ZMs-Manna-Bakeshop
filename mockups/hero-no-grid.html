@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero — no-grid directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F3E8;--navy:#123B68;--navy-deep:#0C2B4E;--ink:#172033;--gold:#D2A62A;--hair:rgba(18,59,104,.14)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"DM Sans",system-ui,sans-serif;background:#EDE6D6;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .page{max-width:1280px;margin:0 auto;padding:40px 20px 90px}
+  .page-head{margin-bottom:34px}
+  .page-head h1{font-family:"Fraunces",Georgia,serif;font-size:36px;color:var(--navy);letter-spacing:-.01em}
+  .page-head p{margin-top:8px;font-size:15px;color:#5A6377;max-width:72ch;line-height:1.6}
+  .page-head strong{color:var(--navy)}
+
+  .cards{display:flex;flex-direction:column;gap:44px}
+  .card{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;border:2px solid transparent;box-shadow:0 10px 30px rgba(18,59,104,.09);transition:border-color .18s,box-shadow .18s}
+  .card:hover{border-color:rgba(210,166,42,.6)}
+  .card.selected{border-color:var(--gold);box-shadow:0 12px 34px rgba(210,166,42,.28)}
+  .card.selected .card-tag{background:var(--gold);color:var(--ink)}
+  .card-tag{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A8296;background:#F6F3EC;border-bottom:1px solid var(--hair)}
+  .card-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+  .card-why{padding:16px 20px 20px;font-size:14px;line-height:1.6;color:#5A6377;border-top:1px solid var(--hair)}
+  .card-why b{color:var(--navy)}
+
+  .mock{background:var(--cream);overflow:hidden}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:76px;padding:0 40px;background:var(--cream);border-bottom:1px solid var(--hair)}
+  .nav-left{display:flex;align-items:center;gap:12px}
+  .nav-logo{width:42px;height:42px;border-radius:50%;overflow:hidden;flex:0 0 auto}
+  .nav-logo img{width:100%;height:100%;object-fit:cover;display:block}
+  .nav-name{font-family:"Fraunces",Georgia,serif;font-size:19px;font-weight:700;color:var(--navy);line-height:1.1}
+  .nav-name small{display:block;font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8A8F9E;font-weight:500;margin-top:3px}
+  .nav-right{display:flex;align-items:center;gap:26px}
+  .nav-link{font-size:14px;color:#39435A;font-weight:500}
+  .nav-phone{font-size:14px;color:var(--navy);font-weight:700}
+  .nav-cta{background:var(--gold);color:var(--ink);font-size:13.5px;font-weight:700;padding:11px 20px;border-radius:999px}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700;padding:15px 26px;border-radius:999px}
+  .btn-gold{background:var(--gold);color:var(--ink)}
+  .btn-outline{border:1px solid rgba(251,247,238,.45);color:#FBF7EE}
+  .btn-ghost{border:1px solid rgba(18,59,104,.32);color:var(--navy)}
+  .arrow{font-weight:400}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  .wordmark{font-family:"Fraunces",Georgia,serif;letter-spacing:-.028em;color:#FBF7EE;white-space:nowrap}
+  .hairline{display:block;width:54px;height:2px;background:var(--gold);margin:24px 0 20px}
+  .tagline{font-family:"Fraunces",Georgia,serif;font-style:italic;color:var(--gold);letter-spacing:-.01em}
+  .chip{display:inline-flex;align-items:center;gap:9px;background:rgba(248,243,232,.95);padding:10px 16px;border-radius:999px;font-size:12.5px;font-weight:700;color:var(--navy);box-shadow:0 6px 16px rgba(0,0,0,.2)}
+  .chip i{width:8px;height:8px;border-radius:50%;background:#3E9B5F;display:block}
+  .facts{display:flex;gap:38px;padding:17px 40px;background:var(--navy-deep);border-top:1px solid rgba(251,247,238,.12);font-size:13px;color:rgba(251,247,238,.70)}
+  .facts b{color:#FBF7EE;margin-right:6px}
+  .facts .sep{color:rgba(251,247,238,.25)}
+
+  /* ---------- E1: photo full-bleed, type overlaid ---------- */
+  .e1 .hero{position:relative;min-height:600px;background:url("../assets/Patatas.webp") center/cover no-repeat;display:flex;align-items:center}
+  .e1 .hero::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(96deg, rgba(8,31,55,.96) 0%, rgba(8,31,55,.90) 32%, rgba(8,31,55,.62) 52%, rgba(8,31,55,.12) 72%, rgba(8,31,55,0) 88%);
+  }
+  .e1 .inner{position:relative;padding:56px 40px;max-width:620px}
+  .e1 .wordmark{font-size:66px;line-height:1;margin-top:16px}
+  .e1 .lede{font-size:14.5px;line-height:1.7;color:rgba(251,247,238,.78);margin-top:26px;max-width:40ch}
+  .e1 .btns{display:flex;gap:10px;margin-top:28px}
+  .e1 .chip{position:absolute;right:40px;bottom:36px;background:rgba(248,243,232,.92);color:var(--navy)}
+
+  /* ---------- E2: centred monument, photo band beneath ---------- */
+  .e2 .top{padding:62px 40px 46px;text-align:center;background:var(--cream)}
+  .e2 .wordmark{color:var(--navy);font-size:94px;line-height:1}
+  .e2 .hairline{margin:22px auto 20px}
+  .e2 .tagline{font-size:32px}
+  .e2 .lede{font-size:15px;line-height:1.7;color:#4A5468;margin:24px auto 0;max-width:58ch}
+  .e2 .btns{display:flex;gap:10px;margin-top:28px;justify-content:center}
+  .e2 .band{height:360px;background:url("../assets/Patatas.webp") center 42%/cover no-repeat}
+  .e2 .facts{background:var(--cream);border-top:1px solid var(--hair);color:#5A6377;justify-content:center}
+  .e2 .facts b{color:var(--navy)}
+  .e2 .facts .sep{color:rgba(18,59,104,.25)}
+
+  /* ---------- E3: photo band with an offset card ---------- */
+  .e3 .stage{position:relative;background:var(--cream);padding-bottom:96px}
+  .e3 .band{height:470px;background:url("../assets/Patatas.webp") center 35%/cover no-repeat}
+  .e3 .panel{
+    position:absolute;left:40px;top:300px;width:470px;background:var(--cream);
+    border-radius:20px;padding:30px 32px 34px;box-shadow:0 24px 50px rgba(10,35,62,.22);
+  }
+  .e3 .wordmark{color:var(--navy);font-size:52px;line-height:1;margin-top:14px}
+  .e3 .hairline{margin:20px 0 16px}
+  .e3 .tagline{font-size:26px}
+  .e3 .btns{display:flex;gap:10px;margin-top:22px}
+  .e3 .chip{position:absolute;right:40px;bottom:36px}
+  .e3 .facts{background:var(--navy-deep);border-top:1px solid rgba(251,247,238,.12);color:rgba(251,247,238,.7)}
+  .e3 .facts b{color:#FBF7EE}
+
+  .hint{position:fixed;right:18px;bottom:14px;background:rgba(18,59,104,.94);color:#F8F3E8;font-size:12px;font-weight:600;padding:8px 16px;border-radius:999px;z-index:50}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-head">
+    <h1>Three that aren't a grid.</h1>
+    <p>No left column, no right column. <strong>E1</strong> makes the photo the whole hero and puts the type on top of it. <strong>E2</strong> stacks it — centred type, then a full-width photo band underneath. <strong>E3</strong> layers it — a photo band with a cream card sitting over the corner and hanging off it.</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card" data-choice="e1" onclick="toggleSelect(this)">
+      <div class="card-tag"><span class="dot"></span>E1 · Photo is the hero</div>
+      <div class="mock e1">
+        <div class="nav">
+          <div class="nav-left"><span class="nav-logo"><img src="../assets/ZmsLogo.webp" alt=""></span><span class="nav-name">Zm’s Manna<small>Bakeshop · Valencia</small></span></div>
+          <div class="nav-right"><span class="nav-link">Products</span><span class="nav-link">Our story</span><span class="nav-link">Visit</span><span class="nav-phone">0926 177 4601</span><span class="nav-cta">Order now</span></div>
+        </div>
+        <div class="hero">
+          <div class="inner">
+            <span class="eyebrow">Biscuits · Bread · Pasalubong</span>
+            <h1 class="wordmark">Zm’s Manna</h1>
+            <span class="hairline"></span>
+            <p class="tagline">“Love at first bite.”</p>
+            <p class="lede">A small-batch biscuit, bread and pasalubong bakehouse in P-2 Lumbo, Valencia City — baked fresh for merienda tables and pasalubong counters across Bukidnon.</p>
+            <div class="btns">
+              <span class="btn btn-gold">Order now <span class="arrow">→</span></span>
+              <span class="btn btn-outline">Plan your visit</span>
+            </div>
+          </div>
+          <span class="chip"><i></i>Baked today · 7 AM</span>
+        </div>
+        <div class="facts">
+          <span><b>Open</b> Mon–Sat · 7AM–6PM</span><span class="sep">|</span>
+          <span><b>Bakehouse</b> P-2 Lumbo, Valencia City</span><span class="sep">|</span>
+          <span><b>Call</b> 0926 177 4601</span>
+        </div>
+      </div>
+      <div class="card-why"><b>Why E1:</b> the photograph is the page, not a box on it. A navy scrim fades left-to-right so the type stays readable and the product still shows on the right. Most cinematic of the three, and the cheapest to make responsive — one image, one overlay.</div>
+    </div>
+
+    <div class="card" data-choice="e2" onclick="toggleSelect(this)">
+      <div class="card-tag"><span class="dot"></span>E2 · Centred, photo underneath</div>
+      <div class="mock e2">
+        <div class="nav">
+          <div class="nav-left"><span class="nav-logo"><img src="../assets/ZmsLogo.webp" alt=""></span><span class="nav-name">Zm’s Manna<small>Bakeshop · Valencia</small></span></div>
+          <div class="nav-right"><span class="nav-link">Products</span><span class="nav-link">Our story</span><span class="nav-link">Visit</span><span class="nav-phone">0926 177 4601</span><span class="nav-cta">Order now</span></div>
+        </div>
+        <div class="top">
+          <span class="eyebrow">Biscuits · Bread · Pasalubong</span>
+          <h1 class="wordmark">Zm’s Manna</h1>
+          <span class="hairline"></span>
+          <p class="tagline">“Love at first bite.”</p>
+          <p class="lede">A small-batch biscuit, bread and pasalubong bakehouse in P-2 Lumbo, Valencia City — baked fresh for merienda tables and pasalubong counters across Bukidnon.</p>
+          <div class="btns">
+            <span class="btn btn-gold">Order now <span class="arrow">→</span></span>
+            <span class="btn btn-ghost">Plan your visit</span>
+          </div>
+        </div>
+        <div class="band"></div>
+        <div class="facts">
+          <span><b>Open</b> Mon–Sat · 7AM–6PM</span><span class="sep">|</span>
+          <span><b>Bakehouse</b> P-2 Lumbo, Valencia City</span><span class="sep">|</span>
+          <span><b>Call</b> 0926 177 4601</span>
+        </div>
+      </div>
+      <div class="card-why"><b>Why E2:</b> nothing competes. The wordmark gets the full width, the photo gets the full width, and the eye goes down the middle. It reads like a shop sign rather than a web page — and it's the easiest to make look right on a phone, because stacking is already the layout.</div>
+    </div>
+
+    <div class="card" data-choice="e3" onclick="toggleSelect(this)">
+      <div class="card-tag"><span class="dot"></span>E3 · Layered, card over the photo</div>
+      <div class="mock e3">
+        <div class="nav">
+          <div class="nav-left"><span class="nav-logo"><img src="../assets/ZmsLogo.webp" alt=""></span><span class="nav-name">Zm’s Manna<small>Bakeshop · Valencia</small></span></div>
+          <div class="nav-right"><span class="nav-link">Products</span><span class="nav-link">Our story</span><span class="nav-link">Visit</span><span class="nav-phone">0926 177 4601</span><span class="nav-cta">Order now</span></div>
+        </div>
+        <div class="stage">
+          <div class="band"></div>
+          <div class="panel">
+            <span class="eyebrow">Biscuits · Bread · Pasalubong</span>
+            <h1 class="wordmark">Zm’s Manna</h1>
+            <span class="hairline"></span>
+            <p class="tagline">“Love at first bite.”</p>
+            <div class="btns">
+              <span class="btn btn-gold">Order now <span class="arrow">→</span></span>
+              <span class="btn btn-ghost">Visit</span>
+            </div>
+          </div>
+          <span class="chip"><i></i>Baked today · 7 AM</span>
+        </div>
+        <div class="facts">
+          <span><b>Open</b> Mon–Sat · 7AM–6PM</span><span class="sep">|</span>
+          <span><b>Bakehouse</b> P-2 Lumbo, Valencia City</span><span class="sep">|</span>
+          <span><b>Call</b> 0926 177 4601</span>
+        </div>
+      </div>
+      <div class="card-why"><b>Why E3:</b> one big photo and one floating card that breaks the frame — nothing lines up on a grid axis, so the page feels composed rather than assembled. The card also gives you somewhere to put a seasonal message later without touching the layout.</div>
+    </div>
+
+  </div>
+</div>
+<div class="hint">Click E1 / E2 / E3 · reply in the terminal</div>
+</body>
+</html>
