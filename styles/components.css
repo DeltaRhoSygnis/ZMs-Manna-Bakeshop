@@ -9,7 +9,8 @@
    Buttons     .btn  .btn-primary  .btn-secondary  .btn-arrow
    Tag         .tag
    Fallback    .fallback-text  .image-missing
-   Header      #navbar  .brand  #menu-button  #mobile-menu
+   Header      #navbar  .brand  .brand-logo  .nav-links  .nav-link
+               .nav-phone  .nav-order
    Popup       .modal  .modal-box  .modal-media  .modal-info
    Photo view  .photo-viewer  .photo-frame  .photo-close
    Footer      .footer  .footer-grid  #back-to-top
@@ -55,73 +56,49 @@
 .image-missing img{display:none}
 .image-missing .fallback-text{opacity:1}
 
-/* --- the header --- */
+/* --- the header: the logo on the left, the actions on the right --- */
+/* The middle of the bar stays empty on purpose. Everything that does
+   something sits in the two corners. */
 #navbar{
   position:fixed;top:0;left:0;right:0;z-index:90;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:clamp(.8rem,2vw,1.1rem) clamp(1rem,3vw,1.6rem);
-  pointer-events:none;background:transparent;border:0;
+  min-height:var(--header-height);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  padding:0 clamp(1rem,3vw,1.6rem);
+  background:var(--color-background);
+  border-bottom:1px solid var(--color-border);
   transition:transform .35s cubic-bezier(.22,1,.36,1);
 }
 /* the header slides away when you scroll down */
 #navbar.is-hidden{transform:translateY(-140%)}
-/* the header itself must not block clicks, but its children should */
-#navbar > *{pointer-events:auto}
 
-/* the brand pill in the corner */
-.brand{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.35rem .85rem .35rem .4rem;border-radius:999px;
-  background:color-mix(in srgb,var(--color-background) 82%,transparent);
-  -webkit-backdrop-filter:blur(0.875rem);backdrop-filter:blur(0.875rem);
-  border:1px solid var(--color-border);box-shadow:var(--shadow-small);
-  font-family:var(--font-heading);font-weight:700;font-size:1rem;color:var(--color-heading);
-}
-.brand-logo{width:2.125rem;height:2.125rem;flex:none}
+/* The page starts below the header, so no section hides under it. */
+main{padding-top:var(--header-height)}
+
+/* the brand: the small mark and the shop name */
+.brand{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;
+  font-family:var(--font-heading);font-weight:700;font-size:1.05rem;color:var(--color-heading)}
+.brand-logo{width:2.375rem;height:2.375rem;flex:none}
 .brand-logo img{width:100%;height:100%;object-fit:contain}
 .brand-name{display:flex;flex-direction:column;line-height:1.05}
 .brand small{font-family:var(--font-body);font-weight:500;font-size:.52rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--color-muted)}
 
-/* the menu button */
-#menu-button{
-  display:inline-flex;align-items:center;gap:.65rem;
-  height:3rem;padding:0 1.1rem;border-radius:999px;
-  background:var(--color-gold);color:#172033;border:1px solid var(--color-gold-dark);
-  box-shadow:var(--shadow-small);
-  transition:transform .25s,box-shadow .3s;
-}
-#menu-button:hover{transform:translateY(-0.125rem);box-shadow:var(--shadow)}
-.menu-button-text{font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
-.menu-icon{display:flex;flex-direction:column;gap:0.25rem}
-.menu-icon span{width:1.125rem;height:0.125rem;background:currentColor;border-radius:0.125rem;
-  transition:transform .3s,opacity .3s}
-/* the three bars fold into an X when the menu is open */
-#menu-button.is-active .menu-icon span:nth-child(1){transform:translateY(0.375rem) rotate(45deg)}
-#menu-button.is-active .menu-icon span:nth-child(2){opacity:0}
-#menu-button.is-active .menu-icon span:nth-child(3){transform:translateY(-0.375rem) rotate(-45deg)}
+/* the links and the actions, collected on the right */
+.nav-links{display:flex;align-items:center;gap:clamp(.75rem,2vw,1.6rem)}
+.nav-link{font-size:.875rem;font-weight:500;color:var(--color-muted);text-decoration:none;white-space:nowrap}
+.nav-link:hover{color:var(--color-heading)}
+.nav-phone{font-size:.875rem;font-weight:700;color:var(--color-heading);text-decoration:none;white-space:nowrap}
+.nav-order{padding:.7rem 1.25rem;font-size:.84rem}
 
-/* the full-screen menu */
-#mobile-menu{position:fixed;inset:0;z-index:85;background:var(--color-background);padding:calc(var(--header-height) + 2.5rem) 8% 2rem;
-  display:flex;flex-direction:column;justify-content:space-between;visibility:hidden;opacity:0;
-  transition:opacity .35s,visibility 0s linear .35s}
-#mobile-menu.is-open{visibility:visible;opacity:1;transition:opacity .35s,visibility 0s}
-.menu-links{display:flex;flex-direction:column;gap:.3rem}
-.menu-links a{font-family:var(--font-heading);font-size:clamp(1.7rem,7vw,2.4rem);font-weight:600;color:var(--color-heading);
-  padding:.45rem 0;border-bottom:1px solid var(--color-border);display:flex;justify-content:space-between;align-items:center;
-  opacity:0;transform:translateY(1.125rem);transition:opacity .45s,transform .45s,color .25s}
-.menu-links a:hover{color:var(--color-accent)}
-.menu-links a i{font-style:normal;font-family:var(--font-body);font-size:.75rem;color:var(--color-muted);letter-spacing:.15em}
-#mobile-menu.is-open .menu-links a{opacity:1;transform:none}
-#mobile-menu.is-open .menu-links a:nth-child(1){transition-delay:.06s}
-#mobile-menu.is-open .menu-links a:nth-child(2){transition-delay:.12s}
-#mobile-menu.is-open .menu-links a:nth-child(3){transition-delay:.18s}
-#mobile-menu.is-open .menu-links a:nth-child(4){transition-delay:.24s}
-#mobile-menu.is-open .menu-links a:nth-child(5){transition-delay:.3s}
-#mobile-menu.is-open .menu-links a:nth-child(6){transition-delay:.36s}
-#mobile-menu.is-open .menu-links a:nth-child(7){transition-delay:.42s}
-.menu-footer{display:flex;flex-direction:column;gap:1rem}
-.menu-footer-text{color:var(--color-muted);font-size:.85rem}
+/* the links go first on a tablet, the phone number on a phone */
+@media (max-width:60rem){
+  .nav-link{display:none}
+}
+@media (max-width:40rem){
+  #navbar{padding:0 1rem}
+  .nav-phone{display:none}
+  .brand{font-size:1rem}
+}
 
 /* --- the product popup --- */
 .modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:1.2rem;

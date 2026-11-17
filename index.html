@@ -32,73 +32,39 @@
 <div class="scroll-progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <div class="noise-overlay" aria-hidden="true"></div>
 
-<!-- ============ THE HEADER — the brand pill and the menu button
+<!-- ============ THE HEADER — the logo on the left, the actions on the right
      Styled by styles/components.css ============ -->
 <header id="navbar">
   <a class="brand" href="#home">
-    <span class="brand-logo"><img src="assets/ZmsLogo.webp" alt="" width="34" height="34"></span>
+    <span class="brand-logo"><img src="assets/ZmsLogo.webp" alt="" width="42" height="42"></span>
     <span class="brand-name">Zm’s Manna<small>Bakeshop · Valencia</small></span>
   </a>
-  <button id="menu-button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-    <span class="menu-button-text">Menu</span>
-    <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-  </button>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a class="nav-link" href="#products">Products</a>
+    <a class="nav-link" href="#story">Our story</a>
+    <a class="nav-link" href="#craft">How we bake</a>
+    <a class="nav-link" href="#visit">Visit</a>
+    <a class="nav-phone" href="tel:+639261774601">0926 177 4601</a>
+    <a class="btn btn-primary nav-order" href="#order">Order now</a>
+  </nav>
 </header>
 
-<div id="mobile-menu" aria-hidden="true">
-  <nav class="menu-links" aria-label="Main navigation">
-    <a href="#home">Home <i>01</i></a>
-    <a href="#products">Products <i>02</i></a>
-    <a href="#story">Our Story <i>03</i></a>
-    <a href="#craft">Our Craft <i>04</i></a>
-    <a href="#freshness">Freshness <i>05</i></a>
-    <a href="#order">Order <i>06</i></a>
-    <a href="#visit">Visit Us <i>07</i></a>
-  </nav>
-  <div class="menu-footer">
-    <p class="menu-footer-text">P-2 Lumbo, Valencia City, Bukidnon · Mon–Sat, 7AM–6PM</p>
-  </div>
-</div>
-
 <main id="main">
-<!-- ============ THE BANNER — the big block at the top of the page
+<!-- ============ THE BANNER — the photograph is the section
      Styled by styles/sections.css ============ -->
 <section class="banner" id="home">
-  <div class="banner-image">
-    <span class="fallback-text">Zm</span>
-    <picture>
-      <!-- Above the panel the banner photo is 16:9, so it uses the wide
-           crop. -->
-      <source media="(max-width:1024px)" srcset="assets/banner-wide.webp">
-      <!-- Side by side the photo cell is nearly square, so it uses the
-           square crop. -->
-      <img src="assets/banner-square.webp" alt="A pack of Zm's Manna biscocho on a dark board beside golden lights, with baked biscocho slices in front" width="680" height="680" fetchpriority="high" decoding="async">
-    </picture>
-    <span class="banner-caption">Fresh from the bakehouse · Valencia City</span>
-  </div>
-  <div class="banner-text">
-    <div class="banner-logo" data-reveal data-delay="300">
-      <img src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="86" height="86">
-    </div>
-    <div class="banner-copy">
-      <span class="section-label" data-reveal>Biscuits · Bread · Pasalubong</span>
-      <h1 class="banner-title" data-reveal data-delay="80">Zm’s<br>Manna</h1>
-      <p class="banner-tagline" data-reveal data-delay="160">“Love at first bite.”</p>
-      <p class="banner-description" data-reveal data-delay="240">
-        A biscuit, bread, and pasalubong bakehouse based in <b>P-2 Lumbo, Valencia City,
-        Bukidnon</b> — baked fresh in small batches for merienda tables and pasalubong
-        counters across Mindanao.
-      </p>
-      <div class="banner-buttons" data-reveal data-delay="320">
-        <a class="btn btn-primary" href="#products">Explore the products <span class="btn-arrow">→</span></a>
-        <a class="btn btn-secondary" href="#visit">Plan your visit <span class="btn-arrow">→</span></a>
-      </div>
-    </div>
-    <div class="banner-details" data-reveal data-delay="420">
-      <div><span>Products</span><p>Otap • Cookies • Toasted Bread • Loaf Breads</p></div>
-      <div><span>Bakehouse</span><p>P-2 Lumbo, Valencia City, Bukidnon</p></div>
-      <div><span>Freshness</span><p>Sealed 100g pouches • DTI registered</p></div>
-      <div><span>Visit</span><p>Mon – Sat · 7AM – 6PM</p></div>
+  <div class="banner-inner">
+    <span class="section-label">P-2 Lumbo · Valencia City</span>
+    <h1 class="banner-title">Zm’s Manna</h1>
+    <span class="banner-rule"></span>
+    <p class="banner-tagline">“Love at first bite.”</p>
+    <p class="banner-description">
+      A small-batch biscuit, bread and pasalubong bakehouse in <b>P-2 Lumbo, Valencia City</b> —
+      baked fresh for merienda tables and pasalubong counters across Bukidnon.
+    </p>
+    <div class="banner-buttons">
+      <a class="btn btn-primary" href="#order">Order now <span class="btn-arrow">→</span></a>
+      <a class="btn btn-secondary" href="#products">See what we bake</a>
     </div>
   </div>
 </section>
@@ -139,17 +105,27 @@
   </div>
 </section>
 
-<!-- ============ THE PRODUCTS — the six cards
-     Styled by styles/sections.css ============ -->
+<!-- ============ THE COUNTER — one product at a time, stepped with the arrows
+     Styled by styles/sections.css, filled in by app.js ============ -->
 <section class="section" id="products">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label" data-reveal>The counter</span>
-      <h2 data-reveal data-delay="80">Six small-batch favorites</h2>
-      <p class="section-subtitle" data-reveal data-delay="160">Tap any product to open its photo and read the texture, flavor notes, and pairing ideas — everything you’d want to know before your first bite.</p>
-    </div>
-    <div class="product-grid" id="product-grid"></div>
-    <noscript><p>Enable JavaScript to browse the interactive product catalog.</p></noscript>
+  <div class="counter-head" aria-live="polite">
+    <span class="counter-cat" id="counter-cat">Toasted specialties</span>
+    <h2 class="counter-name" id="counter-name">Biscocho</h2>
+    <p class="counter-hook" id="counter-hook">“Twice-baked bread with a glassy sugar crust.”</p>
+  </div>
+
+  <div class="counter-band" id="counter-band">
+    <span class="fallback-text" aria-hidden="true">Zm</span>
+    <img id="counter-image" src="assets/Biscocho.webp" alt="Zm’s Manna biscocho slices in a clear pouch" width="960" height="720" fetchpriority="high" decoding="async">
+    <span class="counter-pager"><b id="counter-index">01</b> / <span id="counter-total">06</span></span>
+    <button class="counter-step counter-back" id="counter-back" aria-label="Previous product">←</button>
+    <button class="counter-step counter-forward" id="counter-forward" aria-label="Next product">→</button>
+  </div>
+
+  <div class="counter-foot">
+    <p class="counter-description" id="counter-description"></p>
+    <div class="counter-facts" id="counter-facts"></div>
+    <button class="counter-more" id="counter-more">Read the full notes <span class="btn-arrow">→</span></button>
   </div>
 </section>
 

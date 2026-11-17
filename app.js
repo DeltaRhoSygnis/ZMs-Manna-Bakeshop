@@ -60,32 +60,32 @@ const SITE_CONFIG = {
 
 /* The six products. Each one becomes a card on the page. */
 const PRODUCTS = [
-  { id:"cookie-de-longa", name:"Cookie de Longa", cat:"cookies", catLabel:"Cookies & Biscuits", tag:"Sesame cookie sandwich",
+  { id:"cookie-de-longa", name:"Cookie de Longa", hook:"Sesame cookie sandwiches with a soft caramel centre", cat:"cookies", catLabel:"Cookies & Biscuits", tag:"Sesame cookie sandwich",
     img:"assets/CookieDeLonga.webp", gradientFrom:"#E8C07D", gradientTo:"#B4691E", letters:"CdL",
     desc:"Sesame-topped round cookie sandwiches with a sweet signature filling.",
     texture:"Crumbly outside, soft sweet center", notes:"Toasted sesame, butter, caramel sugar",
     pair:"Barako coffee or warm milk", pack:"100 g heat-sealed pouch", keep:"Cool, dry place — reseal after opening" },
-  { id:"biscocho", name:"Biscocho", cat:"toasted", catLabel:"Toasted Specialties", tag:"Top seller",
+  { id:"biscocho", name:"Biscocho", hook:"Twice-baked bread with a glassy sugar crust", cat:"toasted", catLabel:"Toasted Specialties", tag:"Top seller",
     img:"assets/Biscocho.webp", gradientFrom:"#D9A05B", gradientTo:"#8C4A1F", letters:"B",
     desc:"Twice-baked crispy bread slices glazed with butter and sugar.",
     texture:"Deep crunch, glassy sugar crust", notes:"Butter, toasted sugar, golden bread",
     pair:"Morning coffee or hot tsokolate", pack:"100 g heat-sealed pouch", keep:"Keep sealed to protect the crunch" },
-  { id:"toasted-mammon", name:"Toasted Mammon", cat:"toasted", catLabel:"Toasted Specialties", tag:"Light & airy",
+  { id:"toasted-mammon", name:"Toasted Mammon", hook:"Slow-toasted sponge with an airy crunch", cat:"toasted", catLabel:"Toasted Specialties", tag:"Light & airy",
     img:"assets/Mammon.webp", gradientFrom:"#F0D9A8", gradientTo:"#C98F3D", letters:"M",
     desc:"Light sponge cake slices slow-toasted for an airy, crispy crunch.",
     texture:"Airy, melt-away crisp", notes:"Vanilla sponge, light caramel",
     pair:"Afternoon tea or kape", pack:"100 g heat-sealed pouch", keep:"Away from humidity, reseal tightly" },
-  { id:"patatas", name:"Patatas", cat:"cookies", catLabel:"Cookies & Biscuits", tag:"Coffee pairing",
+  { id:"patatas", name:"Patatas", hook:"Savory-sweet biscuit batons for black coffee", cat:"cookies", catLabel:"Cookies & Biscuits", tag:"Coffee pairing",
     img:"assets/Patatas.webp", gradientFrom:"#E3B778", gradientTo:"#A05C22", letters:"P",
     desc:"Finger-style crunchy biscuit batons with a savory-sweet taste.",
     texture:"Firm snap, fine crumb", notes:"Buttery, lightly sweet, hint of salt",
     pair:"Black coffee — merienda classic", pack:"100 g heat-sealed pouch", keep:"Cool, dry shelf; reseal after opening" },
-  { id:"hopia-choco", name:"Hopia Choco", cat:"pastry", catLabel:"Pastry & Bread", tag:"Rich filling",
+  { id:"hopia-choco", name:"Hopia Choco", hook:"Flaky pockets packed with chocolate bean paste", cat:"pastry", catLabel:"Pastry & Bread", tag:"Rich filling",
     img:"assets/Hopia.webp", gradientFrom:"#9A6A45", gradientTo:"#4A2C17", letters:"H",
     desc:"Flaky crust pockets filled with rich chocolate sweet bean paste.",
     texture:"Layered flaky shell, dense fudgy core", notes:"Cocoa, sweet bean paste, pastry",
     pair:"Warm milk or afternoon kape", pack:"100 g heat-sealed pouch", keep:"Cool, dry place away from sunlight" },
-  { id:"otap-loaf", name:"Otap & Loaf Breads", cat:"pastry", catLabel:"Pastry & Bread", tag:"Specialty line",
+  { id:"otap-loaf", name:"Otap & Loaf Breads", hook:"Crisp otap puffs and soft sliced loaves", cat:"pastry", catLabel:"Pastry & Bread", tag:"Specialty line",
     img:"assets/ZmsLogo.webp", fit:"contained", gradientFrom:"#EAD3A2", gradientTo:"#B98A44", letters:"O",
     desc:"Crisp oval puff biscuits and soft sliced loaves for breakfast and merienda.",
     texture:"Shatter-crisp otap, pillowy loaf", notes:"Puff pastry sugar / soft milk bread",
@@ -103,42 +103,85 @@ const PHOTOS = [
 ];
 
 /* =========================================================
-   3. DRAW THE PRODUCT CARDS
+   3. DRAW THE COUNTER
 
-   The page starts with an empty box where the products go.
-   This builds the cards and puts them in it.
+   The page starts with one empty counter. This fills it with a
+   single product and wires up the two arrows that step through
+   the rest.
    ========================================================= */
 
-/* Builds one card for each product and puts them in the grid. */
-function buildProductTiles() {
-  const productGrid = findElement("#product-grid");
+/* Everything the counter writes into. */
+const counterBand = findElement("#counter-band");
+const counterImage = findElement("#counter-image");
+const counterCategory = findElement("#counter-cat");
+const counterName = findElement("#counter-name");
+const counterHook = findElement("#counter-hook");
+const counterIndex = findElement("#counter-index");
+const counterDescription = findElement("#counter-description");
+const counterFacts = findElement("#counter-facts");
 
-  productGrid.innerHTML = PRODUCTS.map(function (product, index) {
-    // The colours are written into the card as CSS custom properties, so
-    // the stylesheet can use them for the background gradient.
-    const gradient = "--gradient-from:" + product.gradientFrom + ";" +
-                     "--gradient-to:" + product.gradientTo + ";";
+/* Which product the counter is showing right now. */
+let counterPosition = 0;
 
-    return `
-    <button class="product-card${product.fit ? " is-logo" : ""}" data-id="${product.id}" data-reveal data-delay="${(index % 3) * 90}"
-      style="${gradient}" aria-haspopup="dialog" aria-label="View details: ${product.name}">
-      <span class="fallback-text" aria-hidden="true">${product.letters}</span>
-      <img src="${product.img}" class="${product.fit ? "is-contained" : ""}" alt="${product.name}" loading="lazy" decoding="async">
-      <span class="product-caption">${product.name}</span>
-    </button>`;
-  }).join("");
+/* Shows one product in the counter.
+   The number can be any integer and it wraps round, so the back arrow
+   on the first product lands on the last one instead of stopping. */
+function showCounterProduct(position) {
+  const total = PRODUCTS.length;
+  counterPosition = ((position % total) + total) % total;
 
-  // Now that the cards exist, give each one a click handler.
-  for (const card of findElements(".product-card")) {
-    card.addEventListener("click", function () {
-      openProductPopup(card.dataset.id);
-    });
-  }
+  const product = PRODUCTS[counterPosition];
 
-  // Every photo needs a fallback ready in case it cannot load.
-  for (const image of findElements(".product-card img, .banner-image img")) {
-    handleBrokenImage(image);
-  }
+  counterCategory.textContent = product.catLabel;
+  counterName.textContent = product.name;
+  counterHook.textContent = "“" + (product.hook || product.desc) + "”";
+  counterDescription.textContent = product.desc + " " + product.texture + ".";
+  counterIndex.textContent = String(counterPosition + 1).padStart(2, "0");
+
+  // The photo, with a fallback ready in case it cannot load.
+  counterBand.classList.remove("image-missing");
+  counterImage.onerror = function () {
+    counterBand.classList.add("image-missing");
+  };
+  counterImage.classList.toggle("is-contained", Boolean(product.fit));
+  counterImage.src = product.img;
+  counterImage.alt = product.name + " from Zm’s Manna, in its clear pouch.";
+
+  // The three short facts under the photo.
+  const pairing = product.pair.charAt(0).toLowerCase() + product.pair.slice(1);
+  counterFacts.innerHTML = [product.pack, "Best with " + pairing, "DTI-labelled, barcoded"]
+    .map(function (fact) { return "<span>" + fact + "</span>"; })
+    .join("");
+
+  // Restart the fade, so it plays on every swap and not just the first.
+  counterBand.classList.remove("is-changing");
+  void counterBand.offsetWidth;
+  counterBand.classList.add("is-changing");
+}
+
+/* Wires the two arrows, the "read the full notes" button, and the
+   left and right arrow keys while the counter has the focus. */
+function setupCounter() {
+  findElement("#counter-total").textContent = String(PRODUCTS.length).padStart(2, "0");
+
+  findElement("#counter-back").addEventListener("click", function () {
+    showCounterProduct(counterPosition - 1);
+  });
+  findElement("#counter-forward").addEventListener("click", function () {
+    showCounterProduct(counterPosition + 1);
+  });
+  findElement("#counter-more").addEventListener("click", function () {
+    openProductPopup(PRODUCTS[counterPosition].id);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (productModal.classList.contains("is-open")) return;
+    if (!counterBand.contains(document.activeElement)) return;
+    if (event.key === "ArrowRight") { showCounterProduct(counterPosition + 1); event.preventDefault(); }
+    if (event.key === "ArrowLeft") { showCounterProduct(counterPosition - 1); event.preventDefault(); }
+  });
+
+  showCounterProduct(0);
 }
 
 /* If a photo cannot load, show the letters instead.
@@ -293,49 +336,6 @@ function setupScrollChrome() {
 /* =========================================================
    8. THE FULL-SCREEN MENU
    ========================================================= */
-
-/* The menu button, the menu itself, and whether the menu is open. */
-const menuButton = findElement("#menu-button");
-const mobileMenu = findElement("#mobile-menu");
-let menuIsOpen = false;
-
-/* Opens or closes the menu. */
-function setMenuOpen(open) {
-  menuIsOpen = open;
-
-  // the three bars fold into an X
-  menuButton.classList.toggle("is-active", open);
-  menuButton.setAttribute("aria-expanded", String(open));
-
-  // the menu fades in
-  mobileMenu.classList.toggle("is-open", open);
-  // visibility is set here as well as in CSS, so the links leave the
-  // tab order the instant the menu closes
-  mobileMenu.style.visibility = open ? "visible" : "";
-  mobileMenu.setAttribute("aria-hidden", String(!open));
-
-  // the page behind the menu stops scrolling
-  document.body.classList.toggle("scroll-locked", open);
-
-  // move the keyboard focus into the menu
-  if (open) {
-    const firstLink = findElement("a", mobileMenu);
-    if (firstLink) firstLink.focus();
-  }
-}
-
-/* Wires up the menu button and the links inside the menu. */
-function setupMobileMenu() {
-  menuButton.addEventListener("click", function () {
-    setMenuOpen(!menuIsOpen);
-  });
-
-  for (const link of findElements("a", mobileMenu)) {
-    link.addEventListener("click", function () {
-      setMenuOpen(false);
-    });
-  }
-}
 
 /* =========================================================
    9. THE PRODUCT POPUP
@@ -555,13 +555,6 @@ function setupKeyboardControls() {
     } else if (productModal.classList.contains("is-open")) {
       if (event.key === "Escape") closeProductPopup();
       else keepFocusInside(event, productModal);
-    } else if (menuIsOpen) {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
-        findElement("#menu-button").focus();
-      } else {
-        keepFocusInside(event, findElement("#mobile-menu"));
-      }
     }
   });
 }
@@ -593,16 +586,15 @@ function setupMouseEffects() {
 /* =========================================================
    13. RUN EVERYTHING
 
-   The order matters for one reason: the product cards have to
-   be built first, because setupScrollReveal() can only reveal
-   cards that already exist in the page.
+   The order matters for one reason: the counter has to be filled
+   first, because setupScrollReveal() can only reveal things that
+   already exist in the page.
    ========================================================= */
-buildProductTiles();
+setupCounter();
 applySiteSettings();
 setupScrollReveal();
 setupAnimatedCounters();
 setupScrollChrome();
-setupMobileMenu();
 setupProductPopup();
 setupPhotoViewer();
 setupKeyboardControls();
