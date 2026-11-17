@@ -28,7 +28,9 @@ if [ -f "$PID_FILE" ]; then
   kill "$(cat "$PID_FILE")" 2>/dev/null || true
   rm -f "$PID_FILE"
 fi
-pkill -f "opencode serve --hostname 0.0.0.0 --port ${PORT}" 2>/dev/null || true
+if command -v pkill >/dev/null 2>&1; then
+  pkill -f "opencode serve --hostname 0.0.0.0 --port ${PORT}" 2>/dev/null || true
+fi
 
 cd "$REPO_ROOT"
 OPENCODE_PASSWORD="$password" nohup opencode serve \
