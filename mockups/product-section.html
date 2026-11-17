@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product section — the counter walk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F8F3E8;--cream2:#F2E9D7;--navy:#123B68;--navy-deep:#0C2B4E;--ink:#172033;--gold:#D2A62A;--gold-deep:#8A6A15;--body:#4A5468;--hair:rgba(18,59,104,.14)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"DM Sans",system-ui,sans-serif;background:#EDE6D6;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .page{max-width:1280px;margin:0 auto;padding:40px 20px 90px}
+  .page-head h1{font-family:"Fraunces",Georgia,serif;font-size:34px;color:var(--navy);letter-spacing:-.01em}
+  .page-head p{margin-top:8px;font-size:15px;color:#5A6377;max-width:76ch;line-height:1.6}
+  .page-head strong{color:var(--navy)}
+
+  .card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(18,59,104,.09);margin-top:30px}
+  .card-tag{display:flex;align-items:center;gap:10px;padding:12px 20px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A8296;background:#F6F3EC;border-bottom:1px solid var(--hair)}
+  .card-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:76px;padding:0 40px;background:var(--cream);border-bottom:1px solid var(--hair)}
+  .nav-left{display:flex;align-items:center;gap:12px}
+  .nav-logo{width:42px;height:42px;border-radius:50%;overflow:hidden;flex:0 0 auto}
+  .nav-logo img{width:100%;height:100%;object-fit:cover;display:block}
+  .nav-name{font-family:"Fraunces",Georgia,serif;font-size:19px;font-weight:700;color:var(--navy);line-height:1.1}
+  .nav-name small{display:block;font-family:"DM Sans",sans-serif;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8A8F9E;font-weight:500;margin-top:3px}
+  .nav-right{display:flex;align-items:center;gap:26px}
+  .nav-link{font-size:14px;color:#39435A;font-weight:500}
+  .nav-phone{font-size:14px;color:var(--navy);font-weight:700}
+  .nav-cta{background:var(--gold);color:var(--ink);font-size:13.5px;font-weight:700;padding:11px 20px;border-radius:999px}
+
+  /* ============ THE SECTION ============ */
+  .counter{background:var(--cream);padding:52px 40px 58px}
+  .head{max-width:70ch}
+  .lbl{font-size:11px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep)}
+  .head h2{font-family:"Fraunces",Georgia,serif;font-size:40px;line-height:1.08;letter-spacing:-.02em;color:var(--navy);margin-top:10px}
+  .head p{margin-top:10px;font-size:14.5px;line-height:1.6;color:var(--body)}
+
+  .walk{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:34px;align-items:center}
+
+  /* left: photo + arrows */
+  .frame{position:relative;border-radius:18px;overflow:hidden;background:var(--cream2);aspect-ratio:1/1.04;box-shadow:0 26px 50px -26px rgba(12,43,78,.45)}
+  .frame img{width:100%;height:100%;object-fit:cover;display:block}
+  .frame .badge{position:absolute;top:16px;left:16px;background:rgba(248,243,232,.95);color:var(--navy);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
+  .frame .num{position:absolute;top:16px;right:16px;font-family:"Fraunces",Georgia,serif;font-size:13px;color:rgba(255,255,255,.9);background:rgba(12,43,78,.42);backdrop-filter:blur(6px);padding:6px 12px;border-radius:999px;letter-spacing:.06em}
+  .frame .contain{display:flex;align-items:center;justify-content:center}
+  .frame .contain img{width:46%;height:auto;object-fit:contain}
+
+  .controls{display:flex;align-items:center;gap:14px;margin-top:18px}
+  .arrow{width:52px;height:52px;border-radius:50%;border:1px solid rgba(18,59,104,.28);background:transparent;color:var(--navy);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .16s,color .16s,border-color .16s}
+  .arrow:hover{background:var(--navy);color:var(--cream);border-color:var(--navy)}
+  .arrow.next{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+  .arrow.next:hover{background:#BE9524}
+  .track{flex:1;height:2px;background:rgba(18,59,104,.16);border-radius:999px;position:relative;margin:0 6px}
+  .track i{position:absolute;left:0;top:0;height:100%;width:16.6%;background:var(--gold);border-radius:999px}
+  .tally{font-size:12px;font-weight:700;letter-spacing:.1em;color:#8A8F9E;white-space:nowrap}
+  .tally b{color:var(--navy)}
+
+  /* right: the words */
+  .details .cat{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+  .details h3{font-family:"Fraunces",Georgia,serif;font-size:52px;line-height:1;letter-spacing:-.025em;color:var(--navy);margin-top:10px}
+  .details .one{font-family:"Fraunces",Georgia,serif;font-style:italic;font-size:20px;color:var(--gold-deep);margin-top:10px}
+  .details .desc{font-size:15px;line-height:1.7;color:var(--body);margin-top:16px;max-width:46ch}
+  .specs{margin-top:22px;border-top:1px solid var(--hair)}
+  .specs div{display:flex;gap:18px;padding:11px 0;border-bottom:1px solid var(--hair);align-items:baseline}
+  .specs dt{flex:0 0 96px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8A8F9E}
+  .specs dd{font-size:13.5px;color:var(--navy);font-weight:500}
+  .more{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:13.5px;font-weight:700;color:var(--navy);text-decoration:underline;text-underline-offset:4px}
+
+  .hint{position:fixed;right:18px;bottom:14px;background:rgba(18,59,104,.94);color:#F8F3E8;font-size:12px;font-weight:600;padding:8px 16px;border-radius:999px;z-index:50}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="page-head">
+    <h1>The counter walk.</h1>
+    <p>One product at a time: photo on the left, the selling copy on the right, and two arrows that step you to the next pack. The bar between the arrows doubles as the progress — <strong>01 of 06</strong>. No grid, and the section stays the same height whatever the product is.</p>
+  </div>
+
+  <div class="card">
+    <div class="card-tag"><span class="dot"></span>Product section · state 1 of 6</div>
+
+    <div class="nav">
+      <div class="nav-left"><span class="nav-logo"><img src="../assets/ZmsLogo.webp" alt=""></span><span class="nav-name">Zm’s Manna<small>Bakeshop · Valencia</small></span></div>
+      <div class="nav-right"><span class="nav-link">Products</span><span class="nav-link">Our story</span><span class="nav-link">Visit</span><span class="nav-phone">0926 177 4601</span><span class="nav-cta">Order now</span></div>
+    </div>
+
+    <div class="counter">
+      <div class="head">
+        <span class="lbl">The counter</span>
+        <h2>Six things we bake in Lumbo</h2>
+        <p>Step through the counter one pack at a time. Open any of them for texture, flavour notes and what to drink with it.</p>
+      </div>
+
+      <div class="walk">
+        <div class="left">
+          <div class="frame">
+            <img src="../assets/Biscocho.webp" alt="Zm's Manna biscocho slices in a clear pouch, sugar crust catching the light.">
+            <span class="badge">Top seller</span>
+            <span class="num">01 / 06</span>
+          </div>
+          <div class="controls">
+            <button class="arrow" aria-label="Previous product">←</button>
+            <span class="track"><i></i></span>
+            <button class="arrow next" aria-label="Next product">→</button>
+            <span class="tally"><b>01</b> / 06</span>
+          </div>
+        </div>
+
+        <div class="details">
+          <span class="cat">Toasted specialties</span>
+          <h3>Biscocho</h3>
+          <p class="one">Twice-baked bread with a glassy sugar crust.</p>
+          <p class="desc">Sliced bread baked once, glazed with butter and sugar, then baked again until deep gold. The crust cracks like glass and the middle stays light. It is the pack that goes first.</p>
+          <div class="specs">
+            <div><dt>Pairs with</dt><dd>Morning coffee or hot tsokolate</dd></div>
+            <div><dt>Pack</dt><dd>100 g heat-sealed pouch</dd></div>
+            <div><dt>Keeps</dt><dd>Sealed, cool and dry</dd></div>
+          </div>
+          <a class="more">Read the full notes →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hint">Reply in the terminal</div>
+</body>
+</html>

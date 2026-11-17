@@ -31,6 +31,17 @@ seven documented exceptions where JavaScript writes a measured value inline,
 such as the progress bar's width.) See
 [`docs/JS-CSS-BRIDGE.md`](docs/JS-CSS-BRIDGE.md).
 
+<<<<<<< HEAD
+=======
+## OpenCode in GitHub Codespaces
+
+The repository ships a dev container that installs OpenCode 2 and loads this
+machine's OpenCode configuration — agents, commands, skills, plugins and ECC —
+**without** the local database or service secret. Push, create a Codespace, and
+the terminal prints a one-time pairing link for the forwarded web UI on port
+4096. See [`docs/opencode-codespaces.md`](docs/opencode-codespaces.md).
+
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
 ## File map
 
 | File | What it does |
@@ -40,6 +51,11 @@ such as the progress bar's width.) See
 | `styles/` | Five stylesheets, loaded in order. See the table below. |
 | `assets/` | Product photos, the banner crops, the marketing graphics, the logo, favicons. |
 | `docs/` | Project documentation. |
+<<<<<<< HEAD
+=======
+| `.devcontainer/` | GitHub Codespaces image: OpenCode 2, the start/pair scripts and the config sync. |
+| `opencode/` | Exported OpenCode configuration copied into the container (no database, no service secret). |
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
 | `reference/hero.html` | The banner as a standalone fragment, for reuse in other pages. *Local only — not in version control.* |
 | `archive/legacy-2026-11-12/` | The previous design. Not referenced by anything. *Local only — not in version control.* |
 

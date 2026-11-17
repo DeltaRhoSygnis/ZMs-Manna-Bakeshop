@@ -6,15 +6,24 @@
    freshness, visit.
 
    ------------------------------------------------------------
+<<<<<<< HEAD
    Banner     .banner  .banner-image  .banner-text  .banner-title
    Ticker     .ticker  .ticker-track  .ticker-item  .ticker-star
    Story      .story-grid  .stats  .stat  .stat-number  .stat-label
    Products   #products  .product-grid  .product-card  .product-caption
+=======
+   Banner     .banner  .banner-inner  .banner-title  .banner-tagline
+   Ticker     .ticker  .ticker-track  .ticker-item  .ticker-star
+   Story      .story-grid  .stats  .stat  .stat-number  .stat-label
+   Counter    #products  .counter-head  .counter-band  .counter-step
+              .counter-pager  .counter-foot  .counter-more
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
    Craft      .steps  .step  .step-number
    Freshness  #freshness  .feature-list  .feature-card  .feature-icon
    Visit      .visit-grid  .visit-card  .map-wrapper  .visit-note
    ========================================================= */
 
+<<<<<<< HEAD
 /* ============ THE BANNER — the big block at the top ============ */
 /* Contained card, not full-bleed, so the photo is not over-zoomed. */
 .banner{
@@ -161,6 +170,91 @@
   .banner-text{padding:1.2rem 1.1rem}
   .banner-title{font-size:clamp(1.7rem,7vw,2.2rem)}
   .banner-details > div{grid-template-columns:1fr;gap:.15rem}
+=======
+/* ============ THE BANNER — the photograph is the section ============ */
+/* No card, no panel, no rounded corner: the photo runs the full width of
+   the screen and the words sit on top of it. The navy gradient on the left
+   is what keeps the text readable over a bright photo. */
+.banner{
+  position:relative;
+  min-height:calc(100svh - var(--header-height));
+  display:flex;align-items:center;
+  /* the warm gradient shows first, and stays if the photo never loads */
+  background-color:#8C4A1F;
+  background-image:linear-gradient(140deg,#8C4A1F,#D9A05B);
+  background-image:linear-gradient(140deg,rgba(140,74,31,.55),rgba(217,160,91,.55)),url(../assets/Patatas.webp);
+  background-size:cover,cover;background-position:center,center;background-repeat:no-repeat;
+  overflow:hidden;
+}
+/* the scrim: solid navy on the left, clear on the right */
+.banner::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(94deg,
+    rgba(8,31,55,.96) 0%,
+    rgba(8,31,55,.92) 28%,
+    rgba(8,31,55,.62) 50%,
+    rgba(8,31,55,.14) 72%,
+    rgba(8,31,55,0) 88%);
+}
+.banner-inner{
+  position:relative;z-index:2;
+  max-width:40rem;
+  padding:clamp(2rem,5vh,4rem) clamp(1.25rem,4vw,3rem);
+  color:#F8F3E8;
+}
+.banner .section-label{color:var(--color-gold);font-size:.7rem}
+.banner .section-label::before{background:var(--color-gold)}
+/* the name stays on one line at every size */
+.banner-title{
+  font-size:clamp(2.5rem,5vw,4.375rem);
+  line-height:1;letter-spacing:-.03em;
+  color:#FBF7EE;margin:.75rem 0 0;
+  white-space:nowrap;
+}
+.banner-rule{display:block;width:3.375rem;height:0.125rem;background:var(--color-gold);
+  margin:clamp(1rem,2.5vh,1.5rem) 0}
+.banner-tagline{
+  font-family:var(--font-heading);font-style:italic;
+  font-size:clamp(1.375rem,2.4vw,2rem);
+  line-height:1.15;color:var(--color-gold);letter-spacing:-.01em;
+}
+.banner-description{
+  color:rgba(248,243,232,.82);
+  font-size:clamp(.875rem,1.1vw,.97rem);
+  line-height:1.7;max-width:34rem;
+  margin-top:clamp(1rem,2.4vh,1.5rem);
+}
+.banner-description b{color:#FBF7EE;font-weight:700}
+.banner-buttons{display:flex;gap:.625rem;flex-wrap:wrap;margin-top:clamp(1.25rem,3vh,2rem)}
+.banner .btn{padding:.9375rem 1.625rem;font-size:.90625rem}
+.banner .btn.btn-primary{background:var(--color-gold);background-image:none;color:#172033}
+.banner .btn.btn-secondary{background:transparent;border-color:rgba(248,243,232,.45);color:#FBF7EE}
+.banner .btn.btn-secondary:hover{border-color:var(--color-gold);color:var(--color-gold-soft)}
+
+/* On a phone the same composition stands up: the photo keeps the top of
+   the screen and the words move to the bottom. Nothing is dropped. */
+@media (max-width:40rem){
+  .banner{align-items:flex-end;background-position:center 34%}
+  .banner::before{
+    background:linear-gradient(180deg,
+      rgba(8,31,55,0) 0%,
+      rgba(8,31,55,.04) 26%,
+      rgba(8,31,55,.55) 54%,
+      rgba(8,31,55,.93) 74%,
+      rgba(8,31,55,.97) 100%);
+  }
+  .banner-inner{max-width:100%;padding:1.25rem clamp(1rem,4vw,1.5rem) 2rem}
+  .banner-title{font-size:clamp(2.375rem,11vw,3rem)}
+  .banner-rule{margin:.75rem 0 .875rem}
+  .banner-tagline{font-size:clamp(1.1875rem,5.4vw,1.5rem)}
+  .banner-description{font-size:.84375rem;line-height:1.62}
+}
+/* on a short window the paragraph would push the buttons off screen */
+@media (max-height:34rem) and (min-width:40.0625rem){
+  .banner-description{display:none}
+  .banner-title{font-size:clamp(2rem,3.4vw,3rem)}
+  .banner-rule{margin:.75rem 0}
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
 }
 
 /* ============ THE TICKER — the strip of names that scrolls ============ */
@@ -187,6 +281,7 @@
   color:var(--color-accent);line-height:1}
 .stat .stat-label{display:block;font-size:.82rem;color:var(--color-muted);margin-top:.45rem;font-weight:500}
 
+<<<<<<< HEAD
 /* ============ THE PRODUCTS — the six cards ============ */
 #products{background:var(--color-surface-alt);border-block:1px solid var(--color-border)}
 .product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
@@ -213,6 +308,94 @@
 .product-grid .product-card.is-logo .product-caption{
   background:var(--color-surface);color:var(--color-heading);
   padding:1rem 1.1rem .9rem;border-top:1px solid var(--color-border)}
+=======
+/* ============ THE COUNTER — one product at a time ============ */
+/* The name goes huge and centred, the photo runs edge to edge underneath,
+   and the details sit quietly below it. The two arrows ride the left and
+   right edges of the photo, halfway down. */
+#products{padding-block:clamp(2.5rem,6vw,4.5rem) 0}
+.counter-head{text-align:center;padding:0 clamp(1.25rem,4vw,3rem)}
+.counter-cat{font-size:.66rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--color-accent)}
+.counter-name{
+  font-family:var(--font-heading);
+  font-size:clamp(2rem,5.4vw,5.125rem);
+  line-height:.95;letter-spacing:-.035em;
+  color:var(--color-heading);margin-top:.625rem;
+}
+.counter-hook{
+  font-family:var(--font-heading);font-style:italic;
+  font-size:clamp(1rem,1.8vw,1.5rem);
+  color:var(--color-accent);margin-top:.75rem;
+}
+
+/* the photo band */
+.counter-band{
+  position:relative;
+  height:clamp(13rem,30vw,24rem);
+  margin-top:clamp(1.25rem,3vh,2rem);
+  overflow:hidden;
+  background:linear-gradient(140deg,#D9A05B,#8C4A1F);
+}
+.counter-band img{width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block}
+/* the one product with no photograph is shown whole, not cropped */
+.counter-band img.is-contained{object-fit:contain;padding:2rem;background:var(--color-surface)}
+.counter-band::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(248,243,232,.18),rgba(248,243,232,0) 26%,rgba(18,59,104,.14));
+}
+
+/* the two arrows, on the photo, halfway down */
+.counter-step{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:clamp(2.75rem,4vw,3.25rem);height:clamp(2.75rem,4vw,3.25rem);
+  border-radius:50%;border:1px solid rgba(248,243,232,.62);
+  background:color-mix(in srgb,var(--color-background) 92%,transparent);
+  -webkit-backdrop-filter:blur(0.625rem);backdrop-filter:blur(0.625rem);
+  color:var(--color-heading);font-size:1.0625rem;
+  display:grid;place-items:center;
+  box-shadow:0 .625rem 1.5rem -.625rem rgba(12,43,78,.6);
+  transition:background .16s,color .16s,transform .16s;
+}
+.counter-step:hover{background:var(--color-heading);color:var(--color-background);
+  border-color:var(--color-heading);transform:translateY(-50%) scale(1.07)}
+.counter-back{left:clamp(.75rem,2vw,1.5rem)}
+.counter-forward{right:clamp(.75rem,2vw,1.5rem);
+  background:var(--color-gold);border-color:var(--color-gold-dark);color:#172033}
+.counter-forward:hover{background:var(--color-gold-dark);border-color:var(--color-gold-dark);color:#172033}
+
+/* the small page counter in the corner of the photo */
+.counter-pager{
+  position:absolute;top:clamp(.75rem,2vw,1.25rem);right:clamp(.75rem,2vw,1.5rem);z-index:3;
+  background:color-mix(in srgb,var(--color-background) 90%,transparent);
+  -webkit-backdrop-filter:blur(0.5rem);backdrop-filter:blur(0.5rem);
+  color:var(--color-heading);font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  padding:.5rem .875rem;border-radius:999px;box-shadow:var(--shadow-small);
+}
+.counter-pager b{font-family:var(--font-heading);font-size:1rem;letter-spacing:0}
+
+/* the words under the photo */
+.counter-foot{text-align:center;padding:clamp(1.25rem,3vh,2rem) clamp(1.25rem,4vw,3rem) clamp(1.5rem,4vh,2.5rem)}
+.counter-description{font-size:clamp(.84rem,1vw,.94rem);line-height:1.7;color:var(--color-muted);max-width:62ch;margin:0 auto}
+.counter-facts{display:flex;justify-content:center;gap:clamp(1rem,2.5vw,2.125rem);margin-top:1.125rem;flex-wrap:wrap}
+.counter-facts span{font-size:.78rem;color:var(--color-heading);font-weight:500;display:flex;align-items:center;gap:.5rem}
+.counter-facts span::before{content:"";width:.3125rem;height:.3125rem;border-radius:50%;background:var(--color-gold);flex:0 0 auto}
+.counter-more{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:1.25rem;
+  font-size:.84rem;font-weight:700;color:var(--color-heading);
+  text-decoration:underline;text-underline-offset:.25rem;
+}
+.counter-more:hover{color:var(--color-accent)}
+
+/* a quick fade so the swap does not look like a jump */
+.counter-band.is-changing img{animation:counter-fade .32s ease}
+@keyframes counter-fade{from{opacity:.35;transform:scale(1.015)}to{opacity:1;transform:none}}
+
+@media (max-width:40rem){
+  .counter-band{height:clamp(11rem,58vw,16rem)}
+  .counter-name{font-size:clamp(1.875rem,10vw,2.75rem)}
+  .counter-step{width:2.625rem;height:2.625rem;font-size:1rem}
+}
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
 
 /* ============ THE CRAFT — the four steps of the bake ============ */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;position:relative}

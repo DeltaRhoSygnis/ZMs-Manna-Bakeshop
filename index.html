@@ -32,6 +32,7 @@
 <div class="scroll-progress" aria-hidden="true"><span id="progress-bar"></span></div>
 <div class="noise-overlay" aria-hidden="true"></div>
 
+<<<<<<< HEAD
 <!-- ============ THE HEADER — the brand pill and the menu button
      Styled by styles/components.css ============ -->
 <header id="navbar">
@@ -99,6 +100,41 @@
       <div><span>Bakehouse</span><p>P-2 Lumbo, Valencia City, Bukidnon</p></div>
       <div><span>Freshness</span><p>Sealed 100g pouches • DTI registered</p></div>
       <div><span>Visit</span><p>Mon – Sat · 7AM – 6PM</p></div>
+=======
+<!-- ============ THE HEADER — the logo on the left, the actions on the right
+     Styled by styles/components.css ============ -->
+<header id="navbar">
+  <a class="brand" href="#home">
+    <span class="brand-logo"><img src="assets/ZmsLogo.webp" alt="" width="42" height="42"></span>
+    <span class="brand-name">Zm’s Manna<small>Bakeshop · Valencia</small></span>
+  </a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a class="nav-link" href="#products">Products</a>
+    <a class="nav-link" href="#story">Our story</a>
+    <a class="nav-link" href="#craft">How we bake</a>
+    <a class="nav-link" href="#visit">Visit</a>
+    <a class="nav-phone" href="tel:+639261774601">0926 177 4601</a>
+    <a class="btn btn-primary nav-order" href="#order">Order now</a>
+  </nav>
+</header>
+
+<main id="main">
+<!-- ============ THE BANNER — the photograph is the section
+     Styled by styles/sections.css ============ -->
+<section class="banner" id="home">
+  <div class="banner-inner">
+    <span class="section-label">P-2 Lumbo · Valencia City</span>
+    <h1 class="banner-title">Zm’s Manna</h1>
+    <span class="banner-rule"></span>
+    <p class="banner-tagline">“Love at first bite.”</p>
+    <p class="banner-description">
+      A small-batch biscuit, bread and pasalubong bakehouse in <b>P-2 Lumbo, Valencia City</b> —
+      baked fresh for merienda tables and pasalubong counters across Bukidnon.
+    </p>
+    <div class="banner-buttons">
+      <a class="btn btn-primary" href="#order">Order now <span class="btn-arrow">→</span></a>
+      <a class="btn btn-secondary" href="#products">See what we bake</a>
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
     </div>
   </div>
 </section>
@@ -139,6 +175,7 @@
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- ============ THE PRODUCTS — the six cards
      Styled by styles/sections.css ============ -->
 <section class="section" id="products">
@@ -150,6 +187,29 @@
     </div>
     <div class="product-grid" id="product-grid"></div>
     <noscript><p>Enable JavaScript to browse the interactive product catalog.</p></noscript>
+=======
+<!-- ============ THE COUNTER — one product at a time, stepped with the arrows
+     Styled by styles/sections.css, filled in by app.js ============ -->
+<section class="section" id="products">
+  <div class="counter-head" aria-live="polite">
+    <span class="counter-cat" id="counter-cat">Toasted specialties</span>
+    <h2 class="counter-name" id="counter-name">Biscocho</h2>
+    <p class="counter-hook" id="counter-hook">“Twice-baked bread with a glassy sugar crust.”</p>
+  </div>
+
+  <div class="counter-band" id="counter-band">
+    <span class="fallback-text" aria-hidden="true">Zm</span>
+    <img id="counter-image" src="assets/Biscocho.webp" alt="Zm’s Manna biscocho slices in a clear pouch" width="960" height="720" fetchpriority="high" decoding="async">
+    <span class="counter-pager"><b id="counter-index">01</b> / <span id="counter-total">06</span></span>
+    <button class="counter-step counter-back" id="counter-back" aria-label="Previous product">←</button>
+    <button class="counter-step counter-forward" id="counter-forward" aria-label="Next product">→</button>
+  </div>
+
+  <div class="counter-foot">
+    <p class="counter-description" id="counter-description"></p>
+    <div class="counter-facts" id="counter-facts"></div>
+    <button class="counter-more" id="counter-more">Read the full notes <span class="btn-arrow">→</span></button>
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
   </div>
 </section>
 

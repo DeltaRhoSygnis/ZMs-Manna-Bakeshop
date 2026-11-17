@@ -9,7 +9,12 @@
    Buttons     .btn  .btn-primary  .btn-secondary  .btn-arrow
    Tag         .tag
    Fallback    .fallback-text  .image-missing
+<<<<<<< HEAD
    Header      #navbar  .brand  #menu-button  #mobile-menu
+=======
+   Header      #navbar  .brand  .brand-logo  .nav-links  .nav-link
+               .nav-phone  .nav-order
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
    Popup       .modal  .modal-box  .modal-media  .modal-info
    Photo view  .photo-viewer  .photo-frame  .photo-close
    Footer      .footer  .footer-grid  #back-to-top
@@ -55,16 +60,30 @@
 .image-missing img{display:none}
 .image-missing .fallback-text{opacity:1}
 
+<<<<<<< HEAD
 /* --- the header --- */
 #navbar{
   position:fixed;top:0;left:0;right:0;z-index:90;
   display:flex;align-items:center;justify-content:space-between;
   padding:clamp(.8rem,2vw,1.1rem) clamp(1rem,3vw,1.6rem);
   pointer-events:none;background:transparent;border:0;
+=======
+/* --- the header: the logo on the left, the actions on the right --- */
+/* The middle of the bar stays empty on purpose. Everything that does
+   something sits in the two corners. */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  min-height:var(--header-height);
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  padding:0 clamp(1rem,3vw,1.6rem);
+  background:var(--color-background);
+  border-bottom:1px solid var(--color-border);
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
   transition:transform .35s cubic-bezier(.22,1,.36,1);
 }
 /* the header slides away when you scroll down */
 #navbar.is-hidden{transform:translateY(-140%)}
+<<<<<<< HEAD
 /* the header itself must not block clicks, but its children should */
 #navbar > *{pointer-events:auto}
 
@@ -78,11 +97,22 @@
   font-family:var(--font-heading);font-weight:700;font-size:1rem;color:var(--color-heading);
 }
 .brand-logo{width:2.125rem;height:2.125rem;flex:none}
+=======
+
+/* The page starts below the header, so no section hides under it. */
+main{padding-top:var(--header-height)}
+
+/* the brand: the small mark and the shop name */
+.brand{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;
+  font-family:var(--font-heading);font-weight:700;font-size:1.05rem;color:var(--color-heading)}
+.brand-logo{width:2.375rem;height:2.375rem;flex:none}
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
 .brand-logo img{width:100%;height:100%;object-fit:contain}
 .brand-name{display:flex;flex-direction:column;line-height:1.05}
 .brand small{font-family:var(--font-body);font-weight:500;font-size:.52rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--color-muted)}
 
+<<<<<<< HEAD
 /* the menu button */
 #menu-button{
   display:inline-flex;align-items:center;gap:.65rem;
@@ -122,6 +152,24 @@
 #mobile-menu.is-open .menu-links a:nth-child(7){transition-delay:.42s}
 .menu-footer{display:flex;flex-direction:column;gap:1rem}
 .menu-footer-text{color:var(--color-muted);font-size:.85rem}
+=======
+/* the links and the actions, collected on the right */
+.nav-links{display:flex;align-items:center;gap:clamp(.75rem,2vw,1.6rem)}
+.nav-link{font-size:.875rem;font-weight:500;color:var(--color-muted);text-decoration:none;white-space:nowrap}
+.nav-link:hover{color:var(--color-heading)}
+.nav-phone{font-size:.875rem;font-weight:700;color:var(--color-heading);text-decoration:none;white-space:nowrap}
+.nav-order{padding:.7rem 1.25rem;font-size:.84rem}
+
+/* the links go first on a tablet, the phone number on a phone */
+@media (max-width:60rem){
+  .nav-link{display:none}
+}
+@media (max-width:40rem){
+  #navbar{padding:0 1rem}
+  .nav-phone{display:none}
+  .brand{font-size:1rem}
+}
+>>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
 
 /* --- the product popup --- */
 .modal{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:1.2rem;
