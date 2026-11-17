@@ -53,11 +53,10 @@ The password is generated once per container and stored in
 ## Manage the server
 
 ```sh
-opencode service status          # background service state
 curl -u "opencode:$(oc-password)" http://127.0.0.1:4096/api/info
 tail -f ~/.local/share/opencode/serve.log
 bash .devcontainer/start-opencode.sh   # restart
-pkill -f 'opencode serve'              # stop
+pkill -f '[o]pencode serve'            # stop
 ```
 
 ## Update the shipped configuration
