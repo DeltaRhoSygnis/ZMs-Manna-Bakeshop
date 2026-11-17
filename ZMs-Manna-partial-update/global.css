@@ -1,0 +1,477 @@
+/* =========================================================
+   STYLE.CSS - Base & Common Styles
+   For: Web Development Laboratory (ZM's Manna Bakeshop)
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,WONK,wght@0,9..144,100,1,600..800;1,9..144,100,1,600..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px
+}
+
+body {
+  background-color: #F4EFE2;
+  color: #133452;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   1. LAYOUT & GRID SYSTEM
+   ========================================== */
+
+.section {
+  padding: 70px 0;
+}
+
+.section:nth-of-type(odd) {
+  background-color: #FFFFFF;
+}
+
+.section .container {
+  width: 100%;
+  max-width: 1750px;
+  margin: 0 auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+.col-2 {
+  grid-column: span 6;
+}
+
+.col-3 {
+  grid-column: span 4;
+}
+
+.col-4 {
+  grid-column: span 3;
+}
+
+/* ==========================================
+   2. TYPOGRAPHY & SECTION HEADERS
+   ========================================== */
+.section-header {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 48px auto;
+}
+
+.section-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-size: 2.35rem;
+  font-weight: 700;
+  color: #133452;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.section-desc {
+  font-size: 1rem;
+  color: #334155;
+  margin: 0;
+}
+
+/* Editorial Tag with Decorative Lines */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #D99B43;
+  margin-bottom: 16px;
+}
+
+.tag::before,
+.tag::after {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1.5px;
+  background-color: #D99B43;
+}
+
+/* ==========================================
+   3. PILL BUTTONS (Blue & Yellow Theme)
+   ========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1.5px solid transparent;
+}
+
+.section .btn-blue {
+  background-color: #F4C10F; /* Vibrant Yellow */
+  color: #133452; /* Deep Navy */
+  box-shadow: 0 4px 14px rgba(244, 193, 15, 0.25);
+}
+
+.section .btn-blue:hover {
+  background-color: #dcb00d;
+  color: #133452;
+  transform: translateY(-2px);
+}
+
+.section .btn-white {
+  background-color: transparent;
+  color: #133452;
+  border: 1.5px solid #133452;
+}
+
+.section .btn-white:hover {
+  background-color: #133452;
+  color: #F4EFE2;
+  transform: translateY(-2px);
+}
+
+.section .btn-block {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: auto;
+}
+
+/* ==========================================
+   4. CARDS & BOXES
+   ========================================== */
+.box {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 30px;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 6px 20px rgba(19, 52, 82, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(19, 52, 82, 0.09);
+  border-color: #F4C10F;
+}
+
+.step-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #133452;
+  color: #F4C10F;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.pathway-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: #133452;
+  margin: 0 0 12px 0;
+}
+
+.pathway-desc {
+  font-size: 0.94rem;
+  color: #475569;
+  margin: 0 0 24px 0;
+}
+
+/* ==========================================
+   5. PRODUCT CATALOG CARDS
+   ========================================== */
+.product-box {
+  padding: 22px;
+  text-align: center;
+}
+
+.product-img {
+  width: 100%;
+  height: 210px;
+  background-color: #F4EFE2;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.product-box:hover .product-img img {
+  transform: scale(1.06);
+}
+
+.product-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  color: #133452;
+  margin: 0 0 8px 0;
+}
+
+.product-info {
+  font-size: 0.86rem;
+  color: #2288B5; /* Sky Blue accent */
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.product-box .btn {
+  margin-top: 18px;
+}
+
+/* ==========================================
+   6. PACKAGING SPECIFICATIONS
+   ========================================== */
+.packaging-box {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  align-items: center;
+  padding: 40px;
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
+}
+
+.packaging-photo img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 10px 24px rgba(19, 52, 82, 0.1);
+}
+
+.packaging-details h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.9rem;
+  color: #133452;
+  margin: 0 0 14px 0;
+}
+
+.packaging-details p {
+  color: #475569;
+  margin: 0 0 20px 0;
+}
+
+.packaging-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+}
+
+.packaging-list li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 12px;
+  font-size: 0.94rem;
+  color: #133452;
+}
+
+.packaging-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: #F4C10F; /* Vibrant Yellow Accent */
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   7. ABOUT & LOCATION
+   ========================================== */
+.about-desc {
+  font-size: 0.96rem;
+  color: #475569;
+  margin: 0 0 16px 0;
+}
+
+.about-photo {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 315px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.map-box {
+  margin-top: auto;
+  background-color: #F4EFE2;
+  border: 1px dashed #2288B5;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.map-box h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: #133452;
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+}
+
+.map-box p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #334155;
+}
+
+/* ==========================================
+   8. CONTACT & CTA BOX
+   ========================================== */
+.contact-item {
+  text-align: center;
+  padding: 26px 20px;
+}
+
+.contact-item h5 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #2288B5;
+  margin: 0 0 8px 0;
+}
+
+.contact-item p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #133452;
+  margin: 0 0 6px 0;
+}
+
+.contact-item small {
+  font-size: 0.82rem;
+  color: #64748B;
+}
+
+.cta-box {
+  margin-top: 32px;
+  background: linear-gradient(135deg, #133452 0%, #1B466E 100%);
+  border: 2px solid #F4C10F;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px 40px;
+  border-radius: 20px;
+}
+
+.cta-box h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  color: #F4EFE2;
+  margin: 0 0 6px 0;
+}
+
+.cta-box p {
+  color: #CBD5E1;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cta-box .btn-blue {
+  background-color: #F4C10F;
+  color: #133452;
+  white-space: nowrap;
+}
+
+.cta-box .btn-blue:hover {
+  background-color: #dcb00d;
+}
+
+/* ==========================================
+   9. PHOTO GALLERY
+   ========================================== */
+.gallery-img {
+  border-radius: 16px;
+  overflow: hidden;
+  height: 230px;
+  box-shadow: 0 8px 20px rgba(19, 52, 82, 0.08);
+  border: 2px solid #E2E8F0;
+}
+
+.gallery-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.gallery-img:hover img {
+  transform: scale(1.07);
+}
+
+/* ==========================================
+   10. RESPONSIVE BREAKPOINTS
+   ========================================== */
+@media (max-width: 992px) {
+  .banner,
+  .packaging-box {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-text h1 {
+    font-size: 2.6rem;
+  }
+
+  .col-3 {
+    grid-column: span 6;
+  }
+
+  .col-4 {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-2,
+  .col-3,
+  .col-4 {
+    grid-column: span 12;
+  }
+
+  .cta-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .banner-text h1 {
+    font-size: 2.2rem;
+  }
+}

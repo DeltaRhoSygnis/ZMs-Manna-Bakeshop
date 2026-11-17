@@ -1,0 +1,75 @@
+/* ==========================================
+   HOME.CSS - Homepage specific styles 
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,WONK,wght@0,9..144,100,1,600..800;1,9..144,100,1,600..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+.section:first-of-type {
+  padding: 40px 0 70px 0;
+  background: #133452;
+  color: #F4EFE2;
+  border-bottom: 2px solid #F4C10F;
+}
+
+.banner {
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 1.15fr 1.85fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.banner-text h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  font-size: 3.35rem;
+  font-weight: 800;
+  color: #F4EFE2;
+  line-height: 1.12;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.5px;
+}
+
+.banner-text p {
+  font-size: 1.05rem;
+  color: #CBD5E1;
+  margin: 0 0 32px 0;
+  max-width: 540px;
+}
+
+.banner-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.banner-image img {
+  width: 100%;
+  height: auto;
+  max-height: 810px;
+  object-fit: cover;
+  padding: 6px;
+  background: linear-gradient(135deg, rgba(244, 239, 226, 0.15) 40%, #FFA726 60%);
+  box-sizing: border-box;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.section:first-of-type .tag {
+  color: #F4C10F;
+}
+
+.section:first-of-type .tag::before,
+.section:first-of-type .tag::after {
+  background-color: #F4C10F;
+}
+
+.section:first-of-type .btn-white {
+  background-color: transparent;
+  color: #F4EFE2;
+  border-color: #F4EFE2;
+}
+
+.section:first-of-type .btn-white:hover {
+  background-color: #F4EFE2;
+  color: #133452;
+}
