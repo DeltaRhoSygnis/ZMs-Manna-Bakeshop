@@ -1,0 +1,28 @@
+{
+  "name": "ZM's Manna + OpenCode",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "OPENCODE_VERSION": "2.0.22"
+    }
+  },
+  "remoteUser": "node",
+  "forwardPorts": [4096],
+  "portsAttributes": {
+    "4096": {
+      "label": "OpenCode Web",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/setup-opencode.sh",
+  "postStartCommand": "bash .devcontainer/start-opencode.sh",
+  "postAttachCommand": "bash .devcontainer/pair-opencode.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}

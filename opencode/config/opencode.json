@@ -1,0 +1,34 @@
+{
+  "mcp": {
+    "rea": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "rea-agents@6.8.0",
+        "mcp"
+      ],
+      "enabled": true,
+      "timeout": 120000
+    }
+  },
+  "skills": [
+    "/home/node/.config/opencode/ecc/skills",
+    "~/.opencode/skills"
+  ],
+  "providers": {
+    "opencode": {
+      "models": {
+        "deepseek-v4.1-flash-free": {
+          "limit": {
+            "context": 512000,
+            "output": 32000
+          }
+        }
+      }
+    }
+  },
+  "plugins": [
+    "superpowers@git+https://github.com/obra/superpowers.git#v7.0.1"
+  ]
+}

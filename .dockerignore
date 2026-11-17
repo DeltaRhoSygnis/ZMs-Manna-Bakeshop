@@ -1,0 +1,11 @@
+.git
+.github
+.gitignore
+archive
+reference
+mockups
+.superpowers
+assets
+wireframe-spec.png
+**/node_modules
+**/.DS_Store
