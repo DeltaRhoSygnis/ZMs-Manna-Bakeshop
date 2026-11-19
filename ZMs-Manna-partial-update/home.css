@@ -2,27 +2,25 @@
    HOME.CSS - Homepage specific styles 
    ========================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,WONK,wght@0,9..144,100,1,600..800;1,9..144,100,1,600..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
-
 .section:first-of-type {
-  padding: 40px 0 70px 0;
+  padding: calc(var(--section-space) * 0.6) 0 var(--section-space) 0;
   background: #133452;
   color: #F4EFE2;
   border-bottom: 2px solid #F4C10F;
 }
 
 .banner {
-  height: 80vh;
+  min-height: 80vh;
   display: grid;
   grid-template-columns: 1.15fr 1.85fr;
   align-items: center;
-  gap: 48px;
+  gap: clamp(24px, 4vw, 48px);
 }
 
 .banner-text h1 {
   font-family: 'Fraunces', Georgia, serif;
   font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-size: 3.35rem;
+  font-size: clamp(2.1rem, 1.2rem + 3vw, 3.35rem);
   font-weight: 800;
   color: #F4EFE2;
   line-height: 1.12;

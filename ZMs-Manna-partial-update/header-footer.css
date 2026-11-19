@@ -11,17 +11,12 @@ header {
   width: 100%;
 }
 
-header  .container {
-  max-width: 1750px;
-  width: 100%;
-  margin: 0 auto;
-}
-
 .header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  gap: 12px 16px;
+  padding-block: 12px;
 }
 
 /* Logo & Title Styling */
@@ -116,7 +111,7 @@ header .btn-blue:hover {
 footer {
   background-color: #133452;
   border-top: 2px solid #F4C10F;
-  padding: 20px 80px 20px;
+  padding: 20px 0;
   margin-top: 50px;
 }
 
@@ -197,10 +192,4 @@ font-weight: 700;
   padding-top: 15px;
   font-size: 12px;
   color: #94a3b8;
-}
-
-@media (max-width: 768px) {
-  nav {
-    display: none;
-  }
 }
