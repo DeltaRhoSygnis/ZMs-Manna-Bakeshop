@@ -1,397 +1,422 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zm’s Manna Bakeshop — Biscuits, Bread & Pasalubong · Valencia City, Bukidnon</title>
-<meta name="description" content="Zm’s Manna Bakeshop — small-batch biscocho, cookies, hopia and pasalubong favorites baked fresh in P-2 Lumbo, Valencia City, Bukidnon. Love at first bite.">
-<meta property="og:title" content="Zm’s Manna Bakeshop">
-<meta property="og:description" content="Small-batch biscuits, breads & pasalubong from Valencia City, Bukidnon. Love at first bite.">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://zms-manna.vercel.app/assets/wholesale.webp">
-<meta name="theme-color" content="#F8F3E8">
-<meta name="color-scheme" content="light">
-<link rel="icon" href="assets/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" href="assets/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<script>
-(function(){document.documentElement.classList.add("js");})();
-</script>
-<link rel="stylesheet" href="styles/theme.css">
-<link rel="stylesheet" href="styles/base.css">
-<link rel="stylesheet" href="styles/components.css">
-<link rel="stylesheet" href="styles/sections.css">
-<link rel="stylesheet" href="styles/responsive.css">
-<script src="app.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zm's Manna Bakeshop - Home</title>
+  <link rel="icon" href="assets/favicon.ico">
+
+  <!-- Simple CSS files -->
+  <link rel="stylesheet" href="style/global.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="stylesheet" href="styles/home.css">
+  <link rel="stylesheet" href="styles/animation.css">
+   <link rel="stylesheet" href="styles/media.css">
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
-<div class="scroll-progress" aria-hidden="true"><span id="progress-bar"></span></div>
-<div class="noise-overlay" aria-hidden="true"></div>
 
-<<<<<<< HEAD
-<!-- ============ THE HEADER — the brand pill and the menu button
-     Styled by styles/components.css ============ -->
-<header id="navbar">
-  <a class="brand" href="#home">
-    <span class="brand-logo"><img src="assets/ZmsLogo.webp" alt="" width="34" height="34"></span>
-    <span class="brand-name">Zm’s Manna<small>Bakeshop · Valencia</small></span>
-  </a>
-  <button id="menu-button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-    <span class="menu-button-text">Menu</span>
-    <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-  </button>
-</header>
+  <!-- ==========================================
+       1. HEADER / NAVIGATION
+       ========================================== -->
 
-<div id="mobile-menu" aria-hidden="true">
-  <nav class="menu-links" aria-label="Main navigation">
-    <a href="#home">Home <i>01</i></a>
-    <a href="#products">Products <i>02</i></a>
-    <a href="#story">Our Story <i>03</i></a>
-    <a href="#craft">Our Craft <i>04</i></a>
-    <a href="#freshness">Freshness <i>05</i></a>
-    <a href="#order">Order <i>06</i></a>
-    <a href="#visit">Visit Us <i>07</i></a>
-  </nav>
-  <div class="menu-footer">
-    <p class="menu-footer-text">P-2 Lumbo, Valencia City, Bukidnon · Mon–Sat, 7AM–6PM</p>
-  </div>
-</div>
-
-<main id="main">
-<!-- ============ THE BANNER — the big block at the top of the page
-     Styled by styles/sections.css ============ -->
-<section class="banner" id="home">
-  <div class="banner-image">
-    <span class="fallback-text">Zm</span>
-    <picture>
-      <!-- Above the panel the banner photo is 16:9, so it uses the wide
-           crop. -->
-      <source media="(max-width:1024px)" srcset="assets/banner-wide.webp">
-      <!-- Side by side the photo cell is nearly square, so it uses the
-           square crop. -->
-      <img src="assets/banner-square.webp" alt="A pack of Zm's Manna biscocho on a dark board beside golden lights, with baked biscocho slices in front" width="680" height="680" fetchpriority="high" decoding="async">
-    </picture>
-    <span class="banner-caption">Fresh from the bakehouse · Valencia City</span>
-  </div>
-  <div class="banner-text">
-    <div class="banner-logo" data-reveal data-delay="300">
-      <img src="assets/ZmsLogo.webp" alt="Zm’s Manna Bakeshop logo" width="86" height="86">
-    </div>
-    <div class="banner-copy">
-      <span class="section-label" data-reveal>Biscuits · Bread · Pasalubong</span>
-      <h1 class="banner-title" data-reveal data-delay="80">Zm’s<br>Manna</h1>
-      <p class="banner-tagline" data-reveal data-delay="160">“Love at first bite.”</p>
-      <p class="banner-description" data-reveal data-delay="240">
-        A biscuit, bread, and pasalubong bakehouse based in <b>P-2 Lumbo, Valencia City,
-        Bukidnon</b> — baked fresh in small batches for merienda tables and pasalubong
-        counters across Mindanao.
-      </p>
-      <div class="banner-buttons" data-reveal data-delay="320">
-        <a class="btn btn-primary" href="#products">Explore the products <span class="btn-arrow">→</span></a>
-        <a class="btn btn-secondary" href="#visit">Plan your visit <span class="btn-arrow">→</span></a>
-      </div>
-    </div>
-    <div class="banner-details" data-reveal data-delay="420">
-      <div><span>Products</span><p>Otap • Cookies • Toasted Bread • Loaf Breads</p></div>
-      <div><span>Bakehouse</span><p>P-2 Lumbo, Valencia City, Bukidnon</p></div>
-      <div><span>Freshness</span><p>Sealed 100g pouches • DTI registered</p></div>
-      <div><span>Visit</span><p>Mon – Sat · 7AM – 6PM</p></div>
-=======
-<!-- ============ THE HEADER — the logo on the left, the actions on the right
-     Styled by styles/components.css ============ -->
-<header id="navbar">
-  <a class="brand" href="#home">
-    <span class="brand-logo"><img src="assets/ZmsLogo.webp" alt="" width="42" height="42"></span>
-    <span class="brand-name">Zm’s Manna<small>Bakeshop · Valencia</small></span>
-  </a>
-  <nav class="nav-links" aria-label="Main navigation">
-    <a class="nav-link" href="#products">Products</a>
-    <a class="nav-link" href="#story">Our story</a>
-    <a class="nav-link" href="#craft">How we bake</a>
-    <a class="nav-link" href="#visit">Visit</a>
-    <a class="nav-phone" href="tel:+639261774601">0926 177 4601</a>
-    <a class="btn btn-primary nav-order" href="#order">Order now</a>
-  </nav>
-</header>
-
-<main id="main">
-<!-- ============ THE BANNER — the photograph is the section
-     Styled by styles/sections.css ============ -->
-<section class="banner" id="home">
-  <div class="banner-inner">
-    <span class="section-label">P-2 Lumbo · Valencia City</span>
-    <h1 class="banner-title">Zm’s Manna</h1>
-    <span class="banner-rule"></span>
-    <p class="banner-tagline">“Love at first bite.”</p>
-    <p class="banner-description">
-      A small-batch biscuit, bread and pasalubong bakehouse in <b>P-2 Lumbo, Valencia City</b> —
-      baked fresh for merienda tables and pasalubong counters across Bukidnon.
-    </p>
-    <div class="banner-buttons">
-      <a class="btn btn-primary" href="#order">Order now <span class="btn-arrow">→</span></a>
-      <a class="btn btn-secondary" href="#products">See what we bake</a>
->>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
-    </div>
-  </div>
-</section>
-
-<!-- ============ THE TICKER — the strip of names that scrolls sideways
-     Styled by styles/sections.css ============ -->
-<div class="ticker" aria-hidden="true">
-  <div class="ticker-track">
-    <span class="ticker-item">Biscocho <span class="ticker-star">✦</span> Cookie de Longa <span class="ticker-star">✦</span> Toasted Mammon <span class="ticker-star">✦</span> Patatas <span class="ticker-star">✦</span> Hopia Choco <span class="ticker-star">✦</span> Otap <span class="ticker-star">✦</span> Loaf Breads <span class="ticker-star">✦</span> Pasalubong Favorites <span class="ticker-star">✦</span></span>
-    <span class="ticker-item">Biscocho <span class="ticker-star">✦</span> Cookie de Longa <span class="ticker-star">✦</span> Toasted Mammon <span class="ticker-star">✦</span> Patatas <span class="ticker-star">✦</span> Hopia Choco <span class="ticker-star">✦</span> Otap <span class="ticker-star">✦</span> Loaf Breads <span class="ticker-star">✦</span> Pasalubong Favorites <span class="ticker-star">✦</span></span>
-  </div>
-</div>
-
-<!-- ============ THE STORY — about us and the statistics
-     Styled by styles/sections.css ============ -->
-<section class="section" id="story">
-  <div class="container story-grid">
-    <div class="story-copy">
-      <span class="section-label" data-reveal>Our story</span>
-      <h2 data-reveal data-delay="80">A neighborhood bakehouse, baked with heart.</h2>
-      <p data-reveal data-delay="160">
-        Zm’s Manna Bakeshop is a local bakehouse in <b>P-2 Lumbo, Valencia City, Bukidnon</b>.
-        We bake the snacks Mindanao grew up with — twice-baked biscocho, toasted mammon,
-        hopia, and buttery cookies — in small batches, then seal them fresh the same day.
-      </p>
-      <p data-reveal data-delay="240">
-        Every pouch carries our <b>DTI-registered label</b> and a ready-to-scan barcode, so the
-        same favorites you enjoy at home are right at rest on the shelves of local stores
-        and pasalubong counters across Bukidnon.
-      </p>
-    </div>
-    <div class="stats">
-      <div class="stat" data-reveal><span class="stat-number" data-count="6">0</span><span class="stat-label">Signature product lines</span></div>
-      <div class="stat" data-reveal data-delay="90"><span class="stat-number" data-count="100" data-suffix="g">0</span><span class="stat-label">Standard sealed pouch</span></div>
-      <div class="stat" data-reveal data-delay="180"><span class="stat-number" data-count="6">0</span><span class="stat-label">Baking days a week</span></div>
-      <div class="stat" data-reveal data-delay="270"><span class="stat-number" data-count="1">0</span><span class="stat-label">Home bakehouse, Lumbo</span></div>
-    </div>
-  </div>
-</section>
-
-<<<<<<< HEAD
-<!-- ============ THE PRODUCTS — the six cards
-     Styled by styles/sections.css ============ -->
-<section class="section" id="products">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label" data-reveal>The counter</span>
-      <h2 data-reveal data-delay="80">Six small-batch favorites</h2>
-      <p class="section-subtitle" data-reveal data-delay="160">Tap any product to open its photo and read the texture, flavor notes, and pairing ideas — everything you’d want to know before your first bite.</p>
-    </div>
-    <div class="product-grid" id="product-grid"></div>
-    <noscript><p>Enable JavaScript to browse the interactive product catalog.</p></noscript>
-=======
-<!-- ============ THE COUNTER — one product at a time, stepped with the arrows
-     Styled by styles/sections.css, filled in by app.js ============ -->
-<section class="section" id="products">
-  <div class="counter-head" aria-live="polite">
-    <span class="counter-cat" id="counter-cat">Toasted specialties</span>
-    <h2 class="counter-name" id="counter-name">Biscocho</h2>
-    <p class="counter-hook" id="counter-hook">“Twice-baked bread with a glassy sugar crust.”</p>
-  </div>
-
-  <div class="counter-band" id="counter-band">
-    <span class="fallback-text" aria-hidden="true">Zm</span>
-    <img id="counter-image" src="assets/Biscocho.webp" alt="Zm’s Manna biscocho slices in a clear pouch" width="960" height="720" fetchpriority="high" decoding="async">
-    <span class="counter-pager"><b id="counter-index">01</b> / <span id="counter-total">06</span></span>
-    <button class="counter-step counter-back" id="counter-back" aria-label="Previous product">←</button>
-    <button class="counter-step counter-forward" id="counter-forward" aria-label="Next product">→</button>
-  </div>
-
-  <div class="counter-foot">
-    <p class="counter-description" id="counter-description"></p>
-    <div class="counter-facts" id="counter-facts"></div>
-    <button class="counter-more" id="counter-more">Read the full notes <span class="btn-arrow">→</span></button>
->>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
-  </div>
-</section>
-
-<!-- ============ THE CRAFT — how we bake, and how it is packed
-     Styled by styles/sections.css ============ -->
-<section class="section" id="craft">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label" data-reveal>How we bake</span>
-      <h2 data-reveal data-delay="80">From dough to sealed pouch</h2>
-      <p class="section-subtitle" data-reveal data-delay="160">Four steps, no shortcuts — the same routine every baking day.</p>
-    </div>
-
-    <div class="bake-poster" data-reveal>
-      <img src="assets/how-we-bake.webp" alt="Zm's Manna Bakeshop — fresh from our bakehouse, special reseller and pasalubong updates" width="1376" height="768" loading="lazy" decoding="async">
-    </div>
-
-    <div class="steps">
-      <div class="step" data-reveal><span class="step-number">01</span><h3>Mix &amp; shape</h3><p>Time-tested recipes mixed and shaped by hand in small batches — never mass-produced.</p></div>
-      <div class="step" data-reveal data-delay="100"><span class="step-number">02</span><h3>Bake low &amp; slow</h3><p>Even, golden bakes that build flavor and set the crumb before toasting.</p></div>
-      <div class="step" data-reveal data-delay="200"><span class="step-number">03</span><h3>Toast for crunch</h3><p>Biscocho and mammon go back in the oven — twice-baked for that signature crisp.</p></div>
-      <div class="step" data-reveal data-delay="300"><span class="step-number">04</span><h3>Cool &amp; seal</h3><p>Fully cooled, then heat-sealed in labeled 100g pouches the same day.</p></div>
-    </div>
-
-    <!-- the packaging half of the same section -->
-    <div class="craft-packing" id="freshness">
-      <div class="section-header">
-        <span class="section-label" data-reveal>Freshness &amp; packaging</span>
-        <h2 data-reveal data-delay="80">Made to stay crisp</h2>
-        <p class="section-subtitle" data-reveal data-delay="160">How every pouch protects the bake — from our oven to your pantry.</p>
-      </div>
-
-      <div class="feature-list">
-        <div class="feature-card" data-reveal>
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <h3>Heat-sealed pouches</h3><p>Clear, moisture-proof packs keep biscuits crisp through transport and shelf time.</p>
+  <header>
+    <div class="container header-row">
+      <!-- Bakery Logo & Title -->
+      <a href="index.html" class="logo">
+        <img src="Assets\ZmsLogo.webp" alt="Zm's Logo">
+        <div class="logo-text">
+          <h2>Zm's Manna</h2>
+          <small>Bakeshop · Valencia</small>
         </div>
-        <div class="feature-card" data-reveal data-delay="90">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5M8 17h8"/></svg></span>
-          <h3>Honest labels</h3><p>DTI registration, nutrition details, and a scannable barcode printed on every unit.</p>
-        </div>
-        <div class="feature-card" data-reveal data-delay="180">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M6 20h12M8 20V9a4 4 0 0 1 8 0v11"/><path d="M8 13h8"/></svg></span>
-          <h3>Uniform 100g packs</h3><p>The same convenient size across the biscuit lines — easy to grab, easy to share.</p>
-        </div>
-        <div class="feature-card" data-reveal data-delay="270">
-          <span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
-          <h3>Shelf-stable crunch</h3><p>Store cool and dry, reseal after opening, and the crunch holds for weeks.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </a>
 
-<!-- ============ THE ORDER — wholesale and retail
-     Styled by styles/sections.css ============ -->
-<section class="section" id="order">
-  <div class="container">
-    <div class="order-grid">
-      <div class="order-photo" data-reveal>
-        <img src="assets/wholesale.webp" alt="Zm's Manna bakeshop — authentic Bukidnon baked delights, direct from Valencia City" width="1376" height="768" loading="lazy" decoding="async">
-      </div>
-      <div class="order-copy">
-        <span class="section-label" data-reveal>Order from us</span>
-        <h2 data-reveal data-delay="80">Wholesale & retail, baked fresh each day</h2>
-        <p data-reveal data-delay="160">
-          We supply sealed 100&nbsp;g pouches of biscocho, cookies, toasted mammon and
-          hopia to partner counters, shops and merienda tables across Valencia City
-          and the rest of Bukidnon. Every pouch is labelled, barcoded and ready to
-          resell.
-        </p>
-        <ul class="order-list" data-reveal data-delay="240">
-          <li><span><b>Pasalubong and reseller supply</b> — by the carton or by the dozen.</span></li>
-          <li><span><b>Retail and merienda orders</b> — single pouches, ready to pick up.</span></li>
-          <li><span><b>Baked the same day</b> — DTI-registered labels on every unit.</span></li>
+      <!-- Navigation links -->
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#packaging">Packaging</a></li>
+          <li><a href="wholesale.html">Wholesale</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
-        <div class="order-cta" data-reveal data-delay="320">
-          <a class="btn btn-primary" href="tel:+639261774601">Call 0926-177-4601 <span class="btn-arrow">→</span></a>
-          <a class="btn btn-secondary" href="#visit">Find the bakehouse</a>
+      </nav>
+
+      <!-- Request Button -->
+
+      <div>
+        <a href="wholesale.html#inquiry-form" class="btn btn-blue">Request Price List</a>
+      </div>
+    </div>
+    <div class="scroll-progress"></div>
+  </header>
+
+  <!-- ==========================================
+       2. WELCOME / MAIN BANNER
+       ========================================== -->
+
+  <section class="section">
+    <div class="container">
+      <div class="banner">
+        <!-- Banner Left text -->
+        <div class="banner-text">
+          <span class="tag">Fresh From Valencia City</span>
+          <h1>Local Biscuits, Bread &amp; Pasalubong from Valencia City</h1>
+          <p>
+            Zm's Manna Bakeshop provides quality baked biscuits, toasted bread, and pasalubong favorites produced in P-2 Lumbo, Valencia City, Bukidnon for individual customers and bulk wholesale buyers across Mindanao.
+          </p>
+          <div class="banner-btns">
+            <a href="wholesale.html#inquiry-form" class="btn btn-blue">Request Price List</a>
+            <a href="#products" class="btn btn-white">View Products</a>
+          </div>
+        </div>
+
+        <!-- Banner Right Image -->
+        <div class="banner-image">
+          <img src="Assets\how-we-bake.webp" alt="Fresh Bakery Products">
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ THE VISIT — where to find the bakehouse
-     Styled by styles/sections.css ============ -->
-<section class="section" id="visit">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-label" data-reveal>Visit us</span>
-      <h2 data-reveal data-delay="80">Find the bakehouse</h2>
-      <p class="section-subtitle" data-reveal data-delay="160">Walk-ins welcome — pasalubong favorites are stocked fresh every baking day.</p>
-    </div>
-    <div class="visit-grid">
-      <div class="visit-cards">
-        <div class="visit-card" data-reveal>
-          <span class="visit-label">Address</span>
-          <span class="visit-value">P-2 Lumbo, Valencia City</span>
-          <span class="visit-detail">Bukidnon, Northern Mindanao</span>
+  <!-- ==========================================
+       3. ABOUT THE BAKERY
+       ========================================== -->
+
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">About Zm's Manna Bakeshop</h2>
+        <p class="section-desc">Our bakery story, facility, and location in Valencia City.</p>
+      </div>
+
+      <div class="row">
+        <!-- Overview -->
+        <div class="col-2">
+          <div class="box">
+            <span class="tag">Bakery Overview</span>
+            <p class="about-desc">
+              Located in P-2 Lumbo, Valencia City, Bukidnon, Zm's Manna Bakeshop is a dedicated local producer of traditional toasted breads, cookies, otap, and pasalubong bakery items.
+            </p>
+            <p class="about-desc">
+              We serve walk-in customers, mini marts, supermarkets, and local resellers across Bukidnon with freshly baked products.
+            </p>
+            <div class="about-photo">
+              <img src="Assets\promotion-wide.webp" alt="Bakery Production">
+            </div>
+          </div>
         </div>
-        <div class="visit-card" data-reveal data-delay="80">
-          <span class="visit-label">Hours</span>
-          <span class="visit-value">Mon – Sat · 7AM – 6PM</span>
-          <span class="visit-detail">Closed Sundays</span>
+
+        <!-- Location & Directions -->
+        <div class="col-2">
+          <div class="box">
+            <span class="tag">Facility Address</span>
+            <h3 style="color: #0b2746; margin-bottom: 8px;">P-2 Lumbo, Valencia City, Bukidnon</h3>
+            <p class="about-desc">Convenient direct access for transport vans, distributor pickups, and regional logistics couriers.</p>
+
+            <div class="map-box">
+              <h4>&#128506; Location Directions</h4>
+              <p>Along Lumbo primary bypass arterial road, Valencia City, Bukidnon.</p>
+              <p style="margin-top: 8px; color: #888888;">(Open for walk-ins &amp; scheduled pickups)</p>
+            </div>
+          </div>
         </div>
-        <a class="visit-card" href="tel:+639261774601" data-reveal data-delay="160">
-          <span class="visit-label">Phone</span>
-          <span class="visit-value">0926-177-4601</span>
-          <span class="visit-detail">As printed on every pouch</span>
-        </a>
-        <a class="visit-card" data-fb href="#" target="_blank" rel="noopener" data-reveal data-delay="240">
-          <span class="visit-label">Facebook</span>
-          <span class="visit-value">Zm’s Manna Bakeshop</span>
-          <span class="visit-detail">Fresh-batch updates &amp; announcements</span>
-        </a>
-      </div>
-      <div class="map-wrapper" data-reveal data-delay="120">
-        <iframe title="Map — Zm’s Manna Bakeshop, P-2 Lumbo, Valencia City, Bukidnon"
-          src="https://www.google.com/maps?q=P-2+Lumbo,+Valencia+City,+Bukidnon,+Philippines&output=embed"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
     </div>
-    <p class="visit-note" data-reveal><b>✦</b> Look for the clear pouches with the Zm’s Manna label at partner counters around Valencia City.</p>
-  </div>
-</section>
+  </section>
 
-</main>
+  <!-- ==========================================
+       4. ORDER OPTIONS (PATHWAYS)
+       ========================================== -->
 
-<!-- ============ THE FOOTER — links and the back-to-top button
-     Styled by styles/components.css ============ -->
-<footer class="footer">
-  <div class="container">
-    <h2 class="screen-reader-only">Contact and links</h2>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="#home"><span class="brand-logo"><img src="assets/ZmsLogo.webp" alt="" width="42" height="42" loading="lazy"></span><span class="brand-name">Zm’s Manna<small>Bakeshop · Valencia</small></span></a>
-        <p>Small-batch biscuits, breads, and pasalubong favorites from Valencia City, Bukidnon. Love at first bite.</p>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Wholesale &amp; Retail Pathways</h2>
+        <p class="section-desc">Targeted ordering pipelines and commercial arrangements tailored by purchasing volume.</p>
       </div>
-      <div class="footer-column">
-        <h3>Explore</h3>
-        <a href="#products">Products</a>
-        <a href="#story">Our Story</a>
-        <a href="#craft">Our Craft</a>
-        <a href="#freshness">Freshness</a>
-        <a href="#order">Order</a>
-      </div>
-      <div class="footer-column">
-        <h3>Visit</h3>
-        <span>P-2 Lumbo, Valencia City, Bukidnon</span>
-        <span>Mon – Sat · 7AM – 6PM</span>
-        <a href="tel:+639261774601">0926-177-4601</a>
-        <a data-fb href="#" target="_blank" rel="noopener">Facebook Page</a>
+
+      <div class="row">
+        <!-- Option 1 -->
+        <div class="col-3">
+          <div class="box">
+            <span class="step-badge">STEP 01</span>
+            <h3 class="pathway-title">Individual Customers &amp; Walk-ins</h3>
+            <p class="pathway-desc">Direct retail purchases, travel-ready pasalubong multi-packs, and walk-in counter pickups directly from our primary bakehouse in Lumbo, Valencia City.</p>
+            <a href="#products" class="btn btn-white btn-block">Explore Catalog</a>
+          </div>
+        </div>
+
+        <!-- Option 2 -->
+        <div class="col-3">
+          <div class="box">
+            <span class="step-badge">STEP 02</span>
+            <h3 class="pathway-title">Stores &amp; Mini Marts</h3>
+            <p class="pathway-desc">Pre-sealed reseller packs optimized for fast shelf-turnover. Starter inventory bundles, predictable replenishment cycles, and regional courier dispatch.</p>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Reseller Inquiries</a>
+          </div>
+        </div>
+
+        <!-- Option 3 -->
+        <div class="col-3">
+          <div class="box">
+            <span class="step-badge">STEP 03</span>
+            <h3 class="pathway-title">Pharmacies, Malls &amp; Corporate</h3>
+            <p class="pathway-desc">Institutional wholesale volume supply contracts, barcoded packaged dry-goods, regional delivery routing, and formal recurring distribution across Mindanao.</p>
+            <a href="wholesale.html#inquiry-form" class="btn btn-blue btn-block">Request Bulk List</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> Zm’s Manna Bakeshop · DTI registered</span>
-      <span>Baked with love in Mindanao <i class="footer-star" aria-hidden="true">✦</i></span>
+  </section>
+
+  <!-- ==========================================
+       5. PRODUCT CATALOG
+       ========================================== -->
+
+  <section id="products" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Product Catalog</h2>
+        <p class="section-desc">Fresh baked pasalubong items packed in convenient retail pouches.</p>
+      </div>
+
+      <div class="row">
+        <!-- Product 1 -->
+        <div class="col-3">
+          <div class="box product-box">
+            <div class="product-img">
+              <img src="Assets\Cookie-de-longga.jpeg" alt="Cookie de Longa">
+            </div>
+            <h3 class="product-name">Cookie de Longa</h3>
+            <div class="product-info">Pack Size: 100g Pouch</div>
+            <div class="product-info">Unit: Retail Pack / Carton Box</div>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
+          </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="col-3">
+          <div class="box product-box">
+            <div class="product-img">
+              <img src="assets/Biscocho2.webp" alt="Toasted Biscocho">
+            </div>
+            <h3 class="product-name">Toasted Biscocho</h3>
+            <div class="product-info">Pack Size: 100g Pouch</div>
+            <div class="product-info">Unit: Retail Pack / Carton Box</div>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
+          </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="col-3">
+          <div class="box product-box">
+            <div class="product-img">
+              <img src="assets/Mammon.webp" alt="Toasted Mammon">
+            </div>
+            <h3 class="product-name">Toasted Mammon</h3>
+            <div class="product-info">Pack Size: 100g Pouch</div>
+            <div class="product-info">Unit: Retail Pack / Carton Box</div>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
+          </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="col-3">
+          <div class="box product-box">
+            <div class="product-img">
+              <img src="assets/Hopia.webp" alt="Hopia Choco">
+            </div>
+            <h3 class="product-name">Hopia Choco</h3>
+            <div class="product-info">Pack Size: 100g Pouch</div>
+            <div class="product-info">Unit: Retail Pack / Carton Box</div>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
+          </div>
+        </div>
+
+        <!-- Product 5 -->
+        <div class="col-3">
+          <div class="box product-box">
+            <div class="product-img">
+              <img src="assets/Patatas.webp" alt="Patatas Biscuits">
+            </div>
+            <h3 class="product-name">Patatas Biscuits</h3>
+            <div class="product-info">Pack Size: 100g Pouch</div>
+            <div class="product-info">Unit: Retail Pack / Carton Box</div>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
+          </div>
+        </div>
+
+        <!-- Product 6 -->
+        <div class="col-3">
+          <div class="box product-box">
+            <div class="product-img">
+              <img src="assets/Biscocho.webp" alt="Special Biscocho Nice">
+            </div>
+            <h3 class="product-name">Special Biscocho</h3>
+            <div class="product-info">Pack Size: 100g Pouch</div>
+            <div class="product-info">Unit: Retail Pack / Carton Box</div>
+            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<button id="back-to-top" aria-label="Back to top">↑</button>
+  <!-- ==========================================
+       6. PACKAGING SPECIFICATIONS
+       ========================================== -->
 
-<!-- ============ THE PRODUCT POPUP — filled in by app.js
-     Styled by styles/components.css ============ -->
-<div class="modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close details">✕</button>
-    <div class="modal-media"></div>
-    <div class="modal-info"></div>
-  </div>
-</div>
+  <section id="packaging" class="section">
+    <div class="container">
+      <div class="box packaging-box">
+        <div class="packaging-photo">
+          <img src="assets/ad.webp" alt="Packaging Display">
+        </div>
 
-<!-- ============ THE PHOTO VIEWER — filled in by app.js
-     Styled by styles/components.css ============ -->
-<div class="photo-viewer" id="photo-viewer" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
-  <button class="photo-close" aria-label="Close photo viewer">✕</button>
-  <button class="photo-prev" aria-label="Previous photo">←</button>
-  <div class="photo-frame"><img class="photo-image" alt=""></div>
-  <button class="photo-next" aria-label="Next photo">→</button>
-  <div class="photo-bar"><span class="photo-caption"></span><span class="photo-counter"></span></div>
-</div>
+        <div class="packaging-details">
+          <span class="tag">Wholesale Ready</span>
+          <h3>Packaging &amp; Merchandising Specifications</h3>
+          <p>Engineered for long ambient shelf-life, simple inventory scanning, and attractive display placement.</p>
+
+          <ul class="packaging-list">
+            <li><strong>Clear Heat-Sealed Pouches:</strong> Durable plastic with ingredients, allergen labels, and clear expiry date stamp.</li>
+            <li><strong>Barcode &amp; DTI Ready:</strong> Designated slot for official DTI Negosyo Center branding and standard POS barcodes.</li>
+            <li><strong>Standard Net Weight:</strong> Approximately ~100g per retail pouch.</li>
+            <li><strong>Long Shelf Life:</strong> Great for hanging display strips, convenience store counters, and grocery shelves.</li>
+          </ul>
+
+          <a href="wholesale.html#inquiry-form" class="btn btn-blue">Inquire on Bulk Orders</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       7. CONTACT INFORMATION
+       ========================================== -->
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Contact &amp; Information</h2>
+        <p class="section-desc">Get in touch with our bakehouse team for orders and questions.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <div class="box contact-item">
+            <h5>Official Phone</h5>
+            <p>0926-177-4681</p>
+            <small>Call / SMS Inquiries</small>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box contact-item">
+            <h5>Facebook Page</h5>
+            <p>Zm's Manna Bakeshop</p>
+            <small>Official Social Page</small>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box contact-item">
+            <h5>Address</h5>
+            <p>P-2 Lumbo, Valencia</p>
+            <small>Valencia City, Bukidnon</small>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="box contact-item">
+            <h5>Business Hours</h5>
+            <p>7:00 AM - 6:00 PM</p>
+            <small>Monday to Saturday</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Link to Wholesale -->
+      <div class="box cta-box">
+        <div>
+          <h3>Need wholesale pricing &amp; logistics information?</h3>
+          <p>Check out our distribution routes, MOQ, and inquiry form on our wholesale page.</p>
+        </div>
+        <a href="wholesale.html" class="btn btn-blue">Go to Wholesale Page &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       8. PHOTO GALLERY
+       ========================================== -->
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Product Showcase Gallery</h2>
+        <p class="section-desc">Photos of our packaged products ready for distribution.</p>
+      </div>
+
+      <div class="row">
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="Assets\Cookie-de-longga.jpeg" alt="Cookie de Longa">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Biscocho.webp" alt="Biscocho">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Mammon.webp" alt="Mammon">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="gallery-img">
+            <img src="assets/Hopia.webp" alt="Hopia">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       9. FOOTER
+       ========================================== -->
+
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h3>Zm's Manna Bakeshop</h3>
+          <p>
+            Quality baked biscuits, toasted bread, and pasalubong favorites produced in P-2 Lumbo, Valencia City, Bukidnon.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h3>Navigation Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#packaging">Packaging</a></li>
+            <li><a href="wholesale.html">Wholesale</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Zm's Manna Bakeshop. All rights reserved.</p>
+        <p>Web Development Laboratory Project</p>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
