@@ -1,30 +1,26 @@
+# ---------------------------------------------------------------------------
+# Local-only archive: anything moved here stays on this machine.
+# ---------------------------------------------------------------------------
+.archive/
 archive/
-*.md
-!README.md
-!CLAUDE.md
-!docs/
-!docs/**/*.md
 reference/
 .zed
-<<<<<<< HEAD
-=======
 .superpowers/
 
-# OpenCode configuration shipped to the Codespaces image. The .md rules above
-# would otherwise drop every agent, command and skill file.
-!opencode/**
-opencode/config/service.json
-opencode/config/.server-password
-opencode/config/pair-url.txt
-opencode/config/serve.log
->>>>>>> 4dcacea4060d42f8ebc1886ae37d1a7c60e6636f
+# Markdown is local-only unless explicitly shipped
+*.md
+!README.md
 
+# Dev scaffolding kept locally but not published
 docs/
-zm-manna
-app.js
-.dockerignore
-styles/archive/
-rename/
 mockups/
 opencode/
-.devcontainer
+rename/
+zm-manna/
+ZMs-Manna-partial-update/
+.devcontainer/
+styles/archive/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db

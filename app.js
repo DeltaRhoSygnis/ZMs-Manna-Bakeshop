@@ -8,7 +8,8 @@
    JavaScript never styles anything. It changes *state* —
    it adds a class name to an element, or sets a CSS custom
    property — and the stylesheet reacts to that state.
-   The whole contract is written down in docs/JS-CSS-BRIDGE.md.
+   The whole contract is written down in the JS/CSS bridge notes
+   kept in the local archive (.archive/docs/JS-CSS-BRIDGE.md).
 
    A NOTE ON ORDER
    index.html loads this file with `defer`, which means the
