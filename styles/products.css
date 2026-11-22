@@ -1,17 +1,19 @@
 /* ==========================================
-   PRODUCTS.CSS — Horizontal product collection
-   Native scroll-snap does the work; JS only
-   drives the arrows, drag and progress bar.
+   PRODUCTS.CSS — Looping product carousel
+   Three cards read as the shelf; one card on
+   each side sits back as a faded buffer.
    ========================================== */
 
 .collection {
-  --card-w: clamp(252px, 27vw, 352px);
-  --card-gap: clamp(16px, 1.6vw, 24px);
+  --card-w: clamp(198px, 18vw, 262px);
+  --card-h: clamp(336px, 30.5vw, 444px);
+  --step: calc(var(--card-w) * 0.98);
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --rail-pad: max(var(--gutter), calc((100% - var(--page-max)) / 2 + var(--gutter)));
 
-  padding: clamp(64px, 9vw, 116px) 0 clamp(40px, 6vw, 68px);
+  padding: clamp(64px, 9vw, 116px) 0 clamp(40px, 6vw, 64px);
   background-color: #F4EFE2;
+  overflow: hidden;
+  overflow: clip;
 }
 
 /* --- Section head --------------------------------------------------- */
@@ -21,7 +23,7 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: clamp(24px, 4vw, 64px);
-  margin-bottom: clamp(30px, 4vw, 48px);
+  margin-bottom: clamp(28px, 3.6vw, 44px);
 }
 
 .collection__title {
@@ -33,7 +35,6 @@
   letter-spacing: -0.035em;
   color: #133452;
   margin: 0 0 14px 0;
-  max-width: 18ch;
 }
 
 .collection__desc {
@@ -68,8 +69,7 @@
     background-color 0.25s ease,
     border-color 0.25s ease,
     color 0.25s ease,
-    transform 0.25s ease,
-    opacity 0.25s ease;
+    transform 0.25s ease;
 }
 
 .rail-btn svg {
@@ -77,66 +77,64 @@
   height: 20px;
 }
 
-.rail-btn:hover:not(:disabled) {
+.rail-btn:hover {
   background-color: #133452;
   border-color: #133452;
   color: #F4EFE2;
   transform: translateY(-2px);
 }
 
-.rail-btn:disabled {
-  opacity: 0.28;
-  cursor: default;
+/* --- The carousel --------------------------------------------------- */
+
+.showcase {
+  position: relative;
 }
 
-/* --- The rail ------------------------------------------------------- */
-
-.rail {
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--rail-pad);
-  scroll-behavior: smooth;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+.showcase__viewport {
+  position: relative;
+  height: var(--card-h);
+  touch-action: pan-y;
   cursor: grab;
-  /* Room for the card lift + shadow, cancelled out again so layout is unchanged */
-  padding-block: 24px 46px;
-  margin-block: -24px -46px;
 }
 
-.rail::-webkit-scrollbar {
-  display: none;
-}
-
-.rail:focus-visible {
-  outline: 3px solid #F4C10F;
-  outline-offset: 4px;
-}
-
-.rail.is-dragging {
+.showcase.is-dragging .showcase__viewport {
   cursor: grabbing;
-  scroll-snap-type: none;
-  scroll-behavior: auto;
-  user-select: none;
 }
 
-.rail__track {
-  display: flex;
-  align-items: stretch;
-  gap: var(--card-gap);
-  width: max-content;
-  padding-inline: var(--rail-pad);
+.showcase__track {
+  position: relative;
+  height: 100%;
   margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-.rail__item {
-  display: flex;
-  flex: 0 0 var(--card-w);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+/* Every card is stacked on the same centre point, then pushed sideways
+   by its distance from the active one. JS writes --o (offset), --s
+   (scale), --a (opacity) and --lift; everything else is CSS. */
+.showcase__item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: var(--z, 1);
+  width: var(--card-w);
+  height: 100%;
+  margin: 0;
+  transform:
+    translate(-50%, -50%)
+    translateY(var(--lift, 0px))
+    translateX(calc(var(--o, 0) * var(--step)))
+    scale(var(--s, 1));
+  opacity: var(--a, 1);
+  transition:
+    transform 0.6s var(--ease-out),
+    opacity 0.45s ease;
+  will-change: transform, opacity;
+}
+
+/* While a finger or mouse is down the cards must follow it exactly */
+.showcase.is-dragging .showcase__item {
+  transition: none;
 }
 
 /* --- Product card --------------------------------------------------- */
@@ -145,17 +143,24 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 100%;
+  padding: 0;
   overflow: hidden;
   border: 1px solid rgba(19, 52, 82, 0.12);
-  border-radius: 22px;
+  border-radius: 18px;
   background-color: #fffdf8;
   color: #133452;
+  font: inherit;
+  text-align: left;
   text-decoration: none;
-  box-shadow: 0 1px 2px rgba(19, 52, 82, 0.05);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  box-shadow: 0 2px 6px rgba(19, 52, 82, 0.05);
   transition:
-    transform 0.5s var(--ease-out),
-    box-shadow 0.5s var(--ease-out),
-    border-color 0.3s ease;
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    background-color 0.4s ease;
 }
 
 .product-card:focus-visible {
@@ -165,7 +170,9 @@
 
 .product-card__media {
   position: relative;
-  aspect-ratio: 4 / 5;
+  display: block;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow: hidden;
   background-color: #f2e9d8;
 }
@@ -182,56 +189,58 @@
 
 .product-card__index {
   position: absolute;
-  top: 16px;
-  left: 18px;
+  top: 12px;
+  left: 14px;
   z-index: 2;
-  font-size: 0.7rem;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.2em;
-  color: rgba(19, 52, 82, 0.45);
+  color: rgba(19, 52, 82, 0.5);
 }
 
 .product-card__badge {
   position: absolute;
-  top: 13px;
-  right: 13px;
+  top: 10px;
+  right: 10px;
   z-index: 2;
-  padding: 6px 11px;
+  padding: 5px 9px;
   border-radius: 999px;
   background-color: #F4C10F;
   color: #133452;
-  font-size: 0.6rem;
+  font-size: 0.52rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   box-shadow: 0 4px 12px rgba(19, 52, 82, 0.16);
 }
 
 .product-card__body {
   display: flex;
-  flex: 1;
+  flex: 0 0 auto;
   flex-direction: column;
-  gap: 6px;
-  padding: 18px 20px 20px;
+  gap: 5px;
+  padding: 14px 16px 16px;
 }
 
 .product-card__cat {
+  display: block;
   margin: 0;
-  font-size: 0.64rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.17em;
   text-transform: uppercase;
   color: #8a6a2f;
 }
 
 .product-card__name {
+  display: block;
   margin: 0;
   font-family: 'Fraunces', Georgia, serif;
   font-variation-settings: "SOFT" 100, "WONK" 1;
-  font-size: clamp(1.4rem, 1.15rem + 0.55vw, 1.72rem);
+  font-size: clamp(1.12rem, 0.98rem + 0.42vw, 1.34rem);
   font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: #133452;
 }
 
@@ -239,14 +248,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-top: auto;
-  padding-top: 16px;
+  gap: 10px;
+  margin-top: 6px;
+  padding-top: 10px;
   border-top: 1px solid rgba(19, 52, 82, 0.12);
 }
 
 .product-card__spec {
-  font-size: 0.74rem;
+  font-size: 0.66rem;
   letter-spacing: 0.02em;
   color: #5b6b7b;
 }
@@ -254,101 +263,160 @@
 .product-card__cta {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
+  gap: 4px;
+  font-size: 0.68rem;
   font-weight: 700;
   color: #133452;
   white-space: nowrap;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
 }
 
 .product-card__cta svg {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   transition: transform 0.3s var(--ease-out);
 }
 
-/* --- Dark / featured card ------------------------------------------- */
+/* --- The card in focus ---------------------------------------------- */
 
-.product-card--dark {
-  background-color: #133452;
-  border-color: #133452;
-  box-shadow: 0 18px 36px rgba(19, 52, 82, 0.22);
+.showcase__item.is-center .product-card {
+  background-color: #fffefa;
+  border-color: rgba(244, 193, 15, 0.95);
+  box-shadow:
+    0 30px 55px -18px rgba(19, 52, 82, 0.42),
+    0 0 0 1px rgba(244, 193, 15, 0.55);
 }
 
-.product-card--dark .product-card__name {
-  color: #FBF7EE;
+.showcase__item.is-center .product-card__media img {
+  transform: scale(1.04);
 }
 
-.product-card--dark .product-card__cat {
-  color: #E9C46A;
+.showcase__item.is-center .product-card__cta {
+  opacity: 1;
 }
 
-.product-card--dark .product-card__spec {
-  color: rgba(247, 242, 231, 0.64);
+/* The faded neighbours still respond to a pointer, so hovering one is
+   the hint that it can be brought forward. */
+.showcase__item:not(.is-center) .product-card:hover {
+  border-color: rgba(244, 193, 15, 0.55);
 }
 
-.product-card--dark .product-card__cta {
-  color: #FBF7EE;
+.showcase__item:not(.is-center) .product-card:hover .product-card__cta {
+  opacity: 0.85;
 }
 
-.product-card--dark .product-card__foot {
-  border-top-color: rgba(247, 242, 231, 0.18);
-}
-
-/* --- Hover / pointer states ----------------------------------------- */
-
-@media (hover: hover) {
-  .product-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(244, 193, 15, 0.85);
-    box-shadow: 0 22px 40px rgba(19, 52, 82, 0.14);
-  }
-
-  .product-card--dark:hover {
-    box-shadow: 0 26px 46px rgba(19, 52, 82, 0.3);
-  }
-
-  .product-card:hover .product-card__media img {
-    transform: scale(1.045);
-  }
-
-  .product-card:hover .product-card__cta svg {
-    transform: translate(3px, -3px);
-  }
-}
-
-/* --- Progress ------------------------------------------------------- */
+/* --- Footer: hint, dots, counter ------------------------------------ */
 
 .collection__foot {
-  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: clamp(24px, 3vw, 38px);
 }
 
-.collection__progress {
-  position: relative;
-  height: 3px;
+.showcase__hint {
+  margin: 0;
+  flex: 1 1 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7d8a97;
+}
+
+.showcase__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.showcase__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
   border-radius: 999px;
-  background-color: rgba(19, 52, 82, 0.12);
-  overflow: hidden;
+  background-color: rgba(19, 52, 82, 0.22);
+  cursor: pointer;
+  transition: width 0.35s var(--ease-out), background-color 0.25s ease;
 }
 
-.collection__progress span {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 30%;
-  border-radius: inherit;
+.showcase__dot:hover {
+  background-color: rgba(19, 52, 82, 0.45);
+}
+
+.showcase__dot[aria-current="true"] {
+  width: 26px;
   background-color: #133452;
-  transition: left 0.18s linear, width 0.18s linear;
+}
+
+/* The dot is 8px, but the target it presents is 24px */
+.showcase__dot::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.showcase__dot {
+  position: relative;
+}
+
+.showcase__count {
+  flex: 1 1 0;
+  margin: 0;
+  text-align: right;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #133452;
+}
+
+.showcase__count-sep {
+  margin: 0 4px;
+  color: #a9b2bb;
+}
+
+/* --- Without JavaScript --------------------------------------------- */
+
+html:not(.js) .showcase__viewport {
+  height: auto;
+  overflow-x: auto;
+  padding-block: 8px 24px;
+}
+
+html:not(.js) .showcase__track {
+  display: flex;
+  gap: 20px;
+  padding-inline: var(--gutter);
+}
+
+html:not(.js) .showcase__item {
+  position: static;
+  flex: 0 0 var(--card-w);
+  width: var(--card-w);
+  height: var(--card-h);
+  transform: none;
+  opacity: 1;
+}
+
+html:not(.js) .collection__controls,
+html:not(.js) .collection__foot {
+  display: none;
 }
 
 /* --- Responsive ----------------------------------------------------- */
 
 @media (max-width: 900px) {
+  .collection {
+    --card-w: clamp(210px, 30vw, 250px);
+    --card-h: clamp(340px, 48vw, 420px);
+  }
+
   .collection__head {
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 22px;
   }
 
   .collection__title {
@@ -362,7 +430,9 @@
 
 @media (max-width: 640px) {
   .collection {
-    --card-w: min(78vw, 320px);
+    --card-w: min(72vw, 260px);
+    --card-h: min(126vw, 430px);
+    --step: calc(var(--card-w) * 0.72);
   }
 
   .rail-btn {
@@ -371,32 +441,33 @@
   }
 
   .collection__foot {
-    margin-top: 0;
+    gap: 12px;
+  }
+
+  .showcase__hint {
+    display: none;
+  }
+
+  .showcase__dots {
+    flex: 1 1 auto;
+  }
+
+  .showcase__count {
+    flex: 0 0 auto;
   }
 
   .product-card__body {
-    padding: 16px 18px 18px;
+    padding: 12px 14px 14px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rail {
-    scroll-behavior: auto;
-  }
-
+  .showcase__item,
   .product-card,
   .product-card__media img,
   .product-card__cta svg,
   .rail-btn,
-  .collection__progress span {
+  .showcase__dot {
     transition: none;
-  }
-
-  .product-card:hover {
-    transform: none;
-  }
-
-  .product-card:hover .product-card__media img {
-    transform: none;
   }
 }

@@ -9,13 +9,18 @@
   <!-- Hero is the LCP image: fetch it as early as possible -->
   <link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
 
+  <!-- Marks the page as script-capable before first paint, so the
+       carousel can fall back to a plain scroll row without JS -->
+  <script>document.documentElement.classList.add('js');</script>
+
   <!-- Simple CSS files -->
-  <link rel="stylesheet" href="styles/global.css">
-  <link rel="stylesheet" href="styles/header-footer.css">
-  <link rel="stylesheet" href="styles/home.css">
-  <link rel="stylesheet" href="styles/animation.css">
-  <link rel="stylesheet" href="styles/media.css">
-  <link rel="stylesheet" href="styles/products.css">
+  <link rel="stylesheet" href="styles/global.css?v=4">
+  <link rel="stylesheet" href="styles/header-footer.css?v=4">
+  <link rel="stylesheet" href="styles/home.css?v=4">
+  <link rel="stylesheet" href="styles/animation.css?v=4">
+  <link rel="stylesheet" href="styles/media.css?v=4">
+  <link rel="stylesheet" href="styles/products.css?v=4">
+  <link rel="stylesheet" href="styles/modal.css?v=4">
 </head>
 <body>
 
@@ -73,15 +78,16 @@
 
     <div class="container hero__inner">
       <div class="hero__copy">
-        <p class="tag">Baked in Valencia City · Bukidnon</p>
-        <h1>Golden biscuits,<br>baked the Valencia way.</h1>
+        <p class="tag">Fresh From Valencia City</p>
+        <h1>Local Biscuits, Bread &amp; Pasalubong from Valencia City</h1>
         <p class="hero__lede">
-          Toasted biscocho, hopia, and pasalubong favorites — made in small batches at our
-          bakehouse in P-2 Lumbo and packed fresh for the trip home.
+          Zm's Manna Bakeshop provides quality baked biscuits, toasted bread, and pasalubong
+          favorites produced in P-2 Lumbo, Valencia City, Bukidnon for individual customers and
+          bulk wholesale buyers across Mindanao.
         </p>
         <div class="hero__actions">
-          <a href="#products" class="btn btn--gold">Explore the Catalog</a>
-          <a href="wholesale.html" class="btn btn--ghost">Wholesale Inquiries</a>
+          <a href="#contact" class="btn btn--gold">Contact Us</a>
+          <a href="#products" class="btn btn--ghost">View Products</a>
         </div>
       </div>
     </div>
@@ -121,7 +127,7 @@
             <span class="step-badge">STEP 02</span>
             <h3 class="pathway-title">Stores &amp; Mini Marts</h3>
             <p class="pathway-desc">Pre-sealed reseller packs optimized for fast shelf-turnover. Starter inventory bundles, predictable replenishment cycles, and regional courier dispatch.</p>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Reseller Inquiries</a>
+            <a href="#contact" class="btn btn-white btn-block">Reseller Inquiries</a>
           </div>
         </div>
     -->
@@ -131,7 +137,7 @@
             <span class="step-badge">STEP 03</span>
             <h3 class="pathway-title">Pharmacies, Malls &amp; Corporate</h3>
             <p class="pathway-desc">Institutional wholesale volume supply contracts, barcoded packaged dry-goods, regional delivery routing, and formal recurring distribution across Mindanao.</p>
-            <a href="wholesale.html#inquiry-form" class="btn btn-blue btn-block">Request Bulk List</a>
+            <a href="#contact" class="btn btn-blue btn-block">Request Bulk List</a>
           </div>
         </div>
       </div>
@@ -139,27 +145,22 @@
   </section>
 -->
   <!-- ==========================================
-       3. PRODUCT COLLECTION (horizontal rail)
+       3. PRODUCT COLLECTION (looping carousel)
        ========================================== -->
 
   <section class="collection" id="products" aria-labelledby="products-title">
     <div class="container collection__head">
       <div class="collection__intro">
-        <p class="tag">The bakehouse selection</p>
         <h2 class="collection__title" id="products-title">Take home a taste of Valencia.</h2>
-        <p class="collection__desc">
-          Golden, crisp, and made for sharing — six baked favorites, packed fresh from our
-          bakehouse in P-2 Lumbo and ready for retail shelves or the trip home.
-        </p>
       </div>
 
       <div class="collection__controls">
-        <button class="rail-btn" type="button" data-dir="-1" aria-controls="product-rail" aria-label="Show previous products">
+        <button class="rail-btn" type="button" data-dir="-1" aria-controls="product-carousel" aria-label="Show previous product">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <button class="rail-btn" type="button" data-dir="1" aria-controls="product-rail" aria-label="Show next products">
+        <button class="rail-btn" type="button" data-dir="1" aria-controls="product-carousel" aria-label="Show next product">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -167,271 +168,187 @@
       </div>
     </div>
 
-    <div
-      class="rail"
-      id="product-rail"
-      data-rail
-      tabindex="0"
-      role="region"
-      aria-label="Product catalog, scrolls horizontally"
-    >
-      <ul class="rail__track">
+    <div class="showcase" id="product-carousel" data-showcase>
+      <div
+        class="showcase__viewport"
+        data-stage
+        role="group"
+        aria-roledescription="carousel"
+        aria-label="Six baked favorites, one in focus at a time"
+      >
+                <ul class="showcase__track">
 
-        <li class="rail__item">
-          <a class="product-card product-card--dark" href="wholesale.html#inquiry-form">
-            <div class="product-card__media">
-              <span class="product-card__index">01</span>
-              <span class="product-card__badge">Bestseller</span>
-              <img
-                src="assets/products/biscocho.webp"
-                alt="Zm's Manna Toasted Biscocho pouch with toasted bread slices"
-                width="1100" height="1375" loading="lazy" decoding="async"
-              >
-            </div>
-            <div class="product-card__body">
-              <p class="product-card__cat">Toasted biscuits</p>
-              <h3 class="product-card__name">Toasted Biscocho</h3>
-              <div class="product-card__foot">
-                <span class="product-card__spec">100 g · sealed pouch</span>
-                <span class="product-card__cta">
-                  Inquire
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <li class="showcase__item" data-product="toasted-biscocho">
+            <button class="product-card" type="button" data-card aria-haspopup="dialog" aria-label="Open details for Toasted Biscocho">
+              <span class="product-card__media">
+                <span class="product-card__index" aria-hidden="true">01</span>
+                <span class="product-card__badge">Bestseller</span>
+                <img
+                  src="assets/products/biscocho.webp"
+                  alt="Zm's Manna Toasted Biscocho pouch with toasted bread slices"
+                  width="1100" height="1375" loading="lazy" decoding="async"
+                >
+              </span>
+              <span class="product-card__body">
+                <span class="product-card__cat">Toasted specialties</span>
+                <span class="product-card__name">Toasted Biscocho</span>
+                <span class="product-card__foot">
+                  <span class="product-card__spec">100 g &middot; sealed pouch</span>
+                  <span class="product-card__cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </span>
-              </div>
-            </div>
-          </a>
-        </li>
+              </span>
+            </button>
+          </li>
 
-        <li class="rail__item">
-          <a class="product-card" href="wholesale.html#inquiry-form">
-            <div class="product-card__media">
-              <span class="product-card__index">02</span>
-              <img
-                src="assets/products/hopia.webp"
-                alt="Zm's Manna Hopia Choco pouch with chocolate-filled pastries on a plate"
-                width="1100" height="1375" loading="lazy" decoding="async"
-              >
-            </div>
-            <div class="product-card__body">
-              <p class="product-card__cat">Chocolate-filled</p>
-              <h3 class="product-card__name">Hopia Choco</h3>
-              <div class="product-card__foot">
-                <span class="product-card__spec">100 g · sealed pouch</span>
-                <span class="product-card__cta">
-                  Inquire
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <li class="showcase__item" data-product="hopia-choco">
+            <button class="product-card" type="button" data-card aria-haspopup="dialog" aria-label="Open details for Hopia Choco">
+              <span class="product-card__media">
+                <span class="product-card__index" aria-hidden="true">02</span>
+                <span class="product-card__badge">Rich filling</span>
+                <img
+                  src="assets/products/hopia.webp"
+                  alt="Zm's Manna Hopia Choco pouch with chocolate-filled pastries on a plate"
+                  width="1100" height="1375" loading="lazy" decoding="async"
+                >
+              </span>
+              <span class="product-card__body">
+                <span class="product-card__cat">Chocolate-filled</span>
+                <span class="product-card__name">Hopia Choco</span>
+                <span class="product-card__foot">
+                  <span class="product-card__spec">100 g &middot; sealed pouch</span>
+                  <span class="product-card__cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </span>
-              </div>
-            </div>
-          </a>
-        </li>
+              </span>
+            </button>
+          </li>
 
-        <li class="rail__item">
-          <a class="product-card" href="wholesale.html#inquiry-form">
-            <div class="product-card__media">
-              <span class="product-card__index">03</span>
-              <img
-                src="assets/products/mammon.webp"
-                alt="Two pouches of Zm's Manna Toasted Mammon"
-                width="1100" height="1467" loading="lazy" decoding="async"
-              >
-            </div>
-            <div class="product-card__body">
-              <p class="product-card__cat">Toasted biscuits</p>
-              <h3 class="product-card__name">Toasted Mammon</h3>
-              <div class="product-card__foot">
-                <span class="product-card__spec">100 g · sealed pouch</span>
-                <span class="product-card__cta">
-                  Inquire
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <li class="showcase__item" data-product="toasted-mammon">
+            <button class="product-card" type="button" data-card aria-haspopup="dialog" aria-label="Open details for Toasted Mammon">
+              <span class="product-card__media">
+                <span class="product-card__index" aria-hidden="true">03</span>
+                <span class="product-card__badge">Light &amp; airy</span>
+                <img
+                  src="assets/products/mammon.webp"
+                  alt="Two pouches of Zm's Manna Toasted Mammon"
+                  width="1100" height="1467" loading="lazy" decoding="async"
+                >
+              </span>
+              <span class="product-card__body">
+                <span class="product-card__cat">Toasted specialties</span>
+                <span class="product-card__name">Toasted Mammon</span>
+                <span class="product-card__foot">
+                  <span class="product-card__spec">100 g &middot; sealed pouch</span>
+                  <span class="product-card__cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </span>
-              </div>
-            </div>
-          </a>
-        </li>
+              </span>
+            </button>
+          </li>
 
-        <li class="rail__item">
-          <a class="product-card" href="wholesale.html#inquiry-form">
-            <div class="product-card__media">
-              <span class="product-card__index">04</span>
-              <img
-                src="assets/products/patatas.webp"
-                alt="Zm's Manna Patatas pouches with a plate of crisp biscuits"
-                width="1100" height="1375" loading="lazy" decoding="async"
-              >
-            </div>
-            <div class="product-card__body">
-              <p class="product-card__cat">Crisp &amp; light</p>
-              <h3 class="product-card__name">Patatas Biscuits</h3>
-              <div class="product-card__foot">
-                <span class="product-card__spec">100 g · sealed pouch</span>
-                <span class="product-card__cta">
-                  Inquire
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <li class="showcase__item" data-product="patatas">
+            <button class="product-card" type="button" data-card aria-haspopup="dialog" aria-label="Open details for Patatas Biscuits">
+              <span class="product-card__media">
+                <span class="product-card__index" aria-hidden="true">04</span>
+                <span class="product-card__badge">Coffee pairing</span>
+                <img
+                  src="assets/products/patatas.webp"
+                  alt="Zm's Manna Patatas pouches with a plate of crisp biscuits"
+                  width="1100" height="1375" loading="lazy" decoding="async"
+                >
+              </span>
+              <span class="product-card__body">
+                <span class="product-card__cat">Crisp &amp; light</span>
+                <span class="product-card__name">Patatas Biscuits</span>
+                <span class="product-card__foot">
+                  <span class="product-card__spec">100 g &middot; sealed pouch</span>
+                  <span class="product-card__cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </span>
-              </div>
-            </div>
-          </a>
-        </li>
+              </span>
+            </button>
+          </li>
 
-        <li class="rail__item">
-          <a class="product-card" href="wholesale.html#inquiry-form">
-            <div class="product-card__media">
-              <span class="product-card__index">05</span>
-              <img
-                src="assets/products/cookie-de-longga.webp"
-                alt="Zm's Manna Cookie de Longa pouch with sesame cookies"
-                width="1100" height="1100" loading="lazy" decoding="async"
-              >
-            </div>
-            <div class="product-card__body">
-              <p class="product-card__cat">Sesame cookies</p>
-              <h3 class="product-card__name">Cookie de Longa</h3>
-              <div class="product-card__foot">
-                <span class="product-card__spec">100 g · sealed pouch</span>
-                <span class="product-card__cta">
-                  Inquire
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <li class="showcase__item" data-product="cookie-de-longa">
+            <button class="product-card" type="button" data-card aria-haspopup="dialog" aria-label="Open details for Cookie de Longa">
+              <span class="product-card__media">
+                <span class="product-card__index" aria-hidden="true">05</span>
+                <span class="product-card__badge">Sesame</span>
+                <img
+                  src="assets/products/cookie-de-longga.webp"
+                  alt="Zm's Manna Cookie de Longa pouch with sesame cookies"
+                  width="1100" height="1100" loading="lazy" decoding="async"
+                >
+              </span>
+              <span class="product-card__body">
+                <span class="product-card__cat">Sesame cookies</span>
+                <span class="product-card__name">Cookie de Longa</span>
+                <span class="product-card__foot">
+                  <span class="product-card__spec">100 g &middot; sealed pouch</span>
+                  <span class="product-card__cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </span>
-              </div>
-            </div>
-          </a>
-        </li>
+              </span>
+            </button>
+          </li>
 
-        <li class="rail__item">
-          <a class="product-card" href="wholesale.html#inquiry-form">
-            <div class="product-card__media">
-              <span class="product-card__index">06</span>
-              <img
-                src="assets/products/biscocho2.webp"
-                alt="Two pouches of Zm's Manna Special Biscocho"
-                width="1100" height="1467" loading="lazy" decoding="async"
-              >
-            </div>
-            <div class="product-card__body">
-              <p class="product-card__cat">Toasted biscuits</p>
-              <h3 class="product-card__name">Special Biscocho</h3>
-              <div class="product-card__foot">
-                <span class="product-card__spec">100 g · sealed pouch</span>
-                <span class="product-card__cta">
-                  Inquire
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
+          <li class="showcase__item" data-product="special-biscocho">
+            <button class="product-card" type="button" data-card aria-haspopup="dialog" aria-label="Open details for Special Biscocho">
+              <span class="product-card__media">
+                <span class="product-card__index" aria-hidden="true">06</span>
+                <span class="product-card__badge">Special cut</span>
+                <img
+                  src="assets/products/biscocho2.webp"
+                  alt="Two pouches of Zm's Manna Special Biscocho"
+                  width="1100" height="1467" loading="lazy" decoding="async"
+                >
+              </span>
+              <span class="product-card__body">
+                <span class="product-card__cat">Toasted specialties</span>
+                <span class="product-card__name">Special Biscocho</span>
+                <span class="product-card__foot">
+                  <span class="product-card__spec">100 g &middot; sealed pouch</span>
+                  <span class="product-card__cta">
+                    Details
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
                 </span>
-              </div>
-            </div>
-          </a>
-        </li>
+              </span>
+            </button>
+          </li>
 
-      </ul>
+        </ul>
+      </div>
     </div>
 
     <div class="container collection__foot">
-      <div class="collection__progress" aria-hidden="true">
-        <span data-thumb></span>
+      <p class="showcase__hint">Drag, swipe or use the arrow keys</p>
+
+      <div class="showcase__dots" data-dots>
+        <button class="showcase__dot" type="button" data-goto="0" aria-label="Show Toasted Biscocho" aria-current="true"></button>
+        <button class="showcase__dot" type="button" data-goto="1" aria-label="Show Hopia Choco"></button>
+        <button class="showcase__dot" type="button" data-goto="2" aria-label="Show Toasted Mammon"></button>
+        <button class="showcase__dot" type="button" data-goto="3" aria-label="Show Patatas Biscuits"></button>
+        <button class="showcase__dot" type="button" data-goto="4" aria-label="Show Cookie de Longa"></button>
+        <button class="showcase__dot" type="button" data-goto="5" aria-label="Show Special Biscocho"></button>
       </div>
+
+      <p class="showcase__count" aria-live="polite">
+        <span data-count>01</span><span class="showcase__count-sep" aria-hidden="true">/</span><span>06</span>
+      </p>
     </div>
   </section>
-
-    <!-- PRODUCTS
-  <section id="products" class="section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Product Catalog</h2>
-        <p class="section-desc">Fresh baked pasalubong items packed in convenient retail pouches.</p>
-      </div>
-
-      <div class="row">
-        <div class="col-3">
-          <div class="box product-box">
-            <div class="product-img">
-              <img src="assets\Cookie-de-longga.jpeg" alt="Cookie de Longa">
-            </div>
-            <h3 class="product-name">Cookie de Longa</h3>
-            <div class="product-info">Pack Size: 100g Pouch</div>
-            <div class="product-info">Unit: Retail Pack / Carton Box</div>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
-          </div>
-        </div>
-
-        <div class="col-3">
-          <div class="box product-box">
-            <div class="product-img">
-              <img src="assets/Biscocho2.webp" alt="Toasted Biscocho">
-            </div>
-            <h3 class="product-name">Toasted Biscocho</h3>
-            <div class="product-info">Pack Size: 100g Pouch</div>
-            <div class="product-info">Unit: Retail Pack / Carton Box</div>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
-          </div>
-        </div>
-
-        <div class="col-3">
-          <div class="box product-box">
-            <div class="product-img">
-              <img src="assets/Mammon.webp" alt="Toasted Mammon">
-            </div>
-            <h3 class="product-name">Toasted Mammon</h3>
-            <div class="product-info">Pack Size: 100g Pouch</div>
-            <div class="product-info">Unit: Retail Pack / Carton Box</div>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
-          </div>
-        </div>
-
-        <div class="col-3">
-          <div class="box product-box">
-            <div class="product-img">
-              <img src="assets/Hopia.webp" alt="Hopia Choco">
-            </div>
-            <h3 class="product-name">Hopia Choco</h3>
-            <div class="product-info">Pack Size: 100g Pouch</div>
-            <div class="product-info">Unit: Retail Pack / Carton Box</div>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
-          </div>
-        </div>
-
-        <div class="col-3">
-          <div class="box product-box">
-            <div class="product-img">
-              <img src="assets/Patatas.webp" alt="Patatas Biscuits">
-            </div>
-            <h3 class="product-name">Patatas Biscuits</h3>
-            <div class="product-info">Pack Size: 100g Pouch</div>
-            <div class="product-info">Unit: Retail Pack / Carton Box</div>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
-          </div>
-        </div>
-
-        <div class="col-3">
-          <div class="box product-box">
-            <div class="product-img">
-              <img src="assets/Biscocho.webp" alt="Special Biscocho Nice">
-            </div>
-            <h3 class="product-name">Special Biscocho</h3>
-            <div class="product-info">Pack Size: 100g Pouch</div>
-            <div class="product-info">Unit: Retail Pack / Carton Box</div>
-            <a href="wholesale.html#inquiry-form" class="btn btn-white btn-block">Inquire Product</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  -->
-
-  <!-- ==========================================
-       6. PACKAGING SPECIFICATIONS
-       ========================================== -->
 
   <section id="packaging" class="section">
     <div class="container">
@@ -452,7 +369,7 @@
             <li><strong>Long Shelf Life:</strong> Great for hanging display strips, convenience store counters, and grocery shelves.</li>
           </ul>
 
-          <a href="wholesale.html#inquiry-form" class="btn btn-blue">Inquire on Bulk Orders</a>
+          <a href="#contact" class="btn btn-blue">Inquire on Bulk Orders</a>
         </div>
       </div>
     </div>
@@ -468,22 +385,22 @@
       <div class="row">
         <div class="col-4">
           <div class="gallery-img">
-            <img src="assets/Cookie-de-longga.jpeg" alt="Cookie de Longa">
+            <img src="assets/orig/Cookie-de-longga.jpeg" alt="Cookie de Longa">
           </div>
         </div>
         <div class="col-4">
           <div class="gallery-img">
-            <img src="assets/Biscocho.webp" alt="Biscocho">
+            <img src="assets/orig/Biscocho.webp" alt="Biscocho">
           </div>
         </div>
         <div class="col-4">
           <div class="gallery-img">
-            <img src="assets/Mammon.webp" alt="Mammon">
+            <img src="assets/orig/Mammon.webp" alt="Mammon">
           </div>
         </div>
         <div class="col-4">
           <div class="gallery-img">
-            <img src="assets/Hopia.webp" alt="Hopia">
+            <img src="assets/orig/Hopia.webp" alt="Hopia">
           </div>
         </div>
       </div>
@@ -580,7 +497,7 @@
       <div class="box cta-box">
         <div>
           <h3>Need wholesale pricing &amp; logistics information?</h3>
-          <p>Check out our distribution routes, MOQ, and inquiry form on our wholesale page.</p>
+          <p>Call or message the bakehouse and we will walk you through MOQ, pricing, and delivery routes.</p>
         </div>
         <a href="#contact" class="btn btn-blue">Contact Us &rarr;</a>
       </div>
@@ -595,11 +512,23 @@
   <footer>
     <div class="container">
       <div class="footer-info">
-        <p>&copy; 2026 Zm's Manna Bakeshop. All rights reserved.</p>
+        <p>&copy; 2026 Zm's Manna Bakeshop.  All rights reserved.       Built by Jay Bonita, Val Ian Dandasan, JJ Bote.</p>
       </div>
     </div>
   </footer>
 
-  <script src="scripts/catalog.js" defer></script>
+  <!-- ==========================================
+       10. PRODUCT DETAILS DIALOG
+       Content is written by scripts/catalog.js
+       ========================================== -->
+  <div class="modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-box">
+      <button class="modal-close" type="button" aria-label="Close details">&#10005;</button>
+      <div class="modal-media"></div>
+      <div class="modal-info"></div>
+    </div>
+  </div>
+
+  <script src="scripts/catalog.js?v=4" defer></script>
 </body>
 </html>
