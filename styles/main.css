@@ -1,0 +1,17 @@
+/* =========================================================
+   MAIN.CSS — Entry Point for Zm's Manna Bakeshop Styles
+   Imports all stylesheets in dependency order.
+   For production, concatenate these into a single file.
+   ========================================================= */
+
+/* 1. Design tokens & reset — must load first */
+@import './tokens.css';
+
+/* 2. Reusable components */
+@import './components.css';
+
+/* 3. Page-specific sections */
+@import './sections.css';
+
+/* 4. Scroll-driven animations */
+@import './animation.css';

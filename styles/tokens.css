@@ -1,0 +1,303 @@
+/* =========================================================
+   TOKENS.CSS — Design Tokens for Zm's Manna Bakeshop
+   Single source of truth for colors, spacing, typography,
+   shadows, radii, transitions, and z-index.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,SOFT,WONK,wght@0,9..144,100,1,600..800;1,9..144,100,1,600..800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* ------------------------------------------------------------------
+     COLOR PALETTE
+     Naming: --color-{family}-{step} where step is 50-900 (Tailwind-like)
+     ------------------------------------------------------------------ */
+
+  /* Navy — Primary brand dark */
+  --color-navy-950: #091e31;
+  --color-navy-900: #133452;
+  --color-navy-800: #17406e;
+  --color-navy-700: #1b466e;
+  --color-navy-600: #1f5a8a;
+  --color-navy-500: #2570a6;
+  --color-navy-400: #3a90c8;
+  --color-navy-300: #6db0e0;
+  --color-navy-200: #a8d0ee;
+  --color-navy-100: #d4e8f7;
+  --color-navy-50:  #eaf4fc;
+
+  /* Cream — Primary brand light */
+  --color-cream-100: #f4efe2;
+  --color-cream-50:  #fbf7ee;
+  --color-cream-25:  #fffdf8;
+  --color-cream-10:  #fffefa;
+
+  /* Gold — Primary accent */
+  --color-gold-600: #dcb00d;
+  --color-gold-500: #f4c10f;
+  --color-gold-400: #d99b43;
+  --color-gold-300: #e8c07d;
+  --color-gold-200: #f0d9a8;
+  --color-gold-100: #f8ecce;
+
+  /* Sky — Secondary accent */
+  --color-sky-600: #1d7aa0;
+  --color-sky-500: #2288b5;
+  --color-sky-400: #4ab0d8;
+  --color-sky-300: #8dd0eb;
+  --color-sky-200: #c6e8f5;
+  --color-sky-100: #e3f4fa;
+  --color-sky-50:  #f1fafd;
+
+  /* Slate — Neutral grays for borders, dividers, muted text */
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50:  #f8fafc;
+
+  /* Semantic color aliases (use these in components) */
+  --color-bg:              var(--color-cream-100);
+  --color-bg-alt:          var(--color-white);
+  --color-text:            var(--color-navy-900);
+  --color-text-muted:      var(--color-slate-600);
+  --color-text-inverse:    var(--color-cream-50);
+  --color-border:          var(--color-slate-200);
+  --color-border-focus:    var(--color-gold-500);
+  --color-primary:         var(--color-gold-500);
+  --color-primary-hover:   var(--color-gold-600);
+  --color-primary-text:    var(--color-navy-900);
+  --color-secondary:       var(--color-sky-500);
+  --color-secondary-hover: var(--color-sky-600);
+  --color-accent:          var(--color-gold-400);
+  --color-header-bg:       var(--color-navy-900);
+  --color-header-border:   var(--color-gold-500);
+  --color-footer-bg:       var(--color-navy-900);
+  --color-footer-border:   var(--color-gold-500);
+  --color-overlay:         rgba(11, 39, 70, 0.55);
+  --color-scrim-start:     rgba(9, 30, 49, 0.94);
+  --color-scrim-mid:       rgba(9, 30, 49, 0.42);
+  --color-scrim-end:       rgba(9, 30, 49, 0.12);
+
+  /* ------------------------------------------------------------------
+     SPACING SCALE
+     Base unit: 4px (--space-1 = 4px)
+     ------------------------------------------------------------------ */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-7:   28px;
+  --space-8:   30px;  /* --box-pad */
+  --space-9:   32px;
+  --space-10:  40px;  /* --box-pad-lg */
+  --space-12:  48px;  /* --section-head-gap */
+  --space-14:  56px;
+  --space-16:  64px;
+  --space-18:  70px;  /* --section-space */
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+
+  /* Semantic spacing aliases */
+  --gutter:           var(--space-6);
+  --section-space:    var(--space-18);
+  --section-head-gap: var(--space-12);
+  --grid-gap:         var(--space-6);
+  --box-pad:          var(--space-8);
+  --box-pad-lg:       var(--space-10);
+  --header-h:         84px;
+
+  /* ------------------------------------------------------------------
+     TYPOGRAPHY
+     ------------------------------------------------------------------ */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui:      'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Font variation settings for Fraunces */
+  --font-var-soft: 100;
+  --font-var-wonk: 1;
+
+  /* Type scale — clamp(min, preferred, max) */
+  --text-xs:       0.62rem;   /* 9.9px */
+  --text-sm:       0.75rem;   /* 12px */
+  --text-base:     1rem;      /* 16px */
+  --text-lg:       1.125rem;  /* 18px */
+  --text-xl:       1.25rem;   /* 20px */
+  --text-2xl:      1.5rem;    /* 24px */
+  --text-3xl:      1.875rem;  /* 30px */
+  --text-4xl:      2.25rem;   /* 36px */
+
+  /* Display sizes (fluid) */
+  --text-display-sm:  clamp(1.75rem, 1.2rem + 1.8vw, 2.35rem);   /* section-title */
+  --text-display-md:  clamp(2.1rem, 1.1rem + 3.2vw, 3.9rem);     /* collection-title */
+  --text-display-lg:  clamp(2.05rem, 1.15rem + 2.95vw, 3.85rem); /* hero h1 */
+  --text-display-xl:  clamp(2.5rem, 1.5rem + 4vw, 4.5rem);       /* large marketing */
+
+  /* Line heights */
+  --leading-tight:   1.02;
+  --leading-snug:    1.15;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.65;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.035em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.02em;
+  --tracking-wider:  0.1em;
+  --tracking-widest: 0.2em;
+
+  /* ------------------------------------------------------------------
+     BORDER RADIUS
+     ------------------------------------------------------------------ */
+  --radius-sm:    8px;
+  --radius-md:    12px;
+  --radius-lg:    14px;
+  --radius-card:  18px;  /* product cards, boxes */
+  --radius-box:   20px;  /* packaging, cta, modal */
+  --radius-pill:  50px;  /* buttons, badges */
+  --radius-full:  999px; /* dots, avatar */
+
+  /* ------------------------------------------------------------------
+     SHADOWS
+     ------------------------------------------------------------------ */
+  --shadow-sm:     0 2px 6px rgba(19, 52, 82, 0.05);
+  --shadow-card:   0 6px 20px rgba(19, 52, 82, 0.04);
+  --shadow-card-hover: 0 14px 28px rgba(19, 52, 82, 0.09);
+  --shadow-md:     0 8px 20px rgba(19, 52, 82, 0.08);
+  --shadow-lg:     0 10px 24px rgba(19, 52, 82, 0.1);
+  --shadow-xl:     0 30px 55px -18px rgba(19, 52, 82, 0.42);
+  --shadow-modal:  0 30px 60px -20px rgba(9, 30, 49, 0.55);
+  --shadow-focus:  0 0 0 3px var(--color-gold-500);
+
+  /* ------------------------------------------------------------------
+     TRANSITIONS
+     ------------------------------------------------------------------ */
+  --transition-fast:   0.2s ease;
+  --transition-base:   0.25s ease;
+  --transition-slow:   0.35s ease;
+  --transition-spring: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out:          cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ------------------------------------------------------------------
+     Z-INDEX SCALE
+     ------------------------------------------------------------------ */
+  --z-dropdown:   100;
+  --z-sticky:     200;
+  --z-header:     1000;
+  --z-modal-backdrop: 1999;
+  --z-modal:      2000;
+  --z-toast:      3000;
+  --z-tooltip:    4000;
+
+  /* ------------------------------------------------------------------
+     LAYOUT CONSTANTS
+     ------------------------------------------------------------------ */
+  --page-max:    1750px;
+  --container-max: 1200px;
+  --card-width:     clamp(198px, 18vw, 262px);
+  --card-height:    clamp(336px, 30.5vw, 444px);
+  --carousel-step:  calc(var(--card-width) * 0.98);
+
+  /* ------------------------------------------------------------------
+     BREAKPOINTS (for reference — used in media queries)
+     ------------------------------------------------------------------ */
+  --bp-xl:   1280px;
+  --bp-lg:   1024px;
+  --bp-md:   992px;
+  --bp-sm:   768px;
+  --bp-xs:   640px;
+  --bp-2xs:  480px;
+  --bp-3xs:  360px;
+}
+
+/* ------------------------------------------------------------------
+   CSS RESET & BASE STYLES
+   ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-border-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--color-gold-200);
+  color: var(--color-navy-900);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

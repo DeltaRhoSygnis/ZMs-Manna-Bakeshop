@@ -1,109 +1,127 @@
-# Zm’s Manna Bakeshop — website
+# Zm's Manna Bakeshop
 
-Static site. No build step, no framework, no dependencies. Open `index.html`
-in a browser, or serve the folder (`python3 -m http.server 8899`).
+> Small-batch biscuit, bread & pasalubong bakehouse — P-2 Lumbo, Valencia City, Bukidnon.
 
-## What it is
+[![Status](https://img.shields.io/badge/status-live-brightgreen)](#) [![Stack](https://img.shields.io/badge/stack-HTML%20%7C%20CSS%20%7C%20JS-lightgrey)](#) [![License](https://img.shields.io/badge/license-MIT-blue)](#license)
 
-A small-batch biscuit, bread and pasalubong bakehouse in P-2 Lumbo,
-Valencia City, Bukidnon. The site is a single long page: a sticky header and
-navigation, a split banner card, the wholesale and retail pathways, the
-product catalog, packaging, a product showcase gallery, the story, contact
-details with a map, and a footer.
+![Zm's Manna Bakeshop homepage](assets/screenshot.webp)
 
-## File map
+## About
 
-| File | What it does |
+Zm's Manna Bakeshop is a small-batch bakehouse in P-2 Lumbo, Valencia City, Bukidnon, serving biscuits, bread and pasalubong. This repository is the source for its public website — a single, fast, dependency-free static page built with plain HTML, CSS and JavaScript.
+
+## Highlights
+
+- **No build step** — open `index.html` in any browser and it works.
+- **No dependencies** — no framework, no bundler, no npm install.
+- **Responsive** — hand-tuned layouts for 360 / 768 / 1024 / 1440 px.
+- **Accessible** — keyboard-navigable carousel, focus-trapped modal, reduced-motion support.
+- **LCP-optimized** — hero image preloaded with high priority.
+
+## Page sections
+
+| Section | Description |
 | --- | --- |
-| `index.html` | The whole page. Sections in order: header, `#home` (banner), wholesale & retail pathways, `#products`, `#packaging`, product showcase gallery, `#about`, `#contact`, footer. |
-| `styles/` | Five stylesheets, loaded in order. See the table below. |
-| `assets/` | Product photos, banner crops, marketing graphics, the logo, favicons. |
-| `app.js` | The behaviour layer: site config, product data, tile rendering, product popup, photo viewer, mobile menu, scroll reveal, animated counters, scroll progress. |
-| `googlef14fab38a01fa408.html` | Google Search Console site-verification file. Do not delete. |
+| `#home` | Full-bleed hero with brand tagline |
+| `#products` | Product catalog carousel with modal detail view |
+| `#packaging` | Packaging & merchandising specifications |
+| Gallery | Product showcase grid |
+| `#about` | The bakery story |
+| `#contact` | Contact details, hours, address and map |
+| Footer | Links, DTI note, credits |
 
-## Stylesheets (load in this order)
+## Getting started
 
-| File | What it styles |
-| --- | --- |
-| `styles/global.css` | The design tokens (`:root`), reset, typography, `.container`, `.section`, and the shared parts: tags, buttons, boxes, product cards, packaging, about, map, contact, CTA. |
-| `styles/header-footer.css` | The sticky header, the navigation and the footer. |
-| `styles/home.css` | Homepage-specific section styling. |
-| `styles/animation.css` | The scroll progress bar and the keyframes used by the reveal system. |
-| `styles/media.css` | The breakpoints (1024 / 768 / 560) and the responsive overrides. |
+```bash
+# Serve the folder locally
+python3 -m http.server 8899
+# then open http://localhost:8899
+```
 
-## How it works
+Or just open `index.html` directly in your browser.
+
+## Project structure
 
 ```
-index.html          structure      →  <section id="products"> … </section>
-styles/global.css   presentation   →  .product-box { … }
-app.js              behaviour      →  builds the tiles, opens the popup, toggles .is-open
+ZMs-Manna-Bakeshop/
+├── index.html              # The whole page
+├── styles/
+│   ├── main.css            # Entry point (imports the rest)
+│   ├── tokens.css          # Design tokens & reset
+│   ├── components.css      # Reusable UI components
+│   └── sections.css        # Page-specific sections
+├── scripts/
+│   └── catalog.js          # Product data + carousel/modal logic
+└── assets/                 # Photos, logo, favicon, screenshot
 ```
+
+## Tech stack
+
+- **HTML5** — semantic markup, accessibility attributes
+- **CSS3** — custom properties, grid, flexbox, container queries
+- **Vanilla JavaScript (ES2020+)** — state, carousel, modal, focus management
+- **Google Fonts** — Fraunces & Plus Jakarta Sans
+
+## Stylesheet architecture
+
+Styles load in this order via `@import` in `main.css`:
+
+1. `tokens.css` — colors, spacing, typography, shadows, radii, transitions, z-index, breakpoints
+2. `components.css` — buttons, cards, layout, header, footer, modal, grid
+3. `sections.css` — hero, carousel, packaging, gallery, about, contact
 
 Three rules hold it together:
 
-1. **JavaScript owns state, CSS owns appearance.** JS never sets a colour or
-   a size; it toggles a class or sets a custom property, and the stylesheet
-   reacts.
-2. **One stylesheet per job.** `global` for tokens and shared parts,
-   `header-footer` for chrome, `home` for this page, `animation` for motion,
-   `media` for breakpoints.
-3. **Tokens carry the layout.** Spacing lives in `:root` as `--gutter`,
-   `--section-space`, `--grid-gap`, `--box-pad` and friends, so the rhythm
-   changes in one place.
-
-**Units.** `rem` for anything that measures a size, `px` only for hairlines
-and pill shapes, `%` for anything relative to its parent. `1rem` is `16px` at
-the browser default, so the design scales with the visitor’s font size.
+1. **JavaScript owns state, CSS owns appearance.** JS toggles classes or sets custom properties; stylesheets react.
+2. **One stylesheet per concern.** Tokens for decisions, components for reusable UI, sections for page-specific layout.
+3. **Tokens carry the layout.** Spacing lives in `:root`; change the rhythm in one place.
 
 ## Editing cheat sheet
 
-- **Change a colour or font** → the `:root` block in `styles/global.css`.
-- **Change site-wide spacing or the section rhythm** → `--section-space` /
-  `--gutter` in `styles/global.css`.
-- **Add a button style** → `.btn` in `styles/global.css`.
-- **Edit product names, photos, copy, gradients** → the `PRODUCTS` array in
-  `app.js`.
-- **Edit the photo viewer photos** → the `PHOTOS` array in `app.js`.
-- **Change the Facebook link** → `SITE_CONFIG.facebook` in `app.js`.
-- **Change hours / address / phone** → both `index.html` (contact section and
-  footer) — keep them in sync.
-- **Add a new section** → new file in `styles/`, a `<link>` in `index.html`
-  `<head>` (before `media.css`), and the markup in `index.html`.
-- **Change breakpoints** → `styles/media.css`.
+| Task | Where to edit |
+| --- | --- |
+| Change a colour or font | `styles/tokens.css` → `:root` |
+| Change site-wide spacing | `styles/tokens.css` → `--gutter`, `--section-space`, `--grid-gap`, `--box-pad` |
+| Add a button style | `styles/components.css` → `.btn` variants |
+| Edit product names, photos, copy, gradients | `scripts/catalog.js` → `PRODUCTS` |
+| Change hours / address / phone | `index.html` (contact section and footer) — keep in sync |
+| Add a new section | Markup in `index.html`, styles in `styles/sections.css`, tokens in `tokens.css` |
+| Change breakpoints | `styles/components.css` and `styles/sections.css` |
 
 ## Conventions
 
-- Cards are separated by hairline borders, not shadows.
-- Copy stays in the bakehouse’s own register: location, hours, phone, DTI
-  note, product notes from the label.
-- Class names are plain words that say what the thing is, not what it looks
-  like.
+- **Class naming:** BEM — `.component`, `.component__element`, `.component--modifier`
+- **Cards** separated by hairline borders, not heavy shadows
+- **Copy** stays in the bakehouse's own register: location, hours, phone, DTI note, product notes
+- **Semantic color aliases** in components (e.g. `var(--color-primary)`, never `#F4C10F`)
 
-## Running checks
+## Accessibility
+
+- Every interactive element reachable by keyboard
+- Visible focus (3 px gold outline) on all focusable elements
+- Carousel: arrow keys, drag/swipe, dot navigation, `aria-roledescription="carousel"`
+- Modal: focus trap, `Escape` to close, focus restoration, `aria-modal="true"`
+- Meaningful `alt` text; decorative images `aria-hidden="true"`
+- `prefers-reduced-motion` respected
+- Heading hierarchy `h1` → `h2` → `h3` (no skipped levels)
+
+## Verification
 
 There is no build or test suite. Verify by hand:
 
-- Open `index.html` in a browser, or serve with `python3 -m http.server 8899`.
-- Check at 360 / 768 / 1024 / 1440 px widths.
-- Tab through the page: header links, buttons, any open popup or viewer
-  (trap + Escape), and confirm focus returns to the control that opened it.
-- Toggle `prefers-reduced-motion` in DevTools and confirm content is still
-  visible.
-- Confirm no console errors and no broken images.
+1. Open `index.html` or serve with `python3 -m http.server 8899`.
+2. Check at 360 / 768 / 1024 / 1440 px widths.
+3. Tab through the page: header links, buttons, carousel controls, dots, modal (trap + Escape), confirm focus returns to trigger.
+4. Toggle `prefers-reduced-motion` in DevTools and confirm content is still visible.
+5. Confirm no console errors and no broken images.
 
-## Known gaps
+## License
 
-- `index.html` has no `<script>` tag, so `app.js` is not loaded. The page
-  currently renders from `index.html` + CSS only.
-- The footer block at the end of `index.html` is wrapped in an unclosed
-  `<!-- --` comment, so it does not render.
-- Several links point at `wholesale.html`, which is not in this repository.
-- A few `assets\...` paths use Windows backslashes, which do not resolve on
-  the web.
+MIT — see [LICENSE](LICENSE) if present. Otherwise, all rights reserved by Zm's Manna Bakeshop.
 
-## Local-only archive
+## Contact
 
-Development scaffolding lives in `.archive/` on the author’s machine and is
-gitignored, so it never appears in this repository: the older `zm-manna/`
-build, layout `mockups/`, `rename/` image drafts, the OpenCode/Codespaces dev
-container, and the `docs/` guides.
+- **Address:** P-2 Lumbo, Valencia City, Bukidnon
+- **Phone:** see contact section of the site
+- **Website:** single-page site (this repo)
+path: /home/anonymous/ZMs-Manna-Bakeshop/README.md

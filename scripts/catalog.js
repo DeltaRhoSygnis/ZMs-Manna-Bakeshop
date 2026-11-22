@@ -1,472 +1,276 @@
-/* ==========================================
-   catalog.js
-   1. PRODUCTS — the six packs and their notes
-   2. The product popup (openProductPopup / closeProductPopup)
-   3. The looping product carousel
-   ========================================== */
-
+/* Product carousel + popup. */
 (function () {
   'use strict';
 
-  /* ---------------------------------------------------------------
-     1. THE SIX PACKS
-     Same shape as the archived interaction layer
-     (.archive/app.js): catLabel, gradientFrom, gradientTo, letters.
-     The popup reads the notes from here.
-     --------------------------------------------------------------- */
-
-  var PRODUCTS = [
-    {
-      id: 'toasted-biscocho',
-      name: 'Toasted Biscocho',
-      catLabel: 'Toasted specialties',
+  var PRODUCTS = {
+    'toasted-biscocho': {
+      name: 'Toasted Biscocho', cat: 'Toasted specialties', letters: 'B',
+      img: 'assets/orig/Biscocho.webp', from: '#D9A05B', to: '#8C4A1F',
       desc: 'Twice-baked crispy bread slices glazed with butter and sugar.',
-      texture: 'Deep crunch, glassy sugar crust',
-      notes: 'Butter, toasted sugar, golden bread',
-      pair: 'Morning coffee or hot tsokolate',
-      pack: '100 g heat-sealed pouch',
-      keep: 'Keep sealed to protect the crunch',
-      img: 'assets/orig/Biscocho.webp',
-      gradientFrom: '#D9A05B',
-      gradientTo: '#8C4A1F',
-      letters: 'B'
+      texture: 'Deep crunch, glassy sugar crust', notes: 'Butter, toasted sugar, golden bread',
+      pair: 'Morning coffee or hot tsokolate', keep: 'Keep sealed to protect the crunch'
     },
-    {
-      id: 'hopia-choco',
-      name: 'Hopia Choco',
-      catLabel: 'Chocolate-filled',
+    'hopia-choco': {
+      name: 'Hopia Choco', cat: 'Chocolate-filled', letters: 'H',
+      img: 'assets/orig/Hopia.webp', from: '#9A6A45', to: '#4A2C17',
       desc: 'Flaky crust pockets filled with rich chocolate sweet bean paste.',
-      texture: 'Layered flaky shell, dense fudgy core',
-      notes: 'Cocoa, sweet bean paste, pastry',
-      pair: 'Warm milk or afternoon kape',
-      pack: '100 g heat-sealed pouch',
-      keep: 'Cool, dry place away from sunlight',
-      img: 'assets/orig/Hopia.webp',
-      gradientFrom: '#9A6A45',
-      gradientTo: '#4A2C17',
-      letters: 'H'
+      texture: 'Layered flaky shell, dense fudgy core', notes: 'Cocoa, sweet bean paste, pastry',
+      pair: 'Warm milk or afternoon kape', keep: 'Cool, dry place away from sunlight'
     },
-    {
-      id: 'toasted-mammon',
-      name: 'Toasted Mammon',
-      catLabel: 'Toasted specialties',
+    'toasted-mammon': {
+      name: 'Toasted Mammon', cat: 'Toasted specialties', letters: 'M',
+      img: 'assets/orig/Mammon.webp', from: '#F0D9A8', to: '#C98F3D',
       desc: 'Light sponge cake slices slow-toasted for an airy, crispy crunch.',
-      texture: 'Airy, melt-away crisp',
-      notes: 'Vanilla sponge, light caramel',
-      pair: 'Afternoon tea or kape',
-      pack: '100 g heat-sealed pouch',
-      keep: 'Away from humidity, reseal tightly',
-      img: 'assets/orig/Mammon.webp',
-      gradientFrom: '#F0D9A8',
-      gradientTo: '#C98F3D',
-      letters: 'M'
+      texture: 'Airy, melt-away crisp', notes: 'Vanilla sponge, light caramel',
+      pair: 'Afternoon tea or kape', keep: 'Away from humidity, reseal tightly'
     },
-    {
-      id: 'patatas',
-      name: 'Patatas Biscuits',
-      catLabel: 'Crisp &amp; light',
+    'patatas': {
+      name: 'Patatas Biscuits', cat: 'Crisp & light', letters: 'P',
+      img: 'assets/orig/Patatas.webp', from: '#E3B778', to: '#A05C22',
       desc: 'Finger-style crunchy biscuit batons with a savory-sweet taste.',
-      texture: 'Firm snap, fine crumb',
-      notes: 'Buttery, lightly sweet, hint of salt',
-      pair: 'Black coffee — a merienda classic',
-      pack: '100 g heat-sealed pouch',
-      keep: 'Cool, dry shelf; reseal after opening',
-      img: 'assets/orig/Patatas.webp',
-      gradientFrom: '#E3B778',
-      gradientTo: '#A05C22',
-      letters: 'P'
+      texture: 'Firm snap, fine crumb', notes: 'Buttery, lightly sweet, hint of salt',
+      pair: 'Black coffee — a merienda classic', keep: 'Cool, dry shelf; reseal after opening'
     },
-    {
-      id: 'cookie-de-longa',
-      name: 'Cookie de Longa',
-      catLabel: 'Sesame cookies',
+    'cookie-de-longa': {
+      name: 'Cookie de Longa', cat: 'Sesame cookies', letters: 'CdL',
+      img: 'assets/orig/Cookie-de-longga.jpeg', from: '#E8C07D', to: '#B4691E',
       desc: 'Sesame-topped round cookie sandwiches with a sweet signature filling.',
-      texture: 'Crumbly outside, soft sweet centre',
-      notes: 'Toasted sesame, butter, caramel sugar',
-      pair: 'Barako coffee or warm milk',
-      pack: '100 g heat-sealed pouch',
-      keep: 'Cool, dry place — reseal after opening',
-      img: 'assets/orig/Cookie-de-longga.jpeg',
-      gradientFrom: '#E8C07D',
-      gradientTo: '#B4691E',
-      letters: 'CdL'
+      texture: 'Crumbly outside, soft sweet centre', notes: 'Toasted sesame, butter, caramel sugar',
+      pair: 'Barako coffee or warm milk', keep: 'Cool, dry place — reseal after opening'
     },
-    {
-      id: 'special-biscocho',
-      name: 'Special Biscocho',
-      catLabel: 'Toasted specialties',
+    'special-biscocho': {
+      name: 'Special Biscocho', cat: 'Toasted specialties', letters: 'SB',
+      img: 'assets/orig/Biscocho2.webp', from: '#C98F3D', to: '#6B4226',
       desc: 'Our special-cut biscocho — thicker slices, a deeper butter-and-sugar glaze, and one extra pass through the oven.',
-      texture: 'Thick crunch, caramelised sugar shell',
-      notes: 'Butter, muscovado sugar, toasted bread',
-      pair: 'Hot chocolate or barako coffee',
-      pack: '100 g heat-sealed pouch',
-      keep: 'Keep sealed to protect the crunch',
-      img: 'assets/orig/Biscocho2.webp',
-      gradientFrom: '#C98F3D',
-      gradientTo: '#6B4226',
-      letters: 'SB'
+      texture: 'Thick crunch, caramelised sugar shell', notes: 'Butter, muscovado sugar, toasted bread',
+      pair: 'Hot chocolate or barako coffee', keep: 'Keep sealed to protect the crunch'
     }
-  ];
+  };
 
-  function findProduct(productId) {
-    for (var i = 0; i < PRODUCTS.length; i++) {
-      if (PRODUCTS[i].id === productId) return PRODUCTS[i];
-    }
-    return null;
+  var modal = document.getElementById('product-modal');
+  var lastFocus = null;
+
+  function openProductPopup(id) {
+    var p = PRODUCTS[id];
+    if (!p || !modal) return;
+    lastFocus = document.activeElement;
+
+    var media = modal.querySelector('.modal__media');
+    media.style.setProperty('--modal-gradient-from', p.from);
+    media.style.setProperty('--modal-gradient-to', p.to);
+    media.innerHTML = '<span class="modal__fallback">' + p.letters + '</span>' +
+      '<img src="' + p.img + '" alt="' + p.name + '" decoding="async">';
+
+    modal.querySelector('.modal__info').innerHTML =
+      '<span class="tag tag--gold">' + p.cat + '</span><h3 id="modal-title" class="modal__title">' + p.name + '</h3>' +
+      '<p class="modal__description">' + p.desc + '</p><dl class="spec">' +
+      '<div class="spec__row"><dt class="spec__label">Texture</dt><dd class="spec__value">' + p.texture + '</dd></div>' +
+      '<div class="spec__row"><dt class="spec__label">Flavor notes</dt><dd class="spec__value">' + p.notes + '</dd></div>' +
+      '<div class="spec__row"><dt class="spec__label">Best enjoyed with</dt><dd class="spec__value">' + p.pair + '</dd></div>' +
+      '<div class="spec__row"><dt class="spec__label">Pack</dt><dd class="spec__value">100 g heat-sealed pouch</dd></div>' +
+      '<div class="spec__row"><dt class="spec__label">Keeping it fresh</dt><dd class="spec__value">' + p.keep + '</dd></div></dl>' +
+      '<p class="modal__note">Baked in small batches and stocked daily at the bakehouse and partner counters around Bukidnon.</p>';
+
+    modal.classList.add('modal--open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('scroll-locked');
+    modal.querySelector('.modal__close').focus({ preventScroll: true });
   }
 
-  /* A drag must not count as a tap. Both parts of the file share this. */
+  function closeProductPopup() {
+    if (!modal || !modal.classList.contains('modal--open')) return;
+    modal.classList.remove('modal--open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('scroll-locked');
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
+  }
+
+  if (modal) {
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal || e.target.closest('.modal__close')) closeProductPopup();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (!modal.classList.contains('modal--open')) return;
+      if (e.key === 'Escape') { closeProductPopup(); return; }
+      if (e.key !== 'Tab') return;
+      var f = modal.querySelectorAll('a[href], button:not([disabled])');
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+  }
+
+  /* ---- carousel ---- */
+
+  var root = document.querySelector('[data-showcase]');
+  if (!root) return;
+
+  var stage = root.querySelector('[data-stage]');
+  var items = [].slice.call(root.querySelectorAll('.showcase__item'));
+  var cards = items.map(function (i) { return i.querySelector('[data-card]'); });
+  var dots = [].slice.call(document.querySelectorAll('[data-goto]'));
+  var count = document.querySelector('[data-count]');
+  var n = items.length;
+  var index = 0;
+  var drag = null;
+  var isSwiping = false;
+  var startX = 0;
+  var startY = 0;
   var suppressClick = false;
 
-  /* The carousel fills this in when it starts, so the popup can bring
-     the chosen pack into focus without depending on the carousel. */
-  var centerProduct = function () {};
-
-  /* ---------------------------------------------------------------
-     2. THE PRODUCT POPUP
-     Ported from .archive/app.js — same markup, same classes.
-     --------------------------------------------------------------- */
-
-  var productModal = document.getElementById('product-modal');
-  var productPopupPreviouslyFocused = null;
-
-  /* Keeps the Tab key inside the popup, so it cannot wander off
-     to the page behind it. */
-  function keepFocusInside(event, box) {
-    if (event.key !== 'Tab') return;
-
-    var focusable = Array.prototype.filter.call(
-      box.querySelectorAll("a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])"),
-      function (element) { return element.offsetParent !== null; }
-    );
-    if (!focusable.length) return;
-
-    var first = focusable[0];
-    var last = focusable[focusable.length - 1];
-
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+  function wrap(v) {
+    var m = ((v % n) + n) % n;
+    return m > n / 2 ? m - n : m;
   }
 
-  /* If a photo cannot load, show the letters instead. */
-  function handleBrokenImage(image) {
-    if (!image) return;
-
-    function showLetters() {
-      image.parentElement.classList.add('image-missing');
-    }
-    image.addEventListener('error', showLetters, { once: true });
-
-    if (image.complete && image.naturalWidth === 0 && image.src) {
-      showLetters();
-    }
+  function active() {
+    return ((Math.round(index) % n) + n) % n;
   }
 
-  /* Opens the popup for one product. */
-  function openProductPopup(productId) {
-    var product = findProduct(productId);
-    if (!product || !productModal) return;
+  function render() {
+    items.forEach(function (item, i) {
+      var o = wrap(i - index);
+      var d = Math.abs(o);
+      var hidden = d >= 2.5;
+      item.style.setProperty('--o', o.toFixed(3));
+      item.style.setProperty('--s', Math.max(0.82, 1 - d * 0.075).toFixed(3));
+      item.style.setProperty('--a', hidden ? '0' : Math.max(0, 1 - d * 0.25).toFixed(3));
+      item.style.setProperty('--lift', d < 0.5 ? '-10px' : '0px');
+      item.style.setProperty('--z', 20 - Math.round(d * 4));
+      item.classList.toggle('showcase__item--center', d < 0.5);
+      item.inert = hidden;
+      if (cards[i]) cards[i].tabIndex = d < 0.5 ? 0 : -1;
+    });
 
-    productPopupPreviouslyFocused = document.activeElement;
-
-    var media = productModal.querySelector('.modal-media');
-    media.style.setProperty('--gradient-from', product.gradientFrom);
-    media.style.setProperty('--gradient-to', product.gradientTo);
-    media.classList.remove('image-missing');
-    media.innerHTML =
-      '<span class="fallback-text">' + product.letters + '</span>' +
-      '<img src="' + product.img + '" alt="' + product.name + '" decoding="async">';
-    handleBrokenImage(media.querySelector('img'));
-
-    productModal.querySelector('.modal-info').innerHTML =
-      '<span class="tag">' + product.catLabel + '</span>' +
-      '<h3 id="modal-title">' + product.name + '</h3>' +
-      '<p class="modal-description">' + product.desc + '</p>' +
-      '<dl class="spec">' +
-        '<div><dt>Texture</dt><dd>' + product.texture + '</dd></div>' +
-        '<div><dt>Flavor notes</dt><dd>' + product.notes + '</dd></div>' +
-        '<div><dt>Best enjoyed with</dt><dd>' + product.pair + '</dd></div>' +
-        '<div><dt>Pack</dt><dd>' + product.pack + '</dd></div>' +
-        '<div><dt>Keeping it fresh</dt><dd>' + product.keep + '</dd></div>' +
-      '</dl>' +
-      '<p class="modal-note">Baked in small batches and stocked daily at the bakehouse and partner counters around Bukidnon.</p>';
-
-    productModal.classList.add('is-open');
-    productModal.style.visibility = 'visible';
-    productModal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('scroll-locked');
-
-    var closeBtn = productModal.querySelector('.modal-close');
-    if (closeBtn) closeBtn.focus({ preventScroll: true });
-  }
-
-  /* Closes the product popup. */
-  function closeProductPopup() {
-    if (!productModal || !productModal.classList.contains('is-open')) return;
-
-    if (productPopupPreviouslyFocused) {
-      productPopupPreviouslyFocused.focus({ preventScroll: true });
-    }
-
-    productModal.classList.remove('is-open');
-    productModal.style.visibility = '';
-    productModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('scroll-locked');
-  }
-
-  /* Wires up the clicks inside the popup: the close button and the
-     backdrop behind the box. */
-  if (productModal) {
-    productModal.addEventListener('click', function (event) {
-      if (event.target === productModal || event.target.closest('.modal-close')) {
-        closeProductPopup();
+    dots.forEach(function (dot, i) {
+      if (i === active()) {
+        dot.setAttribute('aria-current', 'true');
+        dot.setAttribute('aria-selected', 'true');
+      } else {
+        dot.removeAttribute('aria-current');
+        dot.setAttribute('aria-selected', 'false');
       }
     });
 
-    document.addEventListener('keydown', function (event) {
-      if (!productModal.classList.contains('is-open')) return;
+    if (count) count.textContent = ('0' + (active() + 1)).slice(-2);
+  }
 
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeProductPopup();
+  function moveBy(step) {
+    index += step;
+    render();
+  }
+
+  function moveTo(i) {
+    index += wrap(i - index);
+    render();
+  }
+
+  /* Drag & Swipe Gestures with strict click conflict separation */
+  stage.addEventListener('pointerdown', function (e) {
+    // Only capture primary mouse button or touch/pen
+    if (e.button !== undefined && e.button !== 0) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    isSwiping = false;
+    suppressClick = false;
+    drag = {
+      x: e.clientX,
+      y: e.clientY,
+      i: index,
+      w: (items[0] && items[0].offsetWidth * 0.98) || 300
+    };
+    if (stage.setPointerCapture) {
+      try { stage.setPointerCapture(e.pointerId); } catch (_) {}
+    }
+  });
+
+  stage.addEventListener('pointermove', function (e) {
+    if (!drag) return;
+    var dx = e.clientX - drag.x;
+    var dy = e.clientY - drag.y;
+
+    // Detect if this is an intentional horizontal swipe vs a tap/vertical scroll
+    if (!isSwiping) {
+      if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+        isSwiping = true;
+        suppressClick = true;
+        root.classList.add('showcase--dragging');
+      } else if (Math.abs(dy) > 10) {
+        // Natural vertical scroll, release gesture tracking
+        drag = null;
         return;
       }
+    }
 
-      keepFocusInside(event, productModal);
-    });
+    if (isSwiping) {
+      index = drag.i - dx / drag.w;
+      render();
+    }
+  });
+
+  function endPointer(e) {
+    if (!drag) return;
+    if (isSwiping) {
+      var dx = (e ? e.clientX : startX) - startX;
+      // Flick threshold or snap to nearest card
+      if (Math.abs(dx) > 40) {
+        index = Math.round(index);
+      } else {
+        index = Math.round(drag.i);
+      }
+      render();
+      setTimeout(function () {
+        suppressClick = false;
+      }, 50);
+    }
+    drag = null;
+    isSwiping = false;
+    root.classList.remove('showcase--dragging');
   }
 
-  /* One delegated handler for every product card. It is attached to the
-     document, not to the carousel, so the popup still opens if the
-     carousel never starts. */
-  document.addEventListener('click', function (event) {
-    if (!event.target || !event.target.closest) return;
+  stage.addEventListener('pointerup', endPointer);
+  stage.addEventListener('pointercancel', endPointer);
 
-    var card = event.target.closest('[data-card]');
+  /* Card click listener — opens modal cleanly without swipe conflict */
+  stage.addEventListener('click', function (e) {
+    var card = e.target.closest && e.target.closest('[data-card]');
     if (!card) return;
 
     if (suppressClick) {
-      event.preventDefault();
+      e.preventDefault();
+      e.stopPropagation();
       suppressClick = false;
       return;
     }
 
+    e.preventDefault();
     var item = card.closest('.showcase__item');
-    var id = item ? item.getAttribute('data-product') : card.getAttribute('data-product');
-    if (!id || !findProduct(id) || !productModal) return;
+    if (!item) return;
 
-    event.preventDefault();
-    centerProduct(id);
-    openProductPopup(id);
-  }, true);
-
-  /* ---------------------------------------------------------------
-     3. THE CAROUSEL
-     --------------------------------------------------------------- */
-
-  var root = document.querySelector('[data-showcase]');
-  var stage = root ? root.querySelector('[data-stage]') : null;
-  if (!root || !stage) return;
-
-  var items = Array.prototype.slice.call(root.querySelectorAll('.showcase__item'));
-  var cards = items.map(function (item) { return item.querySelector('[data-card]'); });
-  var dots = Array.prototype.slice.call(document.querySelectorAll('[data-goto]'));
-  var countEl = document.querySelector('[data-count]');
-  var prevBtn = document.querySelector('[data-dir="-1"]');
-  var nextBtn = document.querySelector('[data-dir="1"]');
-  var total = items.length;
-
-  /* index is never wrapped: it keeps counting up or down so the cards
-     keep sliding the same way round the loop. */
-  var index = 0;
-
-  /* Distance from the centre, taken the short way round the loop */
-  function wrap(value) {
-    var m = ((value % total) + total) % total;
-    return m > total / 2 ? m - total : m;
-  }
-
-  function activeIndex() {
-    return ((Math.round(index) % total) + total) % total;
-  }
-
-  function render() {
-    var active = activeIndex();
-
-    for (var i = 0; i < total; i++) {
-      var offset = wrap(i - index);
-      var distance = Math.abs(offset);
-      var item = items[i];
-      var card = cards[i];
-      var hidden = distance >= 2.5;
-
-      item.style.setProperty('--o', offset.toFixed(3));
-      item.style.setProperty('--s', Math.max(0.82, 1 - distance * 0.075).toFixed(3));
-      item.style.setProperty('--a', hidden ? '0' : Math.max(0, 1 - distance * 0.25).toFixed(3));
-      item.style.setProperty('--lift', distance < 0.5 ? '-10px' : '0px');
-      item.style.setProperty('--z', String(Math.round(20 - distance * 4)));
-      item.style.pointerEvents = hidden ? 'none' : '';
-      item.inert = hidden;
-      item.classList.toggle('is-center', distance < 0.5);
-
-      /* One tab stop: whichever card is in focus */
-      if (card) card.tabIndex = distance < 0.5 ? 0 : -1;
+    var itemIdx = items.indexOf(item);
+    if (itemIdx !== -1 && itemIdx !== active()) {
+      moveTo(itemIdx);
     }
-
-    for (var d = 0; d < dots.length; d++) {
-      if (d === active) dots[d].setAttribute('aria-current', 'true');
-      else dots[d].removeAttribute('aria-current');
-    }
-
-    if (countEl) countEl.textContent = ('0' + (active + 1)).slice(-2);
-  }
-
-  function focusCenter() {
-    if (cards[activeIndex()]) cards[activeIndex()].focus({ preventScroll: true });
-  }
-
-  /* Move by the shortest way round the loop */
-  function moveTo(target, shouldFocus) {
-    index = index + wrap(target - index);
-    render();
-    if (shouldFocus) focusCenter();
-  }
-
-  /* -- Measuring one step ------------------------------------------ */
-
-  /* --step is written in CSS as a fraction of the card width, so the
-     only reliable way to read it is to let the browser resolve it. */
-  function measureStep() {
-    var probe = document.createElement('div');
-    probe.setAttribute('aria-hidden', 'true');
-    probe.style.cssText =
-      'position:absolute;top:0;left:0;width:var(--step);height:0;' +
-      'visibility:hidden;pointer-events:none;';
-    root.parentNode.appendChild(probe);
-    var width = probe.getBoundingClientRect().width;
-    probe.parentNode.removeChild(probe);
-    if (width > 0) return width;
-    return items[0] ? items[0].offsetWidth * 0.98 : 200;
-  }
-
-  /* -- Drag -------------------------------------------------------- */
-
-  var drag = null;
-
-  stage.addEventListener('pointerdown', function (event) {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
-
-    drag = {
-      x: event.clientX,
-      start: index,
-      step: measureStep(),
-      lastX: event.clientX,
-      lastTime: performance.now(),
-      velocity: 0
-    };
-
-    suppressClick = false;
-    root.classList.add('is-dragging');
-    if (stage.setPointerCapture) stage.setPointerCapture(event.pointerId);
+    openProductPopup(item.getAttribute('data-product'));
   });
 
-  stage.addEventListener('pointermove', function (event) {
-    if (!drag) return;
-
-    var dx = event.clientX - drag.x;
-    if (Math.abs(dx) > 8) suppressClick = true;
-
-    index = drag.start - dx / drag.step;
-
-    var now = performance.now();
-    var elapsed = now - drag.lastTime;
-    if (elapsed > 0) drag.velocity = (event.clientX - drag.lastX) / elapsed;
-    drag.lastX = event.clientX;
-    drag.lastTime = now;
-
-    render();
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); moveBy(1); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); moveBy(-1); }
+    else if (e.key === 'Home') { e.preventDefault(); moveTo(0); }
+    else if (e.key === 'End') { e.preventDefault(); moveTo(n - 1); }
   });
 
-  function endDrag() {
-    if (!drag) return;
+  var prevArrow = document.querySelector('[data-dir="-1"]');
+  if (prevArrow) prevArrow.addEventListener('click', function () { moveBy(-1); });
 
-    var velocity = drag.velocity;
-    var target = Math.round(index);
+  var nextArrow = document.querySelector('[data-dir="1"]');
+  if (nextArrow) nextArrow.addEventListener('click', function () { moveBy(1); });
 
-    /* A quick flick carries past the nearest card */
-    if (Math.abs(velocity) > 0.35) target = Math.round(index - velocity * 0.3);
-
-    drag = null;
-    root.classList.remove('is-dragging');
-    moveTo(target);
-  }
-
-  stage.addEventListener('pointerup', endDrag);
-  stage.addEventListener('pointercancel', endDrag);
-  stage.addEventListener('lostpointercapture', endDrag);
-
-  stage.addEventListener('dragstart', function (event) {
-    event.preventDefault();
+  dots.forEach(function (dot, i) {
+    dot.addEventListener('click', function () { moveTo(i); });
   });
-
-  /* -- Keyboard ---------------------------------------------------- */
-
-  root.addEventListener('keydown', function (event) {
-    if (event.key === 'ArrowRight') {
-      event.preventDefault();
-      moveTo(index + 1, true);
-    } else if (event.key === 'ArrowLeft') {
-      event.preventDefault();
-      moveTo(index - 1, true);
-    } else if (event.key === 'Home') {
-      event.preventDefault();
-      moveTo(0, true);
-    } else if (event.key === 'End') {
-      event.preventDefault();
-      moveTo(total - 1, true);
-    }
-  });
-
-  /* -- Buttons and dots -------------------------------------------- */
-
-  if (prevBtn) prevBtn.addEventListener('click', function () { moveTo(index - 1); });
-  if (nextBtn) nextBtn.addEventListener('click', function () { moveTo(index + 1); });
-
-  for (var d = 0; d < dots.length; d++) {
-    dots[d].addEventListener('click', function () {
-      moveTo(Number(this.getAttribute('data-goto')), true);
-    });
-  }
-
-  /* -- Horizontal trackpad / wheel --------------------------------- */
-
-  var wheelLock = 0;
-  stage.addEventListener('wheel', function (event) {
-    if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
-
-    event.preventDefault();
-    var now = Date.now();
-    if (now < wheelLock) return;
-    wheelLock = now + 220;
-
-    moveTo(index + (event.deltaX > 0 ? 1 : -1));
-  }, { passive: false });
-
-  /* -- Let the popup bring a pack into focus ----------------------- */
-
-  centerProduct = function (productId) {
-    for (var i = 0; i < total; i++) {
-      if (items[i].getAttribute('data-product') === productId) {
-        if (i !== activeIndex()) moveTo(i);
-        return;
-      }
-    }
-  };
 
   render();
 })();
