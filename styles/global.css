@@ -22,6 +22,12 @@
   box-sizing: border-box;
 }
 
+:focus-visible {
+  outline: 3px solid #F4C10F;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-h);
@@ -462,8 +468,6 @@ body {
    ========================================== */
 
 @media (max-width: 992px) {
-  /* (the .banner stacking rule lives in media.css, because home.css
-     loads AFTER this file and would override it from here) */
   .packaging-box {
     grid-template-columns: 1fr;
   }

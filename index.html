@@ -6,12 +6,16 @@
   <title>Zm's Manna Bakeshop - Home</title>
   <link rel="icon" href="assets/favicon.ico">
 
+  <!-- Hero is the LCP image: fetch it as early as possible -->
+  <link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
+
   <!-- Simple CSS files -->
   <link rel="stylesheet" href="styles/global.css">
   <link rel="stylesheet" href="styles/header-footer.css">
   <link rel="stylesheet" href="styles/home.css">
   <link rel="stylesheet" href="styles/animation.css">
   <link rel="stylesheet" href="styles/media.css">
+  <link rel="stylesheet" href="styles/products.css">
 </head>
 <body>
 
@@ -50,28 +54,34 @@
   </header>
 
   <!-- ==========================================
-       2. WELCOME / MAIN BANNER
+       2. HERO
        ========================================== -->
 
-  <section class="section" id="home">
-    <div class="container">
-      <div class="banner">
-        <!-- Banner Left text -->
-        <div class="banner-text">
-          <span class="tag">Fresh From Valencia City</span>
-          <h1>Local Biscuits, Bread &amp; Pasalubong from Valencia City</h1>
-          <p>
-            Zm's Manna Bakeshop provides quality baked biscuits, toasted bread, and pasalubong favorites produced in P-2 Lumbo, Valencia City, Bukidnon for individual customers and bulk wholesale buyers across Mindanao.
-          </p>
-          <div class="banner-btns">
-            <a href="#contact" class="btn btn-blue">Contact Us</a>
-            <a href="#products" class="btn btn-white">View Products</a>
-          </div>
-        </div>
+  <section class="hero" id="home">
+    <div class="hero__media">
+      <img
+        src="assets/hero.webp"
+        alt="Zm's Manna biscuit pouches arranged on a wooden table beside coffee and fresh biscuits"
+        width="1024"
+        height="765"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </div>
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
 
-        <!-- Banner Right Image -->
-        <div class="banner-image">
-          <img src="assets/how-we-bake.webp" alt="Fresh Bakery Products">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="tag">Baked in Valencia City · Bukidnon</p>
+        <h1>Golden biscuits,<br>baked the Valencia way.</h1>
+        <p class="hero__lede">
+          Toasted biscocho, hopia, and pasalubong favorites — made in small batches at our
+          bakehouse in P-2 Lumbo and packed fresh for the trip home.
+        </p>
+        <div class="hero__actions">
+          <a href="#products" class="btn btn--gold">Explore the Catalog</a>
+          <a href="wholesale.html" class="btn btn--ghost">Wholesale Inquiries</a>
         </div>
       </div>
     </div>
@@ -128,7 +138,213 @@
     </div>
   </section>
 -->
-    <!-- PRODUCTS -->
+  <!-- ==========================================
+       3. PRODUCT COLLECTION (horizontal rail)
+       ========================================== -->
+
+  <section class="collection" id="products" aria-labelledby="products-title">
+    <div class="container collection__head">
+      <div class="collection__intro">
+        <p class="tag">The bakehouse selection</p>
+        <h2 class="collection__title" id="products-title">Take home a taste of Valencia.</h2>
+        <p class="collection__desc">
+          Golden, crisp, and made for sharing — six baked favorites, packed fresh from our
+          bakehouse in P-2 Lumbo and ready for retail shelves or the trip home.
+        </p>
+      </div>
+
+      <div class="collection__controls">
+        <button class="rail-btn" type="button" data-dir="-1" aria-controls="product-rail" aria-label="Show previous products">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="rail-btn" type="button" data-dir="1" aria-controls="product-rail" aria-label="Show next products">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="rail"
+      id="product-rail"
+      data-rail
+      tabindex="0"
+      role="region"
+      aria-label="Product catalog, scrolls horizontally"
+    >
+      <ul class="rail__track">
+
+        <li class="rail__item">
+          <a class="product-card product-card--dark" href="wholesale.html#inquiry-form">
+            <div class="product-card__media">
+              <span class="product-card__index">01</span>
+              <span class="product-card__badge">Bestseller</span>
+              <img
+                src="assets/products/biscocho.webp"
+                alt="Zm's Manna Toasted Biscocho pouch with toasted bread slices"
+                width="1100" height="1375" loading="lazy" decoding="async"
+              >
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__cat">Toasted biscuits</p>
+              <h3 class="product-card__name">Toasted Biscocho</h3>
+              <div class="product-card__foot">
+                <span class="product-card__spec">100 g · sealed pouch</span>
+                <span class="product-card__cta">
+                  Inquire
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li class="rail__item">
+          <a class="product-card" href="wholesale.html#inquiry-form">
+            <div class="product-card__media">
+              <span class="product-card__index">02</span>
+              <img
+                src="assets/products/hopia.webp"
+                alt="Zm's Manna Hopia Choco pouch with chocolate-filled pastries on a plate"
+                width="1100" height="1375" loading="lazy" decoding="async"
+              >
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__cat">Chocolate-filled</p>
+              <h3 class="product-card__name">Hopia Choco</h3>
+              <div class="product-card__foot">
+                <span class="product-card__spec">100 g · sealed pouch</span>
+                <span class="product-card__cta">
+                  Inquire
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li class="rail__item">
+          <a class="product-card" href="wholesale.html#inquiry-form">
+            <div class="product-card__media">
+              <span class="product-card__index">03</span>
+              <img
+                src="assets/products/mammon.webp"
+                alt="Two pouches of Zm's Manna Toasted Mammon"
+                width="1100" height="1467" loading="lazy" decoding="async"
+              >
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__cat">Toasted biscuits</p>
+              <h3 class="product-card__name">Toasted Mammon</h3>
+              <div class="product-card__foot">
+                <span class="product-card__spec">100 g · sealed pouch</span>
+                <span class="product-card__cta">
+                  Inquire
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li class="rail__item">
+          <a class="product-card" href="wholesale.html#inquiry-form">
+            <div class="product-card__media">
+              <span class="product-card__index">04</span>
+              <img
+                src="assets/products/patatas.webp"
+                alt="Zm's Manna Patatas pouches with a plate of crisp biscuits"
+                width="1100" height="1375" loading="lazy" decoding="async"
+              >
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__cat">Crisp &amp; light</p>
+              <h3 class="product-card__name">Patatas Biscuits</h3>
+              <div class="product-card__foot">
+                <span class="product-card__spec">100 g · sealed pouch</span>
+                <span class="product-card__cta">
+                  Inquire
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li class="rail__item">
+          <a class="product-card" href="wholesale.html#inquiry-form">
+            <div class="product-card__media">
+              <span class="product-card__index">05</span>
+              <img
+                src="assets/products/cookie-de-longga.webp"
+                alt="Zm's Manna Cookie de Longa pouch with sesame cookies"
+                width="1100" height="1100" loading="lazy" decoding="async"
+              >
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__cat">Sesame cookies</p>
+              <h3 class="product-card__name">Cookie de Longa</h3>
+              <div class="product-card__foot">
+                <span class="product-card__spec">100 g · sealed pouch</span>
+                <span class="product-card__cta">
+                  Inquire
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li class="rail__item">
+          <a class="product-card" href="wholesale.html#inquiry-form">
+            <div class="product-card__media">
+              <span class="product-card__index">06</span>
+              <img
+                src="assets/products/biscocho2.webp"
+                alt="Two pouches of Zm's Manna Special Biscocho"
+                width="1100" height="1467" loading="lazy" decoding="async"
+              >
+            </div>
+            <div class="product-card__body">
+              <p class="product-card__cat">Toasted biscuits</p>
+              <h3 class="product-card__name">Special Biscocho</h3>
+              <div class="product-card__foot">
+                <span class="product-card__spec">100 g · sealed pouch</span>
+                <span class="product-card__cta">
+                  Inquire
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="container collection__foot">
+      <div class="collection__progress" aria-hidden="true">
+        <span data-thumb></span>
+      </div>
+    </div>
+  </section>
+
+    <!-- PRODUCTS
   <section id="products" class="section">
     <div class="container">
       <div class="section-header">
@@ -137,7 +353,6 @@
       </div>
 
       <div class="row">
-        <!-- Product 1 -->
         <div class="col-3">
           <div class="box product-box">
             <div class="product-img">
@@ -150,7 +365,6 @@
           </div>
         </div>
 
-        <!-- Product 2 -->
         <div class="col-3">
           <div class="box product-box">
             <div class="product-img">
@@ -163,7 +377,6 @@
           </div>
         </div>
 
-        <!-- Product 3 -->
         <div class="col-3">
           <div class="box product-box">
             <div class="product-img">
@@ -176,7 +389,6 @@
           </div>
         </div>
 
-        <!-- Product 4 -->
         <div class="col-3">
           <div class="box product-box">
             <div class="product-img">
@@ -189,7 +401,6 @@
           </div>
         </div>
 
-        <!-- Product 5 -->
         <div class="col-3">
           <div class="box product-box">
             <div class="product-img">
@@ -202,7 +413,6 @@
           </div>
         </div>
 
-        <!-- Product 6 -->
         <div class="col-3">
           <div class="box product-box">
             <div class="product-img">
@@ -217,6 +427,7 @@
       </div>
     </div>
   </section>
+  -->
 
   <!-- ==========================================
        6. PACKAGING SPECIFICATIONS
@@ -371,7 +582,7 @@
           <h3>Need wholesale pricing &amp; logistics information?</h3>
           <p>Check out our distribution routes, MOQ, and inquiry form on our wholesale page.</p>
         </div>
-        <a href="wholesale.html" class="btn btn-blue">Go to Wholesale Page &rarr;</a>
+        <a href="#contact" class="btn btn-blue">Contact Us &rarr;</a>
       </div>
     </div>
   </section>
@@ -381,36 +592,14 @@
   <!-- ==========================================
        9. FOOTER
        ========================================== -->
-<!-- --
   <footer>
     <div class="container">
-      <div class="footer-top">
-        <div class="footer-info">
-          <h3>Zm's Manna Bakeshop</h3>
-          <p>
-            Quality baked biscuits, toasted bread, and pasalubong favorites produced in P-2 Lumbo, Valencia City, Bukidnon.
-          </p>
-        </div>
-
-        <div class="footer-links">
-          <h3>Navigation Links</h3>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#packaging">Packaging</a></li>
-            <li><a href="wholesale.html">Wholesale</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
+      <div class="footer-info">
         <p>&copy; 2026 Zm's Manna Bakeshop. All rights reserved.</p>
-        <p>Web Development Laboratory Project</p>
       </div>
     </div>
   </footer>
--->
+
+  <script src="scripts/catalog.js" defer></script>
 </body>
 </html>

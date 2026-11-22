@@ -32,9 +32,7 @@
 
 .section-header,
 .box,
-.gallery-img,
-.banner-text,
-.banner-image {
+.gallery-img {
   opacity: 1; /* Fallback for browsers without timeline support */
   transform: translateY(0);
 }
@@ -42,9 +40,7 @@
 @supports (animation-timeline: view()) {
   .section-header,
   .box,
-  .gallery-img,
-  .banner-text,
-  .banner-image {
+  .gallery-img {
     animation: scrollFadeIn linear both;
     animation-timeline: view();
     animation-range: entry 0% cover 30%;
