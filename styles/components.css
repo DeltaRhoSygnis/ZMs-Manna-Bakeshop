@@ -16,11 +16,12 @@
 
 .section {
   padding-block: var(--section-space);
+  background: linear-gradient(180deg, var(--color-cream-25) 0%, var(--color-cream-50) 100%);
 }
 
 /* Alternating section backgrounds */
 .section:nth-of-type(odd) {
-  background-color: var(--color-bg-alt);
+  background: linear-gradient(180deg, var(--color-cream-25) 0%, var(--color-cream-50) 100%);
 }
 
 .section-header {
@@ -191,7 +192,9 @@
    ========================================================= */
 
 .card {
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-cream-10);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   padding: var(--box-pad);
@@ -204,7 +207,7 @@
 }
 
 .card--elevated:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-card-hover);
   border-color: var(--color-primary);
 }
@@ -342,7 +345,7 @@
   background-color: var(--color-footer-bg);
   border-top: 2px solid var(--color-footer-border);
   padding: 20px 0;
-  margin-top: 50px;
+  margin-top: 0;
 }
 
 .footer__info {

@@ -1,32 +1,32 @@
 /* =========================================================
    SECTIONS.CSS — Page-Specific Section Styles
-   Hero, Collection (Carousel), Packaging, Gallery, About, Contact
+   banner, Collection (Carousel), Packaging, Gallery, About, Contact
    ========================================================= */
 
 /* =========================================================
-   HERO SECTION
+   banner SECTION
    ========================================================= */
 
-.hero {
+.banner {
   position: relative;
   isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: clamp(520px, 84vh, 800px);
+  min-height: clamp(600px, 100vh, 1080px);
   overflow: hidden;
   background-color: var(--color-navy-950);
   color: var(--color-text-inverse);
   border-bottom: 2px solid var(--color-primary);
 }
 
-.hero__media,
-.hero__scrim,
-.hero__grain {
+.banner__media,
+.banner__scrim,
+.banner__grain {
   position: absolute;
   inset: 0;
 }
 
-.hero__media img {
+.banner__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -34,7 +34,7 @@
 }
 
 /* Navy gradient scrim for text legibility */
-.hero__scrim {
+.banner__scrim {
   background:
     linear-gradient(
       90deg,
@@ -52,7 +52,7 @@
 }
 
 /* Fine film grain overlay */
-.hero__grain {
+.banner__grain {
   opacity: 0.18;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
@@ -60,28 +60,28 @@
   pointer-events: none;
 }
 
-.hero__inner {
+.banner__inner {
   position: relative;
   z-index: 1;
   width: 100%;
   padding-block: clamp(72px, 11vh, 128px);
 }
 
-.hero__copy {
+.banner__copy {
   max-width: 40rem;
 }
 
-.hero .tag {
+.banner .tag {
   color: var(--color-primary);
   margin-bottom: 20px;
 }
 
-.hero .tag::before,
-.hero .tag::after {
+.banner .tag::before,
+.banner .tag::after {
   background-color: var(--color-primary);
 }
 
-.hero__headline {
+.banner__headline {
   font-family: var(--font-display);
   font-variation-settings: "SOFT" var(--font-var-soft), "WONK" var(--font-var-wonk);
   font-size: var(--text-display-lg);
@@ -94,7 +94,7 @@
   text-shadow: 0 2px 30px rgba(6, 20, 34, 0.35);
 }
 
-.hero__lede {
+.banner__lede {
   font-size: clamp(1rem, 0.95rem + 0.35vw, 1.16rem);
   line-height: var(--leading-relaxed);
   color: rgba(244, 239, 226, 0.82);
@@ -102,29 +102,29 @@
   margin: 0 0 34px;
 }
 
-.hero__actions {
+.banner__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
 }
 
-/* Hero button variants */
-.btn--hero-primary {
+/* banner button variants */
+.btn--banner-primary {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
   color: var(--color-primary-text);
   box-shadow: 0 10px 28px rgba(244, 193, 15, 0.28);
 }
 
-.btn--hero-primary:hover,
-.btn--hero-primary:focus {
+.btn--banner-primary:hover,
+.btn--banner-primary:focus {
   background-color: #ffce2e;
   border-color: #ffce2e;
   transform: translateY(-2px);
   box-shadow: 0 14px 32px rgba(244, 193, 15, 0.34);
 }
 
-.btn--hero-ghost {
+.btn--banner-ghost {
   background-color: rgba(244, 239, 226, 0.07);
   border-color: rgba(244, 239, 226, 0.5);
   color: var(--color-text-inverse);
@@ -132,21 +132,21 @@
   -webkit-backdrop-filter: blur(4px);
 }
 
-.btn--hero-ghost:hover,
-.btn--hero-ghost:focus {
+.btn--banner-ghost:hover,
+.btn--banner-ghost:focus {
   background-color: var(--color-text-inverse);
   border-color: var(--color-text-inverse);
   color: var(--color-text);
   transform: translateY(-2px);
 }
 
-/* Hero responsive */
+/* banner responsive */
 @media (max-width: 900px) {
-  .hero {
+  .banner {
     min-height: clamp(500px, 76vh, 680px);
   }
 
-  .hero__scrim {
+  .banner__scrim {
     background:
       linear-gradient(
         180deg,
@@ -156,26 +156,26 @@
       );
   }
 
-  .hero__copy {
+  .banner__copy {
     max-width: 100%;
   }
 }
 
 @media (max-width: 560px) {
-  .hero {
+  .banner {
     min-height: 0;
     align-items: flex-end;
   }
 
-  .hero__inner {
+  .banner__inner {
     padding-block: 96px 56px;
   }
 
-  .hero__headline {
+  .banner__headline {
     font-size: clamp(1.85rem, 7.4vw, 2.6rem);
   }
 
-  .hero__actions .btn {
+  .banner__actions .btn {
     flex: 1 1 100%;
   }
 }
@@ -649,7 +649,7 @@ html:not(.js) .collection__footer {
    ========================================================= */
 
 .packaging {
-  background-color: var(--color-bg);
+  background: none;
 }
 
 .packaging__card {
@@ -658,7 +658,8 @@ html:not(.js) .collection__footer {
   gap: var(--box-pad-lg);
   align-items: center;
   padding: var(--box-pad-lg);
-  background-color: var(--color-bg-alt);
+  background-color: var(--color-cream-10);
+  box-shadow: var(--shadow-md);
   border-radius: var(--radius-box);
   border: 1px solid var(--color-border);
 }

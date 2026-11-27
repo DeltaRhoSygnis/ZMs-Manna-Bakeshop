@@ -16,13 +16,13 @@ Zm's Manna Bakeshop is a small-batch bakehouse in P-2 Lumbo, Valencia City, Buki
 - **No dependencies** — no framework, no bundler, no npm install.
 - **Responsive** — hand-tuned layouts for 360 / 768 / 1024 / 1440 px.
 - **Accessible** — keyboard-navigable carousel, focus-trapped modal, reduced-motion support.
-- **LCP-optimized** — hero image preloaded with high priority.
+- **LCP-optimized** — banner image preloaded with high priority.
 
 ## Page sections
 
 | Section | Description |
 | --- | --- |
-| `#home` | Full-bleed hero with brand tagline |
+| `#home` | Full-bleed banner with brand tagline |
 | `#products` | Product catalog carousel with modal detail view |
 | `#packaging` | Packaging & merchandising specifications |
 | Gallery | Product showcase grid |
@@ -68,7 +68,7 @@ Styles load in this order via `@import` in `main.css`:
 
 1. `tokens.css` — colors, spacing, typography, shadows, radii, transitions, z-index, breakpoints
 2. `components.css` — buttons, cards, layout, header, footer, modal, grid
-3. `sections.css` — hero, carousel, packaging, gallery, about, contact
+3. `sections.css` — banner, carousel, packaging, gallery, about, contact
 
 Three rules hold it together:
 

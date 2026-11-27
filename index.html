@@ -6,8 +6,8 @@
   <title>Zm's Manna Bakeshop - Home</title>
   <link rel="icon" href="assets/favicon.ico">
 
-  <!-- Hero is the LCP image: fetch it as early as possible -->
-  <link rel="preload" as="image" href="assets/hero.webp" fetchpriority="high">
+  <!-- banner is the LCP image: fetch it as early as possible -->
+  <link rel="preload" as="image" href="assets/banner.webp" fetchpriority="high">
 
   <!-- Marks the page as script-capable before first paint,
        so the carousel can fall back to a plain scroll row without JS -->
@@ -59,36 +59,36 @@
   </header>
 
   <!-- ==========================================
-       2. HERO SECTION
-       Full-bleed hero with background image, scrim, grain overlay
+       2. BANNER SECTION
+       Full-bleed banner with background image, scrim, grain overlay
        ========================================== -->
 
-  <section class="hero" id="home" aria-labelledby="hero-headline">
-    <div class="hero__media" aria-hidden="true">
+  <section class="banner" id="home" aria-labelledby="banner-headline">
+    <div class="banner__media" aria-hidden="true">
       <img
-        src="assets/hero.webp"
+        src="assets/banner.webp"
         alt="Zm's Manna biscuit pouches arranged on a wooden table beside coffee and fresh biscuits"
-        width="1024"
-        height="765"
+        width="1920"
+        height="1080"
         fetchpriority="high"
         decoding="async"
       >
     </div>
-    <div class="hero__scrim" aria-hidden="true"></div>
-    <div class="hero__grain" aria-hidden="true"></div>
+    <div class="banner__scrim" aria-hidden="true"></div>
+    <div class="banner__grain" aria-hidden="true"></div>
 
-    <div class="container hero__inner">
-      <div class="hero__copy">
+    <div class="container banner__inner">
+      <div class="banner__copy">
         <p class="tag tag--gold">Fresh From Valencia City</p>
-        <h1 id="hero-headline" class="hero__headline">Local Biscuits, Bread & Pasalubong from Valencia City</h1>
-        <p class="hero__lede">
+        <h1 id="banner-headline" class="banner__headline">Local Biscuits, Bread & Pasalubong from Valencia City</h1>
+        <p class="banner__lede">
           Zm's Manna Bakeshop provides quality baked biscuits, toasted bread, and pasalubong
           favorites produced in P-2 Lumbo, Valencia City, Bukidnon for individual customers and
           bulk wholesale buyers across Mindanao.
         </p>
-        <div class="hero__actions">
-          <a href="#contact" class="btn btn--hero-primary">Contact Us</a>
-          <a href="#products" class="btn btn--hero-ghost">View Products</a>
+        <div class="banner__actions">
+          <a href="#contact" class="btn btn--banner-primary">Contact Us</a>
+          <a href="#products" class="btn btn--banner-ghost">View Products</a>
         </div>
       </div>
     </div>
@@ -314,7 +314,7 @@
 
   <section id="packaging" class="section packaging" aria-labelledby="packaging-title">
     <div class="container">
-      <div class="packaging__card">
+      <div class="card card--elevated packaging__card">
         <div class="packaging__image">
           <img src="assets/ad.webp" alt="Zm's Manna product packaging display showing sealed pouches on retail shelving" width="800" height="600">
         </div>
@@ -440,7 +440,7 @@
 
       <div class="grid">
         <div class="col-3">
-          <div class="card contact__item">
+          <div class="card card--elevated contact__item">
             <h5>Official Phone</h5>
             <p>0926-177-4681</p>
             <small>Call / SMS Inquiries</small>
@@ -448,7 +448,7 @@
         </div>
 
         <div class="col-3">
-          <div class="card contact__item">
+          <div class="card card--elevated contact__item">
             <h5>Facebook Page</h5>
             <p>Zm's Manna Bakeshop</p>
             <small>Official Social Page</small>
@@ -456,7 +456,7 @@
         </div>
 
         <div class="col-3">
-          <div class="card contact__item">
+          <div class="card card--elevated contact__item">
             <h5>Address</h5>
             <p>P-2 Lumbo, Valencia</p>
             <small>Valencia City, Bukidnon</small>
@@ -464,7 +464,7 @@
         </div>
 
         <div class="col-3">
-          <div class="card contact__item">
+          <div class="card card--elevated contact__item">
             <h5>Business Hours</h5>
             <p>7:00 AM - 6:00 PM</p>
             <small>Monday to Saturday</small>
